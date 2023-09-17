@@ -1,8 +1,8 @@
-module main {
+module base {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
 
-    opens main to javafx.fxml;
-    exports main;
+    opens base to javafx.fxml;
+    exports base;
 }
