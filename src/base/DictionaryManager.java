@@ -16,16 +16,14 @@ public class DictionaryManager extends Dictionary {
         }
         Collections.sort(curDict);
     }
-    public static String dictionaryLookup(String search)
-    {
+    public static String dictionaryLookup(String search) {
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
         if (position < 0) return "Word not found.\n";
         else return curDict.get(position).getWordTarget() + " | " + curDict.get(position).getWordExplain();
     }
-    public static String dictionarySearcher(String search)
-    {
+    public static String dictionarySearcher(String search) {
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
