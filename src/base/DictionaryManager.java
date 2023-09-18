@@ -16,4 +16,26 @@ public class DictionaryManager extends Dictionary {
         }
         Collections.sort(curDict);
     }
+    public static String dictionaryLookup(String search)
+    {
+        Word dummy = new Word();
+        dummy.setWordTarget(search);
+        int position = Collections.binarySearch(curDict,dummy);
+        if (position < 0) return "Word not found.\n";
+        else return curDict.get(position).getWordTarget() + " | " + curDict.get(position).getWordExplain();
+    }
+    public static String dictionarySearcher(String search)
+    {
+        Word dummy = new Word();
+        dummy.setWordTarget(search);
+        int position = Collections.binarySearch(curDict,dummy);
+        if (position<0) position = -(position+1);
+        StringBuilder s = new StringBuilder();
+        while (curDict.get(position).getWordTarget().toLowerCase().indexOf(search.toLowerCase())==0) {
+            s.append(curDict.get(position).getWordTarget()).append(" ");
+            position++;
+            if (position>=curDict.size()) break;
+        }
+        return s.toString();
+    }
 }
