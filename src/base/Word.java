@@ -33,5 +33,4 @@ public class Word implements Comparable<Word> {
     public int compareTo(Word other) {
         return this.word_target.compareToIgnoreCase(other.word_target);
     }
-
 }

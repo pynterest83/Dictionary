@@ -1,0 +1,9 @@
+good   tot
+handsome   dep trai
+help   giup
+homework   bai tap ve nha
+mango   qua xoai
+nice   tot
+perfect   tuyet voi
+play   chơi
+run   chạy

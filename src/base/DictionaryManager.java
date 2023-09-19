@@ -1,39 +1,157 @@
 package base;
 
 import java.util.*;
+import java.io.*;
 
 public class DictionaryManager extends Dictionary {
+    private static final String PATH = "src/resources/dictionaries.txt";
     public static void insertFromCommandline() {
         String word_target, word_explain;
+        System.out.print("Enter number of words to add: ");
         Scanner intInput = new Scanner(System.in);
         Scanner strInput = new Scanner(System.in);
         int nums = intInput.nextInt();
         while (nums-- > 0) {
+            System.out.print("Enter word: ");
             word_target = strInput.nextLine();
+            System.out.print("Enter definition of " + word_target + ":");
             word_explain = strInput.nextLine();
             Word newWord = new Word(word_target, word_explain);
+            if (curDict.contains(newWord)) continue;
             curDict.add(newWord);
         }
+        System.out.println("Added " + nums + " words.");
         Collections.sort(curDict);
     }
-    public static String dictionaryLookup(String search) {
+
+
+    public static void defaultFile() {
+        try {
+            File infile = new File(PATH);
+            FileReader fileReader= new FileReader(infile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] words = line.split("   ");
+                Word newWord = new Word(words[0], words[1]);
+                curDict.add(newWord);
+            }
+            Collections.sort(curDict);
+            System.out.println("Data Loaded" + "\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void importFromFile(){
+        try {
+            Scanner sc = new Scanner(System.in);
+            String path = sc.nextLine();
+            File infile = new File(path);
+            FileReader fileReader= new FileReader(infile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] words = line.split("   ");
+                Word newWord = new Word(words[0], words[1]);
+                if (curDict.contains(newWord)) continue;
+                curDict.add(newWord);
+            }
+            System.out.println("Data Loaded" + "\n");
+            Collections.sort(curDict);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void exportToFile() {
+        try {
+            File outfile = new File(PATH);
+            FileWriter fileWriter = new FileWriter(outfile);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (int i = 0; i < curDict.size(); i++) {
+                bufferedWriter.write(curDict.get(i).getWordTarget() + "   " + curDict.get(i).getWordExplain() + "\n");
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            System.out.println("Data Exported Successfully\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteWord() {
+        Scanner strInput = new Scanner(System.in);
+        System.out.println("Enter word you want to delete: ");
+        String del = strInput.nextLine();
+        Word tmp = new Word();
+        tmp.setWordTarget(del);
+        int position = Collections.binarySearch(curDict,tmp);
+        if (position < 0) {
+            System.out.println("Word not found.");
+            return;
+        }
+        curDict.remove(position);
+        System.out.println("Word " + del + " deleted.");
+    }
+
+    public static void addWord() {
+        Scanner strInput = new Scanner(System.in);
+        String word_target, word_explain;
+        word_target = strInput.nextLine();
+        word_explain = strInput.nextLine();
+        Word newWord = new Word(word_target, word_explain);
+        curDict.add(newWord);
+        Collections.sort(curDict);
+    }
+
+    public static void modifyWord() {
+        Scanner strInput = new Scanner(System.in);
+        System.out.println("Enter word you want to modify: ");
+        String search = strInput.nextLine();
+        Word mod = new Word();
+        mod.setWordTarget(search);
+        int position = Collections.binarySearch(curDict, mod);
+        if (position < 0) {
+            System.out.println("Word not found.");
+            return;
+        }
+        String word_target, word_explain;
+        System.out.println("Enter new word: ");
+        word_target = strInput.nextLine();
+        System.out.println("Enter new definition: ");
+        word_explain = strInput.nextLine();
+        mod.setWordTarget(word_target);
+        mod.setWordExplain(word_explain);
+        curDict.set(position, mod);
+        System.out.println("Successfully modified.");
+        Collections.sort(curDict);
+    }
+    public static void dictionaryLookup() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter word you want to lookup: ");
+        String search = sc.nextLine();
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
-        if (position < 0) return "Word not found.\n";
-        else return curDict.get(position).getWordTarget() + " | " + curDict.get(position).getWordExplain();
+        if (position < 0) System.out.println("Word not found.\n");
+        else System.out.println(curDict.get(position).getWordTarget() + " | " + curDict.get(position).getWordExplain());
     }
-    public static String dictionarySearcher(String search) {
+    public static String dictionarySearcher() {
+        Scanner sc = new Scanner(System.in);
+        String search = sc.nextLine();
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
         if (position<0) position = -(position+1);
         StringBuilder s = new StringBuilder();
         while (curDict.get(position).getWordTarget().toLowerCase().indexOf(search.toLowerCase())==0) {
-            s.append(curDict.get(position).getWordTarget()).append(" ");
+            s.append(curDict.get(position).getWordTarget()).append("\n");
             position++;
             if (position>=curDict.size()) break;
         }
         return s.toString();
     }
+
+
 }
