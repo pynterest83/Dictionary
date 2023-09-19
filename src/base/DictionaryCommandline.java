@@ -2,6 +2,7 @@ package base;
 
 import java.util.*;
 
+
 public class DictionaryCommandline extends Dictionary {
     public static void showAllWords() {
         System.out.printf("%-6s%c %-15s%c %-20s%n","No", '|' ,"English", '|', "Vietnamese");
@@ -9,15 +10,6 @@ public class DictionaryCommandline extends Dictionary {
             System.out.printf("%-6d%c %-15s%c %-15s%n", i + 1,'|', curDict.get(i).getWordTarget(), '|',curDict.get(i).getWordExplain());
         }
     }
-
-//    public static void dictionaryBasic() {
-//        //DictionaryManager.insertFromCommandline();
-//        DictionaryManager.insertFromFile();
-//        //DictionaryManager.exportToFile();
-//        DictionaryCommandline.showAllWords();
-//        System.out.println(DictionaryManager.dictionarySearcher("hel"));
-//    }
-
     private static void view(){
         System.out.println("Welcome to my Application!");
         System.out.println("[0] Exit");
@@ -32,13 +24,13 @@ public class DictionaryCommandline extends Dictionary {
         System.out.println("[9] Export to file");
         System.out.print("Your action: ");
     }
-    public static void dictionaryAdvanced() {
+    public static void dictionaryAdvanced() throws Exception {
         DictionaryManager.defaultFile();
-        while (true){
+        while (true) {
             view();
             Scanner input = new Scanner(System.in);
             int action = input.nextInt();
-            switch (action){
+            switch (action) {
                 case 0:
                     System.out.println("Goodbye!");
                     return;
@@ -58,7 +50,7 @@ public class DictionaryCommandline extends Dictionary {
                     DictionaryManager.dictionaryLookup();
                     break;
                 case 6:
-                    System.out.println(DictionaryManager.dictionarySearcher());
+                    //System.out.println(DictionaryManager.dictionarySearcher());
                     break;
                 case 7:
                     //DictionaryManager.dictionaryGame();
@@ -73,9 +65,5 @@ public class DictionaryCommandline extends Dictionary {
                     System.out.println("Invalid action!");
             }
         }
-    }
-
-    public static void main(String[] args) {
-        dictionaryAdvanced();
     }
 }

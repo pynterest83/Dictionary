@@ -1,5 +1,12 @@
 package base;
 
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import main.SearchController;
+
+import java.lang.reflect.Array;
+import java.nio.file.Paths;
 import java.util.*;
 import java.io.*;
 
@@ -127,7 +134,7 @@ public class DictionaryManager extends Dictionary {
         System.out.println("Successfully modified.");
         Collections.sort(curDict);
     }
-    public static void dictionaryLookup() {
+    public static void dictionaryLookup() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter word you want to lookup: ");
         String search = sc.nextLine();
@@ -135,22 +142,25 @@ public class DictionaryManager extends Dictionary {
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
         if (position < 0) System.out.println("Word not found.\n");
-        else System.out.println(curDict.get(position).getWordTarget() + " | " + curDict.get(position).getWordExplain());
+        else {
+            VoiceRSS.speak(search);
+            System.out.println(curDict.get(position).getWordTarget() + " | " + curDict.get(position).getWordExplain());
+        }
     }
-    public static String dictionarySearcher() {
-        Scanner sc = new Scanner(System.in);
-        String search = sc.nextLine();
+    public static String[] dictionarySearcher(String search) {
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
         if (position<0) position = -(position+1);
-        StringBuilder s = new StringBuilder();
+        ArrayList<String> suggestions = new ArrayList<String>();
         while (curDict.get(position).getWordTarget().toLowerCase().indexOf(search.toLowerCase())==0) {
-            s.append(curDict.get(position).getWordTarget()).append("\n");
+            suggestions.add(curDict.get(position).getWordTarget());
             position++;
             if (position>=curDict.size()) break;
         }
-        return s.toString();
+        String[] suggest_array = new String[suggestions.size()];
+        suggest_array = suggestions.toArray(suggest_array);
+        return suggest_array;
     }
 
 

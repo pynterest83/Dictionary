@@ -3,11 +3,15 @@ package base;
 import com.voicerss.tts.AudioFormat;
 import com.voicerss.tts.VoiceParameters;
 import com.voicerss.tts.VoiceProvider;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Paths;
 
 public class VoiceRSS {
     private static final String API_KEY = "4aceebbbab2946d5b434b3bb810bd2eb";
@@ -33,8 +37,9 @@ public class VoiceRSS {
         fos.flush();
         fos.close();
     }
-
-    public static void main(String[] args) throws Exception {
-        speakWord("good morning");
+    public static void speak(String word) throws Exception {
+        speakWord(word);
+        AudioClip voice = new AudioClip(Paths.get("src/resources/audio.wav").toUri().toString());
+        voice.play();
     }
 }
