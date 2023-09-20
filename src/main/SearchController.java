@@ -20,7 +20,8 @@ import java.util.stream.Stream;
 
 public class SearchController {
 
-    String[] suggestions;
+    private String current;
+    private String[] suggestions;
     @FXML
     private TextField searchBar;
     @FXML
@@ -65,6 +66,7 @@ public class SearchController {
     protected void enterSearch() throws Exception {
         if (!searchBar.getText().isEmpty() && !Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found")) {
             DisplayWordExplain();
+            current = searchBar.getText();
             SpeakButton.requestFocus();
         }
     }
@@ -76,6 +78,6 @@ public class SearchController {
     }
     @FXML
     private void onClickSpeakButton() throws Exception {
-        VoiceRSS.speak(searchBar.getText());
+        VoiceRSS.speak(current);
     }
 }
