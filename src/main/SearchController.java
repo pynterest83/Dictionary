@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import base.DictionaryManager;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import javafx.scene.web.WebView;
 import base.VoiceRSS;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,10 +29,13 @@ public class SearchController {
     private Button SpeakButton;
     @FXML
     private WebView wordExplain;
+    private String searched;
     @FXML
     private void initialize() {
+        // Auto complete
+        // update search bar with new suggestions and prepare text field for auto completion
+        // convert suggestions to list and fill in the search bar
         TextFields.bindAutoCompletion(searchBar, input -> {
-            if (searchBar.getText().length()<=1) return Collections.emptyList();
             return Stream.of(suggestions)
                     .filter(s -> s.contains(searchBar.getText()))
                     .collect(Collectors.toList());
@@ -38,6 +43,7 @@ public class SearchController {
         SpeakButton.setVisible(false);
         searchBar.textProperty().addListener((obs, oldText, newText) -> {
             try {
+                // get suggestions from user input and add it the text field which is search bar
                 UserInput();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -55,7 +61,13 @@ public class SearchController {
 
     @FXML
     protected void onImportFromFileClick(ActionEvent event) {
-        DictionaryManager.importFromFile();
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File f = fc.showOpenDialog(null);
+        if (f != null) {
+            System.out.println(f.getAbsolutePath());
+            DictionaryManager.importFromFile(f.getAbsolutePath());
+        }
     }
     @FXML
     protected void UserInput() throws Exception {
@@ -63,19 +75,24 @@ public class SearchController {
     }
     @FXML
     protected void enterSearch() throws Exception {
-        if (!searchBar.getText().isEmpty() && !Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found")) {
+        if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found.")) {
             DisplayWordExplain();
             SpeakButton.requestFocus();
+            searched = searchBar.getText();
+        }
+        else {
+            SpeakButton.setVisible(false);
+            wordExplain.getEngine().loadContent("Word not found.", "text/html");
         }
     }
     @FXML
     private void DisplayWordExplain() throws Exception {
         String explain = DictionaryManager.dictionaryLookup(searchBar.getText());
         wordExplain.getEngine().loadContent(explain, "text/html");
-        if (!SpeakButton.isVisible()) SpeakButton.setVisible(true);
+        SpeakButton.setVisible(true);
     }
     @FXML
     private void onClickSpeakButton() throws Exception {
-        VoiceRSS.speak(searchBar.getText());
+        VoiceRSS.speak(searched);
     }
 }

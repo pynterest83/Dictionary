@@ -39,7 +39,7 @@ public class VoiceRSS {
     }
     public static void speak(String word) throws Exception {
         speakWord(word);
-        AudioClip voice = new AudioClip(Paths.get("src/resources/audio.wav").toUri().toString());
+        MediaPlayer voice = new MediaPlayer(new Media(Paths.get(AUDIO_PATH).toUri().toString()));
         voice.play();
     }
 }

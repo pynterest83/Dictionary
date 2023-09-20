@@ -50,10 +50,8 @@ public class DictionaryManager extends Dictionary {
         }
     }
 
-    public static void importFromFile(){
+    public static void importFromFile(String path){
         try {
-            Scanner sc = new Scanner(System.in);
-            String path = sc.nextLine();
             File infile = new File(path);
             FileReader fileReader= new FileReader(infile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
