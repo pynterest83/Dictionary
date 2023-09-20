@@ -30,7 +30,7 @@ public class SearchController {
     @FXML
     private void initialize() {
         TextFields.bindAutoCompletion(searchBar, input -> {
-            if (searchBar.getText().length()<=2) return Collections.emptyList();
+            if (searchBar.getText().length()<=1) return Collections.emptyList();
             return Stream.of(suggestions)
                     .filter(s -> s.contains(searchBar.getText()))
                     .collect(Collectors.toList());
@@ -63,7 +63,7 @@ public class SearchController {
     }
     @FXML
     protected void enterSearch() throws Exception {
-        if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found")) {
+        if (!searchBar.getText().isEmpty() && !Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found")) {
             DisplayWordExplain();
             SpeakButton.requestFocus();
         }
@@ -72,7 +72,7 @@ public class SearchController {
     private void DisplayWordExplain() throws Exception {
         String explain = DictionaryManager.dictionaryLookup(searchBar.getText());
         wordExplain.getEngine().loadContent(explain, "text/html");
-        SpeakButton.setVisible(true);
+        if (!SpeakButton.isVisible()) SpeakButton.setVisible(true);
     }
     @FXML
     private void onClickSpeakButton() throws Exception {

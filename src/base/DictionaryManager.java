@@ -42,9 +42,7 @@ public class DictionaryManager extends Dictionary {
                 String[] words = line.split("   ");
                 Word newWord = new Word(words[0], words[1]);
                 curDict.add(newWord);
-                wordList.add(words[0]);
             }
-            Collections.sort(wordList);
             Collections.sort(curDict);
             System.out.println("Data Loaded" + "\n");
         } catch (Exception e) {
