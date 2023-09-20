@@ -1,21 +1,49 @@
 package main;
 
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import base.DictionaryManager;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.scene.web.WebView;
+import base.VoiceRSS;
+
+import java.util.Collections;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SearchController {
 
+    String[] suggestions;
     @FXML
     private TextField searchBar;
     @FXML
-    private TextArea wordExplain;
+    private Button SpeakButton;
+    @FXML
+    private WebView wordExplain;
+    @FXML
+    private void initialize() {
+        TextFields.bindAutoCompletion(searchBar, input -> {
+            if (searchBar.getText().length()<=2) return Collections.emptyList();
+            return Stream.of(suggestions)
+                    .filter(s -> s.contains(searchBar.getText()))
+                    .collect(Collectors.toList());
+        });
+        SpeakButton.setVisible(false);
+        searchBar.textProperty().addListener((obs, oldText, newText) -> {
+            try {
+                UserInput();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
     @FXML
     protected void SearchButton() {
         return;
@@ -30,9 +58,24 @@ public class SearchController {
         DictionaryManager.importFromFile();
     }
     @FXML
-    protected void onTextChange() {
-            String[] suggestions = DictionaryManager.dictionarySearcher(searchBar.getText());
-            TextFields.bindAutoCompletion(searchBar, suggestions);
+    protected void UserInput() throws Exception {
+        suggestions = DictionaryManager.dictionarySearcher(searchBar.getText());
     }
-
+    @FXML
+    protected void enterSearch() throws Exception {
+        if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found")) {
+            DisplayWordExplain();
+            SpeakButton.requestFocus();
+        }
+    }
+    @FXML
+    private void DisplayWordExplain() throws Exception {
+        String explain = DictionaryManager.dictionaryLookup(searchBar.getText());
+        wordExplain.getEngine().loadContent(explain, "text/html");
+        SpeakButton.setVisible(true);
+    }
+    @FXML
+    private void onClickSpeakButton() throws Exception {
+        VoiceRSS.speak(searchBar.getText());
+    }
 }

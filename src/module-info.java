@@ -3,7 +3,8 @@ module main {
         requires javafx.fxml;
         requires javafx.media;
         requires voicerss.tts;
-    requires org.controlsfx.controls;
+        requires org.controlsfx.controls;
+        requires javafx.web;
 
     opens base to javafx.fxml;
         exports base;

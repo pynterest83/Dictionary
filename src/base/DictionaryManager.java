@@ -42,7 +42,9 @@ public class DictionaryManager extends Dictionary {
                 String[] words = line.split("   ");
                 Word newWord = new Word(words[0], words[1]);
                 curDict.add(newWord);
+                wordList.add(words[0]);
             }
+            Collections.sort(wordList);
             Collections.sort(curDict);
             System.out.println("Data Loaded" + "\n");
         } catch (Exception e) {
@@ -134,17 +136,13 @@ public class DictionaryManager extends Dictionary {
         System.out.println("Successfully modified.");
         Collections.sort(curDict);
     }
-    public static void dictionaryLookup() throws Exception {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter word you want to lookup: ");
-        String search = sc.nextLine();
+    public static String dictionaryLookup(String search) throws Exception {
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
-        if (position < 0) System.out.println("Word not found.\n");
+        if (position < 0) return "Word not found.";
         else {
-            VoiceRSS.speak(search);
-            System.out.println(curDict.get(position).getWordTarget() + " | " + curDict.get(position).getWordExplain());
+            return curDict.get(position).getWordExplain();
         }
     }
     public static String[] dictionarySearcher(String search) {

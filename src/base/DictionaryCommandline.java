@@ -24,46 +24,4 @@ public class DictionaryCommandline extends Dictionary {
         System.out.println("[9] Export to file");
         System.out.print("Your action: ");
     }
-    public static void dictionaryAdvanced() throws Exception {
-        DictionaryManager.defaultFile();
-        while (true) {
-            view();
-            Scanner input = new Scanner(System.in);
-            int action = input.nextInt();
-            switch (action) {
-                case 0:
-                    System.out.println("Goodbye!");
-                    return;
-                case 1:
-                    DictionaryManager.insertFromCommandline();
-                    break;
-                case 2:
-                    DictionaryManager.deleteWord();
-                    break;
-                case 3:
-                    DictionaryManager.modifyWord();
-                    break;
-                case 4:
-                    DictionaryCommandline.showAllWords();
-                    break;
-                case 5:
-                    DictionaryManager.dictionaryLookup();
-                    break;
-                case 6:
-                    //System.out.println(DictionaryManager.dictionarySearcher());
-                    break;
-                case 7:
-                    //DictionaryManager.dictionaryGame();
-                    break;
-                case 8:
-                    DictionaryManager.importFromFile();
-                    break;
-                case 9:
-                    DictionaryManager.exportToFile();
-                    break;
-                default:
-                    System.out.println("Invalid action!");
-            }
-        }
-    }
 }
