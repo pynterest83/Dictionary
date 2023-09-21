@@ -105,14 +105,16 @@ public class DictionaryManager extends Dictionary {
         System.out.println("Word " + del + " deleted.");
     }
 
-    public static void addWord() {
-        Scanner strInput = new Scanner(System.in);
-        String word_target, word_explain;
-        word_target = strInput.nextLine();
-        word_explain = strInput.nextLine();
+    public static boolean addWord(String word_target, String word_explain) throws Exception {
         Word newWord = new Word(word_target, word_explain);
-        curDict.add(newWord);
-        Collections.sort(curDict);
+        if (DictionaryManager.dictionaryLookup(word_target) != "Word not found.") {
+            return false;
+        }
+        else {
+            curDict.add(newWord);
+            Collections.sort(curDict);
+        }
+        return true;
     }
 
     public static void modifyWord() {

@@ -116,4 +116,20 @@ public class SearchController {
     private void onClickSpeakButton() throws Exception {
         VoiceRSS.speak(searched);
     }
+
+    public void SearchButton(ActionEvent actionEvent) throws Exception {
+        return;
+    }
+    @FXML
+    public void GameButton(ActionEvent actionEvent) {
+        return;
+    }
+    @FXML
+    public void GGTranslateButton(ActionEvent actionEvent) {
+        return;
+    }
+    @FXML
+    public void FavouriteButton(ActionEvent actionEvent) {
+        return;
+    }
 }
