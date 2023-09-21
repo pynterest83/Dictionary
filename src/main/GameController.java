@@ -68,6 +68,16 @@ public class GameController {
         RunApplication.SwitchScenes(stage,"search.fxml");
     }
     @FXML
+    protected void onClickModify() throws IOException {
+        Stage stage = (Stage) gameScreen.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
+    }
+    @FXML
+    protected void onClickAdd() throws IOException {
+        Stage stage = (Stage) gameScreen.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"add.fxml");
+    }
+    @FXML
     protected String CheckResult() {
         if (ChoiceA.isSelected()) return "a";
         if (ChoiceB.isSelected()) return "b";

@@ -9,9 +9,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
@@ -59,10 +61,15 @@ public class EditController {
         }
     }
     @FXML
-    public void SearchButton(ActionEvent actionEvent) throws Exception { return; }
+    public void SearchButton(ActionEvent actionEvent) throws Exception {
+        Stage stage = (Stage) modifyEditor.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"search.fxml");
+    }
     @FXML
-    public void GameButton(ActionEvent actionEvent) {
-        return;
+    public void GameButton(ActionEvent actionEvent) throws IOException {
+
+        Stage stage = (Stage) modifyEditor.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
     public void GGTranslateButton(ActionEvent actionEvent) {

@@ -43,6 +43,16 @@ public class SearchController {
         });
     }
     @FXML
+    protected void onClickModify() throws IOException {
+        Stage stage = (Stage) wordExplain.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
+    }
+    @FXML
+    protected void onClickAdd() throws IOException {
+        Stage stage = (Stage) wordExplain.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"add.fxml");
+    }
+    @FXML
     protected void GameButton() throws IOException {
         Stage stage = (Stage) wordExplain.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"game.fxml");
