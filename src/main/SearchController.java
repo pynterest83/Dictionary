@@ -5,9 +5,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import base.DictionaryManager;
+import base.Word;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -15,8 +18,10 @@ import javafx.scene.web.WebView;
 import base.VoiceRSS;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,7 +71,23 @@ public class SearchController {
         File f = fc.showOpenDialog(null);
         if (f != null) {
             System.out.println(f.getAbsolutePath());
-            DictionaryManager.importFromFile(f.getAbsolutePath());
+            ArrayList<Word> repeated = DictionaryManager.importFromFile(f.getAbsolutePath());
+            if (repeated.size() > 0) {
+                for (int i =0; i<repeated.size(); i++) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Remove Repeated Words");
+                    alert.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
+                    alert.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    if (result.get() == ButtonType.OK) {
+                        int position = DictionaryManager.binSearch(repeated.get(i).getWordTarget());
+                        DictionaryManager.curDict.remove(position);
+                        DictionaryManager.curDict.add(repeated.get(i));
+                        Collections.sort(DictionaryManager.curDict);
+                    }
+                }
+            }
         }
     }
     @FXML

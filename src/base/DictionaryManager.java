@@ -50,7 +50,8 @@ public class DictionaryManager extends Dictionary {
         }
     }
 
-    public static void importFromFile(String path){
+    public static ArrayList<Word> importFromFile(String path){
+        ArrayList<Word> repeated = new ArrayList<Word>();
         try {
             File infile = new File(path);
             FileReader fileReader= new FileReader(infile);
@@ -59,7 +60,10 @@ public class DictionaryManager extends Dictionary {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] words = line.split("   ");
                 Word newWord = new Word(words[0], words[1]);
-                if (curDict.contains(newWord)) continue;
+                if (DictionaryManager.dictionaryLookup(words[0]) != "Word not found.") {
+                    repeated.add(newWord);
+                    continue;
+                }
                 curDict.add(newWord);
             }
             System.out.println("Data Loaded" + "\n");
@@ -67,6 +71,7 @@ public class DictionaryManager extends Dictionary {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return repeated;
     }
 
     public static void exportToFile() {
@@ -157,5 +162,10 @@ public class DictionaryManager extends Dictionary {
         return suggest_array;
     }
 
+    public static int binSearch(String search) {
+        Word dummy = new Word();
+        dummy.setWordTarget(search);
+        return Collections.binarySearch(curDict, dummy);
+    }
 
 }
