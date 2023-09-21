@@ -44,7 +44,6 @@ public class DictionaryManager extends Dictionary {
                 curDict.add(newWord);
             }
             Collections.sort(curDict);
-            System.out.println("Data Loaded" + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,8 +65,8 @@ public class DictionaryManager extends Dictionary {
                 }
                 curDict.add(newWord);
             }
-            System.out.println("Data Loaded" + "\n");
             Collections.sort(curDict);
+            fileReader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
