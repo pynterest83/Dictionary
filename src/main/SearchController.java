@@ -1,21 +1,17 @@
 package main;
 
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import base.DictionaryManager;
 import javafx.stage.FileChooser;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
+import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 import javafx.scene.web.WebView;
 import base.VoiceRSS;
-
 import java.io.File;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,9 +28,6 @@ public class SearchController {
     private String searched;
     @FXML
     private void initialize() {
-        // Auto complete
-        // update search bar with new suggestions and prepare text field for auto completion
-        // convert suggestions to list and fill in the search bar
         TextFields.bindAutoCompletion(searchBar, input -> {
             return Stream.of(suggestions)
                     .filter(s -> s.contains(searchBar.getText()))
@@ -43,7 +36,6 @@ public class SearchController {
         SpeakButton.setVisible(false);
         searchBar.textProperty().addListener((obs, oldText, newText) -> {
             try {
-                // get suggestions from user input and add it the text field which is search bar
                 UserInput();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -51,8 +43,9 @@ public class SearchController {
         });
     }
     @FXML
-    protected void SearchButton() {
-        return;
+    protected void GameButton() throws IOException {
+        Stage stage = (Stage) wordExplain.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
