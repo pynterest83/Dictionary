@@ -46,13 +46,14 @@
                 </AnchorPane>
                 <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="703.0">
                     <children>
-                        <TextField fx:id="addText" layoutY="1.0"  prefHeight="26.0" prefWidth="741.0" />
-                        <Button layoutX="681.0" layoutY="2.0" mnemonicParsing="false" onAction="#onClickAddButton" text="Next" />
-                        <Button fx:id="addButton" layoutX="655.0" layoutY="37.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="71.0" text="Add" />
+                        <TextField fx:id="modifyText" layoutY="1.0" prefHeight="26.0" prefWidth="741.0" />
+                        <Button layoutX="681.0" layoutY="2.0" mnemonicParsing="false" onAction="#onClickModifyButton" text="Next" />
+                        <Button fx:id="saveButton" layoutX="655.0" layoutY="37.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="71.0" text="Save" />
+                        <Button fx:id="delButton" layoutX="573.0" layoutY="37.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="71.0" text="Delete" />
                         <AnchorPane layoutX="60.0" layoutY="163.0" prefHeight="335.0" prefWidth="604.0">
                             <children>
                                 <WebView layoutX="-1.0" layoutY="-1.0" prefHeight="338.0" prefWidth="605.0" />
-                                <HTMLEditor fx:id="addEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="-1.0" prefHeight="337.0" prefWidth="605.0" />
+                                <HTMLEditor fx:id="modifyEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="-1.0" prefHeight="337.0" prefWidth="605.0" />
                             </children>
                         </AnchorPane>
                     </children>

@@ -13,7 +13,7 @@ public class RunApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("search.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("modify.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 895, 559);
         stage.setTitle("Hello World!");
         stage.setScene(scene);

@@ -90,19 +90,11 @@ public class DictionaryManager extends Dictionary {
         }
     }
 
-    public static void deleteWord() {
-        Scanner strInput = new Scanner(System.in);
-        System.out.println("Enter word you want to delete: ");
-        String del = strInput.nextLine();
+    public static void deleteWord(String word_target) {
         Word tmp = new Word();
-        tmp.setWordTarget(del);
+        tmp.setWordTarget(word_target);
         int position = Collections.binarySearch(curDict,tmp);
-        if (position < 0) {
-            System.out.println("Word not found.");
-            return;
-        }
         curDict.remove(position);
-        System.out.println("Word " + del + " deleted.");
     }
 
     public static boolean addWord(String word_target, String word_explain) throws Exception {
@@ -117,26 +109,12 @@ public class DictionaryManager extends Dictionary {
         return true;
     }
 
-    public static void modifyWord() {
-        Scanner strInput = new Scanner(System.in);
-        System.out.println("Enter word you want to modify: ");
-        String search = strInput.nextLine();
+    public static void modifyWord(String word_target, String word_explain) throws Exception {
         Word mod = new Word();
-        mod.setWordTarget(search);
-        int position = Collections.binarySearch(curDict, mod);
-        if (position < 0) {
-            System.out.println("Word not found.");
-            return;
-        }
-        String word_target, word_explain;
-        System.out.println("Enter new word: ");
-        word_target = strInput.nextLine();
-        System.out.println("Enter new definition: ");
-        word_explain = strInput.nextLine();
         mod.setWordTarget(word_target);
+        int position = Collections.binarySearch(curDict, mod);
         mod.setWordExplain(word_explain);
         curDict.set(position, mod);
-        System.out.println("Successfully modified.");
         Collections.sort(curDict);
     }
     public static String dictionaryLookup(String search) throws Exception {
