@@ -68,7 +68,18 @@ public class MainController {
         return;
     }
     @FXML
+<<<<<<< Updated upstream
     public void FavouriteButton(ActionEvent actionEvent) {
         return;
+=======
+    protected void onClickAdd() throws IOException {
+        Stage stage = (Stage) searchButton.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"add.fxml");
+    }
+    @FXML
+    protected void onClickGameButton() throws IOException {
+        Stage stage = (Stage) GameButton.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"completeSentenceGame.fxml");
+>>>>>>> Stashed changes
     }
 }

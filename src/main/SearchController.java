@@ -55,7 +55,7 @@ public class SearchController {
     @FXML
     protected void GameButton() throws IOException {
         Stage stage = (Stage) wordExplain.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"game.fxml");
+        RunApplication.SwitchScenes(stage,"completeSentenceGame.fxml");
     }
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
