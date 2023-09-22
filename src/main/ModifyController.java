@@ -11,6 +11,7 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,12 +20,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EditController {
+public class ModifyController {
     @FXML
     private TextField modifyText;
     @FXML
     private HTMLEditor modifyEditor;
     String[] suggestions;
+
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
         DictionaryManager.exportToFile();
@@ -74,43 +76,15 @@ public class EditController {
     public void FavouriteButton(ActionEvent actionEvent) {
         return;
     }
-
-    // Add
     @FXML
-    public void onClickAddButton(ActionEvent actionEvent) {
-        if (modifyText.getText().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("You must enter a word.");
-            alert.showAndWait();
-
-            return;
-        }
-        modifyEditor.setHtmlText("<html>" + modifyText.getText() + " /" + modifyText.getText() + "/"
-                + "<ul><li><b><i> loại từ: </i></b><ul><li><font color='#cc0000'><b> Nghĩa thứ nhất: </b></font><ul></li></ul></ul></li></ul><ul><li><b><i>loại từ khác: </i></b><ul><li><font color='#cc0000'><b> Nghĩa thứ hai: </b></font></li></ul></li></ul></html>");
+    protected void onClickModify() throws IOException {
+        Stage stage = (Stage) modifyText.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
     }
     @FXML
-    public void addReset() {
-        modifyEditor.setHtmlText("<html>" + modifyText.getText() + " /" + modifyText.getText() + "/"
-                + "<ul><li><b><i> loại từ: </i></b><ul><li><font color='#cc0000'><b> Nghĩa thứ nhất: </b></font><ul></li></ul></ul></li></ul><ul><li><b><i>loại từ khác: </i></b><ul><li><font color='#cc0000'><b> Nghĩa thứ hai: </b></font></li></ul></li></ul></html>");
-    }
-    @FXML
-    public void add(ActionEvent actionEvent) throws Exception {
-        String meaning = modifyEditor.getHtmlText().replace(" dir=\"ltr\"", "");
-        if (DictionaryManager.addWord(modifyText.getText(), meaning)) {
-            addReset();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Thông báo");
-            alert.setHeaderText(null);
-            alert.setContentText("Thêm từ thành công");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Thông báo");
-            alert.setHeaderText(null);
-            alert.setContentText("Từ bạn thêm đã tồn tại! Hãy chọn chức năng sửa đổi!");
-            alert.showAndWait();
-        }
+    protected void onClickAdd() throws IOException {
+        Stage stage = (Stage) modifyText.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"add.fxml");
     }
 
     // Modify
@@ -188,6 +162,14 @@ public class EditController {
             alert2.setHeaderText(null);
             alert2.setContentText("Xóa từ thành công");
             alert2.showAndWait();
+        }
+    }
+
+    public void onEnterModify(ActionEvent actionEvent) {
+        try {
+            onClickModifyButton(actionEvent);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.EditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ModifyController">
     <children>
         <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
@@ -22,9 +22,9 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                        <MenuItem mnemonicParsing="false" text="Edit" />
-                        <MenuItem mnemonicParsing="false" text="Add" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Edit" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -46,7 +46,7 @@
                 </AnchorPane>
                 <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="703.0">
                     <children>
-                        <TextField fx:id="modifyText" layoutY="1.0" prefHeight="26.0" prefWidth="741.0" />
+                        <TextField fx:id="modifyText" layoutY="1.0" onAction="#onEnterModify" prefHeight="26.0" prefWidth="741.0" />
                         <Button layoutX="681.0" layoutY="2.0" mnemonicParsing="false" onAction="#onClickModifyButton" text="Next" />
                         <Button fx:id="saveButton" layoutX="655.0" layoutY="37.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="71.0" text="Save" />
                         <Button fx:id="delButton" layoutX="573.0" layoutY="37.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="71.0" text="Delete" />
