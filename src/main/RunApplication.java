@@ -23,7 +23,11 @@ public class RunApplication extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("main.fxml"));
+<<<<<<< Updated upstream
+        FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("add.fxml"));
+=======
+        FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("wordle.fxml"));
+>>>>>>> Stashed changes
         Scene scene = new Scene(fxmlLoader.load(), 895, 559);
         stage.setTitle("Hello World!");
         stage.setResizable(false);
