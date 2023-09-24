@@ -43,19 +43,27 @@ public class SearchController {
         });
     }
     @FXML
-    protected void onClickModify() throws IOException {
-        Stage stage = (Stage) wordExplain.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
+    protected void onClickGameButton() throws IOException {
+        Stage stage = (Stage) searchBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"game.fxml");
+    }
+    @FXML
+    public void onClickGGTranslateButton(ActionEvent actionEvent) {
+        return;
+    }
+    @FXML
+    public void onClickFavouriteButton(ActionEvent actionEvent) {
+        return;
     }
     @FXML
     protected void onClickAdd() throws IOException {
-        Stage stage = (Stage) wordExplain.getScene().getWindow();
+        Stage stage = (Stage) searchBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"add.fxml");
     }
     @FXML
-    protected void GameButton() throws IOException {
-        Stage stage = (Stage) wordExplain.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"completeSentenceGame.fxml");
+    protected void onClickModify() throws IOException {
+        Stage stage = (Stage) searchBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
     }
     @FXML
     protected void onExportToFileClick(ActionEvent event) {

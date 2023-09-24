@@ -131,9 +131,22 @@ public class WordleController {
         DictionaryManager.exportToFile();
     }
     @FXML
-    protected void onClickModify() throws IOException {
+    public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
+        RunApplication.SwitchScenes(stage,"search.fxml");
+    }
+    @FXML
+    protected void onClickGameButton() throws IOException {
+        Stage stage = (Stage) WordlePane.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"game.fxml");
+    }
+    @FXML
+    public void onClickGGTranslateButton(ActionEvent actionEvent) {
+        return;
+    }
+    @FXML
+    public void onClickFavouriteButton(ActionEvent actionEvent) {
+        return;
     }
     @FXML
     protected void onClickAdd() throws IOException {
@@ -141,23 +154,9 @@ public class WordleController {
         RunApplication.SwitchScenes(stage,"add.fxml");
     }
     @FXML
-    protected void SearchButton() throws IOException {
+    protected void onClickModify() throws IOException {
         Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"search.fxml");
-    }
-    @FXML
-    public void GameButton(ActionEvent actionEvent) throws IOException {
-
-        Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"completeSentenceGame.fxml");
-    }
-    @FXML
-    public void GGTranslateButton(ActionEvent actionEvent) {
-        return;
-    }
-    @FXML
-    public void FavouriteButton(ActionEvent actionEvent) {
-        return;
+        RunApplication.SwitchScenes(stage,"modify.fxml");
     }
     @FXML
     protected void onPress(KeyEvent event) {

@@ -5,6 +5,7 @@ import base.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -17,13 +18,13 @@ import java.util.Optional;
 
 public class MainController {
     @FXML
-    private AnchorPane searchPane;
+    private Button searchButton;
     @FXML
-    private AnchorPane gamePane;
+    private Button GameButton;
     @FXML
-    private AnchorPane ggTranslatePane;
+    private Button GGTranslateButton;
     @FXML
-    private AnchorPane favouritePane;
+    private Button FavouriteButton;
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
         DictionaryManager.exportToFile();
@@ -55,28 +56,31 @@ public class MainController {
         }
     }
     @FXML
-    public void SearchButton(ActionEvent actionEvent) throws Exception {
-        return;
-    }
-    @FXML
-    public void GameButton(ActionEvent actionEvent) {
-        return;
-    }
-    @FXML
-    public void GGTranslateButton(ActionEvent actionEvent) {
-        return;
-    }
-    @FXML
-    public void FavouriteButton(ActionEvent actionEvent) {
-        return;
-    }
-    protected void onClickAdd() throws IOException {
-        Stage stage = (Stage) searchPane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"add.fxml");
+    public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
+        Stage stage = (Stage) searchButton.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"search.fxml");
     }
     @FXML
     protected void onClickGameButton() throws IOException {
-        Stage stage = (Stage) searchPane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"completeSentenceGame.fxml");
+        Stage stage = (Stage) GameButton.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"game.fxml");
+    }
+    @FXML
+    public void onClickGGTranslateButton(ActionEvent actionEvent) {
+        return;
+    }
+    @FXML
+    public void onClickFavouriteButton(ActionEvent actionEvent) {
+        return;
+    }
+    @FXML
+    protected void onClickAdd() throws IOException {
+        Stage stage = (Stage) searchButton.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"add.fxml");
+    }
+    @FXML
+    protected void onClickModify() throws IOException {
+        Stage stage = (Stage) searchButton.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
     }
 }

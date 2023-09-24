@@ -1,5 +1,6 @@
 package main;
 import base.DictionaryManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -62,20 +63,34 @@ public class CompleteSentenceController {
         DictionaryManager.exportToFile();
     }
     @FXML
-    protected void SearchButton() throws IOException {
+    public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage) gameScreen.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"search.fxml");
     }
     @FXML
-    protected void onClickModify() throws IOException {
+    protected void onClickGameButton() throws IOException {
         Stage stage = (Stage) gameScreen.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
+        RunApplication.SwitchScenes(stage,"game.fxml");
+    }
+    @FXML
+    public void onClickGGTranslateButton(ActionEvent actionEvent) {
+        return;
+    }
+    @FXML
+    public void onClickFavouriteButton(ActionEvent actionEvent) {
+        return;
     }
     @FXML
     protected void onClickAdd() throws IOException {
         Stage stage = (Stage) gameScreen.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"add.fxml");
     }
+    @FXML
+    protected void onClickModify() throws IOException {
+        Stage stage = (Stage) gameScreen.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
+    }
+
     @FXML
     protected String CheckResult() {
         if (ChoiceA.isSelected()) return "a";

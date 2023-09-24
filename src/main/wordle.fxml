@@ -23,7 +23,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Delete" />
                   <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Edit" />
                   <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
             </items>
@@ -39,10 +39,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="385.0">
                <children>
-                  <Button layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#SearchButton" prefHeight="70.0" prefWidth="147.0" text="Search" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutY="70.0" mnemonicParsing="false" onAction="#GGTranslateButton" prefHeight="76.0" prefWidth="147.0" text="GGTranslateAPI" />
-                  <Button layoutY="146.0" mnemonicParsing="false" onAction="#FavouriteButton" prefHeight="76.0" prefWidth="147.0" text="Favourite" />
-                  <Button layoutY="222.0" mnemonicParsing="false" onAction="#GameButton" prefHeight="76.0" prefWidth="147.0" text="Game" />
+                  <Button fx:id="searchButton" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="70.0" prefWidth="147.0" text="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="GGTranslateButton" layoutY="70.0" mnemonicParsing="false" prefHeight="76.0" onAction= "#onClickGGTranslateButton" prefWidth="147.0" text="GGTranslateAPI" />
+                  <Button fx:id="FavouriteButton" layoutY="146.0" mnemonicParsing="false" prefHeight="76.0" onAction= "#onClickFavouriteButton" prefWidth="147.0" text="Favourite" />
+                  <Button fx:id="GameButton" layoutY="222.0" mnemonicParsing="false" prefHeight="76.0" onAction= "#onClickGameButton" prefWidth="147.0" text="Game" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="473.0" style="-fx-background-color: transparent;">

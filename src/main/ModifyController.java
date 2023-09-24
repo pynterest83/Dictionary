@@ -58,32 +58,26 @@ public class ModifyController {
         }
     }
     @FXML
-    public void SearchButton(ActionEvent actionEvent) throws Exception {
+    public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage) modifyEditor.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"search.fxml");
     }
     @FXML
-    public void GameButton(ActionEvent actionEvent) throws IOException {
-
+    protected void onClickGameButton() throws IOException {
         Stage stage = (Stage) modifyEditor.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"completeSentenceGame.fxml");
+        RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
-    public void GGTranslateButton(ActionEvent actionEvent) {
+    public void onClickGGTranslateButton(ActionEvent actionEvent) {
         return;
     }
     @FXML
-    public void FavouriteButton(ActionEvent actionEvent) {
+    public void onClickFavouriteButton(ActionEvent actionEvent) {
         return;
-    }
-    @FXML
-    protected void onClickModify() throws IOException {
-        Stage stage = (Stage) modifyText.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
     }
     @FXML
     protected void onClickAdd() throws IOException {
-        Stage stage = (Stage) modifyText.getScene().getWindow();
+        Stage stage = (Stage) modifyEditor.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"add.fxml");
     }
 
