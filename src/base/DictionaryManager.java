@@ -1,12 +1,5 @@
 package base;
 
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import main.SearchController;
-
-import java.lang.reflect.Array;
-import java.nio.file.Paths;
 import java.util.*;
 import java.io.*;
 
@@ -59,7 +52,7 @@ public class DictionaryManager extends Dictionary {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] words = line.split("   ");
                 Word newWord = new Word(words[0], words[1]);
-                if (DictionaryManager.dictionaryLookup(words[0]) != "Word not found.") {
+                if (!Objects.equals(DictionaryManager.dictionaryLookup(words[0]), "Word not found.")) {
                     repeated.add(newWord);
                     continue;
                 }

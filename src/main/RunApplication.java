@@ -1,7 +1,7 @@
 package main;
 
 import base.CompleteSentence;
-import base.DictionaryCommandline;
+import base.Wordle;
 import base.DictionaryManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,7 @@ public class RunApplication extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("wordle.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 895, 559);
         stage.setTitle("Hello World!");
         stage.setResizable(false);
@@ -31,5 +31,6 @@ public class RunApplication extends Application {
         stage.show();
         DictionaryManager.defaultFile();
         CompleteSentence.LoadQuestionsAndAnswers();
+        Wordle.LoadWordleList();
     }
 }

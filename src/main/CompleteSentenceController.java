@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Random;
-public class GameController {
+public class CompleteSentenceController {
     int CurrentQuestion;
     Random rand = new Random();
     @FXML
@@ -33,7 +33,6 @@ public class GameController {
     private Button StartGameButton;
     @FXML
     protected void initialize() {
-        gameScreen.getEngine().setUserStyleSheetLocation(Paths.get("src/style/game.css").toUri().toString());
     }
     @FXML
     protected void StartGame() {
