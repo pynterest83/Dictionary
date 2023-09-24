@@ -56,27 +56,27 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="54.0" prefWidth="291.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
@@ -85,27 +85,27 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutY="61.0" prefHeight="54.0" prefWidth="291.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
@@ -114,27 +114,27 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutY="122.0" prefHeight="54.0" prefWidth="291.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
@@ -143,27 +143,27 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutY="183.0" prefHeight="54.0" prefWidth="291.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
@@ -172,27 +172,27 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutY="244.0" prefHeight="54.0" prefWidth="291.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
@@ -201,27 +201,27 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutY="305.0" prefHeight="54.0" prefWidth="291.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="128.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="158.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="188.0" layoutY="10.0" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black;">
+                              <TextField alignment="CENTER" layoutX="217.0" layoutY="10.0" onAction="#onSubmission" onKeyPressed="#onPress" onKeyReleased="#onRelease" onKeyTyped="#onType" prefHeight="54.0" prefWidth="54.0" style="-fx-border-color: black; -fx-display-caret: false;">
                                  <font>
                                     <Font name="Leelawadee Bold" size="23.0" />
                                  </font>
@@ -237,6 +237,11 @@
                      </font>
                   </Button>
                   <TextField fx:id="AnnounceBoard" layoutX="28.0" layoutY="415.0" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="ErrorBoard" layoutX="320.0" layoutY="426.0" prefHeight="30.0" prefWidth="284.0" style="-fx-background-color: transparent; -fx-text-fill: red;">
                      <font>
                         <Font name="Dubai Regular" size="19.0" />
                      </font>
