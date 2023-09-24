@@ -2,6 +2,10 @@ package main;
 
 import base.DictionaryManager;
 import base.Word;
+import base.Wordle;
+import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -11,13 +15,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class WordleController {
     static int CurrentAttempt;
@@ -36,6 +37,8 @@ public class WordleController {
     private TextField AnnounceBoard;
     @FXML
     private TextField AnnounceBoard2;
+    @FXML
+    private TextField ErrorBoard;
     @FXML
     protected void initialize() {
         InitializeHBoxes();
@@ -83,12 +86,13 @@ public class WordleController {
     protected void Start() {
         CurrentAttempt = 0;
         CurrentLetter = 0;
+        Random random = new Random();
         HBox first = (HBox) WordlePane.getChildren().get(0);
         TextField firstField = (TextField) first.getChildren().get(0);
         firstField.setEditable(true);
         firstField.requestFocus();
         Win = false;
-        Answer = "ALOOF";
+        Answer = Wordle.GetRandomWord();
     }
     @FXML
     protected void onClickReplay() {
@@ -170,6 +174,7 @@ public class WordleController {
     protected void onType(KeyEvent event) {
         HBox CurrentHbox = (HBox) WordlePane.getChildren().get(CurrentAttempt);
         TextField CurrentField = (TextField) CurrentHbox.getChildren().get(CurrentLetter);
+        if (Objects.equals(lastKey, "SPACE")) return;
         if (Objects.equals(lastKey, "BACK_SPACE")) {
             if (CurrentLetter>0) {
                 if (CurrentLetter == 4 && !Objects.equals(lastCharacter, "")) {
@@ -195,12 +200,25 @@ public class WordleController {
         }
     }
     @FXML
-    protected void onSubmission() {
+    protected void onSubmission() throws Exception {
         HBox CurrentHbox = (HBox) WordlePane.getChildren().get(CurrentAttempt);
         TextField CurrentField = (TextField) CurrentHbox.getChildren().get(CurrentLetter);
         CurrentField.setEditable(false);
+        StringBuilder s = new StringBuilder();
+        for (Node text : CurrentHbox.getChildren()) {
+            s.append(((TextField) text).getText());
+        }
         if (Objects.equals(CurrentField.getText(), "")) return;
-        CheckSubmission(CurrentHbox);
+        if (Objects.equals(DictionaryManager.dictionaryLookup(s.toString()), "Word not found.")) {
+            ErrorBoard.setText("Please enter a valid word.");
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(e -> ErrorBoard.setText(""));
+            pause.play();
+            new animatefx.animation.Shake(CurrentHbox).play();
+            return;
+        }
+        String[] styles = CheckSubmission(CurrentHbox,s.toString());
+        CheckAnimation(CurrentHbox,styles);
         if (CurrentAttempt<5 && !Win) {
             CurrentAttempt++;
             CurrentHbox = (HBox) WordlePane.getChildren().get(CurrentAttempt);
@@ -210,23 +228,19 @@ public class WordleController {
             CurrentField.requestFocus();
         }
     }
-    protected void CheckSubmission(HBox hBox) {
-        StringBuilder s = new StringBuilder();
-        for (Node text : hBox.getChildren()) {
-            s.append(((TextField) text).getText());
-        }
-        String guess = s.toString();
+    protected String[] CheckSubmission(HBox hBox,String guess) {
         String answer = Answer;
+        String[] styles = new String[5];
         if (Objects.equals(answer, guess)) {
             for (int i = 0; i < 5; i++) {
-                hBox.getChildren().get(i).setStyle("-fx-control-inner-background: Green;");
+                styles[i] = "-fx-control-inner-background: Green;";
             }
             EndGame(true);
-            return;
+            return styles;
         }
         for (int i = 0; i < 5; i++) {
             if (guess.charAt(i) == answer.charAt(i)) {
-                hBox.getChildren().get(i).setStyle("-fx-control-inner-background: Green;");
+                styles[i] = "-fx-control-inner-background: Green;";
                 answer = answer.substring(0, i) + "#" + answer.substring(i + 1);
                 guess = guess.substring(0,i) + "@" + guess.substring(i+1);
             }
@@ -236,18 +250,42 @@ public class WordleController {
             boolean check = false;
             for (int j = 0; j < 5; j++) {
                 if (guess.charAt(i) == answer.charAt(j)) {
-                    hBox.getChildren().get(i).setStyle("-fx-control-inner-background: Orange;");
+                    styles[i] = "-fx-control-inner-background: Orange;";
                     answer = answer.substring(0, j) + "#" + answer.substring(j + 1);
                     guess = guess.substring(0,i) + "@" + guess.substring(i+1);
                     check = true;
                     break;
                 }
             }
-            if (!check) hBox.getChildren().get(i).setStyle("-fx-control-inner-background: DarkGrey;");
+            if (!check) styles[i] = "-fx-control-inner-background: DarkGrey;";
         }
         if (CurrentAttempt == 5) {
             EndGame(false);
         }
+        return styles;
+    }
+    @FXML
+    protected void CheckAnimation(HBox hbox, String[] styles) {
+        ArrayList<ScaleTransition> transitions = new ArrayList<ScaleTransition>();
+        for (int i = 0;i < 5;i++) {
+            ScaleTransition transition = new ScaleTransition();
+            TextField current = (TextField) hbox.getChildren().get(i);
+            transition.setToY(0);
+            transition.setNode(current);
+            transition.setRate(1.3);
+            int finalI = i;
+            transition.setOnFinished(e-> {
+                current.setStyle(styles[finalI]);
+            });
+            transitions.add(transition);
+            ScaleTransition reverseTransition = new ScaleTransition();
+            reverseTransition.setToY(1);
+            reverseTransition.setNode(current);
+            reverseTransition.setRate(1.3);
+            transitions.add(reverseTransition);
+        }
+        SequentialTransition animation = new SequentialTransition(transitions.get(0), transitions.get(1), transitions.get(2), transitions.get(3), transitions.get(4),transitions.get(5),transitions.get(6),transitions.get(7),transitions.get(8),transitions.get(9));
+        animation.play();
     }
     @FXML
     protected void EndGame(boolean win) {
@@ -264,5 +302,6 @@ public class WordleController {
         ReplayButton.setVisible(true);
         AnnounceBoard.setText("You " + (win ? "won":"lost."));
         if (win) AnnounceBoard2.setText("Number of guess(es): " + (CurrentAttempt+1));
+        else AnnounceBoard2.setText("The answer is: "+ Answer.charAt(0)+Answer.substring(1).toLowerCase());
     }
 }
