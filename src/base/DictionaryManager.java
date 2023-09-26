@@ -5,26 +5,6 @@ import java.io.*;
 
 public class DictionaryManager extends Dictionary {
     private static final String PATH = "src/resources/dictionaries.txt";
-    public static void insertFromCommandline() {
-        String word_target, word_explain;
-        System.out.print("Enter number of words to add: ");
-        Scanner intInput = new Scanner(System.in);
-        Scanner strInput = new Scanner(System.in);
-        int nums = intInput.nextInt();
-        while (nums-- > 0) {
-            System.out.print("Enter word: ");
-            word_target = strInput.nextLine();
-            System.out.print("Enter definition of " + word_target + ":");
-            word_explain = strInput.nextLine();
-            Word newWord = new Word(word_target, word_explain);
-            if (curDict.contains(newWord)) continue;
-            curDict.add(newWord);
-        }
-        System.out.println("Added " + nums + " words.");
-        Collections.sort(curDict);
-    }
-
-
     public static void defaultFile() {
         try {
             File infile = new File(PATH);
