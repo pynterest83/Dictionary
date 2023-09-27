@@ -25,7 +25,7 @@ public class RunApplication extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(RunApplication.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 895, 559);
-        stage.setTitle("Hello World!");
+        stage.setTitle("Dictionary");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
