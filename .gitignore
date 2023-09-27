@@ -34,3 +34,5 @@ build/
 .DS_Store
 out/
 .mvn/
+META-INF/MANIFEST.MF
+src/resources/audio.wav

@@ -5,7 +5,7 @@ module main {
         requires voicerss.tts;
         requires org.controlsfx.controls;
         requires javafx.web;
-    requires AnimateFX;
+        requires AnimateFX;
 
     opens base to javafx.fxml;
         exports base;

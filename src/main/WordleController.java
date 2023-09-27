@@ -272,7 +272,7 @@ public class WordleController {
             TextField current = (TextField) hbox.getChildren().get(i);
             transition.setToY(0);
             transition.setNode(current);
-            transition.setRate(1.3);
+            transition.setRate(1.9);
             int finalI = i;
             transition.setOnFinished(e-> {
                 current.setStyle(styles[finalI]);
@@ -281,7 +281,7 @@ public class WordleController {
             ScaleTransition reverseTransition = new ScaleTransition();
             reverseTransition.setToY(1);
             reverseTransition.setNode(current);
-            reverseTransition.setRate(1.3);
+            reverseTransition.setRate(1.9);
             transitions.add(reverseTransition);
         }
         SequentialTransition animation = new SequentialTransition(transitions.get(0), transitions.get(1), transitions.get(2), transitions.get(3), transitions.get(4),transitions.get(5),transitions.get(6),transitions.get(7),transitions.get(8),transitions.get(9));
@@ -299,9 +299,13 @@ public class WordleController {
                 }
             }
         }
-        ReplayButton.setVisible(true);
-        AnnounceBoard.setText("You " + (win ? "won":"lost."));
-        if (win) AnnounceBoard2.setText("Number of guess(es): " + (CurrentAttempt+1));
-        else AnnounceBoard2.setText("The answer is: "+ Answer.charAt(0)+Answer.substring(1).toLowerCase());
+        PauseTransition replayHalt = new PauseTransition(Duration.seconds(2.5));
+        replayHalt.setOnFinished(e -> {
+            ReplayButton.setVisible(true);
+            AnnounceBoard.setText("You " + (win ? "won":"lost."));
+            if (win) AnnounceBoard2.setText("Number of guess(es): " + (CurrentAttempt+1));
+            else AnnounceBoard2.setText("The answer is: "+ Answer.charAt(0)+Answer.substring(1).toLowerCase());
+        });
+        replayHalt.play();
     }
 }
