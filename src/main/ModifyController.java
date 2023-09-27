@@ -68,8 +68,9 @@ public class ModifyController {
         RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
-    public void onClickGGTranslateButton(ActionEvent actionEvent) {
-        return;
+    public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) modifyEditor.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
     }
     @FXML
     public void onClickFavouriteButton(ActionEvent actionEvent) {
