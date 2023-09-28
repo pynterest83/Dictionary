@@ -74,9 +74,8 @@ public class WordleController {
             HBox current = (HBox) hboxes;
             for (Node text : current.getChildren()) {
                 ((TextField) text).setEditable(false);
-                ((TextField) text).setEditable(false);
                 ((TextField) text).setText("");
-                ((TextField) text).setStyle(null);
+                text.setStyle(null);
             }
         }
         AnnounceBoard.setText("");
@@ -86,7 +85,6 @@ public class WordleController {
     protected void Start() {
         CurrentAttempt = 0;
         CurrentLetter = 0;
-        Random random = new Random();
         HBox first = (HBox) WordlePane.getChildren().get(0);
         TextField firstField = (TextField) first.getChildren().get(0);
         firstField.setEditable(true);
@@ -147,7 +145,6 @@ public class WordleController {
     }
     @FXML
     public void onClickFavouriteButton(ActionEvent actionEvent) {
-        return;
     }
     @FXML
     protected void onClickAdd() throws IOException {
@@ -171,7 +168,7 @@ public class WordleController {
         }
     }
     @FXML
-    protected void onType(KeyEvent event) {
+    protected void onType() {
         HBox CurrentHbox = (HBox) WordlePane.getChildren().get(CurrentAttempt);
         TextField CurrentField = (TextField) CurrentHbox.getChildren().get(CurrentLetter);
         if (Objects.equals(lastKey, "SPACE")) return;
@@ -217,7 +214,7 @@ public class WordleController {
             new animatefx.animation.Shake(CurrentHbox).play();
             return;
         }
-        String[] styles = CheckSubmission(CurrentHbox,s.toString());
+        String[] styles = CheckSubmission(s.toString());
         CheckAnimation(CurrentHbox,styles);
         if (CurrentAttempt<5 && !Win) {
             CurrentAttempt++;
@@ -228,7 +225,7 @@ public class WordleController {
             CurrentField.requestFocus();
         }
     }
-    protected String[] CheckSubmission(HBox hBox,String guess) {
+    protected String[] CheckSubmission(String guess) {
         String answer = Answer;
         String[] styles = new String[5];
         if (Objects.equals(answer, guess)) {
@@ -266,7 +263,7 @@ public class WordleController {
     }
     @FXML
     protected void CheckAnimation(HBox hbox, String[] styles) {
-        ArrayList<ScaleTransition> transitions = new ArrayList<ScaleTransition>();
+        ArrayList<ScaleTransition> transitions = new ArrayList<>();
         for (int i = 0;i < 5;i++) {
             ScaleTransition transition = new ScaleTransition();
             TextField current = (TextField) hbox.getChildren().get(i);
@@ -274,9 +271,7 @@ public class WordleController {
             transition.setNode(current);
             transition.setRate(1.9);
             int finalI = i;
-            transition.setOnFinished(e-> {
-                current.setStyle(styles[finalI]);
-            });
+            transition.setOnFinished(e-> current.setStyle(styles[finalI]));
             transitions.add(transition);
             ScaleTransition reverseTransition = new ScaleTransition();
             reverseTransition.setToY(1);
