@@ -1,9 +1,13 @@
 package base;
 
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 
 public class TranslateAPI {
@@ -48,6 +52,9 @@ public class TranslateAPI {
             outstream.write(buffer, 0, len);
         }
         outstream.close();
+        Media voice = new Media(Paths.get("src/resources/speech.mp3").toUri().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(voice);
+        mediaPlayer.play();
     }
     public static void addDefault() throws IOException {
         File infile = new File(PATH);

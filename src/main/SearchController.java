@@ -1,15 +1,16 @@
 package main;
 
+import base.DictionaryManager;
+import base.TranslateAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import base.DictionaryManager;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
-import javafx.scene.web.WebView;
-import base.VoiceRSS;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -105,6 +106,6 @@ public class SearchController {
     }
     @FXML
     private void onClickSpeakButton() throws Exception {
-        VoiceRSS.speak(searched);
+        TranslateAPI.speakAudio(searched,"English");
     }
 }

@@ -6,14 +6,12 @@ import base.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -127,15 +125,9 @@ public class GGTranslateController {
 
     public void onClickSpeak1(ActionEvent actionEvent) throws IOException, URISyntaxException {
         TranslateAPI.speakAudio(input.getText(),SourceLang.getValue());
-        Media voice = new Media(Paths.get("src/resources/speech.mp3").toUri().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(voice);
-        mediaPlayer.play();
     }
 
     public void onClickSpeak2(ActionEvent actionEvent) throws IOException, URISyntaxException {
         TranslateAPI.speakAudio(output.getText(),TargetLang.getValue());
-        Media voice = new Media(Paths.get("src/resources/speech.mp3").toUri().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(voice);
-        mediaPlayer.play();
     }
 }
