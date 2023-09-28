@@ -102,7 +102,7 @@ public class GGTranslateController {
     public void SelectTargetLang(ActionEvent actionEvent) {
         targetLangCode = TranslateAPI.langMap.get(TargetLang.getValue());
     }
-
+    @FXML
     public void swap(ActionEvent actionEvent) {
         String temp = SourceLang.getValue();
         SourceLang.setValue(TargetLang.getValue());
@@ -112,9 +112,25 @@ public class GGTranslateController {
         input.setText(output.getText());
         output.setText(tmp);
     }
-
+    @FXML
     public void translate(ActionEvent actionEvent) {
         try {
+            if (input.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please enter a word");
+                alert.setContentText("Please enter a word");
+                alert.showAndWait();
+                return;
+            }
+            if (targetLangCode == "") {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please select a target language");
+                alert.setContentText("Please select a target language");
+                alert.showAndWait();
+                return;
+            }
             output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, input.getText()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,10 +140,42 @@ public class GGTranslateController {
     }
 
     public void onClickSpeak1(ActionEvent actionEvent) throws IOException, URISyntaxException {
+        if (SourceLang.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please select a language");
+            alert.setContentText("Please select a language");
+            alert.showAndWait();
+            return;
+        }
+        if (input.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter a word");
+            alert.setContentText("Please enter a word");
+            alert.showAndWait();
+            return;
+        }
         TranslateAPI.speakAudio(input.getText(),SourceLang.getValue());
     }
 
     public void onClickSpeak2(ActionEvent actionEvent) throws IOException, URISyntaxException {
+        if (TargetLang.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please select a language");
+            alert.setContentText("Please select a language");
+            alert.showAndWait();
+            return;
+        }
+        if (output.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter a word");
+            alert.setContentText("Please enter a word");
+            alert.showAndWait();
+            return;
+        }
         TranslateAPI.speakAudio(output.getText(),TargetLang.getValue());
     }
 }

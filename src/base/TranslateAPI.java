@@ -31,14 +31,12 @@ public class TranslateAPI {
         in.close();
         return response.toString();
     }
-    private static String generate_TTS_URL(String language, String text) {
-        return "http://translate.google.com/translate_tts?" + "?ie=UTF-8" + //encoding
-                "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) + //query encoded
-                "&tl=" + TranslateAPI.langMap.get(language) + //language used
-                "&client=tw-ob";
-    }
+
     public static void speakAudio(String text, String languageOutput) throws IOException, URISyntaxException {
-        String urlString = generate_TTS_URL(languageOutput, text);
+        String urlString = "http://translate.google.com/translate_tts?" + "?ie=UTF-8" + //encoding
+                "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) + //query encoded
+                "&tl=" + TranslateAPI.langMap.get(languageOutput) + //language used
+                "&client=tw-ob";
         URL url = new URI(urlString).toURL();
         HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
         urlConn.setRequestMethod("GET");
