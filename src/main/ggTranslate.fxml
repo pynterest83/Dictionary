@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.SearchableComboBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GGTranslateController">
     <children>
@@ -48,9 +48,9 @@
                     <children>
                   <AnchorPane layoutY="51.0" prefHeight="63.0" prefWidth="740.0">
                      <children>
-                        <ComboBox fx:id="SourceLang" layoutX="110.0" layoutY="18.0" onAction="#SelectSourceLang" prefWidth="150.0" promptText="Translate From" />
-                        <ComboBox fx:id="TargetLang" layoutX="480.0" layoutY="18.0" onAction="#SelectTargetLang" prefWidth="150.0" promptText="Translate To" />
                         <Button layoutX="344.0" layoutY="19.0" mnemonicParsing="false" onAction="#swap" text="Swap" />
+                        <SearchableComboBox fx:id="SourceLang" layoutX="111.0" layoutY="17.0" onAction="#SelectSourceLang" prefHeight="26.0" prefWidth="150.0" promptText="Translate From" />
+                        <SearchableComboBox fx:id="TargetLang" layoutX="480.0" layoutY="18.0" onAction="#SelectTargetLang" prefHeight="26.0" prefWidth="150.0" promptText="Translate To" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutY="124.0" prefHeight="404.0" prefWidth="368.0">

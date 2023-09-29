@@ -1,30 +1,24 @@
 package main;
 
-import base.DictionaryManager;
 import base.TranslateAPI;
-import base.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import org.controlsfx.control.SearchableComboBox;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Optional;
 
 public class GGTranslateController extends MainController{
     private static final String PATH = "src/resources/Spelling.txt";
     private String sourceLangCode = "";
     private String targetLangCode = "";
     @FXML
-    private ComboBox<String> SourceLang;
+    private SearchableComboBox<String> SourceLang;
     @FXML
-    private ComboBox<String> TargetLang;
+    private SearchableComboBox<String> TargetLang;
     @FXML
     private TextField input;
     @FXML

@@ -1,20 +1,14 @@
 package main;
 
 import base.DictionaryManager;
-import base.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,10 +23,8 @@ public class ModifyController extends MainController {
 
     @FXML
     private void initialize() {
-        // Auto complete
-        // update search bar with new suggestions and prepare text field for auto completion
-        // convert suggestions to list and fill in the search bar
         TextFields.bindAutoCompletion(modifyText, input -> {
+            if (modifyText.getText().length() <= 1) return Collections.emptyList();
             return Stream.of(suggestions)
                     .filter(s -> s.contains(modifyText.getText()))
                     .collect(Collectors.toList());

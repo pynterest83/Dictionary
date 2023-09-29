@@ -2,17 +2,13 @@ package main;
 
 import base.DictionaryManager;
 import base.TranslateAPI;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
-
-import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,6 +26,7 @@ public class SearchController extends MainController {
     @FXML
     private void initialize() throws IOException {
         TextFields.bindAutoCompletion(searchBar, input -> {
+            if (searchBar.getText().length() <= 1) return Collections.emptyList();
             return Stream.of(suggestions)
                     .filter(s -> s.contains(searchBar.getText()))
                     .collect(Collectors.toList());
