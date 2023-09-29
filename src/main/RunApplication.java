@@ -1,6 +1,7 @@
 package main;
 
 import base.CompleteSentence;
+import base.TranslateAPI;
 import base.Wordle;
 import base.DictionaryManager;
 import javafx.application.Application;
@@ -29,8 +30,10 @@ public class RunApplication extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
         DictionaryManager.defaultFile();
         CompleteSentence.LoadQuestionsAndAnswers();
         Wordle.LoadWordleList();
+        TranslateAPI.addDefault();
     }
 }
