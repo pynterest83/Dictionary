@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
@@ -37,10 +37,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="100.0">
                <children>
-                   <Button fx:id="searchButton" layoutX="6.0" layoutY="1.0" mnemonicParsing="false"  prefHeight="70.0" prefWidth="147.0" text="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                   <Button fx:id="GGTranslateButton" layoutY="70.0" mnemonicParsing="false" prefHeight="76.0" onAction= "#onClickGGTranslateButton" prefWidth="147.0" text="GGTranslateAPI" />
-                   <Button fx:id="FavouriteButton" layoutY="146.0" mnemonicParsing="false" prefHeight="76.0" onAction= "#onClickFavouriteButton" prefWidth="147.0" text="Favourite" />
-                   <Button fx:id="GameButton" layoutY="222.0" mnemonicParsing="false" prefHeight="76.0" onAction= "#onClickGameButton" prefWidth="147.0" text="Game" />
+                   <Button fx:id="searchButton" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="147.0" styleClass="side-button" text="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                   <Button fx:id="GGTranslateButton" layoutY="70.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="GGTranslateAPI" />
+                   <Button fx:id="FavouriteButton" layoutY="146.0" mnemonicParsing="false" onAction="#onClickFavouriteButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Favourite" />
+                   <Button fx:id="GameButton" layoutY="222.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Game" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="825.0">

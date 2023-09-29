@@ -1,0 +1,14 @@
+@font-face {
+    src: url("fonts/Lato-Bold.ttf");
+}
+.side-button {
+    -fx-font-family: 'Lato', sans-serif;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 0.5;
+    -fx-font-size: 15px;
+}
+.side-button:hover {
+    -fx-background-color: #00008B;
+    -fx-text-fill: white;
+}
