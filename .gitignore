@@ -35,4 +35,4 @@ build/
 out/
 .mvn/
 META-INF/MANIFEST.MF
-src/resources/audio.wav
+/src/resources/speech.mp3
