@@ -19,67 +19,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AddController {
+public class AddController extends MainController {
     @FXML
     private TextField addText;
     @FXML
     private HTMLEditor addEditor;
-    @FXML
-    protected void onExportToFileClick(ActionEvent event) {
-        DictionaryManager.exportToFile();
-    }
-    @FXML
-    protected void onImportFromFileClick(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File f = fc.showOpenDialog(null);
-        if (f != null) {
-            System.out.println(f.getAbsolutePath());
-            ArrayList<Word> repeated = DictionaryManager.importFromFile(f.getAbsolutePath());
-            if (repeated.size() > 0) {
-                for (int i =0; i<repeated.size(); i++) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Remove Repeated Words");
-                    alert.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
-                    alert.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
-                    Optional<ButtonType> result = alert.showAndWait();
 
-                    if (result.get() == ButtonType.OK) {
-                        int position = DictionaryManager.binSearch(repeated.get(i).getWordTarget());
-                        DictionaryManager.curDict.remove(position);
-                        DictionaryManager.curDict.add(repeated.get(i));
-                        Collections.sort(DictionaryManager.curDict);
-                    }
-                }
-            }
-        }
-    }
-    @FXML
-    public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
-        Stage stage = (Stage) addEditor.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"search.fxml");
-    }
-    @FXML
-    protected void onClickGameButton() throws IOException {
-        Stage stage = (Stage) addEditor.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"game.fxml");
-    }
-    @FXML
-    public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) addEditor.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
-    }
-    @FXML
-    public void onClickFavouriteButton(ActionEvent actionEvent) {
-        return;
-    }
-    @FXML
-    protected void onClickModify() throws IOException {
-        Stage stage = (Stage) addEditor.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
-    }
-
-    // Add
     @FXML
     public void onClickAddButton(ActionEvent actionEvent) {
         if (addText.getText().equals("")) {

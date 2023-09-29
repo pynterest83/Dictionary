@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class WordleController {
+public class WordleController extends MainController {
     static int CurrentAttempt;
     static int CurrentLetter;
     private static String lastKey;
@@ -97,64 +97,6 @@ public class WordleController {
         ReplayButton.setVisible(false);
         ResetTiles();
         Start();
-    }
-    @FXML
-    protected void onImportFromFileClick() {
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File f = fc.showOpenDialog(null);
-        if (f != null) {
-            System.out.println(f.getAbsolutePath());
-            ArrayList<Word> repeated = DictionaryManager.importFromFile(f.getAbsolutePath());
-            if (repeated.size() > 0) {
-                for (int i =0; i<repeated.size(); i++) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Remove Repeated Words");
-                    alert.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
-                    alert.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
-                    Optional<ButtonType> result = alert.showAndWait();
-
-                    if (result.get() == ButtonType.OK) {
-                        int position = DictionaryManager.binSearch(repeated.get(i).getWordTarget());
-                        DictionaryManager.curDict.remove(position);
-                        DictionaryManager.curDict.add(repeated.get(i));
-                        Collections.sort(DictionaryManager.curDict);
-                    }
-                }
-            }
-        }
-    }
-    @FXML
-    protected void onExportToFileClick() {
-        DictionaryManager.exportToFile();
-    }
-    @FXML
-    public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
-        Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"search.fxml");
-    }
-    @FXML
-    protected void onClickGameButton() throws IOException {
-        Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"game.fxml");
-    }
-    @FXML
-    public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
-    }
-    @FXML
-    public void onClickFavouriteButton(ActionEvent actionEvent) {
-    }
-    @FXML
-    protected void onClickAdd() throws IOException {
-        Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"add.fxml");
-    }
-    @FXML
-    protected void onClickModify() throws IOException {
-        Stage stage = (Stage) WordlePane.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
     }
     @FXML
     protected void onPress(KeyEvent event) {

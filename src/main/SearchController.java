@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SearchController {
+public class SearchController extends MainController {
 
     String[] suggestions;
     @FXML
@@ -42,45 +42,6 @@ public class SearchController {
                 e.printStackTrace();
             }
         });
-    }
-    @FXML
-    protected void onClickGameButton() throws IOException {
-        Stage stage = (Stage) searchBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"game.fxml");
-    }
-    @FXML
-    public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) searchBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
-    }
-    @FXML
-    public void onClickFavouriteButton(ActionEvent actionEvent) {
-        return;
-    }
-    @FXML
-    protected void onClickAdd() throws IOException {
-        Stage stage = (Stage) searchBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"add.fxml");
-    }
-    @FXML
-    protected void onClickModify() throws IOException {
-        Stage stage = (Stage) searchBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
-    }
-    @FXML
-    protected void onExportToFileClick(ActionEvent event) {
-        DictionaryManager.exportToFile();
-    }
-
-    @FXML
-    protected void onImportFromFileClick(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File f = fc.showOpenDialog(null);
-        if (f != null) {
-            System.out.println(f.getAbsolutePath());
-            DictionaryManager.importFromFile(f.getAbsolutePath());
-        }
     }
     @FXML
     protected void UserInput() throws Exception {
