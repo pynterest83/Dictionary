@@ -31,7 +31,6 @@ public class GGTranslateController extends MainController{
     private TextField output;
     @FXML
     private void initialize() throws IOException {
-        TranslateAPI.addDefault();
         for (HashMap.Entry<String, String> entry : TranslateAPI.langMap.entrySet()) {
             SourceLang.getItems().add(entry.getKey());
             TargetLang.getItems().add(entry.getKey());

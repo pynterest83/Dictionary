@@ -28,7 +28,7 @@ public class SearchController extends MainController {
     private WebView wordExplain;
     private String searched;
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         TextFields.bindAutoCompletion(searchBar, input -> {
             return Stream.of(suggestions)
                     .filter(s -> s.contains(searchBar.getText()))
