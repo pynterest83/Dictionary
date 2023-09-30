@@ -43,7 +43,7 @@ public class TranslateAPI {
         urlConn.setRequestProperty("User-Agent", "Mozilla/5.0");
         InputStream audioSrc = urlConn.getInputStream();
         DataInputStream read = new DataInputStream(audioSrc);
-        OutputStream outstream = new FileOutputStream(new File("src/resources/speech.mp3"));
+        OutputStream outstream = new FileOutputStream("src/resources/speech.mp3");
         byte[] buffer = new byte[1024];
         int len;
         while ((len = read.read(buffer)) > 0) {
@@ -58,7 +58,7 @@ public class TranslateAPI {
         File infile = new File(PATH);
         FileReader fileReader=  new FileReader(infile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line = null;
+        String line;
         while ((line = bufferedReader.readLine()) != null) {
             String[] lang = line.split(" ");
             langMap.put(lang[0], lang[1]);
