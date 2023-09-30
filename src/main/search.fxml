@@ -7,6 +7,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 <?import org.controlsfx.control.textfield.TextFields?>
 
@@ -40,15 +42,31 @@
                <children>
                    <Button fx:id="searchButton" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="147.0" styleClass="side-button" text="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                    <Button fx:id="GGTranslateButton" layoutY="70.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="GGTranslateAPI" />
-                   <Button fx:id="FavouriteButton" layoutY="146.0" mnemonicParsing="false" onAction="#onClickFavouriteButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Favourite" />
+                   <Button fx:id="LearningButton" layoutY="146.0" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Learning" />
                    <Button fx:id="GameButton" layoutY="222.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Game" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="825.0">
                <children>
-                  <TextFields fx:factory="createClearableTextField" fx:id="searchBar" layoutY="1.0" onAction="#enterSearch" prefHeight="26.0" prefWidth="741.0" />
+                  <TextFields fx:id="searchBar" layoutY="1.0" onAction="#enterSearch" prefHeight="26.0" prefWidth="741.0" fx:factory="createClearableTextField" />
                   <WebView fx:id="wordExplain" layoutX="14.0" layoutY="27.0" prefHeight="499.0" prefWidth="741.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <Button fx:id="SpeakButton" layoutX="655.0" layoutY="37.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="26.0" prefWidth="71.0" text="Speak" />
+                  <Button fx:id="addLearningButton" layoutX="561.0" layoutY="38.0" mnemonicParsing="false" onAction="#onClickAddLearning" prefHeight="25.0" prefWidth="71.0" text="Learning" />
+                  <AnchorPane fx:id="addNote" layoutX="150.0" layoutY="136.0" prefHeight="127.0" prefWidth="442.0">
+                     <children>
+                        <WebView prefHeight="41.0" prefWidth="446.0" />
+                        <Text layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Notes" textAlignment="CENTER" wrappingWidth="445.9999999999999">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="Notes" alignment="TOP_LEFT" layoutY="41.0" onAction="#addDescription" prefHeight="159.0" prefWidth="446.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
         </items>

@@ -2,9 +2,13 @@ package main;
 
 import base.DictionaryManager;
 import base.TranslateAPI;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
 import java.io.IOException;
@@ -21,7 +25,13 @@ public class SearchController extends MainController {
     @FXML
     private Button SpeakButton;
     @FXML
+    private Button addLearningButton;
+    @FXML
     private WebView wordExplain;
+    @FXML
+    private AnchorPane addNote;
+    @FXML
+    private TextField Notes;
     private String searched;
     @FXML
     private void initialize() throws IOException {
@@ -32,6 +42,8 @@ public class SearchController extends MainController {
                     .collect(Collectors.toList());
         });
         SpeakButton.setVisible(false);
+        addLearningButton.setVisible(false);
+        addNote.setVisible(false);
         searchBar.textProperty().addListener((obs, oldText, newText) -> {
             try {
                 UserInput();
@@ -46,6 +58,7 @@ public class SearchController extends MainController {
     }
     @FXML
     protected void enterSearch() throws Exception {
+        addNote.setVisible(false);
         if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found.")) {
             DisplayWordExplain();
             SpeakButton.requestFocus();
@@ -53,6 +66,7 @@ public class SearchController extends MainController {
         }
         else {
             SpeakButton.setVisible(false);
+            addLearningButton.setVisible(false);
             wordExplain.getEngine().loadContent("Word not found.", "text/html");
         }
     }
@@ -61,9 +75,24 @@ public class SearchController extends MainController {
         String explain = DictionaryManager.dictionaryLookup(searchBar.getText());
         wordExplain.getEngine().loadContent(explain, "text/html");
         SpeakButton.setVisible(true);
+        addLearningButton.setVisible(true);
     }
     @FXML
     private void onClickSpeakButton() throws Exception {
         TranslateAPI.speakAudio(searched,"English");
+    }
+    @FXML
+    public void onClickAddLearning(ActionEvent actionEvent) {
+        addNote.setVisible(true);
+    }
+    @FXML
+    public void addDescription(ActionEvent actionEvent) {
+        DictionaryManager.addLearning(searched, Notes.getText());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Added");
+        alert.setHeaderText(null);
+        alert.setContentText("Added to learning list");
+        alert.showAndWait();
+        addNote.setVisible(false);
     }
 }

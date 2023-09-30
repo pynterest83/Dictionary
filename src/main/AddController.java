@@ -62,8 +62,9 @@ public class AddController extends MainController {
 
             onClickModify();
         }
+        DictionaryManager.exportToFile();
     }
-
+    @FXML
     public void onEnterAdd(ActionEvent actionEvent) {
         try {
             onClickAddButton(actionEvent);

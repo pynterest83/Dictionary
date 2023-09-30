@@ -24,7 +24,7 @@ public class MainController {
     @FXML
     private Button GGTranslateButton;
     @FXML
-    private Button FavouriteButton;
+    private Button LearningButton;
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
         DictionaryManager.exportToFile();
@@ -71,8 +71,9 @@ public class MainController {
         RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
     }
     @FXML
-    public void onClickFavouriteButton(ActionEvent actionEvent) {
-        return;
+    public void onClickLearningButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) LearningButton.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"learning.fxml");
     }
     @FXML
     protected void onClickAdd() throws IOException {

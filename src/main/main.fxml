@@ -41,7 +41,7 @@
                      <font>
                         <Font name="Lucida Bright" size="15.0" />
                      </font></Button>
-                  <Button fx:id="FavouriteButton" layoutY="146.0" mnemonicParsing="false" onAction="#onClickFavouriteButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Favourite" />
+                   <Button fx:id="LearningButton" layoutY="146.0" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Learning" />
                   <Button fx:id="GameButton" layoutY="222.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Game" />
                </children>
             </AnchorPane>

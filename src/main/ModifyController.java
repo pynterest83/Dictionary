@@ -75,6 +75,7 @@ public class ModifyController extends MainController {
         alert.setHeaderText(null);
         alert.setContentText("Sửa từ thành công");
         alert.showAndWait();
+        DictionaryManager.exportToFile();
     }
 
     // Delete
@@ -94,6 +95,7 @@ public class ModifyController extends MainController {
             alert2.setContentText("Xóa từ thành công");
             alert2.showAndWait();
         }
+        DictionaryManager.exportToFile();
     }
 
     public void onEnterModify(ActionEvent actionEvent) {
