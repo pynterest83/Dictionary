@@ -86,8 +86,9 @@ public class SearchController extends MainController {
         addNote.setVisible(true);
     }
     @FXML
-    public void addDescription(ActionEvent actionEvent) {
+    public void addDescription(ActionEvent actionEvent) throws IOException {
         DictionaryManager.addLearning(searched, Notes.getText());
+        RunApplication.Reload("learning.fxml");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Added");
         alert.setHeaderText(null);

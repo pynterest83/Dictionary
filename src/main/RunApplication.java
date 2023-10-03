@@ -21,12 +21,12 @@ public class RunApplication extends Application {
     public static void main(String[] args) throws Exception {
         launch(args);
     }
-    public static void SwitchScenes(Stage stage,String sceneName) throws IOException {
-        if (Objects.equals(sceneName, "learning.fxml")) {
-            FXML_scenes.replace("learning.fxml",FXMLLoader.load(Paths.get("src/main/learning.fxml").toUri().toURL()));
-        }
+    public static void SwitchScenes(Stage stage,String sceneName) {
         stage.getScene().setRoot(FXML_scenes.get(sceneName));
         stage.show();
+    }
+    public static void Reload(String sceneName) throws IOException {
+        FXML_scenes.replace("learning.fxml",FXMLLoader.load(Paths.get("src/main/learning.fxml").toUri().toURL()));
     }
     @Override
     public void start(Stage stage) throws Exception {
