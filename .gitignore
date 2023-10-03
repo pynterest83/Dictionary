@@ -36,3 +36,4 @@ out/
 .mvn/
 META-INF/MANIFEST.MF
 /src/resources/speech.mp3
+/src/resources/Learning.txt
