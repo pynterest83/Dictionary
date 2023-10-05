@@ -3,6 +3,10 @@ package base;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.net.*;
@@ -65,5 +69,36 @@ public class TranslateAPI {
         }
         fileReader.close();
     }
-}
+    public static String[] theSaurus(String word, String type) throws URISyntaxException, IOException, ParseException {
+        String urlScript = "https://dictionaryapi.com/api/v3/references/thesaurus/json/" + word +"?key=8d9232c5-ec85-49a3-a070-3b63dbc55fc8";
+        URL url = new URI(urlScript).toURL();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("accept", "application/json");
+        StringBuilder response = new StringBuilder();
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
 
+        String data = response.toString();
+        String syns = data.substring(data.indexOf("syns") + 8, data.indexOf("ants") - 4);
+        String[] syn = syns.split(",");
+        response = new StringBuilder();
+        String ants = data.substring(data.indexOf("ants") + 8, data.indexOf("offensive") - 4);
+        String[] ant = ants.split(",");
+        for (int i = 0; i < syn.length; i++) {
+            syn[i] = syn[i].substring(1, syn[i].length() - 1);
+        }
+        for (int i = 0; i < ant.length; i++) {
+            ant[i] = ant[i].substring(1, ant[i].length() - 1);
+        }
+        if (type.equals("syn")) {
+            return syn;
+        } else {
+            return ant;
+        }
+    }
+}

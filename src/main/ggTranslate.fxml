@@ -5,6 +5,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -55,20 +56,30 @@
                   </AnchorPane>
                   <AnchorPane layoutY="124.0" prefHeight="404.0" prefWidth="368.0">
                      <children>
-                        <TextField fx:id="input" alignment="TOP_LEFT" onAction="#translate" prefHeight="406.0" prefWidth="368.0">
+                        <TextField fx:id="input" alignment="TOP_LEFT" onAction="#translate" prefHeight="153.0" prefWidth="368.0">
                            <font>
                               <Font size="20.0" />
                            </font></TextField>
-                        <Button layoutX="300.0" layoutY="368.0" mnemonicParsing="false" onAction="#onClickSpeak1" text="Speak" />
+                        <Button layoutX="300.0" layoutY="123.0" mnemonicParsing="false" onAction="#onClickSpeak1" text="Speak" />
+                        <TextArea fx:id="synonyms" editable="false" layoutY="187.0" prefHeight="217.0" prefWidth="368.0" scrollLeft="80.0" scrollTop="35.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font></TextArea>
+                        <Button fx:id="symButton" layoutY="165.0" mnemonicParsing="false" onAction="#onClickSynonyms" text="Synonyms" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="372.0" layoutY="124.0" prefHeight="404.0" prefWidth="368.0">
                      <children>
-                        <TextField fx:id="output" alignment="TOP_LEFT" prefHeight="404.0" prefWidth="368.0">
+                        <TextArea fx:id="output" prefHeight="153.0" prefWidth="368.0">
                            <font>
                               <Font size="20.0" />
-                           </font></TextField>
-                        <Button layoutX="302.0" layoutY="365.0" mnemonicParsing="false" onAction="#onClickSpeak2" text="Speak" />
+                           </font></TextArea>
+                        <Button layoutX="300.0" layoutY="123.0" mnemonicParsing="false" onAction="#onClickSpeak2" text="Speak" />
+                        <TextArea fx:id="antonyms" editable="false" layoutY="187.0" prefHeight="217.0" prefWidth="368.0" scrollLeft="80.0" scrollTop="35.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font></TextArea>
+                        <Button fx:id="antButton" layoutY="164.0" mnemonicParsing="false" onAction="#onClickAntonyms" text="Antonyms" />
                      </children>
                   </AnchorPane>
                     </children>

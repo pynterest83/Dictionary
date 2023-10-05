@@ -4,8 +4,10 @@ import base.TranslateAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.SearchableComboBox;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -22,7 +24,11 @@ public class GGTranslateController extends MainController{
     @FXML
     private TextField input;
     @FXML
-    private TextField output;
+    private TextArea output;
+    @FXML
+    private TextArea synonyms;
+    @FXML
+    private TextArea antonyms;
     @FXML
     private void initialize() throws IOException {
         for (HashMap.Entry<String, String> entry : TranslateAPI.langMap.entrySet()) {
@@ -114,5 +120,67 @@ public class GGTranslateController extends MainController{
             return;
         }
         TranslateAPI.speakAudio(output.getText(),TargetLang.getValue());
+    }
+
+    public void onClickSynonyms(ActionEvent actionEvent) throws URISyntaxException, IOException, ParseException {
+        String word = "";
+        if (sourceLangCode.equals("en") || (sourceLangCode.equals(""))) {
+            word = input.getText();
+        } else if (targetLangCode.equals("en")) {
+            word = output.getText();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("This Language is not supported");
+            alert.setContentText("This Language is not supported");
+            alert.showAndWait();
+            return;
+        }
+        String[] synonymsList = TranslateAPI.theSaurus(word, "syn");
+        if (synonymsList.length == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No synonyms found");
+            alert.setContentText("No synonyms found");
+            alert.showAndWait();
+            return;
+        }
+        String synonymsString = "";
+        for (int i = 0; i < synonymsList.length; i++) {
+            synonymsString += synonymsList[i] + "\n";
+        }
+        synonyms.setText(synonymsString);
+    }
+
+    public void onClickAntonyms(ActionEvent actionEvent) throws URISyntaxException, IOException, ParseException {
+        String word = "";
+        if (sourceLangCode.equals("en") || (sourceLangCode.equals(""))) {
+            word = input.getText();
+        } else if (targetLangCode.equals("en")) {
+            word = output.getText();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("This Language is not supported");
+            alert.setContentText("This Language is not supported");
+            alert.showAndWait();
+            return;
+        }
+        String[] synonymsList = TranslateAPI.theSaurus(word, "ant");
+        if (synonymsList.length == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No antonyms found");
+            alert.setContentText("No antonyms found");
+            alert.showAndWait();
+            return;
+        }
+        String antonymsString = "";
+        for (int i = 0; i < synonymsList.length; i++) {
+            antonymsString += synonymsList[i] + "\n";
+        }
+        antonyms.setText(antonymsString);
     }
 }
