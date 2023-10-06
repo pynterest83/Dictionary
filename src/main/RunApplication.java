@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -26,7 +25,7 @@ public class RunApplication extends Application {
         stage.show();
     }
     public static void Reload(String sceneName) throws IOException {
-        FXML_scenes.replace("learning.fxml",FXMLLoader.load(Paths.get("src/main/learning.fxml").toUri().toURL()));
+        FXML_scenes.replace("learning.fxml",FXMLLoader.load(Paths.get("src/main/"+sceneName).toUri().toURL()));
     }
     @Override
     public void start(Stage stage) throws Exception {

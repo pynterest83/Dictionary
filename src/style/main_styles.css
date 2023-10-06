@@ -12,3 +12,14 @@
     -fx-background-color: #00008B;
     -fx-text-fill: white;
 }
+.tab-button {
+    -fx-font-family: 'Lato', sans-serif;
+    -fx-background-color: transparent;
+    -fx-font-size: 11px;
+    -fx-border-color: blue;
+    -fx-border-width: 0.2;
+}
+.tab-button: hover {
+    -fx-background-color: #6495ED;
+    -fx-text-fill: white;
+}

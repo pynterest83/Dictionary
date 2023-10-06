@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
@@ -32,6 +33,10 @@ public class SearchController extends MainController {
     private AnchorPane addNote;
     @FXML
     private TextField Notes;
+    @FXML
+    private ToggleButton EnVi;
+    @FXML
+    private ToggleButton Synonyms;
     private String searched;
     @FXML
     private void initialize() throws IOException {
@@ -51,6 +56,18 @@ public class SearchController extends MainController {
                 e.printStackTrace();
             }
         });
+    }
+    @FXML
+    protected void EnViClick() {
+        EnVi.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
+        Synonyms.setStyle(null);
+        Synonyms.getStyleClass().add("src/style/main_styles.css");
+    }
+    @FXML
+    protected void SynonymsClick() {
+        Synonyms.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
+        EnVi.setStyle(null);
+        EnVi.getStyleClass().add("src/style/main_styles.css");
     }
     @FXML
     protected void UserInput() throws Exception {
