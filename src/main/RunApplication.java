@@ -25,7 +25,7 @@ public class RunApplication extends Application {
         stage.show();
     }
     public static void Reload(String sceneName) throws IOException {
-        FXML_scenes.replace("learning.fxml",FXMLLoader.load(Paths.get("src/main/"+sceneName).toUri().toURL()));
+        FXML_scenes.replace(sceneName, FXMLLoader.load(Paths.get("src/main/"+sceneName).toUri().toURL()));
     }
     @Override
     public void start(Stage stage) throws Exception {
