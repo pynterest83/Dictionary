@@ -6,6 +6,7 @@ import java.io.*;
 public class DictionaryManager extends Dictionary {
     private static final String PATH = "src/resources/dictionaries.txt";
     private static final String LearningPath = "src/resources/Learning.txt";
+    private static final String SymPath = "src/resources/Thesaurus.txt";
     public static void defaultFile() {
         try {
             File infile = new File(PATH);
@@ -29,6 +30,20 @@ public class DictionaryManager extends Dictionary {
                 learningDict.add(newWord);
             }
             Collections.sort(learningDict);
+
+            File infile3 = new File(SymPath);
+            FileReader fileReader3= new FileReader(infile3);
+            BufferedReader bufferedReader3 = new BufferedReader(fileReader3);
+            String line3 = null;
+            while ((line3 = bufferedReader3.readLine()) != null) {
+                String[] words = line3.split(",");
+                ArrayList<String> synonyms = new ArrayList<String>();
+                for (int i = 1; i < words.length; i++) {
+                    synonyms.add(words[i]);
+                }
+                symDict.put(words[0], synonyms);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -190,7 +205,7 @@ public class DictionaryManager extends Dictionary {
     public static void removeLearningWord(String word_target) throws IOException {
         Word tmp = new Word();
         tmp.setWordTarget(word_target);
-        int position = Collections.binarySearch(learningDict,tmp);
+        int position = Collections.binarySearch(learningDict, tmp);
         learningDict.remove(position);
 
         File outfile = new File(LearningPath);
@@ -201,5 +216,23 @@ public class DictionaryManager extends Dictionary {
         }
         bufferedWriter.flush();
         bufferedWriter.close();
+    }
+
+    public static void addSynonyms(String word, ArrayList<String> synonyms) {
+        try {
+            File outfile = new File(SymPath);
+            FileWriter fileWriter = new FileWriter(outfile, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            symDict.put(word, synonyms);
+            bufferedWriter.write(word + ",");
+            for (int i = 0; i < synonyms.size(); i++) {
+                bufferedWriter.write(synonyms.get(i) + ",");
+            }
+            bufferedWriter.write("\n");
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
