@@ -3,18 +3,18 @@ package main;
 import base.DictionaryManager;
 import base.TranslateAPI;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +32,7 @@ public class SearchController extends MainController {
     @FXML
     private WebView wordExplain;
     @FXML
-    private WebView wordSynonyms;
+    private VBox wordSynonyms;
     @FXML
     private AnchorPane addNote;
     @FXML
@@ -41,6 +41,8 @@ public class SearchController extends MainController {
     private TextField Syms;
     @FXML
     private ToggleButton EnVi;
+    @FXML
+    private ScrollPane synonymPane;
     @FXML
     private ToggleButton Synonyms;
     private String searched;
@@ -55,10 +57,10 @@ public class SearchController extends MainController {
                 return Stream.of(suggestions).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
             }
         });
+        wordSynonyms.setSpacing(20);
         SpeakButton.setVisible(false);
         addLearningButton.setVisible(false);
         addNote.setVisible(false);
-        wordSynonyms.setVisible(false);
         searchBar.textProperty().addListener((obs, oldText, newText) -> {
             try {
                 UserInput();
@@ -68,17 +70,41 @@ public class SearchController extends MainController {
         });
     }
     @FXML
+    protected void CreateSearchHyperlink(String word) throws Exception {
+        if (!Objects.equals(DictionaryManager.dictionaryLookup(word), "Word not found.")) {
+            Hyperlink wordLink = new Hyperlink(word);
+            wordLink.setFont(new Font(16));
+            wordLink.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    searchBar.setText(wordLink.getText());
+                    try {
+                        enterSearch();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            wordSynonyms.getChildren().add(wordLink);
+        }
+        else {
+            Label wordLabel = new Label(" "+word);
+            wordLabel.setFont(new Font(16));
+            wordSynonyms.getChildren().add(wordLabel);
+        }
+    }
+    @FXML
     protected void EnViClick() throws Exception {
         EnVi.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
         Synonyms.setStyle(null);
         Synonyms.getStyleClass().add("src/style/main_styles.css");
         wordExplain.setVisible(true);
-        wordSynonyms.setVisible(false);
+        synonymPane.setVisible(false);
     }
     @FXML
-    protected void SynonymsClick() {
+    protected void SynonymsClick() throws Exception {
         wordExplain.setVisible(false);
-        wordSynonyms.setVisible(true);
+        synonymPane.setVisible(true);
         Synonyms.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
         EnVi.setStyle(null);
         EnVi.getStyleClass().add("src/style/main_styles.css");
@@ -96,11 +122,9 @@ public class SearchController extends MainController {
             return;
         }
         ArrayList<String> synonyms = DictionaryManager.symDict.get(searched);
-        String sym = "";
         for (String s : synonyms) {
-            sym += s + "<br>";
+            CreateSearchHyperlink(s);
         }
-        wordSynonyms.getEngine().loadContent(sym, "text/html");
     }
     @FXML
     protected void UserInput() throws Exception {
@@ -109,10 +133,10 @@ public class SearchController extends MainController {
     @FXML
     protected void enterSearch() throws Exception {
         EnViClick();
+        wordSynonyms.getChildren().clear();
         addNote.setVisible(false);
-        wordSynonyms.setVisible(false);
+        synonymPane.setVisible(false);
         wordExplain.setVisible(true);
-        wordSynonyms.getEngine().loadContent("", "text/html");
         if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found.")) {
             DisplayWordExplain();
             SpeakButton.requestFocus();
@@ -155,12 +179,9 @@ public class SearchController extends MainController {
         addNote.setVisible(false);
     }
 
-    public void addSyms(ActionEvent actionEvent) {
+    public void addSyms(ActionEvent actionEvent) throws Exception {
         String[] sym = Syms.getText().split(",");
-        ArrayList<String> synonyms = new ArrayList<>();
-        for (String s : sym) {
-            synonyms.add(s);
-        }
+        ArrayList<String> synonyms = new ArrayList<>(Arrays.asList(sym));
         DictionaryManager.addSynonyms(searched, synonyms);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Added");

@@ -4,10 +4,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
@@ -51,8 +53,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="825.0">
                <children>
                   <TextFields fx:id="searchBar" layoutY="1.0" onAction="#enterSearch" prefHeight="26.0" prefWidth="741.0" fx:factory="createClearableTextField" />
-                  <WebView fx:id="wordExplain" layoutX="14.0" layoutY="27.0" prefHeight="499.0" prefWidth="741.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <WebView fx:id="wordSynonyms" layoutY="26.0" prefHeight="499.0" prefWidth="740.0" />
+                  <WebView fx:id="wordExplain" layoutX="14.0" layoutY="27.0" prefHeight="478.0" prefWidth="741.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <Button fx:id="SpeakButton" layoutX="655.0" layoutY="37.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="26.0" prefWidth="71.0" text="Speak" />
                   <Button fx:id="addLearningButton" layoutX="561.0" layoutY="38.0" mnemonicParsing="false" onAction="#onClickAddLearning" prefHeight="25.0" prefWidth="71.0" text="Learning" />
                   <AnchorPane fx:id="addNote" layoutX="150.0" layoutY="136.0" prefHeight="127.0" prefWidth="442.0">
@@ -80,6 +81,11 @@
                         <ToggleButton fx:id="Synonyms" mnemonicParsing="false" onAction="#SynonymsClick" prefHeight="26.0" prefWidth="120.0" styleClass="tab-button" text="Synonyms" />
                      </buttons>
                    </SegmentedButton>
+                  <ScrollPane fx:id="synonymPane" layoutY="27.0" prefHeight="477.0" prefWidth="742.0" visible="false">
+                     <content>
+                        <VBox fx:id="wordSynonyms" prefHeight="499.0" prefWidth="741.0" />
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
         </items>
