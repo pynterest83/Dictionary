@@ -7,6 +7,7 @@ public class DictionaryManager extends Dictionary {
     private static final String PATH = "src/resources/dictionaries.txt";
     private static final String LearningPath = "src/resources/Learning.txt";
     private static final String SymPath = "src/resources/Thesaurus.txt";
+    private static final String HisPath = "src/resources/History.txt";
     public static void defaultFile() {
         try {
             File infile = new File(PATH);
@@ -42,6 +43,14 @@ public class DictionaryManager extends Dictionary {
                     synonyms.add(words[i]);
                 }
                 symDict.put(words[0], synonyms);
+            }
+
+            File infile4 = new File(HisPath);
+            FileReader fileReader4= new FileReader(infile4);
+            BufferedReader bufferedReader4 = new BufferedReader(fileReader4);
+            String line4 = null;
+            while ((line4 = bufferedReader4.readLine()) != null) {
+                History.add(line4);
             }
 
         } catch (Exception e) {
@@ -229,6 +238,19 @@ public class DictionaryManager extends Dictionary {
                 bufferedWriter.write(synonyms.get(i) + ",");
             }
             bufferedWriter.write("\n");
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addHistory(String word) {
+        try {
+            File outfile = new File(HisPath);
+            FileWriter fileWriter = new FileWriter(outfile, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            if (History.add(word)) bufferedWriter.write(word + "\n");
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (Exception e) {

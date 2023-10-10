@@ -22,6 +22,7 @@ import java.util.stream.Stream;
 public class SearchController extends MainController {
 
     String[] suggestions;
+    String[] history = DictionaryManager.History.toArray(new String[0]);
     @FXML
     private TextField searchBar;
     @FXML
@@ -46,10 +47,13 @@ public class SearchController extends MainController {
     @FXML
     private void initialize() throws IOException {
         TextFields.bindAutoCompletion(searchBar, input -> {
-            if (searchBar.getText().length() <= 1) return Collections.emptyList();
-            return Stream.of(suggestions)
-                    .filter(s -> s.contains(searchBar.getText()))
-                    .collect(Collectors.toList());
+            if (searchBar.getText().length() <= 1) {
+                return
+                Stream.of(history).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
+            }
+            else {
+                return Stream.of(suggestions).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
+            }
         });
         SpeakButton.setVisible(false);
         addLearningButton.setVisible(false);
@@ -113,6 +117,8 @@ public class SearchController extends MainController {
             DisplayWordExplain();
             SpeakButton.requestFocus();
             searched = searchBar.getText();
+            DictionaryManager.addHistory(searched);
+            history = DictionaryManager.History.toArray(new String[0]);
         }
         else {
             SpeakButton.setVisible(false);
