@@ -167,6 +167,7 @@ public class SearchController extends MainController {
         alert.setHeaderText(null);
         alert.setContentText("Added to synonyms list");
         alert.showAndWait();
+        Syms.setText("");
         addNote.setVisible(false);
         SynonymsClick();
     }
