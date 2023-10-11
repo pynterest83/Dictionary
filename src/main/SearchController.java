@@ -50,8 +50,12 @@ public class SearchController extends MainController {
     private void initialize() throws IOException {
         TextFields.bindAutoCompletion(searchBar, input -> {
             if (searchBar.getText().length() <= 1) {
+                String[] reversedHistory = new String[history.length];
+                for (int i = 0; i < history.length; i++) {
+                    reversedHistory[i] = history[history.length - i - 1];
+                }
                 return
-                Stream.of(history).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
+                Stream.of(reversedHistory).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
             }
             else {
                 return Stream.of(suggestions).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
