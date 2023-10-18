@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class SearchController extends MainController {
     private String searched;
     @FXML
     private void initialize() throws IOException {
-        TextFields.bindAutoCompletion(searchBar, input -> {
+        AutoCompletionBinding<String> completion = TextFields.bindAutoCompletion(searchBar, input -> {
             if (searchBar.getText().length() <= 1) {
                 String[] reversedHistory = new String[history.length];
                 for (int i = 0; i < history.length; i++) {
@@ -61,6 +62,7 @@ public class SearchController extends MainController {
                 return Stream.of(suggestions).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
             }
         });
+        completion.setDelay(0);
         wordSynonyms.setSpacing(20);
         SpeakButton.setVisible(false);
         addLearningButton.setVisible(false);

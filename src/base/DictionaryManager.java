@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 public class DictionaryManager extends Dictionary {
-    private static final String PATH = "src/resources/dictionaries.txt";
+    private static final String PATH = "src/resources/en-vi.txt";
     private static final String LearningPath = "src/resources/Learning.txt";
     private static final String SymPath = "src/resources/Thesaurus.txt";
     private static final String HisPath = "src/resources/History.txt";
