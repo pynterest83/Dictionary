@@ -148,7 +148,7 @@ public class WordleController extends MainController {
             s.append(((TextField) text).getText());
         }
         if (Objects.equals(CurrentField.getText(), "")) return;
-        if (Objects.equals(DictionaryManager.dictionaryLookup(s.toString()), "Word not found.")) {
+        if (Objects.equals(DictionaryManager.dictionaryLookup(s.toString(), "EN_VI"), "Word not found.")) {
             ErrorBoard.setText("Please enter a valid word.");
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(e -> ErrorBoard.setText(""));

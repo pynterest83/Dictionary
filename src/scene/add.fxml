@@ -37,7 +37,7 @@
         </MenuBar>
           <AnchorPane focusTraversable="true" layoutX="-1.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="895.0">
               <children>
-                  <TextFields fx:id="addText" layoutX="45.0" layoutY="1.0" onAction="#onEnterAdd" prefHeight="40.0" prefWidth="850.0" fx:factory="createClearableTextField">
+                  <TextFields fx:id="addText" layoutX="84.0" layoutY="1.0" onAction="#onEnterAdd" prefHeight="40.0" prefWidth="811.0" fx:factory="createClearableTextField">
                     <font>
                         <Font name="SansSerif Bold" size="14.0" />
                     </font></TextFields>
@@ -57,6 +57,7 @@
                </children>
             </VBox>
             <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
+            <Button fx:id="swap_dict" layoutX="40.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="40.0" prefWidth="40.0" text="Swap" />
               </children>
           </AnchorPane>
     </children>

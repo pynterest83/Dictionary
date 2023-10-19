@@ -24,7 +24,7 @@ public class AddController extends MainController {
     private TextField addText;
     @FXML
     private HTMLEditor addEditor;
-
+    private String type_Dict = "EN_VI";
     @FXML
     public void onClickAddButton(ActionEvent actionEvent) {
         if (addText.getText().equals("")) {
@@ -46,7 +46,7 @@ public class AddController extends MainController {
     @FXML
     public void add(ActionEvent actionEvent) throws Exception {
         String meaning = addEditor.getHtmlText().replace(" dir=\"ltr\"", "");
-        if (DictionaryManager.addWord(addText.getText(), meaning)) {
+        if (DictionaryManager.addWord(addText.getText(), meaning, type_Dict)) {
             addReset();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Thông báo");
@@ -62,7 +62,7 @@ public class AddController extends MainController {
 
             onClickModify();
         }
-        DictionaryManager.exportToFile();
+        DictionaryManager.exportToFile("");
     }
     @FXML
     public void onEnterAdd(ActionEvent actionEvent) {
@@ -70,6 +70,16 @@ public class AddController extends MainController {
             onClickAddButton(actionEvent);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void changeDict(ActionEvent actionEvent) {
+        if (type_Dict.equals("EN_VI")) {
+            type_Dict = "VI_EN";
+        }
+        else {
+            type_Dict = "EN_VI";
         }
     }
 }

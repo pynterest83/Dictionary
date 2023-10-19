@@ -33,7 +33,19 @@ public class MainController {
     protected Button LearningButton;
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
-        DictionaryManager.exportToFile();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Export to File");
+        alert.setHeaderText("Choose file to export?");
+        alert.setContentText("Choose File");
+        ButtonType buttonTypeOne = new ButtonType("Export to EN_VI.txt");
+        ButtonType buttonTypeTwo = new ButtonType("Export to VI_EN.txt");
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne){
+            DictionaryManager.exportToFile("EN_VI");
+        } else if (result.get() == buttonTypeTwo) {
+            DictionaryManager.exportToFile("VI_EN");
+        }
     }
     @FXML
     protected void onImportFromFileClick(ActionEvent event) {
@@ -41,17 +53,29 @@ public class MainController {
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         File f = fc.showOpenDialog(null);
         if (f != null) {
-            System.out.println(f.getAbsolutePath());
-            ArrayList<Word> repeated = DictionaryManager.importFromFile(f.getAbsolutePath());
+            ArrayList<Word> repeated = new ArrayList<Word>();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Import from File");
+            alert.setHeaderText("Choose file to import?");
+            alert.setContentText("Choose File");
+            ButtonType buttonTypeOne = new ButtonType("Import to EN_VI");
+            ButtonType buttonTypeTwo = new ButtonType("Import to VI_EN");
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+                repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "EN_VI");
+            } else if (result.get() == buttonTypeTwo) {
+                repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "VI_EN");
+            }
             if (repeated.size() > 0) {
                 for (int i =0; i<repeated.size(); i++) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Remove Repeated Words");
-                    alert.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
-                    alert.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
-                    Optional<ButtonType> result = alert.showAndWait();
+                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.setTitle("Remove Repeated Words");
+                    alert1.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
+                    alert1.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
+                    Optional<ButtonType> result1 = alert.showAndWait();
 
-                    if (result.get() == ButtonType.OK) {
+                    if (result1.get() == ButtonType.OK) {
                         int position = DictionaryManager.binSearch(repeated.get(i).getWordTarget());
                         DictionaryManager.curDict.remove(position);
                         DictionaryManager.curDict.add(repeated.get(i));

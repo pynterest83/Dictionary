@@ -20,7 +20,7 @@ public class ModifyController extends MainController {
     @FXML
     private HTMLEditor modifyEditor;
     String[] suggestions;
-
+    private String type_Dict = "EN_VI";
     @FXML
     private void initialize() {
         TextFields.bindAutoCompletion(modifyText, input -> {
@@ -40,7 +40,7 @@ public class ModifyController extends MainController {
     }
     @FXML
     protected void UserInput() throws Exception {
-        suggestions = DictionaryManager.dictionarySearcher(modifyText.getText());
+        suggestions = DictionaryManager.dictionarySearcher(modifyText.getText(), type_Dict);
     }
     @FXML
     public void onClickModifyButton(ActionEvent actionEvent) throws Exception {
@@ -52,13 +52,13 @@ public class ModifyController extends MainController {
 
             return;
         }
-        if (DictionaryManager.dictionaryLookup(modifyText.getText()).equals("Word not found.")) {
+        if (DictionaryManager.dictionaryLookup(modifyText.getText(), type_Dict).equals("Word not found.")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Word not found.");
             alert.showAndWait();
         }
-        else modifyEditor.setHtmlText(DictionaryManager.dictionaryLookup(modifyText.getText()));
+        else modifyEditor.setHtmlText(DictionaryManager.dictionaryLookup(modifyText.getText(), type_Dict));
     }
     @FXML
     public void modifyReset() {
@@ -69,13 +69,13 @@ public class ModifyController extends MainController {
     public void modify(ActionEvent actionEvent) throws Exception {
         String meaning = modifyEditor.getHtmlText().replace(" dir=\"ltr\"", "");
         modifyReset();
-        DictionaryManager.modifyWord(modifyText.getText(), meaning);
+        DictionaryManager.modifyWord(modifyText.getText(), meaning, type_Dict);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");
         alert.setHeaderText(null);
         alert.setContentText("Sửa từ thành công");
         alert.showAndWait();
-        DictionaryManager.exportToFile();
+        DictionaryManager.exportToFile("");
     }
 
     // Delete
@@ -88,14 +88,14 @@ public class ModifyController extends MainController {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
-            DictionaryManager.deleteWord(modifyText.getText());
+            DictionaryManager.deleteWord(modifyText.getText(), type_Dict);
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Thông báo");
             alert2.setHeaderText(null);
             alert2.setContentText("Xóa từ thành công");
             alert2.showAndWait();
         }
-        DictionaryManager.exportToFile();
+        DictionaryManager.exportToFile("");
     }
 
     public void onEnterModify(ActionEvent actionEvent) {
@@ -103,6 +103,16 @@ public class ModifyController extends MainController {
             onClickModifyButton(actionEvent);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void changeDict(ActionEvent actionEvent) {
+        if (type_Dict.equals("EN_VI")) {
+            type_Dict = "VI_EN";
+        }
+        else {
+            type_Dict = "EN_VI";
         }
     }
 }

@@ -4,22 +4,27 @@ import java.util.*;
 import java.io.*;
 
 public class DictionaryManager extends Dictionary {
-    private static final String PATH = "src/resources/en-vi.txt";
+    private static final String E_V_PATH = "src/resources/en-vi.txt";
+    private static final String V_E_PATH = "src/resources/vi-en.txt";
     private static final String LearningPath = "src/resources/Learning.txt";
     private static final String SymPath = "src/resources/Thesaurus.txt";
-    private static final String HisPath = "src/resources/History.txt";
+    private static final String EN_HisPath = "src/resources/en_history.txt";
+    private static final String VI_HisPath = "src/resources/vi_history.txt";
+    private static String PATH = null;
+    private static String HisPath = null;
+
     public static void defaultFile() {
         try {
-            File infile = new File(PATH);
+            File infile = new File(E_V_PATH);
             FileReader fileReader= new FileReader(infile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] words = line.split("   ");
                 Word newWord = new Word(words[0], words[1]);
-                curDict.add(newWord);
+                EN_VI_Dict.add(newWord);
             }
-            Collections.sort(curDict);
+            Collections.sort(EN_VI_Dict);
 
             File infile2 = new File(LearningPath);
             FileReader fileReader2= new FileReader(infile2);
@@ -45,12 +50,30 @@ public class DictionaryManager extends Dictionary {
                 symDict.put(words[0], synonyms);
             }
 
-            File infile4 = new File(HisPath);
+            File infile4 = new File(EN_HisPath);
             FileReader fileReader4= new FileReader(infile4);
             BufferedReader bufferedReader4 = new BufferedReader(fileReader4);
             String line4 = null;
             while ((line4 = bufferedReader4.readLine()) != null) {
-                History.add(line4);
+                EN_History.add(line4);
+            }
+
+            File infile5 = new File(VI_HisPath);
+            FileReader fileReader5= new FileReader(infile5);
+            BufferedReader bufferedReader5 = new BufferedReader(fileReader5);
+            String line5 = null;
+            while ((line5 = bufferedReader5.readLine()) != null) {
+                VI_History.add(line5);
+            }
+
+            File infile6 = new File(V_E_PATH);
+            FileReader fileReader6= new FileReader(infile6);
+            BufferedReader bufferedReader6 = new BufferedReader(fileReader6);
+            String line6 = null;
+            while ((line6 = bufferedReader6.readLine()) != null) {
+                String[] words = line6.split("   ");
+                Word newWord = new Word(words[0], words[1]);
+                VI_EN_Dict.add(newWord);
             }
 
         } catch (Exception e) {
@@ -58,9 +81,15 @@ public class DictionaryManager extends Dictionary {
         }
     }
 
-    public static ArrayList<Word> importFromFile(String path){
+    public static ArrayList<Word> importFromFile(String path, String dest){
         ArrayList<Word> repeated = new ArrayList<Word>();
         try {
+            if (dest.equals("EN_VI")) {
+                curDict = EN_VI_Dict;
+            }
+            else if (dest.equals("VI_EN")) {
+                curDict = VI_EN_Dict;
+            }
             File infile = new File(path);
             FileReader fileReader= new FileReader(infile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -68,7 +97,7 @@ public class DictionaryManager extends Dictionary {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] words = line.split("   ");
                 Word newWord = new Word(words[0], words[1]);
-                if (!Objects.equals(DictionaryManager.dictionaryLookup(words[0]), "Word not found.")) {
+                if (!Objects.equals(DictionaryManager.dictionaryLookup(words[0], dest), "Word not found.")) {
                     repeated.add(newWord);
                     continue;
                 }
@@ -82,8 +111,16 @@ public class DictionaryManager extends Dictionary {
         return repeated;
     }
 
-    public static void exportToFile() {
+    public static void exportToFile(String path) {
         try {
+            if (path.equals("EN_VI")) {
+                PATH = E_V_PATH;
+                curDict = EN_VI_Dict;
+            }
+            else if (path.equals("VI_EN")) {
+                PATH = V_E_PATH;
+                curDict = VI_EN_Dict;
+            }
             File outfile = new File(PATH);
             FileWriter fileWriter = new FileWriter(outfile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -97,26 +134,44 @@ public class DictionaryManager extends Dictionary {
         }
     }
 
-    public static void deleteWord(String word_target) {
+    public static void deleteWord(String word_target, String path) {
+        if (path.equals("EN_VI")) {
+            curDict = EN_VI_Dict;
+        }
+        else if (path.equals("VI_EN")) {
+            curDict = VI_EN_Dict;
+        }
         Word tmp = new Word();
         tmp.setWordTarget(word_target);
         int position = Collections.binarySearch(curDict,tmp);
         curDict.remove(position);
     }
 
-    public static boolean addWord(String word_target, String word_explain) throws Exception {
+    public static boolean addWord(String word_target, String word_explain, String path) throws Exception {
         Word newWord = new Word(word_target, word_explain);
-        if (DictionaryManager.dictionaryLookup(word_target) != "Word not found.") {
+        if (DictionaryManager.dictionaryLookup(word_target, path) != "Word not found.") {
             return false;
         }
         else {
+            if (path.equals("EN_VI")) {
+                curDict = EN_VI_Dict;
+            }
+            else if (path.equals("VI_EN")) {
+                curDict = VI_EN_Dict;
+            }
             curDict.add(newWord);
             Collections.sort(curDict);
         }
         return true;
     }
 
-    public static void modifyWord(String word_target, String word_explain) throws Exception {
+    public static void modifyWord(String word_target, String word_explain, String path) throws Exception {
+        if (path.equals("EN_VI")) {
+            curDict = EN_VI_Dict;
+        }
+        else if (path.equals("VI_EN")) {
+            curDict = VI_EN_Dict;
+        }
         Word mod = new Word();
         mod.setWordTarget(word_target);
         int position = Collections.binarySearch(curDict, mod);
@@ -124,7 +179,13 @@ public class DictionaryManager extends Dictionary {
         curDict.set(position, mod);
         Collections.sort(curDict);
     }
-    public static String dictionaryLookup(String search) throws Exception {
+    public static String dictionaryLookup(String search, String path) throws Exception {
+        if (path.equals("EN_VI")) {
+            curDict = EN_VI_Dict;
+        }
+        else if (path.equals("VI_EN")) {
+            curDict = VI_EN_Dict;
+        }
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
@@ -133,7 +194,13 @@ public class DictionaryManager extends Dictionary {
             return curDict.get(position).getWordExplain();
         }
     }
-    public static String[] dictionarySearcher(String search) {
+    public static String[] dictionarySearcher(String search, String path) {
+        if (path.equals("EN_VI")) {
+            curDict = EN_VI_Dict;
+        }
+        else if (path.equals("VI_EN")) {
+            curDict = VI_EN_Dict;
+        }
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
@@ -156,14 +223,14 @@ public class DictionaryManager extends Dictionary {
     }
 
 
-    public static void addLearning(String word, String note) {
+    public static void addLearning(String word, String note, String path) {
         try {
             File outfile = new File(LearningPath);
             FileWriter fileWriter = new FileWriter(outfile, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            learningDict.add(new Word(word, dictionaryLookup(word) + "<br>Note: " + note));
+            learningDict.add(new Word(word, dictionaryLookup(word, path) + "<br>Note: " + note));
             Collections.sort(learningDict);
-            bufferedWriter.write(word + "   " + dictionaryLookup(word) + "<br>Note: " + note + "\n");
+            bufferedWriter.write(word + "   " + dictionaryLookup(word, path) + "<br>Note: " + note + "\n");
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (Exception e) {
@@ -245,8 +312,16 @@ public class DictionaryManager extends Dictionary {
         }
     }
 
-    public static void addHistory(String word) {
+    public static void addHistory(String word, String path) {
         try {
+            if (path.equals("EN_VI")) {
+                History = EN_History;
+                HisPath = EN_HisPath;
+            }
+            else if (path.equals("VI_EN")) {
+                History = VI_History;
+                HisPath = VI_HisPath;
+            }
             File outfile = new File(HisPath);
             FileWriter fileWriter = new FileWriter(outfile, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -256,5 +331,12 @@ public class DictionaryManager extends Dictionary {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static LinkedHashSet<String> getHistory(String path) {
+        if (path.equals("EN_VI")) {
+            return EN_History;
+        }
+        return VI_History;
     }
 }

@@ -18,7 +18,7 @@
     -fx-background-size: 30;
     -fx-background-position: center;
 }
-.menu-bar-button: hover {
+.menu-bar-button:hover {
     -fx-background-image: url("media/menu_bar_hover.png");
 }
 .google-translate-button {
@@ -28,7 +28,7 @@
     -fx-background-size: 30;
     -fx-background-position: center;
 }
-.google-translate-button: hover {
+.google-translate-button:hover {
     -fx-background-image: url("media/google_translate_hover.png");
 }
 .learning-button {
@@ -58,7 +58,7 @@
     -fx-border-color: blue;
     -fx-border-width: 0.2;
 }
-.tab-button: hover {
+.tab-button:hover {
     -fx-background-color: #6495ED;
     -fx-text-fill: white;
 }

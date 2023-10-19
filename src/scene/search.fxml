@@ -41,14 +41,14 @@
       </MenuBar>
     <AnchorPane layoutX="47.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0">
          <children>
-            <TextFields fx:id="searchBar" layoutX="37.0" layoutY="1.0" onAction="#enterSearch" prefHeight="40.0" prefWidth="858.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-color: blue; -fx-border-width: 0.4;" fx:factory="createClearableTextField">
+            <TextFields fx:id="searchBar" layoutX="77.0" layoutY="1.0" onAction="#enterSearch" prefHeight="40.0" prefWidth="818.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-color: blue; -fx-border-width: 0.4;" fx:factory="createClearableTextField">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font></TextFields>
             <WebView fx:id="wordExplain" layoutY="42.0" prefHeight="466.0" prefWidth="895.0" AnchorPane.bottomAnchor="27.000006103515602" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.2207031204525265E-5" AnchorPane.topAnchor="42.0" />
             <SegmentedButton layoutY="504.0" prefHeight="26.0" prefWidth="741.0">
               <buttons>
-                  <ToggleButton fx:id="EnVi" mnemonicParsing="false" onAction="#EnViClick" prefHeight="26.0" prefWidth="120.0" styleClass="tab-button" text="En-Vi" />
+                  <ToggleButton fx:id="EnVi" mnemonicParsing="false" onAction="#EnViClick" prefHeight="26.0" prefWidth="120.0" styleClass="tab-button" text="Definition" />
                   <ToggleButton fx:id="Synonyms" mnemonicParsing="false" onAction="#SynonymsClick" prefHeight="26.0" prefWidth="120.0" styleClass="tab-button" text="Synonyms" />
                </buttons>
              </SegmentedButton>
@@ -89,6 +89,7 @@
                    <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
                </children>
             </VBox>
+            <Button fx:id="swap_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" text="Swap" />
          </children>
       </AnchorPane>
    </children>

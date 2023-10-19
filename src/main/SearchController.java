@@ -23,7 +23,6 @@ import java.util.stream.Stream;
 public class SearchController extends MainController {
 
     String[] suggestions;
-    String[] history = DictionaryManager.History.toArray(new String[0]);
     @FXML
     private TextField searchBar;
     @FXML
@@ -49,6 +48,8 @@ public class SearchController extends MainController {
     @FXML
     private ToggleButton Synonyms;
     private String searched = null;
+    private String type_Dict = "EN_VI";
+    private String[] history;
     @FXML
     private void initialize() {
         AutoCompletionBinding<String> completion = TextFields.bindAutoCompletion(searchBar, input -> {
@@ -90,10 +91,17 @@ public class SearchController extends MainController {
                 e.printStackTrace();
             }
         });
+        searchBar.textProperty().addListener((obs, oldText, newText) -> {
+            try {
+                getHistory();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
     @FXML
     protected void CreateSearchHyperlink(String word) throws Exception {
-        if (!Objects.equals(DictionaryManager.dictionaryLookup(word), "Word not found.")) {
+        if (!Objects.equals(DictionaryManager.dictionaryLookup(word, type_Dict), "Word not found.")) {
             Hyperlink wordLink = new Hyperlink(word);
             wordLink.setFont(new Font(16));
             wordLink.setOnAction(actionEvent -> {
@@ -154,33 +162,38 @@ public class SearchController extends MainController {
     }
     @FXML
     protected void UserInput() {
-        suggestions = DictionaryManager.dictionarySearcher(searchBar.getText());
+        suggestions = DictionaryManager.dictionarySearcher(searchBar.getText(), type_Dict);
+    }
+    protected void getHistory() {
+        history = DictionaryManager.getHistory(type_Dict).toArray(new String[0]);
     }
     @FXML
     protected void enterSearch() throws Exception {
         HideMenuBar();
         EnViClick();
+        Synonyms.setVisible(false);
         wordSynonyms.getChildren().clear();
         addNote.setVisible(false);
         synonymPane.setVisible(false);
         wordExplain.setVisible(true);
-        if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText()), "Word not found.")) {
+        if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict), "Word not found.")) {
             DisplayWordExplain();
             SpeakButton.requestFocus();
             searched = searchBar.getText();
-            DictionaryManager.addHistory(searched);
+            DictionaryManager.addHistory(searched, type_Dict);
             history = DictionaryManager.History.toArray(new String[0]);
-            Synonyms.setVisible(true);
+            if (type_Dict == "EN_VI") Synonyms.setVisible(true);
         }
         else {
             SpeakButton.setVisible(false);
             addLearningButton.setVisible(false);
+            Synonyms.setVisible(false);
             wordExplain.getEngine().loadContent("Word not found.", "text/html");
         }
     }
     @FXML
     private void DisplayWordExplain() throws Exception {
-        String explain = DictionaryManager.dictionaryLookup(searchBar.getText());
+        String explain = DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict);
         wordExplain.getEngine().loadContent(explain, "text/html");
         SpeakButton.setVisible(true);
         addLearningButton.setVisible(true);
@@ -198,7 +211,7 @@ public class SearchController extends MainController {
     }
     @FXML
     public void addDescription(ActionEvent actionEvent) throws IOException {
-        DictionaryManager.addLearning(searched, Notes.getText());
+        DictionaryManager.addLearning(searched, Notes.getText(), type_Dict);
         RunApplication.Reload("learning.fxml");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Added");
@@ -208,6 +221,7 @@ public class SearchController extends MainController {
         addNote.setVisible(false);
     }
 
+    @FXML
     public void addSyms(ActionEvent actionEvent) throws Exception {
         String[] sym = Syms.getText().split(",");
         ArrayList<String> synonyms = new ArrayList<>(Arrays.asList(sym));
@@ -227,10 +241,21 @@ public class SearchController extends MainController {
         SynonymsClick();
     }
 
+    @FXML
     public void onClickAddSynonyms(ActionEvent actionEvent) {
         addNote.setVisible(true);
         Syms.setVisible(true);
         Notes.setVisible(false);
         Syms.requestFocus();
+    }
+
+    @FXML
+    public void changeDict(ActionEvent actionEvent) {
+        if (type_Dict.equals("EN_VI")) {
+            type_Dict = "VI_EN";
+        }
+        else {
+            type_Dict = "EN_VI";
+        }
     }
 }
