@@ -46,8 +46,6 @@
                   <Font name="SansSerif Bold" size="14.0" />
                </font></TextFields>
             <WebView fx:id="wordExplain" layoutY="42.0" prefHeight="466.0" prefWidth="895.0" AnchorPane.bottomAnchor="27.000006103515602" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.2207031204525265E-5" AnchorPane.topAnchor="42.0" />
-            <Button fx:id="SpeakButton" layoutX="811.0" layoutY="47.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="26.0" prefWidth="71.0" text="Speak" />
-            <Button fx:id="addLearningButton" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#onClickAddLearning" prefHeight="25.0" prefWidth="71.0" text="Learning" />
             <SegmentedButton layoutY="504.0" prefHeight="26.0" prefWidth="741.0">
               <buttons>
                   <ToggleButton fx:id="EnVi" mnemonicParsing="false" onAction="#EnViClick" prefHeight="26.0" prefWidth="120.0" styleClass="tab-button" text="En-Vi" />
@@ -59,6 +57,9 @@
                   <VBox fx:id="wordSynonyms" prefHeight="454.0" prefWidth="894.0" style="-fx-background-color: transparent;" />
                </content>
             </ScrollPane>
+            <Button fx:id="SpeakButton" layoutX="811.0" layoutY="47.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="26.0" prefWidth="71.0" text="Speak" />
+            <Button fx:id="addLearningButton" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#onClickAddLearning" prefHeight="25.0" prefWidth="71.0" text="Learning" />
+            <Button fx:id="addSynonymsButton" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#onClickAddSynonyms" prefHeight="25.0" prefWidth="71.0" text="AddSym" />
             <AnchorPane fx:id="addNote" layoutX="138.0" layoutY="135.0" prefHeight="202.0" prefWidth="522.0">
                <children>
                   <WebView layoutX="83.0" layoutY="-1.0" prefHeight="41.0" prefWidth="446.0" />

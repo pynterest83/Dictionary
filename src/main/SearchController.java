@@ -31,6 +31,8 @@ public class SearchController extends MainController {
     @FXML
     private Button addLearningButton;
     @FXML
+    private Button addSynonymsButton;
+    @FXML
     private WebView wordExplain;
     @FXML
     private VBox wordSynonyms;
@@ -75,10 +77,12 @@ public class SearchController extends MainController {
                 addNote.setVisible(false);
             }
         });
-        wordSynonyms.setSpacing(20);
+        wordSynonyms.setSpacing(5);
         SpeakButton.setVisible(false);
         addLearningButton.setVisible(false);
         addNote.setVisible(false);
+        Synonyms.setVisible(false);
+        addSynonymsButton.setVisible(false);
         searchBar.textProperty().addListener((obs, oldText, newText) -> {
             try {
                 UserInput();
@@ -115,11 +119,13 @@ public class SearchController extends MainController {
         Synonyms.getStyleClass().add("src/style/main_styles.css");
         wordExplain.setVisible(true);
         synonymPane.setVisible(false);
+        addSynonymsButton.setVisible(false);
     }
     @FXML
     protected void SynonymsClick() throws Exception {
         wordExplain.setVisible(false);
         synonymPane.setVisible(true);
+        addSynonymsButton.setVisible(true);
         Synonyms.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
         EnVi.setStyle(null);
         EnVi.getStyleClass().add("src/style/main_styles.css");
@@ -161,6 +167,7 @@ public class SearchController extends MainController {
             searched = searchBar.getText();
             DictionaryManager.addHistory(searched);
             history = DictionaryManager.History.toArray(new String[0]);
+            Synonyms.setVisible(true);
         }
         else {
             SpeakButton.setVisible(false);
@@ -201,6 +208,9 @@ public class SearchController extends MainController {
     public void addSyms(ActionEvent actionEvent) throws Exception {
         String[] sym = Syms.getText().split(",");
         ArrayList<String> synonyms = new ArrayList<>(Arrays.asList(sym));
+        if (DictionaryManager.symDict.get(searched) != null) {
+            synonyms.addAll(DictionaryManager.symDict.get(searched));
+        }
         DictionaryManager.addSynonyms(searched, synonyms);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Added");
@@ -210,6 +220,14 @@ public class SearchController extends MainController {
         Syms.setText("");
         Syms.setVisible(false);
         addNote.setVisible(false);
+        wordSynonyms.getChildren().clear();
         SynonymsClick();
+    }
+
+    public void onClickAddSynonyms(ActionEvent actionEvent) {
+        addNote.setVisible(true);
+        Syms.setVisible(true);
+        Notes.setVisible(false);
+        Syms.requestFocus();
     }
 }
