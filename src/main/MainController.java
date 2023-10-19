@@ -108,4 +108,9 @@ public class MainController {
         menuOpen = !menuOpen;
         menuBar.setVisible(menuOpen);
     }
+    @FXML
+    protected void HideMenuBar() {
+        menuOpen = false;
+        menuBar.setVisible(false);
+    }
 }

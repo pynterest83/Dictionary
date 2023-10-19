@@ -30,7 +30,7 @@ public class RunApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         LoadData();
-        Scene scene = new Scene(FXML_scenes.get("search.fxml"), 895, 559);
+        Scene scene = new Scene(FXML_scenes.get("main.fxml"), 895, 559);
         stage.setTitle("Dictionary");
         stage.setResizable(false);
         stage.setScene(scene);

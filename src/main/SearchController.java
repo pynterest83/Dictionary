@@ -114,6 +114,7 @@ public class SearchController extends MainController {
     }
     @FXML
     protected void EnViClick() {
+        HideMenuBar();
         EnVi.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
         Synonyms.setStyle(null);
         Synonyms.getStyleClass().add("src/style/main_styles.css");
@@ -123,6 +124,7 @@ public class SearchController extends MainController {
     }
     @FXML
     protected void SynonymsClick() throws Exception {
+        HideMenuBar();
         wordExplain.setVisible(false);
         synonymPane.setVisible(true);
         addSynonymsButton.setVisible(true);
@@ -156,6 +158,7 @@ public class SearchController extends MainController {
     }
     @FXML
     protected void enterSearch() throws Exception {
+        HideMenuBar();
         EnViClick();
         wordSynonyms.getChildren().clear();
         addNote.setVisible(false);
