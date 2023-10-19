@@ -4,8 +4,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 <?import org.controlsfx.control.textfield.TextFields?>
@@ -34,30 +34,27 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <SplitPane dividerPositions="0.16812178195657038" layoutY="30.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
-            <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="100.0">
-                    <children>
-                        <Button fx:id="searchButton" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="70.0" prefWidth="147.0" styleClass="side-button" text="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Button fx:id="GGTranslateButton" layoutY="70.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="GGTranslateAPI" />
-                        <Button fx:id="LearningButton" layoutY="146.0" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Learning" />
-                        <Button fx:id="GameButton" layoutY="222.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Game" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="703.0">
-                    <children>
-                        <TextFields fx:id="modifyText" layoutY="1.0" onAction="#onEnterModify" prefHeight="26.0" prefWidth="741.0" fx:factory="createClearableTextField" />
-                        <Button fx:id="saveButton" layoutX="655.0" layoutY="37.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="71.0" text="Save" />
-                        <Button fx:id="delButton" layoutX="573.0" layoutY="37.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="71.0" text="Delete" />
-                        <AnchorPane layoutX="60.0" layoutY="163.0" prefHeight="335.0" prefWidth="604.0">
-                            <children>
-                                <WebView layoutX="-1.0" layoutY="-1.0" prefHeight="338.0" prefWidth="605.0" />
-                                <HTMLEditor fx:id="modifyEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="-1.0" prefHeight="337.0" prefWidth="605.0" />
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
+          <AnchorPane focusTraversable="true" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="895.0">
+              <children>
+                  <TextFields fx:id="modifyText" layoutX="41.0" layoutY="1.0" onAction="#onEnterModify" prefHeight="26.0" prefWidth="854.0" fx:factory="createClearableTextField" />
+                  <Button fx:id="saveButton" layoutX="809.0" layoutY="37.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="71.0" text="Save" />
+                  <Button fx:id="delButton" layoutX="724.0" layoutY="37.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="71.0" text="Delete" />
+                  <AnchorPane layoutX="60.0" layoutY="163.0" prefHeight="335.0" prefWidth="604.0">
+                      <children>
+                          <WebView layoutX="-1.0" layoutY="-1.0" prefHeight="338.0" prefWidth="605.0" />
+                          <HTMLEditor fx:id="modifyEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="-1.0" prefHeight="338.0" prefWidth="788.0" />
+                      </children>
+                  </AnchorPane>
+            <Button fx:id="menuBarButton" layoutX="-1.0" layoutY="-6.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
+            <VBox fx:id="menuBar" layoutX="-1.0" layoutY="34.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
+                  <Button fx:id="GGTranslateButton" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="40.0" prefWidth="40.0" styleClass="google-translate-button" />
+                  <Button fx:id="LearningButton" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="40.0" prefWidth="40.0" styleClass="learning-button" />
+                  <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
+               </children>
+            </VBox>
+              </children>
+          </AnchorPane>
     </children>
 </AnchorPane>

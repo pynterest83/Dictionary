@@ -5,9 +5,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
@@ -35,36 +35,34 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.16812178195657038" layoutY="30.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="100.0">
+    <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="528.0" prefWidth="895.0">
+         <children>
+            <WebView fx:id="gameScreen" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="NextButton" layoutX="821.0" layoutY="476.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" visible="false" />
+            <RadioButton fx:id="ChoiceA" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#RadioButtonClick" visible="false">
+               <toggleGroup>
+                  <ToggleGroup fx:id="QuestionChoices" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="ChoiceB" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" onAction="#RadioButtonClick" prefHeight="18.0" prefWidth="0.0" toggleGroup="$QuestionChoices" visible="false" />
+            <RadioButton fx:id="ChoiceC" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
+            <RadioButton fx:id="ChoiceD" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
+            <RadioButton fx:id="ChoiceE" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
+            <Button fx:id="StartGameButton" layoutX="384.0" layoutY="229.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="70.0" prefWidth="126.0" text="Start">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Button>
+            <VBox fx:id="menuBar" layoutX="855.0" layoutY="34.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
                <children>
-                   <Button fx:id="searchButton" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="70.0" prefWidth="147.0" styleClass="side-button" text="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                   <Button fx:id="GGTranslateButton" layoutY="70.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="GGTranslateAPI" />
-                   <Button fx:id="LearningButton" layoutY="146.0" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Learning" />
-                   <Button fx:id="GameButton" layoutY="222.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="76.0" prefWidth="147.0" styleClass="side-button" text="Game" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
+                  <Button fx:id="GGTranslateButton" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="40.0" prefWidth="40.0" styleClass="google-translate-button" />
+                  <Button fx:id="LearningButton" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="40.0" prefWidth="40.0" styleClass="learning-button" />
+                  <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
                </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="825.0">
-               <children>
-                  <WebView fx:id="gameScreen" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button fx:id="NextButton" layoutX="663.0" layoutY="460.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" visible="false" />
-                  <RadioButton fx:id="ChoiceA" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#RadioButtonClick" visible="false">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="QuestionChoices" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="ChoiceB" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" onAction="#RadioButtonClick" prefHeight="18.0" prefWidth="0.0" toggleGroup="$QuestionChoices" visible="false" />
-                  <RadioButton fx:id="ChoiceC" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
-                  <RadioButton fx:id="ChoiceD" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
-                  <RadioButton fx:id="ChoiceE" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
-                  <Button fx:id="StartGameButton" layoutX="307.0" layoutY="212.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="70.0" prefWidth="126.0" text="Start">
-                     <font>
-                        <Font name="Calibri Bold" size="24.0" />
-                     </font>
-                  </Button>
-               </children></AnchorPane>
-        </items>
-      </SplitPane>
+            </VBox>
+            <Button fx:id="menuBarButton" layoutX="855.0" layoutY="-6.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

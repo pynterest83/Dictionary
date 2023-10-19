@@ -1,17 +1,11 @@
 package main;
-import base.DictionaryManager;
-import javafx.event.ActionEvent;
+
+import base.CompleteSentence;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.web.WebView;
-import base.CompleteSentence;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Random;
 public class CompleteSentenceController extends MainController {
     int CurrentQuestion;
@@ -75,7 +69,7 @@ public class CompleteSentenceController extends MainController {
     }
     @FXML
     protected void onNextButtonClick() {
-        CurrentQuestion = rand.nextInt(502);
+        CurrentQuestion = rand.nextInt(501);
         ToggleRadioButtons(false);
         ClearAllRadioButton();
         String content = "<html>" + CompleteSentence.askQuestion(CurrentQuestion) + "</html>";
