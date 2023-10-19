@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -18,13 +19,18 @@ import java.util.Optional;
 
 public class MainController {
     @FXML
-    private Button searchButton;
+    protected Button menuBarButton;
     @FXML
-    private Button GameButton;
+    protected VBox menuBar;
+    protected boolean menuOpen = false;
     @FXML
-    private Button GGTranslateButton;
+    protected Button searchButton;
     @FXML
-    private Button LearningButton;
+    protected Button GameButton;
+    @FXML
+    protected Button GGTranslateButton;
+    @FXML
+    protected Button LearningButton;
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
         DictionaryManager.exportToFile();
@@ -57,32 +63,49 @@ public class MainController {
     }
     @FXML
     public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
-        Stage stage = (Stage) searchButton.getScene().getWindow();
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"search.fxml");
     }
     @FXML
     protected void onClickGameButton() throws IOException {
-        Stage stage = (Stage) GameButton.getScene().getWindow();
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
     public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) GGTranslateButton.getScene().getWindow();
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
     }
     @FXML
     public void onClickLearningButton(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) LearningButton.getScene().getWindow();
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"learning.fxml");
     }
     @FXML
     protected void onClickAdd() throws IOException {
-        Stage stage = (Stage) searchButton.getScene().getWindow();
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"add.fxml");
     }
     @FXML
     protected void onClickModify() throws IOException {
-        Stage stage = (Stage) searchButton.getScene().getWindow();
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"modify.fxml");
+    }
+    @FXML
+    protected void MenuBarClick() {
+        menuOpen = !menuOpen;
+        menuBar.setVisible(menuOpen);
     }
 }

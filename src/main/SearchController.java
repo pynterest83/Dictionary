@@ -2,8 +2,8 @@ package main;
 
 import base.DictionaryManager;
 import base.TranslateAPI;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -46,9 +46,9 @@ public class SearchController extends MainController {
     private ScrollPane synonymPane;
     @FXML
     private ToggleButton Synonyms;
-    private String searched;
+    private String searched = null;
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         AutoCompletionBinding<String> completion = TextFields.bindAutoCompletion(searchBar, input -> {
             if (searchBar.getText().length() <= 1) {
                 String[] reversedHistory = new String[history.length];
@@ -63,6 +63,18 @@ public class SearchController extends MainController {
             }
         });
         completion.setDelay(0);
+        Notes.focusedProperty().addListener((ObservableValue <? extends Boolean> observable, Boolean oldValue, Boolean newValue)->{
+            if (oldValue && !newValue) {
+                Notes.setVisible(false);
+                addNote.setVisible(false);
+            }
+        });
+        Syms.focusedProperty().addListener((ObservableValue <? extends Boolean> observable, Boolean oldValue, Boolean newValue)->{
+            if (oldValue && !newValue) {
+                Syms.setVisible(false);
+                addNote.setVisible(false);
+            }
+        });
         wordSynonyms.setSpacing(20);
         SpeakButton.setVisible(false);
         addLearningButton.setVisible(false);
@@ -80,15 +92,12 @@ public class SearchController extends MainController {
         if (!Objects.equals(DictionaryManager.dictionaryLookup(word), "Word not found.")) {
             Hyperlink wordLink = new Hyperlink(word);
             wordLink.setFont(new Font(16));
-            wordLink.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    searchBar.setText(wordLink.getText());
-                    try {
-                        enterSearch();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+            wordLink.setOnAction(actionEvent -> {
+                searchBar.setText(wordLink.getText());
+                try {
+                    enterSearch();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             });
             wordSynonyms.getChildren().add(wordLink);
@@ -100,7 +109,7 @@ public class SearchController extends MainController {
         }
     }
     @FXML
-    protected void EnViClick() throws Exception {
+    protected void EnViClick() {
         EnVi.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
         Synonyms.setStyle(null);
         Synonyms.getStyleClass().add("src/style/main_styles.css");
@@ -124,16 +133,19 @@ public class SearchController extends MainController {
                 addNote.setVisible(true);
                 Syms.setVisible(true);
                 Notes.setVisible(false);
+                Syms.requestFocus();
             }
             return;
         }
-        ArrayList<String> synonyms = DictionaryManager.symDict.get(searched);
-        for (String s : synonyms) {
-            CreateSearchHyperlink(s);
+        if (wordSynonyms.getChildren().isEmpty()) {
+            ArrayList<String> synonyms = DictionaryManager.symDict.get(searched);
+            for (String s : synonyms) {
+                CreateSearchHyperlink(s);
+            }
         }
     }
     @FXML
-    protected void UserInput() throws Exception {
+    protected void UserInput() {
         suggestions = DictionaryManager.dictionarySearcher(searchBar.getText());
     }
     @FXML
@@ -172,6 +184,7 @@ public class SearchController extends MainController {
         addNote.setVisible(true);
         Syms.setVisible(false);
         Notes.setVisible(true);
+        Notes.requestFocus();
     }
     @FXML
     public void addDescription(ActionEvent actionEvent) throws IOException {
@@ -195,6 +208,7 @@ public class SearchController extends MainController {
         alert.setContentText("Added to synonyms list");
         alert.showAndWait();
         Syms.setText("");
+        Syms.setVisible(false);
         addNote.setVisible(false);
         SynonymsClick();
     }

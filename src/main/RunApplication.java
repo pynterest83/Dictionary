@@ -25,12 +25,12 @@ public class RunApplication extends Application {
         stage.show();
     }
     public static void Reload(String sceneName) throws IOException {
-        FXML_scenes.replace(sceneName, FXMLLoader.load(Paths.get("src/main/"+sceneName).toUri().toURL()));
+        FXML_scenes.replace(sceneName, FXMLLoader.load(Paths.get("src/scene/"+sceneName).toUri().toURL()));
     }
     @Override
     public void start(Stage stage) throws Exception {
         LoadData();
-        Scene scene = new Scene(FXML_scenes.get("main.fxml"), 895, 559);
+        Scene scene = new Scene(FXML_scenes.get("search.fxml"), 895, 559);
         stage.setTitle("Dictionary");
         stage.setResizable(false);
         stage.setScene(scene);
@@ -41,10 +41,10 @@ public class RunApplication extends Application {
         CompleteSentence.LoadQuestionsAndAnswers();
         Wordle.LoadWordleList();
         TranslateAPI.addDefault();
-        File dir = new File("src/main");
+        File dir = new File("src/scene");
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.getName().endsWith((".fxml"))) {
-                FXML_scenes.put(file.getName(), FXMLLoader.load(Paths.get("src/main/" + file.getName()).toUri().toURL()));
+                FXML_scenes.put(file.getName(), FXMLLoader.load(Paths.get("src/scene/" + file.getName()).toUri().toURL()));
             }
         }
     }
