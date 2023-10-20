@@ -4,6 +4,7 @@ import base.DictionaryManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
@@ -19,6 +20,10 @@ public class ModifyController extends MainController {
     private TextField modifyText;
     @FXML
     private HTMLEditor modifyEditor;
+    @FXML
+    private Button en_vi_dict;
+    @FXML
+    private Button vi_en_dict;
     String[] suggestions;
     private String type_Dict = "EN_VI";
     @FXML
@@ -110,9 +115,13 @@ public class ModifyController extends MainController {
     public void changeDict(ActionEvent actionEvent) {
         if (type_Dict.equals("EN_VI")) {
             type_Dict = "VI_EN";
+            en_vi_dict.setVisible(false);
+            vi_en_dict.setVisible(true);
         }
         else {
             type_Dict = "EN_VI";
+            en_vi_dict.setVisible(true);
+            vi_en_dict.setVisible(false);
         }
     }
 }

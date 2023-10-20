@@ -54,7 +54,8 @@
                   <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
                </children>
             </VBox>
-            <Button fx:id="swap_dict" layoutX="48.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="40.0" prefWidth="45.0" text="Swap" />
+                  <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
+                  <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
               </children>
           </AnchorPane>
     </children>

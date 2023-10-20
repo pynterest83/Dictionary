@@ -6,6 +6,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -47,6 +49,10 @@ public class SearchController extends MainController {
     private ScrollPane synonymPane;
     @FXML
     private ToggleButton Synonyms;
+    @FXML
+    private Button en_vi_dict;
+    @FXML
+    private Button vi_en_dict;
     private String searched = null;
     private String type_Dict = "EN_VI";
     private String[] history;
@@ -84,6 +90,8 @@ public class SearchController extends MainController {
         addNote.setVisible(false);
         Synonyms.setVisible(false);
         addSynonymsButton.setVisible(false);
+        en_vi_dict.setVisible(true);
+        vi_en_dict.setVisible(false);
         searchBar.textProperty().addListener((obs, oldText, newText) -> {
             try {
                 UserInput();
@@ -253,9 +261,13 @@ public class SearchController extends MainController {
     public void changeDict(ActionEvent actionEvent) {
         if (type_Dict.equals("EN_VI")) {
             type_Dict = "VI_EN";
+            en_vi_dict.setVisible(false);
+            vi_en_dict.setVisible(true);
         }
         else {
             type_Dict = "EN_VI";
+            en_vi_dict.setVisible(true);
+            vi_en_dict.setVisible(false);
         }
     }
 }

@@ -66,7 +66,7 @@ public class LearningController extends MainController {
     }
     @FXML
     private void selectSearch() throws Exception {
-        MenuBarClick();
+        HideMenuBar();
         DisplayWordExplain(learningList.getSelectionModel().getSelectedItem());
         currentWord = learningList.getSelectionModel().getSelectedItem();
     }

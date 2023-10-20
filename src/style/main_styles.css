@@ -62,3 +62,17 @@
     -fx-background-color: #6495ED;
     -fx-text-fill: white;
 }
+.en-vi-button {
+    -fx-background-image: url("media/united-kingdom.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.vi-en-button {
+    -fx-background-image: url("media/vietnam.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
