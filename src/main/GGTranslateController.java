@@ -67,6 +67,15 @@ public class GGTranslateController extends MainController{
         SourceLang.setValue(TargetLang.getValue());
         TargetLang.setValue(temp);
 
+        sourceLangCode = TranslateAPI.langMap.get(SourceLang.getValue());
+        targetLangCode = TranslateAPI.langMap.get(TargetLang.getValue());
+        if (Objects.equals(sourceLangCode, null)){
+            sourceLangCode = "";
+        }
+        if (Objects.equals(targetLangCode, null)){
+            targetLangCode = "";
+        }
+
         String tmp = input.getText();
         input.setText(output.getText());
         output.setText(tmp);
