@@ -10,32 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.WordleController">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#onImportFromFileClick" text="Import from file..." />
-                  <MenuItem mnemonicParsing="false" onAction="#onExportToFileClick" text="Export to file..." />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Delete" />
-                  <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Edit" />
-                  <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-    <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="895.0" style="-fx-background-color: transparent;">
+    <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="895.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.20000000000004547" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
             <TextField fx:id="AnnounceBoard2" editable="false" layoutX="28.0" layoutY="466.0" prefHeight="48.0" prefWidth="298.0" style="-fx-background-color: transparent;">
                <font>
@@ -236,7 +215,30 @@
                   <Font name="Dubai Regular" size="19.0" />
                </font>
             </TextField>
-            <Button fx:id="menuBarButton" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
+            <Pane fx:id="menuDescription" layoutX="40.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Google Translate">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="13.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Games">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
             <VBox fx:id="menuBar" layoutY="40.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
@@ -245,7 +247,30 @@
                   <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
                </children>
             </VBox>
+            <Button fx:id="menuBarButton" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
+      <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onImportFromFileClick" text="Import from file..." />
+                  <MenuItem mnemonicParsing="false" onAction="#onExportToFileClick" text="Export to file..." />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Delete" />
+                  <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Edit" />
+                  <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

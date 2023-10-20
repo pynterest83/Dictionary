@@ -31,6 +31,7 @@ public class GGTranslateController extends MainController{
     private TextArea antonyms;
     @FXML
     private void initialize() throws IOException {
+        PrepareMenu(true);
         for (HashMap.Entry<String, String> entry : TranslateAPI.langMap.entrySet()) {
             SourceLang.getItems().add(entry.getKey());
             TargetLang.getItems().add(entry.getKey());

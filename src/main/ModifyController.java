@@ -28,6 +28,7 @@ public class ModifyController extends MainController {
     private String type_Dict = "EN_VI";
     @FXML
     private void initialize() {
+        PrepareMenu(true);
         TextFields.bindAutoCompletion(modifyText, input -> {
             if (modifyText.getText().length() <= 1) return Collections.emptyList();
             return Stream.of(suggestions)

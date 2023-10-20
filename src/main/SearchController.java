@@ -6,8 +6,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -58,6 +56,7 @@ public class SearchController extends MainController {
     private String[] history;
     @FXML
     private void initialize() {
+        PrepareMenu(true);
         AutoCompletionBinding<String> completion = TextFields.bindAutoCompletion(searchBar, input -> {
             if (searchBar.getText().length() <= 1) {
                 String[] reversedHistory = new String[history.length];

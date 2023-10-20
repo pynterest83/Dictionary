@@ -1,24 +1,12 @@
 package main;
 
 import base.DictionaryManager;
-import base.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import org.controlsfx.control.textfield.TextFields;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AddController extends MainController {
     @FXML
@@ -30,6 +18,10 @@ public class AddController extends MainController {
     @FXML
     private Button vi_en_dict;
     private String type_Dict = "EN_VI";
+    @FXML
+    private void initialize() {
+        PrepareMenu(true);
+    }
     @FXML
     public void onClickAddButton(ActionEvent actionEvent) {
         if (addText.getText().equals("")) {

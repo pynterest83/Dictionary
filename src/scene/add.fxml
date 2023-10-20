@@ -5,15 +5,67 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 <?import org.controlsfx.control.textfield.TextFields?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.AddController">
     <children>
-        <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+          <AnchorPane focusTraversable="true" layoutX="-1.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="895.0" AnchorPane.topAnchor="30.4">
+              <children>
+                  <TextFields fx:id="addText" layoutX="84.0" layoutY="1.0" onAction="#onEnterAdd" prefHeight="40.0" prefWidth="811.0" fx:factory="createClearableTextField">
+                    <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                    </font></TextFields>
+                  <Button fx:id="addButton" layoutX="809.0" layoutY="47.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="71.0" text="Add" />
+                  <AnchorPane layoutX="60.0" layoutY="163.0" prefHeight="335.0" prefWidth="604.0">
+                      <children>
+                          <WebView layoutX="1.0" layoutY="-1.0" prefHeight="338.0" prefWidth="772.0" />
+                          <HTMLEditor fx:id="addEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="2.0" layoutY="-78.0" prefHeight="415.0" prefWidth="772.0" />
+                      </children>
+                  </AnchorPane>
+            <Pane fx:id="menuDescription" layoutX="40.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Google Translate">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="13.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Games">
+                     <font>
+                        <Font name="SansSerif Regular" size="22.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <VBox fx:id="menuBar" layoutY="40.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
+                  <Button fx:id="LearningButton" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="40.0" prefWidth="40.0" styleClass="learning-button" />
+                  <Button fx:id="GGTranslateButton" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="40.0" prefWidth="40.0" styleClass="google-translate-button" />
+                  <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
+               </children>
+            </VBox>
+            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="en_vi_dict" layoutX="44.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
+                  <Button fx:id="vi_en_dict" layoutX="44.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
+              </children>
+          </AnchorPane>
+        <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -35,31 +87,5 @@
                 </Menu>
             </menus>
         </MenuBar>
-          <AnchorPane focusTraversable="true" layoutX="-1.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="895.0">
-              <children>
-                  <TextFields fx:id="addText" layoutX="84.0" layoutY="1.0" onAction="#onEnterAdd" prefHeight="40.0" prefWidth="811.0" fx:factory="createClearableTextField">
-                    <font>
-                        <Font name="SansSerif Bold" size="14.0" />
-                    </font></TextFields>
-                  <Button fx:id="addButton" layoutX="809.0" layoutY="47.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="71.0" text="Add" />
-                  <AnchorPane layoutX="60.0" layoutY="163.0" prefHeight="335.0" prefWidth="604.0">
-                      <children>
-                          <WebView layoutX="1.0" layoutY="-1.0" prefHeight="338.0" prefWidth="772.0" />
-                          <HTMLEditor fx:id="addEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="2.0" layoutY="-78.0" prefHeight="415.0" prefWidth="772.0" />
-                      </children>
-                  </AnchorPane>
-            <VBox fx:id="menuBar" layoutY="35.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
-               <children>
-                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
-                  <Button fx:id="LearningButton" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="40.0" prefWidth="40.0" styleClass="learning-button" />
-                  <Button fx:id="GGTranslateButton" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="40.0" prefWidth="40.0" styleClass="google-translate-button" />
-                  <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
-               </children>
-            </VBox>
-            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
-                  <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
-                  <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
-              </children>
-          </AnchorPane>
     </children>
 </AnchorPane>

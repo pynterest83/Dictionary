@@ -1,5 +1,6 @@
 package main;
 
+import animatefx.animation.*;
 import base.DictionaryManager;
 import base.Word;
 import javafx.event.ActionEvent;
@@ -7,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -32,6 +35,43 @@ public class MainController {
     @FXML
     protected Button LearningButton;
     @FXML
+    protected Pane menuDescription;
+    @FXML
+    private void initialize() {
+        PrepareMenu(true);
+    }
+    @FXML
+    protected void PrepareMenu(boolean isLeft) {
+        if (isLeft) {
+            menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+                menuDescription.setVisible(true);
+                SlideInLeft in = new SlideInLeft(menuDescription);
+                in.setSpeed(4);
+                in.play();
+            });
+            menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+                SlideOutLeft out = new SlideOutLeft(menuDescription);
+                out.setSpeed(4);
+                out.setOnFinished(eve-> menuDescription.setVisible(false));
+                out.play();
+            });
+        }
+        else {
+            menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+                menuDescription.setVisible(true);
+                SlideInRight in = new SlideInRight(menuDescription);
+                in.setSpeed(4);
+                in.play();
+            });
+            menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+                SlideOutRight out = new SlideOutRight(menuDescription);
+                out.setSpeed(4);
+                out.setOnFinished(eve-> menuDescription.setVisible(false));
+                out.play();
+            });
+        }
+    }
+    @FXML
     protected void onExportToFileClick(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Export to File");
@@ -53,7 +93,7 @@ public class MainController {
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         File f = fc.showOpenDialog(null);
         if (f != null) {
-            ArrayList<Word> repeated = new ArrayList<Word>();
+            ArrayList<Word> repeated = new ArrayList<>();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Import from File");
             alert.setHeaderText("Choose file to import?");
@@ -67,7 +107,7 @@ public class MainController {
             } else if (result.get() == buttonTypeTwo) {
                 repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "VI_EN");
             }
-            if (repeated.size() > 0) {
+            if (!repeated.isEmpty()) {
                 for (int i =0; i<repeated.size(); i++) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
                     alert1.setTitle("Remove Repeated Words");
@@ -114,7 +154,7 @@ public class MainController {
         RunApplication.SwitchScenes(stage,"learning.fxml");
     }
     @FXML
-    protected void onClickAdd() throws IOException {
+    protected void onClickAdd() {
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -130,11 +170,29 @@ public class MainController {
     @FXML
     protected void MenuBarClick() {
         menuOpen = !menuOpen;
-        menuBar.setVisible(menuOpen);
+        if (menuOpen) {
+            menuBar.setVisible(true);
+            SlideInDown inDown = new SlideInDown(menuBar);
+            inDown.setOnFinished(e -> {
+                menuBar.setDisable(false);
+            });
+            inDown.setSpeed(3);
+            inDown.play();
+        }
+        else {
+            SlideOutUp outUp = new SlideOutUp(menuBar);
+            menuBar.setDisable(true);
+            outUp.setOnFinished(e -> {
+                menuBar.setVisible(menuOpen);
+            });
+            outUp.setSpeed(3);
+            outUp.play();
+        }
     }
     @FXML
     protected void HideMenuBar() {
         menuOpen = false;
         menuBar.setVisible(false);
+        menuBar.setDisable(true);
     }
 }

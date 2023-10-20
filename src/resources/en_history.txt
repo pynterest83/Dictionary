@@ -2,3 +2,8 @@ go
 hello
 final
 accost
+north
+damnedest
+haberdasher
+fishwife
+Xanthippe

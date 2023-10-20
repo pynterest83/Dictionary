@@ -1,13 +1,10 @@
 package main;
 
-import base.DictionaryManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 
 public class GameController extends MainController {
@@ -15,7 +12,10 @@ public class GameController extends MainController {
     private Button CompleteSentence;
     @FXML
     private Button Wordle;
-
+    @FXML
+    private void initialize() {
+        PrepareMenu(true);
+    }
     @FXML
     public void onClickCompleteSentence(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) CompleteSentence.getScene().getWindow();

@@ -1,24 +1,22 @@
 package main;
 
 import base.DictionaryManager;
-import base.Word;
 import base.Wordle;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class WordleController extends MainController {
     static int CurrentAttempt;
@@ -41,6 +39,7 @@ public class WordleController extends MainController {
     private TextField ErrorBoard;
     @FXML
     protected void initialize() {
+        PrepareMenu(true);
         InitializeHBoxes();
     }
     @FXML

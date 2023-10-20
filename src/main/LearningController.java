@@ -31,6 +31,7 @@ public class LearningController extends MainController {
     private String currentWord;
     @FXML
     private void initialize() {
+        PrepareMenu(true);
         for (int i = 0; i < DictionaryManager.learningDict.size(); i++) {
             learningList.getItems().add(DictionaryManager.learningDict.get(i).getWordTarget());
         }
