@@ -13,6 +13,7 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 public class TranslateAPI {
     private static final String PATH = "src/resources/Spelling.txt";
@@ -84,21 +85,46 @@ public class TranslateAPI {
         in.close();
 
         String data = response.toString();
-        String syns = data.substring(data.indexOf("syns") + 8, data.indexOf("ants") - 4);
-        String[] syn = syns.split(",");
+        if (data.equals("[]")) {
+            return null;
+        }
+        if (!data.contains("syns") || !data.contains("ants")) {
+            if (type.equals("ant")) {
+                return null;
+            }
+            else {
+                String syns = data.substring(data.indexOf("[") + 1, data.indexOf("]") - 1);
+                String[] syn = syns.split(",");
+                for (int i = 0; i < syn.length; i++) {
+                    syn[i] = syn[i].substring(1, syn[i].length() - 1);
+                }
+                return syn;
+            }
+        }
+        if ((data.indexOf("syns") + 8 > data.indexOf("ants") - 4) && type == "syn") {
+            return null;
+        }
+        if ((data.indexOf("ants") + 8 > data.indexOf("offensive") - 4) && type == "ant") {
+            return null;
+        }
         response = new StringBuilder();
-        String ants = data.substring(data.indexOf("ants") + 8, data.indexOf("offensive") - 4);
-        String[] ant = ants.split(",");
-        for (int i = 0; i < syn.length; i++) {
-            syn[i] = syn[i].substring(1, syn[i].length() - 1);
-        }
-        for (int i = 0; i < ant.length; i++) {
-            ant[i] = ant[i].substring(1, ant[i].length() - 1);
-        }
         if (type.equals("syn")) {
+            String syns = data.substring(data.indexOf("syns") + 8, data.indexOf("ants") - 4);
+            String[] syn = syns.split(",");
+            for (int i = 0; i < syn.length; i++) {
+                syn[i] = syn[i].substring(1, syn[i].length() - 1);
+            }
             return syn;
-        } else {
+        }
+        if (type.equals("ant")) {
+            String ants = data.substring(data.indexOf("ants") + 8, data.indexOf("offensive") - 4);
+            String[] ant = ants.split(",");
+
+            for (int i = 0; i < ant.length; i++) {
+                ant[i] = ant[i].substring(1, ant[i].length() - 1);
+            }
             return ant;
         }
+        return null;
     }
 }

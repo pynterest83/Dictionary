@@ -139,12 +139,8 @@ public class GGTranslateController extends MainController{
             return;
         }
         String[] synonymsList = TranslateAPI.theSaurus(word, "syn");
-        if (synonymsList.length == 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No synonyms found");
-            alert.setContentText("No synonyms found");
-            alert.showAndWait();
+        if (synonymsList == null) {
+            synonyms.setText("No synonyms found");
             return;
         }
         String synonymsString = "";
@@ -169,18 +165,14 @@ public class GGTranslateController extends MainController{
             alert.showAndWait();
             return;
         }
-        String[] synonymsList = TranslateAPI.theSaurus(word, "ant");
-        if (synonymsList.length == 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No antonyms found");
-            alert.setContentText("No antonyms found");
-            alert.showAndWait();
+        String[] antonymsList = TranslateAPI.theSaurus(word, "ant");
+        if (antonymsList == null) {
+            antonyms.setText("No antonyms found");
             return;
         }
         String antonymsString = "";
-        for (int i = 0; i < synonymsList.length; i++) {
-            antonymsString += synonymsList[i] + "\n";
+        for (int i = 0; i < antonymsList.length; i++) {
+            antonymsString += antonymsList[i] + "\n";
         }
         antonyms.setText(antonymsString);
     }
