@@ -42,7 +42,7 @@
             </AnchorPane>
             <AnchorPane layoutX="469.0" layoutY="124.0" prefHeight="404.0" prefWidth="368.0">
                <children>
-                  <TextArea fx:id="output" prefHeight="153.0" prefWidth="368.0">
+                  <TextArea fx:id="output" editable="false" prefHeight="153.0" prefWidth="368.0">
                      <font>
                         <Font size="20.0" />
                      </font>
