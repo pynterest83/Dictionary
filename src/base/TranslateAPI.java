@@ -68,6 +68,9 @@ public class TranslateAPI {
         fileReader.close();
     }
     public static String[] theSaurus(String word, String type) throws URISyntaxException, IOException, ParseException {
+        if (word.contains(" ")) {
+            word = word.replace(" ", "_");
+        }
         String urlScript = "https://dictionaryapi.com/api/v3/references/thesaurus/json/" + word +"?key=8d9232c5-ec85-49a3-a070-3b63dbc55fc8";
         URL url = new URI(urlScript).toURL();
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -122,5 +125,16 @@ public class TranslateAPI {
             return ant;
         }
         return null;
+    }
+
+    public static void main(String[] args) throws URISyntaxException, IOException, ParseException {
+        String[] syn = theSaurus("i love you", "syn");
+        if (syn == null) {
+            System.out.println("null");
+            return;
+        }
+        for (String s : syn) {
+            System.out.println(s);
+        }
     }
 }

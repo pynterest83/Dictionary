@@ -168,6 +168,14 @@ public class GGTranslateController extends MainController {
     public void onClickSynonyms() {
         synonyms.setText("");
         String word;
+        if (input.getText().isEmpty() && output.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter a word");
+            alert.setContentText("Please enter a word");
+            alert.showAndWait();
+            return;
+        }
         if (sourceLangCode.equals("en") || (sourceLangCode.isEmpty())) {
             word = input.getText();
         } else if (targetLangCode.equals("en")) {
@@ -215,6 +223,14 @@ public class GGTranslateController extends MainController {
     public void onClickAntonyms() {
         antonyms.setText("");
         String word;
+        if (input.getText().isEmpty() && output.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter a word");
+            alert.setContentText("Please enter a word");
+            alert.showAndWait();
+            return;
+        }
         if (sourceLangCode.equals("en") || (sourceLangCode.isEmpty())) {
             word = input.getText();
         } else if (targetLangCode.equals("en")) {
