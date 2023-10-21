@@ -19,9 +19,9 @@
               <children>
             <AnchorPane layoutX="78.0" layoutY="40.0" prefHeight="63.0" prefWidth="740.0">
                <children>
-                  <Button layoutX="344.0" layoutY="19.0" mnemonicParsing="false" onAction="#swap" text="Swap" />
-                  <SearchableComboBox fx:id="SourceLang" layoutX="111.0" layoutY="17.0" onAction="#SelectSourceLang" prefHeight="26.0" prefWidth="150.0" promptText="Translate From" />
-                  <SearchableComboBox fx:id="TargetLang" layoutX="480.0" layoutY="18.0" onAction="#SelectTargetLang" prefHeight="26.0" prefWidth="150.0" promptText="Translate To" />
+                  <Button layoutX="355.0" layoutY="15.0" mnemonicParsing="false" onAction="#swap" prefHeight="30.0" prefWidth="31.0" styleClass="swap-button" />
+                  <SearchableComboBox fx:id="SourceLang" layoutX="111.0" layoutY="17.0" onAction="#SelectSourceLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate From" />
+                  <SearchableComboBox fx:id="TargetLang" layoutX="480.0" layoutY="18.0" onAction="#SelectTargetLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate To" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="54.0" layoutY="124.0" prefHeight="404.0" prefWidth="368.0">
