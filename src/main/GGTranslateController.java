@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.SearchableComboBox;
@@ -19,7 +20,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class GGTranslateController extends MainController{
+public class GGTranslateController extends MainController {
     private static final String PATH = "src/resources/Spelling.txt";
     private String sourceLangCode = "";
     private String targetLangCode = "";
@@ -40,7 +41,8 @@ public class GGTranslateController extends MainController{
     @FXML
     private Button antButton;
     @FXML
-    private ImageView loading = new ImageView(Paths.get("src/style/media/loading.gif").toUri().toURL().toString());
+    private Image loadImage = new Image(Paths.get("src/style/media/loading.gif").toUri().toURL().toString());
+
     public GGTranslateController() throws MalformedURLException {
     }
 
@@ -98,6 +100,7 @@ public class GGTranslateController extends MainController{
                 alert.showAndWait();
                 return;
             }
+            ImageView loading = new ImageView(loadImage);
             String translate = input.getText();
             output.clear();
             new Thread(()-> {
@@ -105,9 +108,8 @@ public class GGTranslateController extends MainController{
                 loading.setFitHeight(60);
                 loading.setFitWidth(60);
                 loading.setLayoutY(0);
-                ImageView finalLoading = loading;
                 Platform.runLater(()-> {
-                    parent.getChildren().add(finalLoading);
+                    parent.getChildren().add(loading);
                     input.setDisable(true);
                 });
                 try {
@@ -179,6 +181,7 @@ public class GGTranslateController extends MainController{
             alert.showAndWait();
             return;
         }
+        ImageView loading = new ImageView(loadImage);
         new Thread(() -> {
             loading.setFitWidth(60);
             loading.setFitHeight(60);
@@ -225,6 +228,7 @@ public class GGTranslateController extends MainController{
             alert.showAndWait();
             return;
         }
+        ImageView loading = new ImageView(loadImage);
         new Thread(() -> {
             loading.setFitWidth(60);
             loading.setFitHeight(60);
