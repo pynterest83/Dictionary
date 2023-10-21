@@ -33,7 +33,7 @@ public class RunApplication extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        LoadScenes();
+        FXML_scenes.put("main.fxml",FXMLLoader.load(Paths.get("src/scene/main.fxml").toUri().toURL()));
         Scene scene = new Scene(FXML_scenes.get("main.fxml"), 895, 559);
         stage.setTitle("Dictionary");
         stage.setResizable(false);
@@ -55,12 +55,16 @@ public class RunApplication extends Application {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Platform.runLater(()-> {
+            Platform.runLater(() -> {
+                try {
+                    LoadScenes();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 root.setDisable(false);
                 root.getChildren().remove(loading);
             });
         }).start();
-
     }
     public static void LoadData() throws IOException {
         DictionaryManager.defaultFile();
@@ -71,7 +75,7 @@ public class RunApplication extends Application {
     public static void LoadScenes() throws IOException {
         File dir = new File("src/scene");
         for (File file : Objects.requireNonNull(dir.listFiles())) {
-            if (file.getName().endsWith((".fxml"))) {
+            if (!file.getName().equals("main.fxml")) {
                 FXML_scenes.put(file.getName(), FXMLLoader.load(Paths.get("src/scene/" + file.getName()).toUri().toURL()));
             }
         }

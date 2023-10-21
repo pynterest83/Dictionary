@@ -3,9 +3,6 @@ package base;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -101,13 +98,12 @@ public class TranslateAPI {
                 return syn;
             }
         }
-        if ((data.indexOf("syns") + 8 > data.indexOf("ants") - 4) && type == "syn") {
+        if ((data.indexOf("syns") + 8 > data.indexOf("ants") - 4) && Objects.equals(type, "syn")) {
             return null;
         }
-        if ((data.indexOf("ants") + 8 > data.indexOf("offensive") - 4) && type == "ant") {
+        if ((data.indexOf("ants") + 8 > data.indexOf("offensive") - 4) && Objects.equals(type, "ant")) {
             return null;
         }
-        response = new StringBuilder();
         if (type.equals("syn")) {
             String syns = data.substring(data.indexOf("syns") + 8, data.indexOf("ants") - 4);
             String[] syn = syns.split(",");
