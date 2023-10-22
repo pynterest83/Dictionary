@@ -5,7 +5,6 @@ module main {
         requires org.controlsfx.controls;
         requires javafx.web;
         requires AnimateFX;
-        requires json.simple;
         opens base to javafx.fxml;
         exports base;
         exports main;

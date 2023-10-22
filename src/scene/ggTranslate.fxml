@@ -13,47 +13,47 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.SearchableComboBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GGTranslateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GGTranslateController">
     <children>
-          <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="529.0" prefWidth="895.0" AnchorPane.topAnchor="30.4">
+          <AnchorPane layoutY="30.4" minHeight="0.0" minWidth="0.0" prefHeight="670.0" prefWidth="950.0" AnchorPane.topAnchor="30.0">
               <children>
-            <AnchorPane layoutX="78.0" layoutY="40.0" prefHeight="63.0" prefWidth="740.0">
+            <AnchorPane layoutX="99.0" layoutY="40.0" prefHeight="63.0" prefWidth="740.0">
                <children>
-                  <Button layoutX="355.0" layoutY="15.0" mnemonicParsing="false" onAction="#swap" prefHeight="30.0" prefWidth="31.0" styleClass="swap-button" />
+                  <Button layoutX="354.0" layoutY="16.0" mnemonicParsing="false" onAction="#swap" prefHeight="30.0" prefWidth="31.0" styleClass="swap-button" />
                   <SearchableComboBox fx:id="SourceLang" layoutX="111.0" layoutY="17.0" onAction="#SelectSourceLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate From" />
                   <SearchableComboBox fx:id="TargetLang" layoutX="480.0" layoutY="18.0" onAction="#SelectTargetLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate To" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="54.0" layoutY="124.0" prefHeight="404.0" prefWidth="368.0">
+            <AnchorPane layoutX="28.0" layoutY="120.0" prefHeight="539.0" prefWidth="422.0">
                <children>
-                  <TextField fx:id="input" alignment="TOP_LEFT" onAction="#translate" prefHeight="153.0" prefWidth="368.0">
+                  <TextField fx:id="input" alignment="TOP_LEFT" onAction="#translate" prefHeight="234.0" prefWidth="422.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="306.0" layoutY="121.0" mnemonicParsing="false" onAction="#onClickSpeak1" text="Speak" />
-                  <TextArea fx:id="synonyms" editable="false" layoutY="187.0" prefHeight="217.0" prefWidth="368.0" scrollLeft="80.0" scrollTop="35.0">
+                  <Button layoutX="360.0" layoutY="200.0" mnemonicParsing="false" onAction="#onClickSpeak1" text="Speak" />
+                  <TextArea fx:id="synonyms" editable="false" layoutY="274.0" prefHeight="250.0" prefWidth="422.0" scrollLeft="80.0" scrollTop="35.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <Button fx:id="symButton" layoutY="161.0" mnemonicParsing="false" onAction="#onClickSynonyms" text="Synonyms" />
+                  <Button fx:id="symButton" layoutX="7.0" layoutY="244.0" mnemonicParsing="false" onAction="#onClickSynonyms" text="Synonyms" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="469.0" layoutY="124.0" prefHeight="404.0" prefWidth="368.0">
+            <AnchorPane layoutX="497.0" layoutY="120.0" prefHeight="546.0" prefWidth="422.0">
                <children>
-                  <TextArea fx:id="output" editable="false" prefHeight="153.0" prefWidth="368.0">
+                  <TextArea fx:id="output" editable="false" prefHeight="234.0" prefWidth="422.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <Button layoutX="306.0" layoutY="121.0" mnemonicParsing="false" onAction="#onClickSpeak2" text="Speak" />
-                  <TextArea fx:id="antonyms" editable="false" layoutY="187.0" prefHeight="217.0" prefWidth="368.0" scrollLeft="80.0" scrollTop="35.0">
+                  <Button layoutX="360.0" layoutY="199.0" mnemonicParsing="false" onAction="#onClickSpeak2" text="Speak" />
+                  <TextArea fx:id="antonyms" editable="false" layoutY="274.0" prefHeight="250.0" prefWidth="422.0" scrollLeft="80.0" scrollTop="35.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <Button fx:id="antButton" layoutY="161.0" mnemonicParsing="false" onAction="#onClickAntonyms" text="Antonyms" />
+                  <Button fx:id="antButton" layoutX="6.0" layoutY="241.0" mnemonicParsing="false" onAction="#onClickAntonyms" text="Antonyms" />
                </children>
             </AnchorPane>
             <Pane fx:id="menuDescription" layoutX="40.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">

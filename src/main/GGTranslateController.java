@@ -11,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.SearchableComboBox;
-import org.json.simple.parser.ParseException;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -193,7 +191,7 @@ public class GGTranslateController extends MainController {
         new Thread(() -> {
             loading.setFitWidth(60);
             loading.setFitHeight(60);
-            loading.setLayoutY(180);
+            loading.setLayoutY(265);
             AnchorPane parent = (AnchorPane) synonyms.getParent();
             Platform.runLater(() -> {
                 parent.getChildren().add(loading);
@@ -211,7 +209,7 @@ public class GGTranslateController extends MainController {
                     }
                     synonyms.setText(synonymsString.toString());
                 }
-            } catch (URISyntaxException | ParseException | IOException e) {
+            } catch (URISyntaxException | IOException e) {
                 throw new RuntimeException(e);
             }
             Platform.runLater(() -> {
@@ -248,7 +246,7 @@ public class GGTranslateController extends MainController {
         new Thread(() -> {
             loading.setFitWidth(60);
             loading.setFitHeight(60);
-            loading.setLayoutY(180);
+            loading.setLayoutY(265);
             AnchorPane parent = (AnchorPane) antonyms.getParent();
             Platform.runLater(() -> {
                 parent.getChildren().add(loading);
@@ -267,7 +265,7 @@ public class GGTranslateController extends MainController {
                     }
                     antonyms.setText(antonymsString.toString());
                 }
-            } catch (URISyntaxException | ParseException | IOException e) {
+            } catch (URISyntaxException | IOException e) {
                 throw new RuntimeException(e);
             }
             Platform.runLater(() -> {

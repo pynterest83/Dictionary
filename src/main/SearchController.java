@@ -2,21 +2,38 @@ package main;
 
 import base.DictionaryManager;
 import base.TranslateAPI;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
+import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -42,18 +59,26 @@ public class SearchController extends MainController {
     @FXML
     private TextField Syms;
     @FXML
-    private ToggleButton EnVi;
-    @FXML
     private ScrollPane synonymPane;
-    @FXML
-    private ToggleButton Synonyms;
     @FXML
     private Button en_vi_dict;
     @FXML
     private Button vi_en_dict;
+    @FXML
+    private LineChart<Integer,Double> UsageOverTime;
+    @FXML
+    private NumberAxis YearAxis;
+    @FXML
+    private Label graphFailed;
+    @FXML
+    private Image loadImage = new Image(Paths.get("src/style/media/loading.gif").toUri().toURL().toString());
     private String searched = null;
     private String type_Dict = "EN_VI";
     private String[] history;
+
+    public SearchController() throws MalformedURLException {
+    }
+
     @FXML
     private void initialize() {
         PrepareMenu(true);
@@ -64,7 +89,7 @@ public class SearchController extends MainController {
                     reversedHistory[i] = history[history.length - i - 1];
                 }
                 return
-                Stream.of(reversedHistory).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
+                Stream.of(reversedHistory).collect(Collectors.toList());
             }
             else {
                 return Stream.of(suggestions).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
@@ -83,28 +108,122 @@ public class SearchController extends MainController {
                 addNote.setVisible(false);
             }
         });
+        synonymPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        synonymPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        wordExplain.getChildrenUnmodifiable().addListener((ListChangeListener<Node>) change -> {
+            Set<Node> deadSeaScrolls = wordExplain.lookupAll(".scroll-bar");
+            for (Node scroll : deadSeaScrolls) {
+                scroll.setVisible(false);
+            }
+        });
+        getHistory();
+        UsageOverTime.setCreateSymbols(false);
+        NumberFormat format = new DecimalFormat("####");
+        YearAxis.setTickLabelFormatter(new StringConverter<>() {
+            @Override
+            public String toString(Number number) {
+                return format.format(number);
+            }
+
+            @Override
+            public Number fromString(String s) {
+                try {
+                    return format.parse(s);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         wordSynonyms.setSpacing(5);
         SpeakButton.setVisible(false);
         addLearningButton.setVisible(false);
         addNote.setVisible(false);
-        Synonyms.setVisible(false);
         addSynonymsButton.setVisible(false);
         en_vi_dict.setVisible(true);
         vi_en_dict.setVisible(false);
         searchBar.textProperty().addListener((obs, oldText, newText) -> {
-            try {
-                UserInput();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (newText.length() >= 2) {
+                try {
+                    UserInput();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
-        searchBar.textProperty().addListener((obs, oldText, newText) -> {
-            try {
-                getHistory();
-            } catch (Exception e) {
-                e.printStackTrace();
+        searchBar.focusedProperty().addListener((ObservableValue <? extends Boolean> observable, Boolean oldValue, Boolean newValue)->{
+            if (!oldValue && newValue) {
+                searchBar.setText("s");
+                searchBar.setText("");
             }
         });
+    }
+    @FXML
+    protected void LoadGraph() {
+        UsageOverTime.getData().clear();
+        ImageView loading = new ImageView(loadImage);
+        loading.setFitWidth(60);
+        loading.setFitHeight(60);
+        loading.setLayoutX(310);
+        loading.setLayoutY(460);
+        AnchorPane parent = (AnchorPane) UsageOverTime.getParent();
+        new Thread(() -> {
+            boolean connected = true;
+            Platform.runLater(() -> {
+                parent.getChildren().add(loading);
+            });
+            XYChart.Series<Integer,Double> data = new XYChart.Series<>();
+            String urlScript = "https://books.google.com/ngrams/json?content="
+                     + searched
+                     + "&year_start=1800&year_end=2022&corpus=26&smoothing=3";
+            URL url;
+            try {
+                url = new URI(urlScript).toURL();
+            } catch (MalformedURLException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+            HttpURLConnection con;
+            try {
+                con = (HttpURLConnection) url.openConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                con.setRequestMethod("GET");
+            } catch (ProtocolException e) {
+                throw new RuntimeException(e);
+            }
+            con.setRequestProperty("accept", "application/json");
+            StringBuilder response = new StringBuilder();
+            BufferedReader in = null;
+            try {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } catch (IOException e) {
+                connected = false;
+            }
+            if (connected) {
+                try {
+                    response.append(in.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String input = response.substring(response.toString().indexOf("timeseries") + 14, response.toString().indexOf("]}]"));
+                String[] wordData = input.split(", ");
+                for (int i = 0; i < wordData.length; i++) {
+                    data.getData().add(new XYChart.Data<>(i + 1800, 100 * Double.parseDouble(wordData[i])));
+                }
+            }
+            boolean finalConnected = connected;
+            Platform.runLater(() -> {
+                parent.getChildren().remove(loading);
+                if (finalConnected) UsageOverTime.getData().add(data);
+                else graphFailed.setVisible(true);
+            });
+        }).start();
     }
     @FXML
     protected void CreateSearchHyperlink(String word) throws Exception {
@@ -128,36 +247,13 @@ public class SearchController extends MainController {
         }
     }
     @FXML
-    protected void EnViClick() {
+    protected void LoadSynonym() throws Exception {
         HideMenuBar();
-        EnVi.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
-        Synonyms.setStyle(null);
-        Synonyms.getStyleClass().add("src/style/main_styles.css");
-        wordExplain.setVisible(true);
-        synonymPane.setVisible(false);
-        addSynonymsButton.setVisible(false);
-    }
-    @FXML
-    protected void SynonymsClick() throws Exception {
-        HideMenuBar();
-        wordExplain.setVisible(false);
-        synonymPane.setVisible(true);
         addSynonymsButton.setVisible(true);
-        Synonyms.setStyle("-fx-background-color: #8A2BE2; -fx-text-fill: white;");
-        EnVi.setStyle(null);
-        EnVi.getStyleClass().add("src/style/main_styles.css");
         if (DictionaryManager.symDict.get(searched) == null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("No synonyms found");
-            alert.setHeaderText(null);
-            alert.setContentText("DO YOU WANT TO ADD THIS WORD TO SYNONYMS LIST?");
-            alert.showAndWait();
-            if (alert.getResult().getText().equals("OK")) {
-                addNote.setVisible(true);
-                Syms.setVisible(true);
-                Notes.setVisible(false);
-                Syms.requestFocus();
-            }
+            Label label = new Label(" No synonym found.");
+            label.setFont(new Font(16));
+            wordSynonyms.getChildren().add(label);
             return;
         }
         if (wordSynonyms.getChildren().isEmpty()) {
@@ -167,34 +263,34 @@ public class SearchController extends MainController {
             }
         }
     }
-    @FXML
     protected void UserInput() {
-        suggestions = DictionaryManager.dictionarySearcher(searchBar.getText(), type_Dict);
+        new Thread(() -> {
+            suggestions = DictionaryManager.dictionarySearcher(searchBar.getText(), type_Dict);
+        }).start();
     }
     protected void getHistory() {
-        history = DictionaryManager.getHistory(type_Dict).toArray(new String[0]);
+        new Thread(() -> {
+            history = DictionaryManager.getHistory(type_Dict).toArray(new String[0]);
+        }).start();
     }
     @FXML
     protected void enterSearch() throws Exception {
         HideMenuBar();
-        EnViClick();
-        Synonyms.setVisible(false);
+        if (graphFailed.isVisible()) graphFailed.setVisible(false);
         wordSynonyms.getChildren().clear();
         addNote.setVisible(false);
-        synonymPane.setVisible(false);
-        wordExplain.setVisible(true);
         if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict), "Word not found.")) {
             DisplayWordExplain();
+            LoadSynonym();
             SpeakButton.requestFocus();
             searched = searchBar.getText();
             DictionaryManager.addHistory(searched, type_Dict);
             history = DictionaryManager.History.toArray(new String[0]);
-            if (type_Dict == "EN_VI") Synonyms.setVisible(true);
+            LoadGraph();
         }
         else {
             SpeakButton.setVisible(false);
             addLearningButton.setVisible(false);
-            Synonyms.setVisible(false);
             wordExplain.getEngine().loadContent("Word not found.", "text/html");
         }
     }
@@ -210,7 +306,7 @@ public class SearchController extends MainController {
         TranslateAPI.speakAudio(searched,"English");
     }
     @FXML
-    public void onClickAddLearning(ActionEvent actionEvent) {
+    public void onClickAddLearning() {
         addNote.setVisible(true);
         Syms.setVisible(false);
         Notes.setVisible(true);
@@ -229,7 +325,7 @@ public class SearchController extends MainController {
     }
 
     @FXML
-    public void addSyms(ActionEvent actionEvent) throws Exception {
+    public void addSyms() throws Exception {
         String[] sym = Syms.getText().split(",");
         ArrayList<String> synonyms = new ArrayList<>(Arrays.asList(sym));
         if (DictionaryManager.symDict.get(searched) != null) {
@@ -245,11 +341,11 @@ public class SearchController extends MainController {
         Syms.setVisible(false);
         addNote.setVisible(false);
         wordSynonyms.getChildren().clear();
-        SynonymsClick();
+        LoadSynonym();
     }
 
     @FXML
-    public void onClickAddSynonyms(ActionEvent actionEvent) {
+    public void onClickAddSynonyms() {
         addNote.setVisible(true);
         Syms.setVisible(true);
         Notes.setVisible(false);
@@ -257,7 +353,7 @@ public class SearchController extends MainController {
     }
 
     @FXML
-    public void changeDict(ActionEvent actionEvent) {
+    public void changeDict() {
         if (type_Dict.equals("EN_VI")) {
             type_Dict = "VI_EN";
             en_vi_dict.setVisible(false);

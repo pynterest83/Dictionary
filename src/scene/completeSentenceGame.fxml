@@ -13,12 +13,12 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.CompleteSentenceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.CompleteSentenceController">
    <children>
-    <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="528.0" prefWidth="895.0" style="-fx-background-color: white;" AnchorPane.topAnchor="30.4">
+    <AnchorPane layoutY="30.4" minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="950.0" style="-fx-background-color: white;" AnchorPane.topAnchor="30.0">
          <children>
             <WebView fx:id="gameScreen" layoutY="7.0" prefHeight="528.0" prefWidth="856.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="0.0" />
-            <Button fx:id="NextButton" layoutX="821.0" layoutY="476.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" visible="false" />
+            <Button fx:id="NextButton" layoutX="874.0" layoutY="619.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" visible="false" />
             <RadioButton fx:id="ChoiceA" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#RadioButtonClick" visible="false">
                <toggleGroup>
                   <ToggleGroup fx:id="QuestionChoices" />
@@ -28,12 +28,12 @@
             <RadioButton fx:id="ChoiceC" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
             <RadioButton fx:id="ChoiceD" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
             <RadioButton fx:id="ChoiceE" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
-            <Button fx:id="StartGameButton" layoutX="384.0" layoutY="229.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="70.0" prefWidth="126.0" text="Start">
+            <Button fx:id="StartGameButton" layoutX="412.0" layoutY="277.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="70.0" prefWidth="126.0" text="Start">
                <font>
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Button>
-            <Pane fx:id="menuDescription" layoutX="668.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="menuDescription" layoutX="724.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
                      <font>
@@ -57,7 +57,7 @@
                   </Text>
                </children>
             </Pane>
-            <VBox fx:id="menuBar" layoutX="855.0" layoutY="40.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
+            <VBox fx:id="menuBar" layoutX="910.0" layoutY="40.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
                   <Button fx:id="GGTranslateButton" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="40.0" prefWidth="40.0" styleClass="google-translate-button" />

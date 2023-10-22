@@ -3,7 +3,6 @@ package base;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.net.*;
@@ -67,7 +66,7 @@ public class TranslateAPI {
         }
         fileReader.close();
     }
-    public static String[] theSaurus(String word, String type) throws URISyntaxException, IOException, ParseException {
+    public static String[] theSaurus(String word, String type) throws URISyntaxException, IOException {
         if (word.contains(" ")) {
             word = word.replace(" ", "_");
         }
@@ -125,16 +124,5 @@ public class TranslateAPI {
             return ant;
         }
         return null;
-    }
-
-    public static void main(String[] args) throws URISyntaxException, IOException, ParseException {
-        String[] syn = theSaurus("i love you", "syn");
-        if (syn == null) {
-            System.out.println("null");
-            return;
-        }
-        for (String s : syn) {
-            System.out.println(s);
-        }
     }
 }

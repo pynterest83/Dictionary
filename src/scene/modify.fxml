@@ -13,17 +13,17 @@
 <?import javafx.scene.web.WebView?>
 <?import org.controlsfx.control.textfield.TextFields?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ModifyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ModifyController">
     <children>
-          <AnchorPane focusTraversable="true" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="895.0" AnchorPane.topAnchor="30.4">
+          <AnchorPane focusTraversable="true" layoutY="30.4" minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="950.0" AnchorPane.topAnchor="30.0">
               <children>
-                  <TextFields fx:id="modifyText" layoutX="94.0" layoutY="1.0" onAction="#onEnterModify" prefHeight="40.0" prefWidth="801.0" fx:factory="createClearableTextField" />
-                  <Button fx:id="saveButton" layoutX="813.0" layoutY="50.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="71.0" text="Save" />
-                  <Button fx:id="delButton" layoutX="724.0" layoutY="50.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="71.0" text="Delete" />
-                  <AnchorPane layoutX="60.0" layoutY="163.0" prefHeight="335.0" prefWidth="604.0">
+                  <TextFields fx:id="modifyText" layoutX="94.0" layoutY="1.0" onAction="#onEnterModify" prefHeight="40.0" prefWidth="855.0" fx:factory="createClearableTextField" />
+                  <Button fx:id="saveButton" layoutX="862.0" layoutY="50.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="71.0" text="Save" />
+                  <Button fx:id="delButton" layoutX="779.0" layoutY="50.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="71.0" text="Delete" />
+                  <AnchorPane layoutX="60.0" layoutY="165.0" prefHeight="504.0" prefWidth="838.0">
                       <children>
-                          <WebView layoutX="-1.0" layoutY="-1.0" prefHeight="338.0" prefWidth="605.0" />
-                          <HTMLEditor fx:id="modifyEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="-1.0" prefHeight="338.0" prefWidth="788.0" />
+                          <WebView layoutX="-1.0" layoutY="12.0" prefHeight="493.0" prefWidth="838.0" />
+                          <HTMLEditor fx:id="modifyEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="-57.0" prefHeight="562.0" prefWidth="838.0" />
                       </children>
                   </AnchorPane>
             <Pane fx:id="menuDescription" layoutX="39.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">

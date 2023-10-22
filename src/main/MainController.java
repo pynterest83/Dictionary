@@ -3,6 +3,7 @@ package main;
 import animatefx.animation.*;
 import base.DictionaryManager;
 import base.Word;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -35,20 +36,28 @@ public class MainController {
     protected Button LearningButton;
     @FXML
     protected Pane menuDescription;
+    protected Boolean inside = false;
     @FXML
     private void initialize() {
         PrepareMenu(true);
     }
     @FXML
     protected void PrepareMenu(boolean isLeft) {
+        menuBarButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
+            if (oldValue && !newValue && menuOpen && !inside) {
+                MenuBarClick();
+            }
+        });
         if (isLeft) {
             menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+                inside = true;
                 menuDescription.setVisible(true);
                 SlideInLeft in = new SlideInLeft(menuDescription);
                 in.setSpeed(4);
                 in.play();
             });
             menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+                inside = false;
                 SlideOutLeft out = new SlideOutLeft(menuDescription);
                 out.setSpeed(4);
                 out.setOnFinished(eve-> menuDescription.setVisible(false));
@@ -126,6 +135,7 @@ public class MainController {
     }
     @FXML
     public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
+        inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -133,6 +143,7 @@ public class MainController {
     }
     @FXML
     protected void onClickGameButton() throws IOException {
+        inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -140,6 +151,7 @@ public class MainController {
     }
     @FXML
     public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
+        inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -147,6 +159,7 @@ public class MainController {
     }
     @FXML
     public void onClickLearningButton(ActionEvent actionEvent) throws IOException {
+        inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -172,18 +185,14 @@ public class MainController {
         if (menuOpen) {
             menuBar.setVisible(true);
             SlideInDown inDown = new SlideInDown(menuBar);
-            inDown.setOnFinished(e -> {
-                menuBar.setDisable(false);
-            });
+            inDown.setOnFinished(e -> menuBar.setDisable(false));
             inDown.setSpeed(3);
             inDown.play();
         }
         else {
             SlideOutUp outUp = new SlideOutUp(menuBar);
             menuBar.setDisable(true);
-            outUp.setOnFinished(e -> {
-                menuBar.setVisible(menuOpen);
-            });
+            outUp.setOnFinished(e -> menuBar.setVisible(menuOpen));
             outUp.setSpeed(3);
             outUp.play();
         }

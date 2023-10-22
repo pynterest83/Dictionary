@@ -12,16 +12,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.WordleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.WordleController">
    <children>
-    <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="895.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.20000000000004547" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
+    <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="895.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
-            <TextField fx:id="AnnounceBoard2" editable="false" layoutX="28.0" layoutY="466.0" prefHeight="48.0" prefWidth="298.0" style="-fx-background-color: transparent;">
+            <TextField fx:id="AnnounceBoard2" editable="false" layoutX="20.0" layoutY="572.0" prefHeight="48.0" prefWidth="298.0" style="-fx-background-color: transparent;">
                <font>
                   <Font name="Dubai Regular" size="19.0" />
                </font>
             </TextField>
-            <Pane fx:id="WordlePane" layoutX="302.0" layoutY="32.0" prefHeight="394.0" prefWidth="291.0" visible="false">
+            <Pane fx:id="WordlePane" layoutX="329.0" layoutY="67.0" prefHeight="392.0" prefWidth="292.0" visible="false">
                <children>
                   <HBox alignment="CENTER" prefHeight="54.0" prefWidth="291.0" spacing="5.0">
                      <children>
@@ -199,18 +199,18 @@
                   </HBox>
                </children>
             </Pane>
-            <Button fx:id="ReplayButton" layoutX="784.0" layoutY="457.0" mnemonicParsing="false" onAction="#onClickReplay" prefHeight="46.0" prefWidth="81.0" text="Replay" visible="false" />
-            <Button fx:id="StartButton" layoutX="377.0" layoutY="218.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" text="Start">
+            <Button fx:id="ReplayButton" layoutX="835.0" layoutY="596.0" mnemonicParsing="false" onAction="#onClickReplay" prefHeight="46.0" prefWidth="81.0" text="Replay" visible="false" />
+            <Button fx:id="StartButton" layoutX="404.0" layoutY="289.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" text="Start">
                <font>
                   <Font name="Segoe UI Semibold" size="22.0" />
                </font>
             </Button>
-            <TextField fx:id="AnnounceBoard" editable="false" layoutX="59.0" layoutY="418.0" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: transparent;">
+            <TextField fx:id="AnnounceBoard" editable="false" layoutX="40.0" layoutY="514.0" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: transparent;">
                <font>
                   <Font name="Dubai Regular" size="19.0" />
                </font>
             </TextField>
-            <TextField fx:id="ErrorBoard" alignment="CENTER" layoutX="306.0" layoutY="426.0" prefHeight="30.0" prefWidth="284.0" style="-fx-background-color: transparent; -fx-text-fill: red;">
+            <TextField fx:id="ErrorBoard" alignment="CENTER" editable="false" layoutX="333.0" layoutY="442.0" prefHeight="30.0" prefWidth="284.0" style="-fx-background-color: transparent; -fx-text-fill: red;">
                <font>
                   <Font name="Dubai Regular" size="19.0" />
                </font>

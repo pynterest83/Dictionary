@@ -14,20 +14,20 @@
 <?import javafx.scene.web.WebView?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="895.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LearningController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LearningController">
     <children>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="950.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutY="33.0" prefHeight="525.0" prefWidth="241.0" AnchorPane.topAnchor="30.4">
                <children>
-                  <CustomTextField fx:id="searchLearningWord" layoutX="41.0" onAction="#enterSearch" prefHeight="40.0" prefWidth="198.0" AnchorPane.topAnchor="0.0">
+                  <CustomTextField fx:id="searchLearningWord" layoutX="41.0" onAction="#enterSearch" prefHeight="40.0" prefWidth="201.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="SansSerif Bold" size="14.0" />
                      </font>
                   </CustomTextField>
-                  <VBox layoutY="40.0" prefHeight="487.0" prefWidth="242.0">
+                  <VBox layoutY="40.0" prefHeight="629.0" prefWidth="242.0">
                      <children>
-                        <ListView fx:id="learningList" onMouseClicked="#selectSearch" prefHeight="488.0" prefWidth="242.0" />
+                        <ListView fx:id="learningList" onMouseClicked="#selectSearch" prefHeight="634.0" prefWidth="242.0" />
                      </children>
                   </VBox>
                   <Pane fx:id="menuDescription" layoutX="40.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
@@ -65,14 +65,14 @@
                   <Button fx:id="menuBarButton" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="242.0" layoutY="33.0" prefHeight="527.0" prefWidth="655.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
+            <AnchorPane layoutX="242.0" layoutY="30.4" prefHeight="670.0" prefWidth="707.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                <children>
-                  <WebView fx:id="learningExplain" layoutY="-1.0" prefHeight="527.0" prefWidth="655.0" />
-                  <HTMLEditor fx:id="editLearningWord" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="-1.0" prefHeight="527.0" prefWidth="655.0" visible="false" />
-                  <Button fx:id="saveLearningWord" layoutX="591.0" layoutY="480.0" mnemonicParsing="false" onAction="#saveEdited" text="Save" visible="false" />
-                  <Button layoutX="590.0" layoutY="12.0" mnemonicParsing="false" onAction="#onClickSpeakButton" text="Speak" />
-                  <Button layoutX="525.0" layoutY="12.0" mnemonicParsing="false" onAction="#onClickModifyButton" prefHeight="25.0" prefWidth="48.0" text="Edit" />
-                  <Button layoutX="445.0" layoutY="12.0" mnemonicParsing="false" onAction="#onClickRemoveLearningWord" text="Remove" />
+                  <WebView fx:id="learningExplain" layoutY="-1.0" prefHeight="670.0" prefWidth="707.0" />
+                  <HTMLEditor fx:id="editLearningWord" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="-1.0" prefHeight="670.0" prefWidth="707.0" visible="false" />
+                  <Button fx:id="saveLearningWord" layoutX="652.0" layoutY="621.0" mnemonicParsing="false" onAction="#saveEdited" text="Save" visible="false" />
+                  <Button layoutX="637.0" layoutY="12.0" mnemonicParsing="false" onAction="#onClickSpeakButton" text="Speak" />
+                  <Button layoutX="568.0" layoutY="12.0" mnemonicParsing="false" onAction="#onClickModifyButton" prefHeight="25.0" prefWidth="48.0" text="Edit" />
+                  <Button layoutX="491.0" layoutY="12.0" mnemonicParsing="false" onAction="#onClickRemoveLearningWord" text="Remove" />
                </children>
             </AnchorPane>
          </children>
