@@ -28,6 +28,8 @@ public class ModifyController extends MainController {
     private String type_Dict = "EN_VI";
     @FXML
     private void initialize() {
+        en_vi_dict.setVisible(true);
+        vi_en_dict.setVisible(false);
         PrepareMenu(true);
         TextFields.bindAutoCompletion(modifyText, input -> {
             if (modifyText.getText().length() <= 1) return Collections.emptyList();
@@ -81,7 +83,7 @@ public class ModifyController extends MainController {
         alert.setHeaderText(null);
         alert.setContentText("Sửa từ thành công");
         alert.showAndWait();
-        DictionaryManager.exportToFile("");
+        DictionaryManager.exportToFile(type_Dict);
     }
 
     // Delete
@@ -101,7 +103,7 @@ public class ModifyController extends MainController {
             alert2.setContentText("Xóa từ thành công");
             alert2.showAndWait();
         }
-        DictionaryManager.exportToFile("");
+        DictionaryManager.exportToFile(type_Dict);
     }
 
     public void onEnterModify(ActionEvent actionEvent) {

@@ -20,6 +20,8 @@ public class AddController extends MainController {
     private String type_Dict = "EN_VI";
     @FXML
     private void initialize() {
+        en_vi_dict.setVisible(true);
+        vi_en_dict.setVisible(false);
         PrepareMenu(true);
     }
     @FXML
@@ -59,7 +61,7 @@ public class AddController extends MainController {
 
             onClickModify();
         }
-        DictionaryManager.exportToFile("");
+        DictionaryManager.exportToFile(type_Dict);
     }
     @FXML
     public void onEnterAdd(ActionEvent actionEvent) {
