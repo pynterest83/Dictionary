@@ -25,26 +25,6 @@
                   <Font name="SansSerif Bold" size="14.0" />
                </font></TextField>
             <Button fx:id="SpeakButton" layoutX="102.0" layoutY="359.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 10;" text="Speak" />
-            <AnchorPane fx:id="addNote" layoutX="145.0" layoutY="136.0" prefHeight="202.0" prefWidth="498.0" visible="false">
-               <children>
-                  <WebView layoutX="83.0" layoutY="-1.0" prefHeight="41.0" prefWidth="446.0" />
-                  <Text layoutX="83.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD" textAlignment="CENTER" wrappingWidth="445.9999999999999">
-                     <font>
-                        <Font size="31.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="Syms" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addSyms" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="Notes" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addDescription" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </AnchorPane>
             <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
              <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
             <Pane layoutX="14.0" layoutY="51.0" prefHeight="298.0" prefWidth="602.0" style="-fx-background-radius: 50; -fx-background-color: antiquewhite;">
@@ -81,6 +61,31 @@
                 <NumberAxis label="\%" side="LEFT" />
               </yAxis>
             </LineChart>
+            <Label layoutX="254.0" layoutY="374.0" text="Usage over time">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
+            <AnchorPane fx:id="addNote" layoutX="167.0" layoutY="215.0" prefHeight="202.0" prefWidth="498.0" visible="false">
+               <children>
+                  <TextField fx:id="Syms" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addSyms" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="Notes" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addDescription" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Text layoutX="111.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-blend-mode: DARKEN;" text="ADD" textAlignment="CENTER" wrappingWidth="388.4000244140624">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
             <Pane fx:id="menuDescription" layoutX="37.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
@@ -113,12 +118,6 @@
                    <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
                </children>
             </VBox>
-            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
-            <Label layoutX="254.0" layoutY="374.0" text="Usage over time">
-               <font>
-                  <Font name="SansSerif Bold" size="18.0" />
-               </font>
-            </Label>
             <Label fx:id="graphFailed" layoutX="248.0" layoutY="497.0" text="No internet connection" textFill="#fa0202" visible="false">
                <font>
                   <Font name="SansSerif Bold" size="16.0" />

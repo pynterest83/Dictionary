@@ -168,12 +168,11 @@ public class SearchController extends MainController {
         AnchorPane parent = (AnchorPane) UsageOverTime.getParent();
         new Thread(() -> {
             boolean connected = true;
-            Platform.runLater(() -> {
-                parent.getChildren().add(loading);
-            });
+            Platform.runLater(() -> parent.getChildren().add(loading));
             XYChart.Series<Integer,Double> data = new XYChart.Series<>();
+            String requestString = searched.replace(' ','+');
             String urlScript = "https://books.google.com/ngrams/json?content="
-                     + searched
+                     + requestString
                      + "&year_start=1800&year_end=2022&corpus=26&smoothing=3";
             URL url;
             try {
@@ -264,14 +263,10 @@ public class SearchController extends MainController {
         }
     }
     protected void UserInput() {
-        new Thread(() -> {
-            suggestions = DictionaryManager.dictionarySearcher(searchBar.getText(), type_Dict);
-        }).start();
+        new Thread(() -> suggestions = DictionaryManager.dictionarySearcher(searchBar.getText(), type_Dict)).start();
     }
     protected void getHistory() {
-        new Thread(() -> {
-            history = DictionaryManager.getHistory(type_Dict).toArray(new String[0]);
-        }).start();
+        new Thread(() -> history = DictionaryManager.getHistory(type_Dict).toArray(new String[0])).start();
     }
     @FXML
     protected void enterSearch() throws Exception {
@@ -280,10 +275,10 @@ public class SearchController extends MainController {
         wordSynonyms.getChildren().clear();
         addNote.setVisible(false);
         if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict), "Word not found.")) {
+            searched = searchBar.getText();
             DisplayWordExplain();
             LoadSynonym();
             SpeakButton.requestFocus();
-            searched = searchBar.getText();
             DictionaryManager.addHistory(searched, type_Dict);
             history = DictionaryManager.History.toArray(new String[0]);
             LoadGraph();
