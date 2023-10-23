@@ -19,7 +19,7 @@ public class TranslateAPI {
         String urlScript = "https://translate.googleapis.com/translate_a/single?client=gtx&"
                 + "sl=" + langFrom
                 + "&tl=" + langTo
-                + "&dt=t&dt=t&q=" + text.replace(" ","+");
+                + "&dt=t&dt=t&q=" + URLEncoder.encode(text,StandardCharsets.UTF_8);
         URL url = new URI(urlScript).toURL();
         StringBuilder response = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
