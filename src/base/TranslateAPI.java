@@ -133,14 +133,13 @@ public class TranslateAPI {
         }
         return null;
     }
-    public static String[] graphData(String requestString, Boolean connected) {
+    public static double[] graphData(String requestString) {
         if (requestString.contains("(") || requestString.contains(")")) {
             requestString = requestString.substring(0, requestString.indexOf("(") - 1);
         }
-        String[] wordData = null;
         String urlScript = "https://books.google.com/ngrams/json?content="
                 + requestString
-                + "&year_start=1800&year_end=2022&corpus=26&smoothing=3";
+                + "&year_start=1800&year_end=2022&case_insensitive=on&corpus=26&smoothing=2";
         URL url;
         try {
             url = new URI(urlScript).toURL();
@@ -160,30 +159,34 @@ public class TranslateAPI {
         }
         con.setRequestProperty("accept", "application/json");
         StringBuilder response = new StringBuilder();
-        BufferedReader in = null;
+        BufferedReader in;
         try {
             in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         } catch (IOException e) {
-            connected = false;
+            return null;
         }
-        if (connected) {
-            try {
-                response.append(in.readLine());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                in.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            if (response.toString().equals("[]")) {
-                return null;
-            }
-            String input = response.substring(response.toString().indexOf("timeseries") + 14, response.toString().indexOf("]}]"));
-            wordData = input.split(", ");
+        double[] wordData;
+        try {
+            response.append(in.readLine());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
+        try {
+            in.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.toString().equals("[]")) {
+            return new double[0];
+        }
+        String responseString = response.toString();
+        String[] temp = responseString
+                .substring(responseString.indexOf("timeseries") + 14, responseString.indexOf("]"))
+                .split(", ");
+        wordData = new double[temp.length];
+        for (int i = 0; i < temp.length; i++) {
+            wordData[i] = Double.parseDouble(temp[i]);
+        }
         return wordData;
     }
 }

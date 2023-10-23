@@ -22,10 +22,8 @@ import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.*;
+import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -167,26 +165,27 @@ public class SearchController extends MainController {
         loading.setLayoutY(460);
         AnchorPane parent = (AnchorPane) UsageOverTime.getParent();
         new Thread(() -> {
-            boolean connected = true;
+            boolean success = true;
             Platform.runLater(() -> parent.getChildren().add(loading));
             XYChart.Series<Integer,Double> data = new XYChart.Series<>();
             String requestString = searched.replace(' ','+');
-            String[] wordData = TranslateAPI.graphData(requestString, connected);
-            if (wordData == null) {
-                connected = false;
+            double[] wordData = TranslateAPI.graphData(requestString);
+            if (type_Dict.equals("VI_EN") || wordData == null || wordData.length == 0) {
+                success = false;
             }
             else {
                 for (int i = 0; i < wordData.length; i++) {
-                    data.getData().add(new XYChart.Data<>(i + 1800, 100 * Double.parseDouble(wordData[i])));
+                    data.getData().add(new XYChart.Data<>(i + 1800, 100 * wordData[i]));
                 }
             }
-            boolean finalConnected = connected;
+            boolean succeed = success;
             Platform.runLater(() -> {
                 parent.getChildren().remove(loading);
-                if (finalConnected) UsageOverTime.getData().add(data);
+                if (succeed) UsageOverTime.getData().add(data);
                 else {
                     if (type_Dict.equals("VI_EN")) graphFailed.setText("This language is not supported");
-                    else graphFailed.setText("No internet connection");
+                    else if (wordData == null) graphFailed.setText("No internet connection");
+                    else graphFailed.setText("Stats not available");
                     graphFailed.setVisible(true);
                 }
             });
