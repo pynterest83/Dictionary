@@ -15,3 +15,5 @@ astrology
 search
 falsification
 hell-for-leather
+artificial intelligence (ai)
+aspect

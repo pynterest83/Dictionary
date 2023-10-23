@@ -68,7 +68,7 @@ public class TranslateAPI {
     }
     public static String[] theSaurus(String word, String type) throws URISyntaxException, IOException {
         if (word.contains(" ")) {
-            word = word.replace(" ", "_");
+            word = word.replace(" ", "%20");
         }
         String urlScript = "https://dictionaryapi.com/api/v3/references/thesaurus/json/" + word +"?key=8d9232c5-ec85-49a3-a070-3b63dbc55fc8";
         URL url = new URI(urlScript).toURL();
@@ -110,6 +110,12 @@ public class TranslateAPI {
             String syns = data.substring(data.indexOf("syns") + 8, data.indexOf("ants") - 4);
             String[] syn = syns.split(",");
             for (int i = 0; i < syn.length; i++) {
+                if (syn[i].contains("[")) {
+                    syn[i] = syn[i].replace("[", "");
+                }
+                if (syn[i].contains("]")) {
+                    syn[i] = syn[i].replace("]", "");
+                }
                 syn[i] = syn[i].substring(1, syn[i].length() - 1);
             }
             return syn;
@@ -119,10 +125,76 @@ public class TranslateAPI {
             String[] ant = ants.split(",");
 
             for (int i = 0; i < ant.length; i++) {
+                if (ant[i].contains("[")) {
+                    ant[i] = ant[i].replace("[", "");
+                }
+                if (ant[i].contains("]")) {
+                    ant[i] = ant[i].replace("]", "");
+                }
                 ant[i] = ant[i].substring(1, ant[i].length() - 1);
             }
             return ant;
         }
         return null;
+    }
+    public static String[] graphData(String requestString, Boolean connected) {
+        if (requestString.contains("(") || requestString.contains(")")) {
+            requestString = requestString.substring(0, requestString.indexOf("(") - 1);
+        }
+        String[] wordData = null;
+        String urlScript = "https://books.google.com/ngrams/json?content="
+                + requestString
+                + "&year_start=1800&year_end=2022&corpus=26&smoothing=3";
+        URL url;
+        try {
+            url = new URI(urlScript).toURL();
+        } catch (MalformedURLException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        HttpURLConnection con;
+        try {
+            con = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            con.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            throw new RuntimeException(e);
+        }
+        con.setRequestProperty("accept", "application/json");
+        StringBuilder response = new StringBuilder();
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } catch (IOException e) {
+            connected = false;
+        }
+        if (connected) {
+            try {
+                response.append(in.readLine());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                in.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (response.toString().equals("[]")) {
+                return null;
+            }
+            String input = response.substring(response.toString().indexOf("timeseries") + 14, response.toString().indexOf("]}]"));
+            wordData = input.split(", ");
+        }
+
+        return wordData;
+    }
+
+    public static void main(String[] args) throws URISyntaxException, IOException {
+        String[] syn = theSaurus("beautiful", "syn");
+        for (String s : syn) {
+            System.out.println(s);
+        }
     }
 }

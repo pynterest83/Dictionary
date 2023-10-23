@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: aliceblue;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: aliceblue;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
    <children>
     <AnchorPane layoutX="47.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
@@ -29,8 +29,8 @@
              <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
             <Pane layoutX="14.0" layoutY="51.0" prefHeight="298.0" prefWidth="602.0" style="-fx-background-radius: 50; -fx-background-color: antiquewhite;">
                <children>
-                  <WebView fx:id="wordExplain" layoutX="17.0" layoutY="16.0" prefHeight="273.0" prefWidth="570.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
-                  <Label layoutX="43.0" text="Definition">
+                  <WebView fx:id="wordExplain" layoutX="17.0" layoutY="25.0" prefHeight="257.0" prefWidth="570.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
+                  <Label layoutX="43.0" layoutY="6.0" text="Definition">
                      <font>
                         <Font name="SansSerif Bold" size="15.0" />
                      </font>
@@ -42,10 +42,10 @@
                <children>
                   <ScrollPane fx:id="synonymPane" layoutY="25.0" prefHeight="250.0" prefWidth="302.0" style="-fx-background-color: antiquewhite;">
                      <content>
-                        <VBox fx:id="wordSynonyms" prefHeight="250.0" prefWidth="298.0" style="-fx-background-color: antiquewhite;" />
+                        <VBox fx:id="wordSynonyms" prefHeight="250.0" prefWidth="286.0" style="-fx-background-color: antiquewhite;" />
                      </content>
                   </ScrollPane>
-                  <Label layoutX="21.0" text="Synonym">
+                  <Label layoutX="26.0" layoutY="6.0" text="Synonym">
                      <font>
                         <Font name="SansSerif Bold" size="15.0" />
                      </font>
@@ -79,11 +79,6 @@
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <Text layoutX="111.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-blend-mode: DARKEN;" text="ADD" textAlignment="CENTER" wrappingWidth="388.4000244140624">
-                     <font>
-                        <Font size="31.0" />
-                     </font>
-                  </Text>
                </children>
             </AnchorPane>
             <Pane fx:id="menuDescription" layoutX="37.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">

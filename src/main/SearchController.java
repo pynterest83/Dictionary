@@ -171,47 +171,11 @@ public class SearchController extends MainController {
             Platform.runLater(() -> parent.getChildren().add(loading));
             XYChart.Series<Integer,Double> data = new XYChart.Series<>();
             String requestString = searched.replace(' ','+');
-            String urlScript = "https://books.google.com/ngrams/json?content="
-                     + requestString
-                     + "&year_start=1800&year_end=2022&corpus=26&smoothing=3";
-            URL url;
-            try {
-                url = new URI(urlScript).toURL();
-            } catch (MalformedURLException | URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
-            HttpURLConnection con;
-            try {
-                con = (HttpURLConnection) url.openConnection();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                con.setRequestMethod("GET");
-            } catch (ProtocolException e) {
-                throw new RuntimeException(e);
-            }
-            con.setRequestProperty("accept", "application/json");
-            StringBuilder response = new StringBuilder();
-            BufferedReader in = null;
-            try {
-                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            } catch (IOException e) {
+            String[] wordData = TranslateAPI.graphData(requestString, connected);
+            if (wordData == null) {
                 connected = false;
             }
-            if (connected) {
-                try {
-                    response.append(in.readLine());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                String input = response.substring(response.toString().indexOf("timeseries") + 14, response.toString().indexOf("]}]"));
-                String[] wordData = input.split(", ");
+            else {
                 for (int i = 0; i < wordData.length; i++) {
                     data.getData().add(new XYChart.Data<>(i + 1800, 100 * Double.parseDouble(wordData[i])));
                 }
@@ -220,7 +184,11 @@ public class SearchController extends MainController {
             Platform.runLater(() -> {
                 parent.getChildren().remove(loading);
                 if (finalConnected) UsageOverTime.getData().add(data);
-                else graphFailed.setVisible(true);
+                else {
+                    if (type_Dict.equals("VI_EN")) graphFailed.setText("This language is not supported");
+                    else graphFailed.setText("No internet connection");
+                    graphFailed.setVisible(true);
+                }
             });
         }).start();
     }
@@ -318,7 +286,6 @@ public class SearchController extends MainController {
         alert.showAndWait();
         addNote.setVisible(false);
     }
-
     @FXML
     public void addSyms() throws Exception {
         String[] sym = Syms.getText().split(",");
@@ -338,7 +305,6 @@ public class SearchController extends MainController {
         wordSynonyms.getChildren().clear();
         LoadSynonym();
     }
-
     @FXML
     public void onClickAddSynonyms() {
         addNote.setVisible(true);
@@ -346,7 +312,6 @@ public class SearchController extends MainController {
         Notes.setVisible(false);
         Syms.requestFocus();
     }
-
     @FXML
     public void changeDict() {
         if (type_Dict.equals("EN_VI")) {
@@ -359,5 +324,6 @@ public class SearchController extends MainController {
             en_vi_dict.setVisible(true);
             vi_en_dict.setVisible(false);
         }
+        getHistory();
     }
 }
