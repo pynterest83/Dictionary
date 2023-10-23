@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.SearchableComboBox;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -51,6 +52,8 @@ public class GGTranslateController extends MainController {
             SourceLang.getItems().add(entry.getKey());
             TargetLang.getItems().add(entry.getKey());
         }
+        SourceLang.setValue("Auto Detect");
+        sourceLangCode = "auto";
     }
 
     @FXML

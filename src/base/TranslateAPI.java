@@ -16,21 +16,17 @@ public class TranslateAPI {
     public static LinkedHashMap<String, String> langMap = new LinkedHashMap<>();
 
     public static String googleTranslate(String langFrom, String langTo, String text) throws IOException, URISyntaxException {
-        String urlScript = "https://script.google.com/macros/s/AKfycbyniMmCcI4V-qH7DhHozrZgu-CE4boXZihvviN4fRKZXkhApuwdw4YDqKNJBbhfNpfZdQ/exec" +
-                "?q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) +
-                "&target=" + langTo +
-                "&source=" + langFrom;
+        String urlScript = "https://translate.googleapis.com/translate_a/single?client=gtx&"
+                + "sl=" + langFrom
+                + "&tl=" + langTo
+                + "&dt=t&dt=t&q=" + text.replace(" ","+");
         URL url = new URI(urlScript).toURL();
         StringBuilder response = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        return response.toString();
+        response.append(in.readLine());
+        return response.substring(response.indexOf("\"") + 1,response.indexOf("\"",response.indexOf("\"") + 1));
     }
 
     public static void speakAudio(String text, String languageOutput) throws IOException, URISyntaxException {
@@ -61,7 +57,7 @@ public class TranslateAPI {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            String[] lang = line.split(" ");
+            String[] lang = line.split("\\|");
             langMap.put(lang[0], lang[1]);
         }
         fileReader.close();
@@ -189,12 +185,5 @@ public class TranslateAPI {
         }
 
         return wordData;
-    }
-
-    public static void main(String[] args) throws URISyntaxException, IOException {
-        String[] syn = theSaurus("beautiful", "syn");
-        for (String s : syn) {
-            System.out.println(s);
-        }
     }
 }

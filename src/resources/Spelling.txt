@@ -1,183 +1,184 @@
-English en
-Vietnamese vi
-Chinese zh
-Japanese ja
-Korean ko
-Russian ru
-German de
-Spanish es
-French fr
-Thai th
-Lao lo
-Italian it
-CentralKhmer km
-Polish pl
-Portuguese pt
-Dutch nl
-Finnish fi
-Afar aa
-Abkhazian ab
-Afrikaans af
-Albanian sq
-Amharic am
-Arabic ar
-Aragonese an
-Armenian hy
-Assamese as
-Avaric av
-Avestan ae
-Aymara ay
-Azerbaijani az
-Bashkir ba
-Bambara bm
-Basque eu
-Belarusian be
-Bengali bn
-Bihari languages bh
-Bislama bi
-Bosnian bs
-Breton br
-Bulgarian bg
-Burmese my
-Catalan;Valencian ca
-Chamorro ch
-Chechen ce
-Church Slavic cu
-Chuvash cv
-Cornish kw
-Corsican co
-Cree cr
-Czech cs
-Danish da
-Maldivian dv
-Dzongkha dz
-Esperanto eo
-Estonian et
-Ewe ee
-Faroese fo
-Fijian fj
-Western Frisian fy
-Fulah ff
-Georgian ka
-Gaelic gd
-Irish ga
-Galician gl
-Manx gv
-Greek el
-Guarani gn
-Gujarati gu
-Haitian ht
-Hausa ha
-Hebrew he
-Herero hz
-Hindi hi
-HiriMotu ho
-Croatian hr
-Hungarian hu
-Igbo ig
-Icelandic is
-Ido io
-SichuanYi ii
-Inuktitut iu
-Interlingue ie
-Interlingua ia
-Indonesian id
-Inupiaq ik
-Javanese jv
-Greenlandic kl
-Kannada kn
-Kashmiri ks
-Kanuri kr
-Kazakh kk
-Gikuyu ki
-Kinyarwanda rw
-Kyrgyz ky
-Komi kv
-Kongo kg
-Kwanyama kj
-Kurdish ku
-Latin la
-Latvian lv
-Limburgish li
-Lingala ln
-Lithuanian lt
-Luxembourgish lb
-Luba-Katanga lu
-Ganda lg
-Macedonian mk
-Marshallese mh
-Malayalam ml
-Maori mi
-Marathi mr
-Malay ms
-Malagasy mg
-Maltese mt
-Mongolian mn
-Nauru na
-Navaho nv
-South Ndebele nr
-North Ndebele nd
-Ndonga ng
-Nepali ne
-Norwegian nn
-Bokmål-Norwegian nb
-Norwegian no
-Chichewa ny
-Occitan oc
-Ojibwa oj
-Oriya or
-Oromo om
-Ossetian os
-Panjabi pa
-Persian fa
-Pali pi
-Pushto-Pashto ps
-Quechua qu
-Romansh rm
-Romanian ro
-Rundi rn
-Sango sg
-Sanskrit sa
-Sinhalese si
-Slovak sk
-Slovenian sl
-Northern-Sami se
-Samoan sm
-Shona sn
-Sindhi sd
-Somali so
-Sotho st
-Sardinian sc
-Serbian sr
-Swati ss
-Sundanese su
-Swahili sw
-Swedish sv
-Tahitian ty
-Tamil ta
-Tatar tt
-Telugu te
-Tajik tg
-Tagalog tl
-Tibetan bo
-Tigrinya ti
-Tonga to
-Tswana tn
-Tsonga ts
-Turkmen tk
-Turkish tr
-Twi tw
-Uyghur ug
-Ukrainian uk
-Urdu ur
-Uzbek uz
-Venda ve
-Volapük vo
-Welsh cy
-Walloon wa
-Wolof wo
-Xhosa xh
-Yiddish yi
-Yoruba yo
-Zhuang-Chuang za
-Zulu zu
+Auto Detect|auto
+English|en
+Vietnamese|vi
+Chinese|zh
+Japanese|ja
+Korean|ko
+Russian|ru
+German|de
+Spanish|es
+French|fr
+Thai|th
+Lao|lo
+Italian|it
+CentralKhmer|km
+Polish|pl
+Portuguese|pt
+Dutch|nl
+Finnish|fi
+Afar|aa
+Abkhazian|ab
+Afrikaans|af
+Albanian|sq
+Amharic|am
+Arabic|ar
+Aragonese|an
+Armenian|hy
+Assamese|as
+Avaric|av
+Avestan|ae
+Aymara|ay
+Azerbaijani|az
+Bashkir|ba
+Bambara|bm
+Basque|eu
+Belarusian|be
+Bengali|bn
+Bihari languages|bh
+Bislama|bi
+Bosnian|bs
+Breton|br
+Bulgarian|bg
+Burmese|my
+Catalan;Valencian|ca
+Chamorro|ch
+Chechen|ce
+Church Slavic|cu
+Chuvash|cv
+Cornish|kw
+Corsican|co
+Cree|cr
+Czech|cs
+Danish|da
+Maldivian|dv
+Dzongkha|dz
+Esperanto|eo
+Estonian|et
+Ewe|ee
+Faroese|fo
+Fijian|fj
+Western Frisian|fy
+Fulah|ff
+Georgian|ka
+Gaelic|gd
+Irish|ga
+Galician|gl
+Manx|gv
+Greek|el
+Guarani|gn
+Gujarati|gu
+Haitian|ht
+Hausa|ha
+Hebrew|he
+Herero|hz
+Hindi|hi
+HiriMotu|ho
+Croatian|hr
+Hungarian|hu
+Igbo|ig
+Icelandic|is
+Ido|io
+SichuanYi|ii
+Inuktitut|iu
+Interlingue|ie
+Interlingua|ia
+Indonesian|id
+Inupiaq|ik
+Javanese|jv
+Greenlandic|kl
+Kannada|kn
+Kashmiri|ks
+Kanuri|kr
+Kazakh|kk
+Gikuyu|ki
+Kinyarwanda|rw
+Kyrgyz|ky
+Komi|kv
+Kongo|kg
+Kwanyama|kj
+Kurdish|ku
+Latin|la
+Latvian|lv
+Limburgish|li
+Lingala|ln
+Lithuanian|lt
+Luxembourgish|lb
+Luba-Katanga|lu
+Ganda|lg
+Macedonian|mk
+Marshallese|mh
+Malayalam|ml
+Maori|mi
+Marathi|mr
+Malay|ms
+Malagasy|mg
+Maltese|mt
+Mongolian|mn
+Nauru|na
+Navaho|nv
+South Ndebele|nr
+North Ndebele|nd
+Ndonga|ng
+Nepali|ne
+Norwegian|nn
+Bokmål-Norwegian|nb
+Norwegian|no
+Chichewa|ny
+Occitan|oc
+Ojibwa|oj
+Oriya|or
+Oromo|om
+Ossetian|os
+Panjabi|pa
+Persian|fa
+Pali|pi
+Pushto-Pashto|ps
+Quechua|qu
+Romansh|rm
+Romanian|ro
+Rundi|rn
+Sango|sg
+Sanskrit|sa
+Sinhalese|si
+Slovak|sk
+Slovenian|sl
+Northern-Sami|se
+Samoan|sm
+Shona|sn
+Sindhi|sd
+Somali|so
+Sotho|st
+Sardinian|sc
+Serbian|sr
+Swati|ss
+Sundanese|su
+Swahili|sw
+Swedish|sv
+Tahitian|ty
+Tamil|ta
+Tatar|tt
+Telugu|te
+Tajik|tg
+Tagalog|tl
+Tibetan|bo
+Tigrinya|ti
+Tonga|to
+Tswana|tn
+Tsonga|ts
+Turkmen|tk
+Turkish|tr
+Twi|tw
+Uyghur|ug
+Ukrainian|uk
+Urdu|ur
+Uzbek|uz
+Venda|ve
+Volapük|vo
+Welsh|cy
+Walloon|wa
+Wolof|wo
+Xhosa|xh
+Yiddish|yi
+Yoruba|yo
+Zhuang-Chuang|za
+Zulu|zu
