@@ -66,12 +66,14 @@ public class MainController {
         }
         else {
             menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+                inside = true;
                 menuDescription.setVisible(true);
                 SlideInRight in = new SlideInRight(menuDescription);
                 in.setSpeed(4);
                 in.play();
             });
             menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+                inside = false;
                 SlideOutRight out = new SlideOutRight(menuDescription);
                 out.setSpeed(4);
                 out.setOnFinished(eve-> menuDescription.setVisible(false));
