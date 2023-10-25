@@ -16,7 +16,7 @@
    <children>
     <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="895.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
-            <TextField fx:id="AnnounceBoard2" editable="false" layoutX="20.0" layoutY="572.0" prefHeight="48.0" prefWidth="298.0" style="-fx-background-color: transparent;">
+            <TextField fx:id="AnnounceBoard2" alignment="CENTER" editable="false" layoutX="325.0" layoutY="541.0" prefHeight="48.0" prefWidth="298.0" style="-fx-background-color: transparent;">
                <font>
                   <Font name="Dubai Regular" size="19.0" />
                </font>
@@ -200,12 +200,12 @@
                </children>
             </Pane>
             <Button fx:id="ReplayButton" layoutX="835.0" layoutY="596.0" mnemonicParsing="false" onAction="#onClickReplay" prefHeight="46.0" prefWidth="81.0" text="Replay" visible="false" />
-            <Button fx:id="StartButton" layoutX="404.0" layoutY="289.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" text="Start">
+            <Button fx:id="StartButton" layoutX="404.0" layoutY="289.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: blue;" styleClass="generic-button" text="Start">
                <font>
                   <Font name="Segoe UI Semibold" size="22.0" />
                </font>
             </Button>
-            <TextField fx:id="AnnounceBoard" editable="false" layoutX="40.0" layoutY="514.0" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: transparent;">
+            <TextField fx:id="AnnounceBoard" alignment="CENTER" editable="false" layoutX="385.0" layoutY="478.0" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: transparent;">
                <font>
                   <Font name="Dubai Regular" size="19.0" />
                </font>
@@ -239,6 +239,162 @@
                   </Text>
                </children>
             </Pane>
+            <VBox fx:id="VirtualKeyboard" alignment="CENTER" layoutX="159.0" layoutY="490.0" prefHeight="160.0" prefWidth="632.0" spacing="3.0" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="50.4" prefWidth="632.0" spacing="3.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="Q">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="W">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="E">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="R">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="T">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="Y">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="U">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="462.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="I">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="488.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="O">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="516.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="P">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="50.4" prefWidth="632.0" spacing="3.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="A">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="S">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="D">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="F">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="G">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="H">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="J">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="462.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="K">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="488.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="L">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="3.0">
+                     <children>
+                        <Button layoutX="140.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="ENTER">
+                           <font>
+                              <Font name="SansSerif Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="Z">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="X">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="C">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="V">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="B">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="N">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="M">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" layoutX="274.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" styleClass="backspace-button">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             <VBox fx:id="menuBar" layoutY="40.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />

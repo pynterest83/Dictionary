@@ -239,6 +239,7 @@ public class SearchController extends MainController {
     protected void enterSearch() throws Exception {
         HideMenuBar();
         if (graphFailed.isVisible()) graphFailed.setVisible(false);
+        UsageOverTime.getData().clear();
         wordSynonyms.getChildren().clear();
         addNote.setVisible(false);
         if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict), "Word not found.")) {
