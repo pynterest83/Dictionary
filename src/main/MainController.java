@@ -83,18 +83,22 @@ public class MainController {
     }
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setTitle("Export to File");
         alert.setHeaderText("Choose file to export?");
         alert.setContentText("Choose File");
         ButtonType buttonTypeOne = new ButtonType("Export to EN_VI.txt");
         ButtonType buttonTypeTwo = new ButtonType("Export to VI_EN.txt");
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+        ButtonType buttonTypeCancel = new ButtonType("Cancel");
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
             DictionaryManager.exportToFile("EN_VI");
         } else if (result.get() == buttonTypeTwo) {
             DictionaryManager.exportToFile("VI_EN");
+        }
+        else {
+            alert.close();
         }
     }
     @FXML
@@ -205,4 +209,31 @@ public class MainController {
         menuBar.setVisible(false);
         menuBar.setDisable(true);
     }
+
+    @FXML
+    public void onClickClearENHistory() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Clear History");
+        alert.setHeaderText("Are you sure you want to clear history?");
+        alert.setContentText("Choose your option.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            DictionaryManager.EN_History.clear();
+            DictionaryManager.addHistory("", "EN_VI");
+        }
+    }
+
+    @FXML
+    public void onClickClearVIHistory() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Clear History");
+        alert.setHeaderText("Are you sure you want to clear history?");
+        alert.setContentText("Choose your option.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            DictionaryManager.VI_History.clear();
+            DictionaryManager.addHistory("", "VI_EN");
+        }
+    }
+
 }

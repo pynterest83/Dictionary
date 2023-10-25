@@ -78,6 +78,12 @@
                         <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="Clear">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onClickClearENHistory" text="EN_VI_History" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickClearVIHistory" text="VI_EN_History" />
+                    </items>
+                </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="About" />

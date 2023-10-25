@@ -86,8 +86,7 @@ public class SearchController extends MainController {
                 for (int i = 0; i < history.length; i++) {
                     reversedHistory[i] = history[history.length - i - 1];
                 }
-                return
-                Stream.of(reversedHistory).collect(Collectors.toList());
+                return Stream.of(reversedHistory).collect(Collectors.toList());
             }
             else {
                 return Stream.of(suggestions).filter(s -> s.contains(searchBar.getText())).collect(Collectors.toList());
@@ -150,6 +149,7 @@ public class SearchController extends MainController {
         });
         searchBar.focusedProperty().addListener((ObservableValue <? extends Boolean> observable, Boolean oldValue, Boolean newValue)->{
             if (!oldValue && newValue) {
+                getHistory();
                 searchBar.setText("s");
                 searchBar.setText("");
             }

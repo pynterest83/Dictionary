@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
     <AnchorPane layoutY="30.0" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="895.0">
          <children>
@@ -68,6 +68,12 @@
                 <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Clear">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#onClickClearENHistory" text="EN_VI_History" />
+                <MenuItem mnemonicParsing="false" onAction="#onClickClearVIHistory" text="VI_EN_History" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />

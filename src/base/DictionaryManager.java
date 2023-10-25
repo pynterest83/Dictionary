@@ -179,6 +179,7 @@ public class DictionaryManager extends Dictionary {
         curDict.set(position, mod);
         Collections.sort(curDict);
     }
+
     public static String dictionaryLookup(String search, String path) throws Exception {
         if (path.equals("EN_VI")) {
             curDict = EN_VI_Dict;
@@ -194,6 +195,7 @@ public class DictionaryManager extends Dictionary {
             return curDict.get(position).getWordExplain();
         }
     }
+
     public static String[] dictionarySearcher(String search, String path) {
         if (path.equals("EN_VI")) {
             curDict = EN_VI_Dict;
@@ -222,7 +224,6 @@ public class DictionaryManager extends Dictionary {
         return Collections.binarySearch(curDict, dummy);
     }
 
-
     public static void addLearning(String word, String note, String path) {
         try {
             File outfile = new File(LearningPath);
@@ -237,6 +238,7 @@ public class DictionaryManager extends Dictionary {
             e.printStackTrace();
         }
     }
+
     public static String learningWordLookup(String search) throws Exception {
         Word dummy = new Word();
         dummy.setWordTarget(search);
@@ -246,6 +248,7 @@ public class DictionaryManager extends Dictionary {
             return learningDict.get(position).getWordExplain();
         }
     }
+
     public static String[] learningWordSearcher(String search) {
         Word dummy = new Word();
         dummy.setWordTarget(search);
@@ -261,6 +264,7 @@ public class DictionaryManager extends Dictionary {
         suggest_array = suggestions.toArray(suggest_array);
         return suggest_array;
     }
+
     public static void modifyLearningWord(String word_target, String word_explain) throws Exception {
         Word mod = new Word();
         mod.setWordTarget(word_target);
@@ -278,6 +282,7 @@ public class DictionaryManager extends Dictionary {
         bufferedWriter.flush();
         bufferedWriter.close();
     }
+
     public static void removeLearningWord(String word_target) throws IOException {
         Word tmp = new Word();
         tmp.setWordTarget(word_target);
@@ -323,6 +328,14 @@ public class DictionaryManager extends Dictionary {
                 HisPath = VI_HisPath;
             }
             File outfile = new File(HisPath);
+            if (word.isEmpty()) {
+                FileWriter fileWriter = new FileWriter(outfile);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write("");
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                return;
+            }
             FileWriter fileWriter = new FileWriter(outfile, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             if (History.add(word)) bufferedWriter.write(word + "\n");
