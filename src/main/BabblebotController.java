@@ -87,7 +87,7 @@ public class BabblebotController extends MainController {
     }
     @FXML
     private void startCountdown() {
-        ObjectProperty<Duration> timeLeft = new SimpleObjectProperty<>(Duration.ofSeconds(2L *availableWord));
+        ObjectProperty<Duration> timeLeft = new SimpleObjectProperty<>(Duration.ofSeconds((long) (1.4*availableWord)));
         Time.textProperty().bind(Bindings.createStringBinding(() ->
                 String.format("%02d:%02d", timeLeft.get().toMinutesPart(), timeLeft.get().toSecondsPart()), timeLeft));
         Timeline countdown = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1),(ActionEvent e) ->

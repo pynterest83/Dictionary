@@ -118,6 +118,30 @@
             <Font name="Segoe UI Semibold" size="22.0" />
          </font>
       </Button>
+      <Pane fx:id="menuDescription" layoutX="40.0" layoutY="70.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
+               <font>
+                  <Font name="SansSerif Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Google Translate">
+               <font>
+                  <Font name="SansSerif Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning">
+               <font>
+                  <Font name="SansSerif Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="13.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Games">
+               <font>
+                  <Font name="SansSerif Regular" size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
       <VBox fx:id="menuBar" layoutY="70.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
          <children>
             <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
@@ -155,30 +179,6 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Pane fx:id="menuDescription" layoutX="40.0" layoutY="70.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
-         <children>
-            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
-               <font>
-                  <Font name="SansSerif Regular" size="22.0" />
-               </font>
-            </Text>
-            <Text layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Google Translate">
-               <font>
-                  <Font name="SansSerif Regular" size="22.0" />
-               </font>
-            </Text>
-            <Text layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning">
-               <font>
-                  <Font name="SansSerif Regular" size="22.0" />
-               </font>
-            </Text>
-            <Text layoutX="13.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Games">
-               <font>
-                  <Font name="SansSerif Regular" size="22.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
       <Text fx:id="PrepareStart" layoutX="459.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" visible="false">
          <font>
             <Font name="Cambria" size="55.0" />
