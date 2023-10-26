@@ -1,0 +1,21 @@
+.keyboard-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 4;
+    -fx-font-size: 23;
+    -fx-border-color: red;
+    -fx-alignment: center;
+}
+.keyboard-button: hover {
+    -fx-background-color: lightblue;
+}
+.keyboard-clicked {
+    -fx-background-color: lightgray;
+    -fx-alignment: center;
+    -fx-font-size: 23;
+    -fx-border-radius: 4;
+    -fx-border-color: red;
+}
+.list-cell {
+    -fx-alignment:center;
+    -fx-font-size:16;
+}

@@ -1,19 +1,18 @@
 package base;
 
-import javafx.geometry.Pos;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Wordle {
     static Random random = new Random();
-    private static ArrayList<String> PossibleWords = new ArrayList<String>();
+    private static final ArrayList<String> PossibleWords = new ArrayList<>();
     public static void LoadWordleList() throws IOException {
-        File infile = new File("src/resources/WordleList.txt");
-        FileReader fileReader= new FileReader(infile);
+        FileReader fileReader= new FileReader("src/resources/WordleList.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line = null;
+        String line;
         while ((line = bufferedReader.readLine()) != null) {
             PossibleWords.add(line);
         }

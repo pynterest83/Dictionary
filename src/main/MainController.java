@@ -190,14 +190,15 @@ public class MainController {
         menuOpen = !menuOpen;
         if (menuOpen) {
             menuBar.setVisible(true);
+            menuBar.setDisable(true);
             SlideInDown inDown = new SlideInDown(menuBar);
             inDown.setOnFinished(e -> menuBar.setDisable(false));
             inDown.setSpeed(3);
             inDown.play();
         }
         else {
-            SlideOutUp outUp = new SlideOutUp(menuBar);
             menuBar.setDisable(true);
+            SlideOutUp outUp = new SlideOutUp(menuBar);
             outUp.setOnFinished(e -> menuBar.setVisible(menuOpen));
             outUp.setSpeed(3);
             outUp.play();

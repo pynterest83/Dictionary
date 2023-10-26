@@ -21,7 +21,6 @@ import javafx.scene.web.WebView;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;

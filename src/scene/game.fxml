@@ -83,5 +83,10 @@
                 </Menu>
             </menus>
         </MenuBar>
+      <Button fx:id="Babble" focusTraversable="false" layoutX="365.0" layoutY="463.0" mnemonicParsing="false" onAction="#onClickBabble" prefHeight="152.0" prefWidth="220.0" style="-fx-background-radius: 20;" text="BABBLE BOTS">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

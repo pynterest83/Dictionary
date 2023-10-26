@@ -13,6 +13,8 @@ public class GameController extends MainController {
     @FXML
     private Button Wordle;
     @FXML
+    private Button Babble;
+    @FXML
     private void initialize() {
         PrepareMenu(true);
     }
@@ -28,4 +30,9 @@ public class GameController extends MainController {
         RunApplication.SwitchScenes(stage,"wordle.fxml");
     }
 
+    @FXML
+    public void onClickBabble() {
+        Stage stage = (Stage) Babble.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"babblebot.fxml");
+    }
 }
