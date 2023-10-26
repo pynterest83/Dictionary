@@ -3,13 +3,11 @@ package main;
 import base.TranslateAPI;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.io.IOException;
@@ -24,9 +22,9 @@ public class GGTranslateController extends MainController {
     private String sourceLangCode = "";
     private String targetLangCode = "";
     @FXML
-    private SearchableComboBox<String> SourceLang;
+    private ComboBox<String> SourceLang;
     @FXML
-    private SearchableComboBox<String> TargetLang;
+    private ComboBox<String> TargetLang;
     @FXML
     private TextField input;
     @FXML
@@ -105,13 +103,14 @@ public class GGTranslateController extends MainController {
             String translate = input.getText();
             output.clear();
             new Thread(()-> {
-                AnchorPane parent = (AnchorPane) output.getParent();
+                Pane parent = (Pane) output.getParent();
                 loading.setFitHeight(60);
                 loading.setFitWidth(60);
-                loading.setLayoutY(0);
+                loading.setLayoutX(20);
+                loading.setLayoutY(334);
                 Platform.runLater(()-> {
                     parent.getChildren().add(loading);
-                    input.setDisable(true);
+                    //input.setDisable(true);
                 });
                 try {
                     output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, translate));
@@ -194,8 +193,9 @@ public class GGTranslateController extends MainController {
         new Thread(() -> {
             loading.setFitWidth(60);
             loading.setFitHeight(60);
-            loading.setLayoutY(265);
-            AnchorPane parent = (AnchorPane) synonyms.getParent();
+            loading.setLayoutX(17);
+            loading.setLayoutY(58);
+            Pane parent = (Pane) synonyms.getParent();
             Platform.runLater(() -> {
                 parent.getChildren().add(loading);
                 symButton.setDisable(true);
@@ -232,7 +232,7 @@ public class GGTranslateController extends MainController {
             alert.showAndWait();
             return;
         }
-        if (sourceLangCode.equals("en") || (sourceLangCode.isEmpty())) {
+        if (sourceLangCode.equals("en")) {
             word = input.getText();
         } else if (targetLangCode.equals("en")) {
             word = output.getText();
@@ -249,8 +249,9 @@ public class GGTranslateController extends MainController {
         new Thread(() -> {
             loading.setFitWidth(60);
             loading.setFitHeight(60);
-            loading.setLayoutY(265);
-            AnchorPane parent = (AnchorPane) antonyms.getParent();
+            loading.setLayoutX(17);
+            loading.setLayoutY(335);
+            Pane parent = (Pane) antonyms.getParent();
             Platform.runLater(() -> {
                 parent.getChildren().add(loading);
 
