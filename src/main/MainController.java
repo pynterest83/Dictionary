@@ -1,19 +1,22 @@
 package main;
 
-import animatefx.animation.*;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideOutLeft;
 import base.DictionaryManager;
 import base.Word;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +37,14 @@ public class MainController {
     protected Button GGTranslateButton;
     @FXML
     protected Button LearningButton;
+    @FXML
+    protected Button CloseButton;
+    @FXML
+    protected Button MinimizeButton;
+    @FXML
+    protected Button HomeButton;
+    @FXML
+    protected ButtonBar TitleBar;
     protected Boolean inside = false;
     @FXML
     private void initialize() {
@@ -41,32 +52,18 @@ public class MainController {
     }
     @FXML
     protected void PrepareMenu(boolean isLeft) {
-        menuBarButton.addEventHandler((MouseEvent.MOUSE_CLICKED), mouseEvent -> {
-            ZoomIn zoomIn = new ZoomIn(menuBarButton);
-            zoomIn.setSpeed(1);
-            zoomIn.play();
-        });
-        menuBarButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
+        HomeButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
             if (oldValue && !newValue && menuOpen && !inside) {
+                System.out.println("here");
                 MenuBarClick();
             }
         });
-        if (isLeft) {
             menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
                 inside = true;
             });
             menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
                 inside = false;
             });
-        }
-        else {
-            menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-                inside = true;
-            });
-            menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
-                inside = false;
-            });
-        }
     }
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
@@ -127,6 +124,14 @@ public class MainController {
         }
     }
     @FXML
+    public void onCloseClick() {
+        Platform.exit();
+    }
+    @FXML
+    public void onMinimizeClick() {
+        ((Stage) TitleBar.getScene().getWindow()).setIconified(true);
+    }
+    @FXML
     public void onClickHomeButton(ActionEvent actionEvent) throws Exception {
         inside = false;
         menuOpen = false;
@@ -182,20 +187,24 @@ public class MainController {
     }
     @FXML
     protected void MenuBarClick() {
+        inside = false;
         menuOpen = !menuOpen;
         if (menuOpen) {
             menuBar.setVisible(true);
             menuBar.setDisable(true);
             SlideInLeft inLeft = new SlideInLeft(menuBar);
-            inLeft.setOnFinished(e -> menuBar.setDisable(false));
-            inLeft.setSpeed(1);
+            inLeft.setOnFinished(e -> {
+                menuBar.setDisable(false);
+                HomeButton.requestFocus();
+            });
+            inLeft.setSpeed(3);
             inLeft.play();
         }
         else {
             menuBar.setDisable(true);
             SlideOutLeft outLeft= new SlideOutLeft(menuBar);
             outLeft.setOnFinished(e -> menuBar.setVisible(menuOpen));
-            outLeft.setSpeed(1);
+            outLeft.setSpeed(3);
             outLeft.play();
         }
     }

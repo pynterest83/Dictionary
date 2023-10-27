@@ -1,107 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
-    <AnchorPane layoutY="28.0" minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="950.0" style="-fx-background-color: royalblue;">
+      <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="950.0" style="-fx-background-color: white;">
+         <buttons>
+            <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="30.4" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
+            <Button fx:id="MinimizeButton" focusTraversable="false" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
+            <Button fx:id="CloseButton" focusTraversable="false" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="30.4" prefWidth="45.0" styleClass="close-button" />
+         </buttons>
+      </ButtonBar>
+      <Pane fx:id="menuBar" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E4E5E9;" visible="false">
          <children>
-            <Pane layoutY="77.0" prefHeight="684.0" prefWidth="950.0" style="-fx-background-color: white;" />
-            <Button fx:id="menuBarButton" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: cornflowerblue; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: cornflowerblue;" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
-            <Pane fx:id="menuBar" layoutY="77.0" prefHeight="389.0" prefWidth="274.0" style="-fx-background-color: royalblue;" visible="false">
-               <children>
-                  <Pane prefHeight="78.0" prefWidth="274.0" style="-fx-border-color: white;">
-                     <children>
-                        <Button fx:id="HomeButton" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickHomeButton" prefHeight="50.0" prefWidth="50.0" styleClass="home-button" />
-                        <Text fill="WHITE" layoutX="104.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
-                           <font>
-                              <Font name="SansSerif Bold" size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutY="78.0" prefHeight="78.0" prefWidth="274.0" style="-fx-border-color: white;">
-                     <children>
-                        <Button fx:id="searchButton" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="50.0" prefWidth="50.0" styleClass="search-button" />
-                        <Text fill="WHITE" layoutX="104.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEARCH">
-                           <font>
-                              <Font name="SansSerif Bold" size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutY="156.0" prefHeight="78.0" prefWidth="274.0" style="-fx-border-color: white;">
-                     <children>
-                        <Button fx:id="GGTranslateButton" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="50.0" prefWidth="50.0" styleClass="google-translate-button">
-                           <font>
-                              <Font name="Lucida Bright" size="15.0" />
-                           </font>
-                        </Button>
-                        <Text fill="WHITE" layoutX="104.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GOOGLE TRANSLATE" wrappingWidth="165.8876953125">
-                           <font>
-                              <Font name="SansSerif Bold" size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutY="234.0" prefHeight="78.0" prefWidth="274.0" style="-fx-border-color: white;">
-                     <children>
-                         <Button fx:id="LearningButton" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="50.0" prefWidth="50.0" styleClass="learning-button" />
-                        <Text fill="WHITE" layoutX="104.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEARNING">
-                           <font>
-                              <Font name="SansSerif Bold" size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutY="312.0" prefHeight="78.0" prefWidth="274.0" style="-fx-border-color: white;">
-                     <children>
-                        <Button fx:id="GameButton" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="50.0" prefWidth="50.0" styleClass="games-button" />
-                        <Text fill="WHITE" layoutX="104.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAMES">
-                           <font>
-                              <Font name="SansSerif Bold" size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
+            <Button fx:id="HomeButton" mnemonicParsing="false" onAction="#onClickHomeButton" prefHeight="63.0" prefWidth="213.0" styleClass="home-button" text="Home" textAlignment="CENTER">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="searchButton" layoutY="63.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="63.0" prefWidth="213.0" styleClass="search-button" text="Search">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="GGTranslateButton" layoutY="126.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="63.0" prefWidth="213.0" styleClass="google-translate-button" text="Google&#10;Translate" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+             <Button fx:id="LearningButton" layoutY="189.0" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="63.0" prefWidth="213.0" styleClass="learning-button" text="Learning">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="GameButton" layoutY="252.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="63.0" prefWidth="213.0" styleClass="games-button" text="Games">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
-      </AnchorPane>
-      <MenuBar prefHeight="29.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#onImportFromFileClick" text="Import from file..." />
-                  <MenuItem mnemonicParsing="false" onAction="#onExportToFileClick" text="Export to file..." />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Delete" />
-                <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Edit" />
-                <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Clear">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#onClickClearENHistory" text="EN_VI_History" />
-                <MenuItem mnemonicParsing="false" onAction="#onClickClearVIHistory" text="VI_EN_History" />
-              </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      </Pane>
    </children>
 </AnchorPane>

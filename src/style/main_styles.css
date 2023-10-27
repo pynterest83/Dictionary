@@ -5,61 +5,61 @@
     -fx-background-image: url("media/search.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
-    -fx-background-position: center;
+    -fx-background-size: 23;
+    -fx-background-position: 20;
 }
 .search-button:hover {
-    -fx-background-size: 25;
+    -fx-background-color: #CECFD3;
 }
 .home-button {
 -fx-background-image: url("media/home.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
-    -fx-background-position: center;
+    -fx-background-size: 23;
+    -fx-background-position: 20;
 }
 .home-button:hover {
-    -fx-background-size: 25;
+    -fx-background-color: #CECFD3;
 }
 .menu-bar-button {
     -fx-background-image: url("media/menu_bar.png");
-    -fx-background-color:white;
+    -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
+    -fx-background-size: 20;
     -fx-background-position: center;
 }
 .menu-bar-button:hover {
-    -fx-background-size: 25;
+    -fx-background-color: #CECFD3;
 }
 .google-translate-button {
     -fx-background-image: url("media/google_translate.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
-    -fx-background-position: center;
+    -fx-background-size: 23;
+    -fx-background-position: 20;
 }
 .google-translate-button:hover {
-    -fx-background-size: 25;
+    -fx-background-color: #CECFD3;
 }
 .learning-button {
     -fx-background-image: url("media/learning.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40;
-    -fx-background-position: center;
+    -fx-background-size: 30;
+    -fx-background-position: 15;
 }
 .learning-button:hover {
-    -fx-background-size: 25;
+    -fx-background-color: #CECFD3;
 }
 .games-button {
     -fx-background-image: url("media/games.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
-    -fx-background-position: center;
+    -fx-background-size: 23;
+    -fx-background-position: 20;
 }
 .games-button:hover {
-    -fx-background-size: 25;
+    -fx-background-color: #CECFD3;
 }
 .tab-button {
     -fx-font-family: 'Lato', sans-serif;
@@ -109,4 +109,26 @@
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
     -fx-vbar-policy: never;
+}
+.close-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-background-image: url("media/close.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 10;
+    -fx-background-position: center;
+}
+.close-button: hover {
+    -fx-background-color: #FF0000;
+}
+.minimize-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-background-image: url("media/minimize.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 10;
+    -fx-background-position: center;
+}
+.minimize-button: hover {
+    -fx-background-color: #D3D3D3;
 }

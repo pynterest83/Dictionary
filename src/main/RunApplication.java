@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class RunApplication extends Application {
     public void start(Stage stage) throws Exception {
         FXML_scenes.put("main.fxml",FXMLLoader.load(Paths.get("src/scene/main.fxml").toUri().toURL()));
         Scene scene = new Scene(FXML_scenes.get("main.fxml"), 950, 700);
-        stage.setTitle("Dictionary");
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
@@ -56,11 +57,11 @@ public class RunApplication extends Application {
                 throw new RuntimeException(e);
             }
             Platform.runLater(() -> {
-                try {
-                    LoadScenes();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    LoadScenes();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
                 root.setDisable(false);
                 root.getChildren().remove(loading);
             });
