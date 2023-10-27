@@ -24,7 +24,7 @@ public class MainController {
     @FXML
     protected Button menuBarButton;
     @FXML
-    protected VBox menuBar;
+    protected Pane menuBar;
     protected boolean menuOpen = false;
     @FXML
     protected Button searchButton;
@@ -34,8 +34,6 @@ public class MainController {
     protected Button GGTranslateButton;
     @FXML
     protected Button LearningButton;
-    @FXML
-    protected Pane menuDescription;
     protected Boolean inside = false;
     @FXML
     private void initialize() {
@@ -43,6 +41,11 @@ public class MainController {
     }
     @FXML
     protected void PrepareMenu(boolean isLeft) {
+        menuBarButton.addEventHandler((MouseEvent.MOUSE_CLICKED), mouseEvent -> {
+            ZoomIn zoomIn = new ZoomIn(menuBarButton);
+            zoomIn.setSpeed(1);
+            zoomIn.play();
+        });
         menuBarButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
             if (oldValue && !newValue && menuOpen && !inside) {
                 MenuBarClick();
@@ -51,33 +54,17 @@ public class MainController {
         if (isLeft) {
             menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
                 inside = true;
-                menuDescription.setVisible(true);
-                SlideInLeft in = new SlideInLeft(menuDescription);
-                in.setSpeed(4);
-                in.play();
             });
             menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
                 inside = false;
-                SlideOutLeft out = new SlideOutLeft(menuDescription);
-                out.setSpeed(4);
-                out.setOnFinished(eve-> menuDescription.setVisible(false));
-                out.play();
             });
         }
         else {
             menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
                 inside = true;
-                menuDescription.setVisible(true);
-                SlideInRight in = new SlideInRight(menuDescription);
-                in.setSpeed(4);
-                in.play();
             });
             menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
                 inside = false;
-                SlideOutRight out = new SlideOutRight(menuDescription);
-                out.setSpeed(4);
-                out.setOnFinished(eve-> menuDescription.setVisible(false));
-                out.play();
             });
         }
     }
@@ -140,6 +127,14 @@ public class MainController {
         }
     }
     @FXML
+    public void onClickHomeButton(ActionEvent actionEvent) throws Exception {
+        inside = false;
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"main.fxml");
+    }
+    @FXML
     public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
         inside = false;
         menuOpen = false;
@@ -191,17 +186,17 @@ public class MainController {
         if (menuOpen) {
             menuBar.setVisible(true);
             menuBar.setDisable(true);
-            SlideInDown inDown = new SlideInDown(menuBar);
-            inDown.setOnFinished(e -> menuBar.setDisable(false));
-            inDown.setSpeed(3);
-            inDown.play();
+            SlideInLeft inLeft = new SlideInLeft(menuBar);
+            inLeft.setOnFinished(e -> menuBar.setDisable(false));
+            inLeft.setSpeed(1);
+            inLeft.play();
         }
         else {
             menuBar.setDisable(true);
-            SlideOutUp outUp = new SlideOutUp(menuBar);
-            outUp.setOnFinished(e -> menuBar.setVisible(menuOpen));
-            outUp.setSpeed(3);
-            outUp.play();
+            SlideOutLeft outLeft= new SlideOutLeft(menuBar);
+            outLeft.setOnFinished(e -> menuBar.setVisible(menuOpen));
+            outLeft.setSpeed(1);
+            outLeft.play();
         }
     }
     @FXML

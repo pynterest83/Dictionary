@@ -5,11 +5,21 @@
     -fx-background-image: url("media/search.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 25;
+    -fx-background-size: 30;
     -fx-background-position: center;
 }
 .search-button:hover {
-    -fx-background-image: url("media/search_hover.png");
+    -fx-background-size: 25;
+}
+.home-button {
+-fx-background-image: url("media/home.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.home-button:hover {
+    -fx-background-size: 25;
 }
 .menu-bar-button {
     -fx-background-image: url("media/menu_bar.png");
@@ -17,11 +27,9 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
-    -fx-border-color: blue;
-    -fx-border-width: 0.5;
 }
 .menu-bar-button:hover {
-    -fx-background-image: url("media/menu_bar_hover.png");
+    -fx-background-size: 25;
 }
 .google-translate-button {
     -fx-background-image: url("media/google_translate.png");
@@ -31,7 +39,7 @@
     -fx-background-position: center;
 }
 .google-translate-button:hover {
-    -fx-background-image: url("media/google_translate_hover.png");
+    -fx-background-size: 25;
 }
 .learning-button {
     -fx-background-image: url("media/learning.png");
@@ -41,7 +49,7 @@
     -fx-background-position: center;
 }
 .learning-button:hover {
-    -fx-background-image: url("media/learning_hover.png");
+    -fx-background-size: 25;
 }
 .games-button {
     -fx-background-image: url("media/games.png");
@@ -51,7 +59,7 @@
     -fx-background-position: center;
 }
 .games-button:hover {
-    -fx-background-image: url("media/games_hover.png");
+    -fx-background-size: 25;
 }
 .tab-button {
     -fx-font-family: 'Lato', sans-serif;

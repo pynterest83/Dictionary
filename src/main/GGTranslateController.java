@@ -61,6 +61,7 @@ public class GGTranslateController extends MainController {
     @FXML
     public void SelectTargetLang() {
         targetLangCode = TranslateAPI.langMap.get(TargetLang.getValue());
+        input.requestFocus();
     }
     @FXML
     public void swap() {
@@ -97,6 +98,7 @@ public class GGTranslateController extends MainController {
                 alert.setHeaderText("Please select a target language");
                 alert.setContentText("Please select a target language");
                 alert.showAndWait();
+                TargetLang.requestFocus();
                 return;
             }
             ImageView loading = new ImageView(loadImage);
