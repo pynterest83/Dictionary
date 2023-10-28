@@ -92,12 +92,6 @@
 .generic-button:hover {
     -fx-background-color: lightcoral;
 }
-.backspace-button {
-    -fx-background-image: url("media/backspace.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
-    -fx-background-position: center;
-}
 .text-area .scroll-pane {
     -fx-background-color: transparent;
     -fx-vbar-policy: never;

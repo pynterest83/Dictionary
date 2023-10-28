@@ -1,0 +1,53 @@
+.keyboard-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 4;
+    -fx-font-size: 21;
+    -fx-border-color: red;
+    -fx-alignment: center;
+}
+.keyboard-button: hover {
+    -fx-background-color: lightblue;
+}
+.backspace-button {
+    -fx-background-image: url("media/backspace.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-border-radius: 4;
+    -fx-border-color: red;
+    -fx-alignment: center;
+}
+.backspace-button: hover {
+    -fx-background-color: lightblue;
+}
+.wrong-letter {
+    -fx-background-color: DarkGrey;
+    -fx-border-radius: 4;
+    -fx-font-size: 21;
+    -fx-border-color: red;
+    -fx-alignment: center;
+}
+.wrong-position {
+    -fx-background-color: Orange;
+    -fx-border-radius: 4;
+    -fx-font-size: 21;
+    -fx-border-color: red;
+    -fx-alignment: center;
+}
+.correct-letter {
+    -fx-background-color: Green;
+    -fx-border-radius: 4;
+    -fx-font-size: 21;
+    -fx-border-color: red;
+    -fx-alignment: center;
+}
+.generic-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: blue;
+}
+.generic-button:hover {
+    -fx-background-color: lightblue;
+}

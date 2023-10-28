@@ -19,3 +19,30 @@
     -fx-alignment:center;
     -fx-font-size:16;
 }
+.enter-key {
+    -fx-background-color: transparent;
+    -fx-border-radius: 4;
+    -fx-font-size: 23;
+    -fx-border-color: red;
+    -fx-alignment: center;
+    -fx-background-image: url("media/enter.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.enter-key: hover {
+    -fx-background-color: lightblue;
+}
+.backspace-button {
+    -fx-background-image: url("media/backspace.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-border-radius: 4;
+    -fx-border-color: red;
+    -fx-alignment: center;
+}
+.backspace-button: hover {
+    -fx-background-color: lightblue;
+}

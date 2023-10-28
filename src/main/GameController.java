@@ -20,7 +20,7 @@ public class GameController extends MainController {
     }
     @FXML
     protected void MouseClick() {
-        if (!inside) MenuBarClick();
+        if (!inside) HideMenuBar();
     }
     @FXML
     public void onClickCompleteSentence(ActionEvent actionEvent) throws IOException {

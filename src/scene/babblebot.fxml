@@ -23,7 +23,7 @@
                         <Font name="SansSerif Regular" size="20.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="AnswerList" prefHeight="454.0" prefWidth="264.0" />
+                  <ListView fx:id="AnswerList" prefHeight="454.0" prefWidth="264.0" stylesheets="@../style/babblebot.css" />
                   <Button mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: blue;" styleClass="generic-button" text="Replay">
                      <font>
                         <Font name="Segoe UI Semibold" size="22.0" />
@@ -69,7 +69,7 @@
                   </Button>
                </children>
             </HBox>
-            <ListView fx:id="Submissions" layoutX="375.0" layoutY="27.0" prefHeight="411.0" prefWidth="200.0" />
+            <ListView fx:id="Submissions" layoutX="375.0" layoutY="27.0" prefHeight="411.0" prefWidth="200.0" stylesheets="@../style/babblebot.css" />
             <TextField fx:id="Answer" alignment="CENTER" editable="false" layoutX="375.0" layoutY="450.0" prefHeight="63.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: blue;">
                <font>
                   <Font name="SansSerif Bold" size="28.0" />
@@ -100,12 +100,12 @@
                   <Font size="21.0" />
                </font>
             </Text>
-            <Button layoutX="271.0" layoutY="598.0" mnemonicParsing="false" onAction="#onShuffleClick" prefHeight="55.0" prefWidth="55.0" styleClass="keyboard-button">
+            <Button layoutX="271.0" layoutY="598.0" mnemonicParsing="false" onAction="#onShuffleClick" prefHeight="55.0" prefWidth="55.0" styleClass="enter-key">
                <font>
                   <Font name="SansSerif Bold" size="23.0" />
                </font>
             </Button>
-            <Button layoutX="616.0" layoutY="598.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="55.0" prefWidth="55.0" styleClass="keyboard-button">
+            <Button layoutX="616.0" layoutY="598.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="55.0" prefWidth="55.0" styleClass="backspace-button" stylesheets="@../style/babblebot.css">
                <font>
                   <Font name="SansSerif Bold" size="23.0" />
                </font>

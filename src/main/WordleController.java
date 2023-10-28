@@ -46,7 +46,6 @@ public class WordleController extends MainController {
     private TextField ErrorBoard;
     @FXML
     private VBox VirtualKeyboard;
-    private String ButtonStyle;
     @FXML
     private TextField CurrentFieldGuess;
     @FXML
@@ -86,7 +85,6 @@ public class WordleController extends MainController {
     @FXML
     protected void initialize() {
         HBox node = (HBox) VirtualKeyboard.getChildren().get(0);
-        ButtonStyle = node.getChildren().get(0).getStyle();
         PrepareMenu();
         InitializeHBoxes();
     }
@@ -106,12 +104,6 @@ public class WordleController extends MainController {
                         return change;
                     }
                 }));
-            }
-        }
-        for (Node hboxes: VirtualKeyboard.getChildren()) {
-            HBox current = (HBox) hboxes;
-            for (Node text: current.getChildren()) {
-                text.setStyle(ButtonStyle + "-fx-background-color: transparent;");
             }
         }
     }
@@ -137,7 +129,10 @@ public class WordleController extends MainController {
         for (Node hboxes: VirtualKeyboard.getChildren()) {
             HBox current = (HBox) hboxes;
             for (Node text: current.getChildren()) {
-                text.setStyle(ButtonStyle + "-fx-background-color: transparent;");
+                if (!text.getStyleClass().contains("backspace-button")) {
+                    text.getStyleClass().clear();
+                    text.getStyleClass().add("keyboard-button");
+                }
             }
         }
     }
@@ -187,7 +182,7 @@ public class WordleController extends MainController {
     }
     @FXML
     protected void MouseClick() {
-        if (!inside) MenuBarClick();
+        if (!inside) HideMenuBar();
     }
     @FXML
     protected void onType() {
@@ -269,15 +264,15 @@ public class WordleController extends MainController {
         String[] styles = new String[5];
         if (Objects.equals(answer, guess)) {
             for (int i = 0; i < 5; i++) {
-                styles[i] = "-fx-background-color: Green;";
+                styles[i] = "-fx-background-color: Green";
             }
             EndGame(true);
             return styles;
         }
         for (int i = 0; i < 5; i++) {
             if (guess.charAt(i) == answer.charAt(i)) {
-                styles[i] = "-fx-background-color: Green;";
-                setKeyboardColor(guess.charAt(i),"-fx-background-color: Green;");
+                styles[i] = "-fx-background-color: Green";
+                setKeyboardColor(guess.charAt(i),"correct-letter");
                 answer = answer.substring(0, i) + "#" + answer.substring(i + 1);
                 guess = guess.substring(0,i) + "@" + guess.substring(i+1);
             }
@@ -287,8 +282,8 @@ public class WordleController extends MainController {
             boolean check = false;
             for (int j = 0; j < 5; j++) {
                 if (guess.charAt(i) == answer.charAt(j)) {
-                    styles[i] = "-fx-background-color: Orange;";
-                    setKeyboardColor(guess.charAt(i),"-fx-background-color: Orange;");
+                    styles[i] = "-fx-background-color: Orange";
+                    setKeyboardColor(guess.charAt(i),"wrong-position");
                     answer = answer.substring(0, j) + "#" + answer.substring(j + 1);
                     guess = guess.substring(0,i) + "@" + guess.substring(i+1);
                     check = true;
@@ -296,8 +291,8 @@ public class WordleController extends MainController {
                 }
             }
             if (!check) {
-                styles[i] = "-fx-background-color: DarkGrey;";
-                setKeyboardColor(guess.charAt(i),"-fx-background-color: DarkGrey;");
+                styles[i] = "-fx-background-color: DarkGrey";
+                setKeyboardColor(guess.charAt(i),"wrong-letter");
             }
         }
         if (CurrentAttempt == 5) {
@@ -349,12 +344,13 @@ public class WordleController extends MainController {
         replayHalt.play();
     }
     @FXML
-    private void setKeyboardColor(Character c, String style) {
+    private void setKeyboardColor(Character c, String styleClass) {
         PauseTransition pause = new PauseTransition(Duration.seconds(2.6));
         pause.setOnFinished(e -> {
             HBox Hboxtemp = (HBox) VirtualKeyboard.getChildren().get(Keycode.get(c)[0]);
-            if (!Objects.equals(Hboxtemp.getChildren().get(Keycode.get(c)[1]).getStyle(), ButtonStyle + style)) {
-                Hboxtemp.getChildren().get(Keycode.get(c)[1]).setStyle(ButtonStyle + style);
+            if (Hboxtemp.getChildren().get(Keycode.get(c)[1]).getStyleClass().contains("keyboard-button")) {
+                Hboxtemp.getChildren().get(Keycode.get(c)[1]).getStyleClass().clear();
+                Hboxtemp.getChildren().get(Keycode.get(c)[1]).getStyleClass().add(styleClass);
             }
         });
         pause.playFromStart();

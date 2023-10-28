@@ -41,11 +41,12 @@ public class RunApplication extends Application {
         stage.setScene(scene);
         stage.show();
         AnchorPane root = (AnchorPane)scene.getRoot();
-        ImageView loading = new ImageView(Paths.get("src/style/media/loading.gif").toUri().toURL().toString());
-        loading.setFitHeight(100);
-        loading.setFitWidth(100);
-        loading.setLayoutX(root.getWidth()/2 - 50);
-        loading.setLayoutY(root.getHeight()/2 - 50);
+        ImageView loading = new ImageView(Paths.get("src/style/media/loading2.gif").toUri().toURL().toString());
+        loading.setFitHeight(200);
+        loading.setFitWidth(200);
+        loading.setLayoutX(root.getWidth()/2 - 100);
+        loading.setLayoutY(root.getHeight()/2 - 100);
+        LoadScenes();
         new Thread(() -> {
             Platform.runLater(() -> {
                 root.setDisable(true);

@@ -29,7 +29,7 @@ public class AddController extends MainController {
     }
     @FXML
     protected void MouseClick() {
-        if (!inside) MenuBarClick();
+        if (!inside) HideMenuBar();
     }
     @FXML
     public void onClickAddButton(ActionEvent actionEvent) {

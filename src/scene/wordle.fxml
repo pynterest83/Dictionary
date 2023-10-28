@@ -197,8 +197,8 @@
                   </HBox>
                </children>
             </Pane>
-            <Button fx:id="ReplayButton" layoutX="835.0" layoutY="596.0" mnemonicParsing="false" onAction="#onClickReplay" prefHeight="46.0" prefWidth="81.0" text="Replay" visible="false" />
-            <Button fx:id="StartButton" layoutX="404.0" layoutY="289.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: blue;" styleClass="generic-button" text="Start">
+            <Button fx:id="ReplayButton" layoutX="835.0" layoutY="596.0" mnemonicParsing="false" onAction="#onClickReplay" prefHeight="46.0" prefWidth="81.0" styleClass="generic-button" stylesheets="@../style/wordle.css" text="Replay" visible="false" />
+            <Button fx:id="StartButton" layoutX="404.0" layoutY="289.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" styleClass="generic-button" stylesheets="@../style/wordle.css" text="Start">
                <font>
                   <Font name="Segoe UI Semibold" size="22.0" />
                </font>
@@ -217,52 +217,52 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="50.4" prefWidth="632.0" spacing="3.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="Q">
+                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="Q">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="W">
+                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="W">
+                           <font>
+                              <Font name="SansSerif Regular" size="23.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="E">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="E">
+                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="R">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="R">
+                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="T">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="T">
+                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="Y">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="Y">
+                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="U">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="U">
+                        <Button layoutX="462.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="I">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="462.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="I">
+                        <Button layoutX="488.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="O">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="488.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="O">
-                           <font>
-                              <Font name="SansSerif Bold" size="21.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="516.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="P">
+                        <Button layoutX="516.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="P">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
@@ -271,47 +271,47 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="50.4" prefWidth="632.0" spacing="3.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="A">
+                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="A">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="S">
+                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="S">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="D">
+                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="D">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="F">
+                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="F">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="G">
+                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="G">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="H">
+                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="H">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="J">
+                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="J">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="462.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="K">
+                        <Button layoutX="462.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="K">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="488.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="L">
+                        <Button layoutX="488.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="L">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
@@ -320,47 +320,47 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="3.0">
                      <children>
-                        <Button layoutX="140.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="ENTER">
-                           <font>
-                              <Font name="SansSerif Bold" size="16.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="Z">
+                        <Button layoutX="140.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="91.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="ENTER">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="X">
+                        <Button mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="Z">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="C">
+                        <Button layoutX="301.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="X">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="V">
+                        <Button layoutX="328.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="C">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="B">
+                        <Button layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="V">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="N">
+                        <Button layoutX="381.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="B">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" text="M">
+                        <Button layoutX="408.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="N">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button contentDisplay="CENTER" layoutX="274.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: red;" styleClass="backspace-button">
+                        <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="keyboard-button" stylesheets="@../style/wordle.css" text="M">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" layoutX="274.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onButtonTyped" prefHeight="50.0" prefWidth="50.0" styleClass="backspace-button" stylesheets="@../style/wordle.css">
                            <font>
                               <Font name="SansSerif Bold" size="21.0" />
                            </font>

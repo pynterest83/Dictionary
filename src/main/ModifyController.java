@@ -48,7 +48,7 @@ public class ModifyController extends MainController {
     }
     @FXML
     protected void MouseClick() {
-        if (!inside) MenuBarClick();
+        if (!inside) HideMenuBar();
     }
     @FXML
     protected void UserInput() throws Exception {
