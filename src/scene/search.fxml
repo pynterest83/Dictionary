@@ -3,70 +3,68 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
    <children>
-    <AnchorPane layoutX="47.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
+    <AnchorPane layoutX="47.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
-            <TextField fx:id="searchBar" focusTraversable="false" layoutX="77.0" layoutY="2.0" onAction="#enterSearch" prefHeight="40.0" prefWidth="870.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-radius: 20; -fx-border-color: blue; -fx-border-width: 0.4; -fx-background-radius: 20;">
+            <TextField fx:id="searchBar" focusTraversable="false" layoutX="77.0" layoutY="2.0" onAction="#enterSearch" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="826.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-radius: 20; -fx-border-color: blue; -fx-border-width: 0.4; -fx-background-radius: 20;">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font></TextField>
-            <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
-             <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
-            <Pane layoutX="14.0" layoutY="51.0" prefHeight="298.0" prefWidth="602.0" style="-fx-background-radius: 50; -fx-background-color: antiquewhite;">
+            <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
+             <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="1.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
+            <Pane layoutX="14.0" layoutY="51.0" onMousePressed="#MouseClick" prefHeight="298.0" prefWidth="602.0" style="-fx-background-radius: 50; -fx-background-color: antiquewhite;">
                <children>
-                  <WebView fx:id="wordExplain" layoutX="17.0" layoutY="25.0" prefHeight="257.0" prefWidth="570.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
-                  <Label layoutX="43.0" layoutY="6.0" text="Definition">
+                  <WebView fx:id="wordExplain" layoutX="17.0" layoutY="25.0" onMousePressed="#MouseClick" prefHeight="257.0" prefWidth="570.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
+                  <Label layoutX="43.0" layoutY="6.0" onMousePressed="#MouseClick" text="Definition">
                      <font>
                         <Font name="SansSerif Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="addLearningButton" layoutX="21.0" layoutY="359.0" mnemonicParsing="false" onAction="#onClickAddLearning" prefHeight="25.0" prefWidth="71.0" style="-fx-background-radius: 10;" text="Learning" />
-            <Pane layoutX="616.0" layoutY="51.0" prefHeight="298.0" prefWidth="302.0" style="-fx-background-color: antiquewhite; -fx-background-radius: 30;" AnchorPane.rightAnchor="24.0">
+            <Button fx:id="addLearningButton" layoutX="21.0" layoutY="359.0" mnemonicParsing="false" onAction="#onClickAddLearning" onMousePressed="#MouseClick" prefHeight="25.0" prefWidth="71.0" style="-fx-background-radius: 10;" text="Learning" />
+            <Pane layoutX="616.0" layoutY="51.0" onMousePressed="#MouseClick" prefHeight="298.0" prefWidth="302.0" style="-fx-background-color: antiquewhite; -fx-background-radius: 30;" AnchorPane.rightAnchor="24.0">
                <children>
-                  <ScrollPane fx:id="synonymPane" layoutY="25.0" prefHeight="250.0" prefWidth="302.0" style="-fx-background-color: antiquewhite;">
+                  <ScrollPane fx:id="synonymPane" layoutY="25.0" onMousePressed="#MouseClick" prefHeight="250.0" prefWidth="302.0" style="-fx-background-color: antiquewhite;">
                      <content>
-                        <VBox fx:id="wordSynonyms" prefHeight="250.0" prefWidth="286.0" style="-fx-background-color: antiquewhite;" />
+                        <VBox fx:id="wordSynonyms" onMousePressed="#MouseClick" prefHeight="250.0" prefWidth="286.0" style="-fx-background-color: antiquewhite;" />
                      </content>
                   </ScrollPane>
-                  <Label layoutX="26.0" layoutY="6.0" text="Synonym">
+                  <Label layoutX="26.0" layoutY="6.0" onMousePressed="#MouseClick" text="Synonym">
                      <font>
                         <Font name="SansSerif Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="addSynonymsButton" layoutX="809.0" layoutY="359.0" mnemonicParsing="false" onAction="#onClickAddSynonyms" prefHeight="25.0" prefWidth="71.0" style="-fx-background-radius: 10;" text="AddSym" />
-            <LineChart fx:id="UsageOverTime" layoutX="14.0" layoutY="393.0" legendVisible="false" prefHeight="273.0" prefWidth="602.0">
+            <Button fx:id="addSynonymsButton" layoutX="809.0" layoutY="359.0" mnemonicParsing="false" onAction="#onClickAddSynonyms" onMousePressed="#MouseClick" prefHeight="25.0" prefWidth="71.0" style="-fx-background-radius: 10;" text="AddSym" />
+            <LineChart fx:id="UsageOverTime" layoutX="14.0" layoutY="393.0" legendVisible="false" onMousePressed="#MouseClick" prefHeight="274.0" prefWidth="602.0">
               <xAxis>
-                <NumberAxis fx:id="YearAxis" autoRanging="false" label="Year" lowerBound="1800.0" side="BOTTOM" upperBound="2022.0" />
+                <NumberAxis fx:id="YearAxis" autoRanging="false" label="Year" lowerBound="1800.0" onMousePressed="#MouseClick" side="BOTTOM" upperBound="2022.0" />
               </xAxis>
               <yAxis>
-                <NumberAxis label="\%" side="LEFT" />
+                <NumberAxis label="\%" onMousePressed="#MouseClick" side="LEFT" />
               </yAxis>
             </LineChart>
-            <Label layoutX="254.0" layoutY="374.0" text="Usage over time">
+            <Label layoutX="254.0" layoutY="374.0" onMousePressed="#MouseClick" text="Usage over time">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
-            <AnchorPane fx:id="addNote" layoutX="167.0" layoutY="215.0" prefHeight="202.0" prefWidth="498.0" visible="false">
+            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
+            <AnchorPane fx:id="addNote" layoutX="167.0" layoutY="215.0" onMousePressed="#MouseClick" prefHeight="202.0" prefWidth="498.0" visible="false">
                <children>
                   <TextField fx:id="Syms" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addSyms" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
                      <font>
@@ -80,73 +78,88 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <Pane fx:id="menuDescription" layoutX="37.0" layoutY="40.0" prefHeight="160.0" prefWidth="186.0" style="-fx-background-color: white;" visible="false">
-               <children>
-                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
-                     <font>
-                        <Font name="SansSerif Regular" size="22.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Google Translate">
-                     <font>
-                        <Font name="SansSerif Regular" size="22.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning">
-                     <font>
-                        <Font name="SansSerif Regular" size="22.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="13.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Games">
-                     <font>
-                        <Font name="SansSerif Regular" size="22.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <VBox fx:id="menuBar" layoutY="40.0" prefHeight="160.0" prefWidth="40.0" style="-fx-background-color: white;" visible="false">
-               <children>
-                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="40.0" prefWidth="40.0" styleClass="search-button" />
-                   <Button fx:id="GGTranslateButton" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="40.0" prefWidth="40.0" styleClass="google-translate-button" />
-                   <Button fx:id="LearningButton" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="40.0" prefWidth="40.0" styleClass="learning-button" />
-                   <Button fx:id="GameButton" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="40.0" prefWidth="40.0" styleClass="games-button" />
-               </children>
-            </VBox>
-            <Label fx:id="graphFailed" layoutX="248.0" layoutY="497.0" text="No internet connection" textFill="#fa0202" visible="false">
+            <Label fx:id="graphFailed" layoutX="248.0" layoutY="497.0" onMousePressed="#MouseClick" text="No internet connection" textFill="#fa0202" visible="false">
                <font>
                   <Font name="SansSerif Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="SpeakButton" layoutX="104.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: white;" styleClass="speak-button" />
+            <Button fx:id="SpeakButton" layoutX="104.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickSpeakButton" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: white;" styleClass="speak-button" />
+            <Button fx:id="ToolbarMenuButton" layoutX="906.0" layoutY="2.0" mnemonicParsing="false" onAction="#ToolbarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
          </children>
       </AnchorPane>
-      <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#onImportFromFileClick" text="Import from file..." />
-                  <MenuItem mnemonicParsing="false" onAction="#onExportToFileClick" text="Export to file..." />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Delete" />
-                  <MenuItem mnemonicParsing="false" onAction="#onClickModify" text="Edit" />
-              <MenuItem mnemonicParsing="false" onAction="#onClickAdd" text="Add" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Clear">
-                <items>
-                    <MenuItem mnemonicParsing="false" onAction="#onClickClearENHistory" text="EN_VI_History" />
-                    <MenuItem mnemonicParsing="false" onAction="#onClickClearVIHistory" text="VI_EN_History" />
-                </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" layoutX="1.0" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="950.0" style="-fx-background-color: white;">
+         <buttons>
+            <Button fx:id="MinimizeButton" focusTraversable="false" mnemonicParsing="false" onAction="#onMinimizeClick" onMousePressed="#MouseClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
+            <Button fx:id="CloseButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" onMousePressed="#MouseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
+         </buttons>
+      </ButtonBar>
+      <Pane fx:id="menuBar" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E4E5E9;" visible="false">
+         <children>
+            <Label alignment="CENTER_RIGHT" layoutX="14.0" maxWidth="1.7976931348623157E308" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="177.0" styleClass="app-label" text="DICTIONARY" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <Button fx:id="HomeButton" layoutX="1.0" layoutY="67.0" mnemonicParsing="false" onAction="#onClickHomeButton" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="213.0" styleClass="home-button" text="Home" textAlignment="CENTER">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="searchButton1" layoutX="1.0" layoutY="130.0" mnemonicParsing="false" onAction="#onClickSearchButton" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="213.0" styleClass="search-button" text="Search">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="GGTranslateButton1" layoutY="193.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="213.0" styleClass="google-translate-button" text="Google&#10;Translate" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="LearningButton1" layoutX="1.0" layoutY="256.0" mnemonicParsing="false" onAction="#onClickLearningButton" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="213.0" styleClass="learning-button" text="Learning">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="GameButton1" layoutY="319.0" mnemonicParsing="false" onAction="#onClickGameButton" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="213.0" styleClass="games-button" text="Games">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="ToolPane" layoutY="30.0" onMousePressed="#MouseClick" prefHeight="670.0" prefWidth="214.0" style="-fx-background-color: #E4E5E9;" visible="false" AnchorPane.rightAnchor="0.0">
+         <children>
+            <TitledPane fx:id="FileTool" expanded="false" onMousePressed="#MouseClick" prefHeight="108.0" prefWidth="214.0" stylesheets="@../style/search.css" text="Import &amp; Export">
+               <content>
+                  <Pane onMousePressed="#MouseClick" prefHeight="116.0" prefWidth="213.0">
+                     <children>
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#onImportFromFileClick" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="213.0" styleClass="generic-button" text="Import from file..." />
+                        <Button layoutY="41.0" mnemonicParsing="false" onAction="#onExportToFileClick" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="213.0" styleClass="generic-button" text="Export to file..." />
+                     </children>
+                  </Pane>
+               </content>
+            </TitledPane>
+            <TitledPane fx:id="DictionaryTool" expanded="false" layoutY="108.0" onMousePressed="#MouseClick" prefHeight="108.0" prefWidth="214.0" stylesheets="@../style/search.css" text="Dictionary Editor" translateY="-83.0">
+               <content>
+                  <Pane onMousePressed="#MouseClick" prefHeight="80.0" prefWidth="213.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onClickAdd" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="213.0" styleClass="generic-button" text="Add" />
+                        <Button layoutY="40.0" mnemonicParsing="false" onAction="#onClickModify" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="213.0" styleClass="generic-button" text="Edit" />
+                     </children>
+                  </Pane>
+               </content>
+            </TitledPane>
+            <TitledPane fx:id="HistoryTool" expanded="false" layoutY="216.0" onMousePressed="#MouseClick" prefHeight="108.0" prefWidth="214.0" stylesheets="@../style/search.css" text="History" translateY="-166.0">
+               <content>
+                  <Pane onMousePressed="#MouseClick" prefHeight="80.0" prefWidth="213.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onClickClearENHistory" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="213.0" styleClass="generic-button" text="Clear English-Vietnamese history" />
+                        <Button layoutY="40.0" mnemonicParsing="false" onAction="#onClickClearVIHistory" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="213.0" styleClass="generic-button" text="Clear Vietnamese-English history" />
+                     </children>
+                  </Pane>
+               </content>
+            </TitledPane>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -65,7 +65,7 @@ public class BabblebotController extends MainController {
 
     @FXML
     private void initialize() {
-        PrepareMenu(true);
+        PrepareMenu();
         Answer.textProperty().addListener((obs, oldText, newText) -> Submit.setDisable(newText.length() <= 2));
         AnswerList.setCellFactory(e -> new ListCell<>() {
             @Override

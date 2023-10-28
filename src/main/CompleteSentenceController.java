@@ -28,7 +28,7 @@ public class CompleteSentenceController extends MainController {
     private Button StartGameButton;
     @FXML
     protected void initialize() {
-        PrepareMenu(false);
+        PrepareMenu();
     }
     @FXML
     protected void StartGame() {

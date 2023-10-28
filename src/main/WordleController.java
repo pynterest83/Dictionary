@@ -87,7 +87,7 @@ public class WordleController extends MainController {
     protected void initialize() {
         HBox node = (HBox) VirtualKeyboard.getChildren().get(0);
         ButtonStyle = node.getChildren().get(0).getStyle();
-        PrepareMenu(true);
+        PrepareMenu();
         InitializeHBoxes();
     }
     @FXML
@@ -184,6 +184,10 @@ public class WordleController extends MainController {
             onType();
             onRelease();
         }
+    }
+    @FXML
+    protected void MouseClick() {
+        if (!inside) MenuBarClick();
     }
     @FXML
     protected void onType() {

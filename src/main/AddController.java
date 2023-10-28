@@ -7,6 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class AddController extends MainController {
     @FXML
@@ -22,7 +25,11 @@ public class AddController extends MainController {
     private void initialize() {
         en_vi_dict.setVisible(true);
         vi_en_dict.setVisible(false);
-        PrepareMenu(true);
+        PrepareMenu();
+    }
+    @FXML
+    protected void MouseClick() {
+        if (!inside) MenuBarClick();
     }
     @FXML
     public void onClickAddButton(ActionEvent actionEvent) {
@@ -58,10 +65,16 @@ public class AddController extends MainController {
             alert.setHeaderText(null);
             alert.setContentText("Từ bạn thêm đã tồn tại! Hãy chọn chức năng sửa đổi!");
             alert.showAndWait();
-
             onClickModify();
         }
         DictionaryManager.exportToFile(type_Dict);
+    }
+    @FXML
+    protected void onClickModify() throws IOException {
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
     }
     @FXML
     public void onEnterAdd(ActionEvent actionEvent) {

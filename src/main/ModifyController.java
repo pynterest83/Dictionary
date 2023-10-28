@@ -30,7 +30,7 @@ public class ModifyController extends MainController {
     private void initialize() {
         en_vi_dict.setVisible(true);
         vi_en_dict.setVisible(false);
-        PrepareMenu(true);
+        PrepareMenu();
         TextFields.bindAutoCompletion(modifyText, input -> {
             if (modifyText.getText().length() <= 1) return Collections.emptyList();
             return Stream.of(suggestions)
@@ -45,6 +45,10 @@ public class ModifyController extends MainController {
                 e.printStackTrace();
             }
         });
+    }
+    @FXML
+    protected void MouseClick() {
+        if (!inside) MenuBarClick();
     }
     @FXML
     protected void UserInput() throws Exception {

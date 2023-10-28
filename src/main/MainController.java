@@ -2,26 +2,17 @@ package main;
 
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideOutLeft;
-import base.DictionaryManager;
-import base.Word;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Optional;
 
 public class MainController {
     @FXML
@@ -48,11 +39,11 @@ public class MainController {
     protected Boolean inside = false;
     @FXML
     private void initialize() {
-        PrepareMenu(true);
+        PrepareMenu();
     }
     @FXML
-    protected void PrepareMenu(boolean isLeft) {
-        menuBarButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
+    protected void PrepareMenu() {
+        HomeButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
             if (oldValue && !newValue && menuOpen && !inside) {
                 MenuBarClick();
             }
@@ -63,64 +54,6 @@ public class MainController {
         menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
             inside = false;
         });
-    }
-    @FXML
-    protected void onExportToFileClick(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setTitle("Export to File");
-        alert.setHeaderText("Choose file to export?");
-        alert.setContentText("Choose File");
-        ButtonType buttonTypeOne = new ButtonType("Export to EN_VI.txt");
-        ButtonType buttonTypeTwo = new ButtonType("Export to VI_EN.txt");
-        ButtonType buttonTypeCancel = new ButtonType("Cancel");
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne){
-            DictionaryManager.exportToFile("EN_VI");
-        } else if (result.get() == buttonTypeTwo) {
-            DictionaryManager.exportToFile("VI_EN");
-        }
-        else {
-            alert.close();
-        }
-    }
-    @FXML
-    protected void onImportFromFileClick(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File f = fc.showOpenDialog(null);
-        if (f != null) {
-            ArrayList<Word> repeated = new ArrayList<>();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Import from File");
-            alert.setHeaderText("Choose file to import?");
-            alert.setContentText("Choose File");
-            ButtonType buttonTypeOne = new ButtonType("Import to EN_VI");
-            ButtonType buttonTypeTwo = new ButtonType("Import to VI_EN");
-            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonTypeOne){
-                repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "EN_VI");
-            } else if (result.get() == buttonTypeTwo) {
-                repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "VI_EN");
-            }
-            if (!repeated.isEmpty()) {
-                for (int i =0; i<repeated.size(); i++) {
-                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert1.setTitle("Remove Repeated Words");
-                    alert1.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
-                    alert1.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
-                    Optional<ButtonType> result1 = alert.showAndWait();
-
-                    if (result1.get() == ButtonType.OK) {
-                        int position = DictionaryManager.binSearch(repeated.get(i).getWordTarget());
-                        DictionaryManager.curDict.remove(position);
-                        DictionaryManager.curDict.add(repeated.get(i));
-                        Collections.sort(DictionaryManager.curDict);
-                    }
-                }
-            }
-        }
     }
     @FXML
     public void onCloseClick() {
@@ -171,20 +104,6 @@ public class MainController {
         RunApplication.SwitchScenes(stage,"learning.fxml");
     }
     @FXML
-    protected void onClickAdd() {
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"add.fxml");
-    }
-    @FXML
-    protected void onClickModify() throws IOException {
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"modify.fxml");
-    }
-    @FXML
     protected void MenuBarClick() {
         inside = false;
         menuOpen = !menuOpen;
@@ -211,31 +130,8 @@ public class MainController {
     protected void HideMenuBar() {
         if (menuOpen) MenuBarClick();
     }
-
     @FXML
-    public void onClickClearENHistory() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Clear History");
-        alert.setHeaderText("Are you sure you want to clear history?");
-        alert.setContentText("Choose your option.");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            DictionaryManager.EN_History.clear();
-            DictionaryManager.addHistory("", "EN_VI");
-        }
-    }
+    protected void MouseClick() {
 
-    @FXML
-    public void onClickClearVIHistory() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Clear History");
-        alert.setHeaderText("Are you sure you want to clear history?");
-        alert.setContentText("Choose your option.");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            DictionaryManager.VI_History.clear();
-            DictionaryManager.addHistory("", "VI_EN");
-        }
     }
-
 }

@@ -1,7 +1,11 @@
 package main;
 
+import animatefx.animation.SlideInRight;
+import animatefx.animation.SlideOutRight;
 import base.DictionaryManager;
 import base.TranslateAPI;
+import base.Word;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
@@ -14,23 +18,27 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,17 +76,70 @@ public class SearchController extends MainController {
     @FXML
     private Label graphFailed;
     @FXML
+    private Pane ToolPane;
+    @FXML
+    private TitledPane FileTool;
+    @FXML
+    private TitledPane DictionaryTool;
+    @FXML
+    private TitledPane HistoryTool;
+    @FXML
+    private Button ToolbarMenuButton;
+    @FXML
     private Image loadImage = new Image(Paths.get("src/style/media/loading.gif").toUri().toURL().toString());
     private String searched = null;
     private String type_Dict = "EN_VI";
     private String[] history;
-
+    private boolean ToolbarOpen = false;
+    private boolean insideToolbar = false;
     public SearchController() throws MalformedURLException {
     }
 
     @FXML
     private void initialize() {
-        PrepareMenu(true);
+        FileTool.expandedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                TranslateTransition moveFirst = new TranslateTransition(Duration.seconds(0.38),DictionaryTool);
+                moveFirst.setToY(0);
+                TranslateTransition moveSecond = new TranslateTransition(Duration.seconds(0.38),HistoryTool);
+                if (DictionaryTool.isExpanded()) {
+                    moveSecond.setToY(0);
+                }
+                else moveSecond.setToY(-83);
+                moveFirst.play();
+                moveSecond.play();
+            }
+            else {
+                TranslateTransition moveFirst = new TranslateTransition(Duration.seconds(0.25),DictionaryTool);
+                moveFirst.setToY(-83);
+                TranslateTransition moveSecond = new TranslateTransition(Duration.seconds(0.25),HistoryTool);
+                if (DictionaryTool.isExpanded()) {
+                    moveSecond.setToY(-83);
+                }
+                else moveSecond.setToY(-166);
+                moveFirst.play();
+                moveSecond.play();
+            }
+        });
+        DictionaryTool.expandedProperty().addListener((observableValue, oldValue, newValue) -> {
+            TranslateTransition move;
+            if (newValue) {
+                move = new TranslateTransition(Duration.seconds(0.38), HistoryTool);
+                if (FileTool.isExpanded()) {
+                    move.setToY(0);
+                }
+                else move.setToY(-83);
+            }
+            else {
+                move = new TranslateTransition(Duration.seconds(0.25), HistoryTool);
+                if (FileTool.isExpanded()) {
+                    move.setToY(-83);
+                }
+                else move.setToY(-166);
+            }
+            move.play();
+        });
+        PrepareMenu();
         AutoCompletionBinding<String> completion = TextFields.bindAutoCompletion(searchBar, input -> {
             if (searchBar.getText().length() <= 1) {
                 String[] reversedHistory = new String[history.length];
@@ -153,6 +214,142 @@ public class SearchController extends MainController {
                 searchBar.setText("");
             }
         });
+        ToolPane.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            insideToolbar = true;
+        });
+        ToolPane.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            insideToolbar = false;
+        });
+    }
+    @FXML
+    protected void MouseClick() {
+        if (!insideToolbar) HideToolbar();
+    }
+    @FXML
+    protected void HideToolbar() {
+        if (ToolbarOpen) ToolbarClick();
+    }
+    @FXML
+    protected void ToolbarClick() {
+        ToolbarOpen = !ToolbarOpen;
+        insideToolbar = false;
+        if (ToolbarOpen) {
+            ToolPane.setVisible(true);
+            ToolPane.setDisable(true);
+            SlideInRight inRight = new SlideInRight(ToolPane);
+            inRight.setOnFinished(e -> {
+                ToolPane.setDisable(false);
+                ToolPane.requestFocus();
+            });
+            inRight.setSpeed(3);
+            inRight.play();
+        }
+        else {
+            ToolPane.setDisable(true);
+            SlideOutRight outRight= new SlideOutRight(ToolPane);
+            outRight.setOnFinished(e -> ToolPane.setVisible(ToolbarOpen));
+            outRight.setSpeed(3);
+            outRight.play();
+        }
+    }
+    @FXML
+    protected void onExportToFileClick(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle("Export to File");
+        alert.setHeaderText("Choose file to export?");
+        alert.setContentText("Choose File");
+        ButtonType buttonTypeOne = new ButtonType("Export to EN_VI.txt");
+        ButtonType buttonTypeTwo = new ButtonType("Export to VI_EN.txt");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel");
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne){
+            DictionaryManager.exportToFile("EN_VI");
+        } else if (result.get() == buttonTypeTwo) {
+            DictionaryManager.exportToFile("VI_EN");
+        }
+        else {
+            alert.close();
+        }
+    }
+    @FXML
+    protected void onImportFromFileClick(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File f = fc.showOpenDialog(null);
+        if (f != null) {
+            ArrayList<Word> repeated = new ArrayList<>();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Import from File");
+            alert.setHeaderText("Choose file to import?");
+            alert.setContentText("Choose File");
+            ButtonType buttonTypeOne = new ButtonType("Import to EN_VI");
+            ButtonType buttonTypeTwo = new ButtonType("Import to VI_EN");
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+                repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "EN_VI");
+            } else if (result.get() == buttonTypeTwo) {
+                repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "VI_EN");
+            }
+            if (!repeated.isEmpty()) {
+                for (int i =0; i<repeated.size(); i++) {
+                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.setTitle("Remove Repeated Words");
+                    alert1.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
+                    alert1.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
+                    Optional<ButtonType> result1 = alert.showAndWait();
+
+                    if (result1.get() == ButtonType.OK) {
+                        int position = DictionaryManager.binSearch(repeated.get(i).getWordTarget());
+                        DictionaryManager.curDict.remove(position);
+                        DictionaryManager.curDict.add(repeated.get(i));
+                        Collections.sort(DictionaryManager.curDict);
+                    }
+                }
+            }
+        }
+    }
+    @FXML
+    protected void onClickAdd() {
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        ToolbarClick();
+        RunApplication.SwitchScenes(stage,"add.fxml");
+    }
+    @FXML
+    protected void onClickModify() throws IOException {
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        ToolbarClick();
+        RunApplication.SwitchScenes(stage,"modify.fxml");
+    }
+    @FXML
+    public void onClickClearENHistory() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Clear History");
+        alert.setHeaderText("Are you sure you want to clear history?");
+        alert.setContentText("Choose your option.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            DictionaryManager.EN_History.clear();
+            DictionaryManager.addHistory("", "EN_VI");
+        }
+    }
+
+    @FXML
+    public void onClickClearVIHistory() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Clear History");
+        alert.setHeaderText("Are you sure you want to clear history?");
+        alert.setContentText("Choose your option.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            DictionaryManager.VI_History.clear();
+            DictionaryManager.addHistory("", "VI_EN");
+        }
     }
     @FXML
     protected void LoadGraph() {

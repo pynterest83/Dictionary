@@ -16,20 +16,22 @@ public class GameController extends MainController {
     private Button Babble;
     @FXML
     private void initialize() {
-        PrepareMenu(true);
+        PrepareMenu();
+    }
+    @FXML
+    protected void MouseClick() {
+        if (!inside) MenuBarClick();
     }
     @FXML
     public void onClickCompleteSentence(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) CompleteSentence.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"completeSentenceGame.fxml");
     }
-
     @FXML
     public void onClickWordle(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) Wordle.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"wordle.fxml");
     }
-
     @FXML
     public void onClickBabble() {
         Stage stage = (Stage) Babble.getScene().getWindow();
