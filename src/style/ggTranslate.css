@@ -2,7 +2,7 @@
     -fx-background-image: url("media/swap.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
+    -fx-background-size: 50;
     -fx-background-position: center;
 }
 .speak-button {

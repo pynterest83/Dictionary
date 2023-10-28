@@ -3,9 +3,11 @@ package main;
 import base.TranslateAPI;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.controlsfx.control.SearchableComboBox;
@@ -50,8 +52,6 @@ public class GGTranslateController extends MainController {
             SourceLang.getItems().add(entry.getKey());
             TargetLang.getItems().add(entry.getKey());
         }
-        SourceLang.setValue("Auto Detect");
-        sourceLangCode = "auto";
     }
 
     @FXML
@@ -84,51 +84,50 @@ public class GGTranslateController extends MainController {
     }
     @FXML
     public void translate() {
-            if (input.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Please enter a word");
-                alert.setContentText("Please enter a word");
-                alert.showAndWait();
-                return;
-            }
-            if (Objects.equals(targetLangCode, "")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Please select a target language");
-                alert.setContentText("Please select a target language");
-                alert.showAndWait();
-                TargetLang.requestFocus();
-                return;
-            }
-            ImageView loading = new ImageView(loadImage);
-            String translate = input.getText();
-            output.clear();
-            new Thread(()-> {
-                Pane parent = (Pane) output.getParent();
-                loading.setFitHeight(60);
-                loading.setFitWidth(60);
-                loading.setLayoutX(20);
-                loading.setLayoutY(334);
-                Platform.runLater(()-> {
-                    parent.getChildren().add(loading);
-                    //input.setDisable(true);
+        if (SourceLang.getValue() == null) {
+            SourceLang.setValue("Auto Detect");
+            sourceLangCode = "auto";
+        }
+        if (input.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter a word");
+            alert.setContentText("Please enter a word");
+            alert.showAndWait();
+            return;
+        }
+        if (Objects.equals(targetLangCode, "")) {
+            TargetLang.setValue("Auto Detect");
+            targetLangCode = "auto";
+        }
+        ImageView loading = new ImageView(loadImage);
+        String translate = input.getText();
+        output.clear();
+        new Thread(()-> {
+            Pane parent = (Pane) output.getParent();
+            loading.setFitHeight(60);
+            loading.setFitWidth(60);
+            loading.setLayoutX(20);
+            loading.setLayoutY(334);
+            Platform.runLater(()-> {
+                parent.getChildren().add(loading);
+                //input.setDisable(true);
                 });
-                try {
-                    output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, translate));
-                    Platform.runLater(()-> {
-                        parent.getChildren().remove(loading);
-                        input.setDisable(false);
-                    });
-                } catch (IOException | URISyntaxException e) {
+            try {
+                output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, translate));
+                Platform.runLater(()-> {
                     parent.getChildren().remove(loading);
                     input.setDisable(false);
-                }
-            }).start();
+                });
+            } catch (IOException | URISyntaxException e) {
+                parent.getChildren().remove(loading);
+                input.setDisable(false);
+            }
+        }).start();
     }
 
     public void onClickSpeak1() throws IOException, URISyntaxException {
-        if (SourceLang.getValue() == null) {
+        if (SourceLang.getValue() == null || SourceLang.getValue().equals("Auto Detect")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Please select a language");
@@ -148,7 +147,7 @@ public class GGTranslateController extends MainController {
     }
 
     public void onClickSpeak2() throws IOException, URISyntaxException {
-        if (TargetLang.getValue() == null) {
+        if (TargetLang.getValue() == null || TargetLang.getValue().equals("Auto Detect")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Please select a language");

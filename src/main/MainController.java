@@ -52,18 +52,17 @@ public class MainController {
     }
     @FXML
     protected void PrepareMenu(boolean isLeft) {
-        HomeButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
+        menuBarButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
             if (oldValue && !newValue && menuOpen && !inside) {
-                System.out.println("here");
                 MenuBarClick();
             }
         });
-            menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-                inside = true;
-            });
-            menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
-                inside = false;
-            });
+        menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            inside = true;
+        });
+        menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            inside = false;
+        });
     }
     @FXML
     protected void onExportToFileClick(ActionEvent event) {
@@ -210,9 +209,7 @@ public class MainController {
     }
     @FXML
     protected void HideMenuBar() {
-        menuOpen = false;
-        menuBar.setVisible(false);
-        menuBar.setDisable(true);
+        if (menuOpen) MenuBarClick();
     }
 
     @FXML

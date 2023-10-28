@@ -57,11 +57,11 @@ public class RunApplication extends Application {
                 throw new RuntimeException(e);
             }
             Platform.runLater(() -> {
-//                try {
-//                    LoadScenes();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
+                try {
+                    LoadScenes();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 root.setDisable(false);
                 root.getChildren().remove(loading);
             });

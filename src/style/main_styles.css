@@ -5,7 +5,7 @@
     -fx-background-image: url("media/search.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 23;
+    -fx-background-size: 30;
     -fx-background-position: 20;
 }
 .search-button:hover {
@@ -15,7 +15,7 @@
 -fx-background-image: url("media/home.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 23;
+    -fx-background-size: 30;
     -fx-background-position: 20;
 }
 .home-button:hover {
@@ -35,7 +35,7 @@
     -fx-background-image: url("media/google_translate.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 23;
+    -fx-background-size: 30;
     -fx-background-position: 20;
 }
 .google-translate-button:hover {
@@ -46,7 +46,7 @@
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
-    -fx-background-position: 15;
+    -fx-background-position: 20;
 }
 .learning-button:hover {
     -fx-background-color: #CECFD3;
@@ -55,7 +55,7 @@
     -fx-background-image: url("media/games.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 23;
+    -fx-background-size: 30;
     -fx-background-position: 20;
 }
 .games-button:hover {
@@ -110,6 +110,10 @@
     -fx-background-color: transparent;
     -fx-vbar-policy: never;
 }
+.text-field {
+    -fx-focus-color: -fx-control-inner-background ;
+    -fx-faint-focus-color: -fx-control-inner-background ;
+}
 .close-button {
     -fx-background-color: transparent;
     -fx-background-radius: 0;
@@ -118,7 +122,7 @@
     -fx-background-size: 10;
     -fx-background-position: center;
 }
-.close-button: hover {
+.close-button:hover {
     -fx-background-color: #FF0000;
 }
 .minimize-button {
@@ -129,6 +133,40 @@
     -fx-background-size: 10;
     -fx-background-position: center;
 }
-.minimize-button: hover {
+.minimize-button:hover {
     -fx-background-color: #D3D3D3;
+}
+.app-label {
+    -fx-background-image: url("media/app.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40;
+    -fx-background-position: 0;
+}
+.click-button {
+    -fx-background-color: #E4E5E9;
+    -fx-text-fill: black;
+}
+.click-button:hover {
+    -fx-background-color: lightcoral;
+    -fx-text-fill: brown;
+}
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: lightcoral;
+}
+.scroll-bar:vertical *.increment-button,
+.scroll-bar:vertical *.decrement-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-bar:vertical *.increment-arrow,
+.scroll-bar:vertical *.decrement-arrow {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-shape: null;
 }
