@@ -88,6 +88,9 @@ public class ModifyController extends MainController {
         alert.setContentText("Sửa từ thành công");
         alert.showAndWait();
         DictionaryManager.exportToFile(type_Dict);
+
+        modifyEditor.setHtmlText("");
+        modifyText.clear();
     }
 
     // Delete
@@ -108,6 +111,9 @@ public class ModifyController extends MainController {
             alert2.showAndWait();
         }
         DictionaryManager.exportToFile(type_Dict);
+
+        modifyEditor.setHtmlText("");
+        modifyText.clear();
     }
 
     public void onEnterModify(ActionEvent actionEvent) {

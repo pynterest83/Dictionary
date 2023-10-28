@@ -10,7 +10,7 @@
 <?import javafx.scene.web.WebView?>
 <?import org.controlsfx.control.textfield.TextFields?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.AddController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.AddController">
     <children>
           <AnchorPane focusTraversable="true" layoutX="-1.0" layoutY="30.4" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="669.0" prefWidth="950.0" AnchorPane.topAnchor="30.0">
               <children>
@@ -25,13 +25,14 @@
                           <HTMLEditor fx:id="addEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="2.0" layoutY="-78.0" prefHeight="583.0" prefWidth="825.0" />
                       </children>
                   </AnchorPane>
-            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
                   <Button fx:id="en_vi_dict" layoutX="32.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
                   <Button fx:id="vi_en_dict" layoutX="32.0" layoutY="-1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
+            <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="33.0" onAction="#onClickSearchButton" styleClass="back-button"/>
               </children>
           </AnchorPane>
       <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="26.0" prefWidth="950.0" style="-fx-background-color: white;">
          <buttons>
+            <Button fx:id="menuBarButton" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="36.0" prefWidth="40.0" styleClass="menu-bar-button" ButtonBar.buttonData="LEFT" />
             <Button fx:id="MinimizeButton" focusTraversable="false" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
             <Button fx:id="CloseButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
          </buttons>

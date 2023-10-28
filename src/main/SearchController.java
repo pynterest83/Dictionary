@@ -320,6 +320,10 @@ public class SearchController extends MainController {
     }
     @FXML
     protected void onClickModify() throws IOException {
+        searchBar.clear();
+        wordExplain.getEngine().loadContent("");
+        wordSynonyms.getChildren().clear();
+        UsageOverTime.getData().clear();
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();

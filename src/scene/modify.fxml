@@ -10,11 +10,11 @@
 <?import javafx.scene.web.WebView?>
 <?import org.controlsfx.control.textfield.TextFields?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ModifyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ModifyController">
     <children>
           <AnchorPane focusTraversable="true" layoutY="30.4" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="671.0" prefWidth="950.0" AnchorPane.topAnchor="30.0">
               <children>
-                  <TextFields fx:id="modifyText" layoutX="39.0" layoutY="1.0" onAction="#onEnterModify" prefHeight="40.0" prefWidth="910.0" fx:factory="createClearableTextField" />
+                  <TextFields fx:id="modifyText" layoutX="71.0" layoutY="1.0" onAction="#onEnterModify" prefHeight="40.0" prefWidth="878.0" fx:factory="createClearableTextField" />
                   <Button fx:id="saveButton" layoutX="862.0" layoutY="50.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="71.0" text="Save" />
                   <Button fx:id="delButton" layoutX="779.0" layoutY="50.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="71.0" text="Delete" />
                   <AnchorPane layoutX="60.0" layoutY="165.0" prefHeight="504.0" prefWidth="838.0">
@@ -23,8 +23,9 @@
                           <HTMLEditor fx:id="modifyEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="-57.0" prefHeight="562.0" prefWidth="838.0" />
                       </children>
                   </AnchorPane>
-                  <Button fx:id="en_vi_dict" layoutX="-1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" AnchorPane.topAnchor="0.0" />
-                  <Button fx:id="vi_en_dict" layoutX="-1.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="en_vi_dict" layoutX="32.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
+                  <Button fx:id="vi_en_dict" layoutX="32.0" mnemonicParsing="false" onAction="#changeDict" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
+                  <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="34.0" prefWidth="33.0" styleClass="back-button" />
               </children>
           </AnchorPane>
       <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="950.0" style="-fx-background-color: transparent;">

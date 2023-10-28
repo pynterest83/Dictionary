@@ -90,7 +90,7 @@
     -fx-background-color: transparent;
 }
 .generic-button:hover {
-    -fx-background-color:lightblue;
+    -fx-background-color: lightcoral;
 }
 .backspace-button {
     -fx-background-image: url("media/backspace.png");
@@ -169,4 +169,14 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-shape: null;
+}
+.back-button {
+    -fx-background-image: url("media/back.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.back-button:hover {
+    -fx-background-color: #CECFD3;
 }

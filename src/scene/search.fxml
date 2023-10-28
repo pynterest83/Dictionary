@@ -83,7 +83,7 @@
                   <Font name="SansSerif Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="SpeakButton" layoutX="104.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickSpeakButton" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: white;" styleClass="speak-button" />
+            <Button fx:id="SpeakButton" layoutX="104.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickSpeakButton" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: white;" stylesheets="@../style/search.css" styleClass="speak-button" />
             <Button fx:id="ToolbarMenuButton" layoutX="906.0" layoutY="2.0" mnemonicParsing="false" onAction="#ToolbarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
          </children>
       </AnchorPane>

@@ -59,12 +59,16 @@ public class AddController extends MainController {
             alert.setHeaderText(null);
             alert.setContentText("Thêm từ thành công");
             alert.showAndWait();
+            addEditor.setHtmlText("");
+            addText.clear();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Thông báo");
             alert.setHeaderText(null);
             alert.setContentText("Từ bạn thêm đã tồn tại! Hãy chọn chức năng sửa đổi!");
             alert.showAndWait();
+            addEditor.setHtmlText("");
+            addText.clear();
             onClickModify();
         }
         DictionaryManager.exportToFile(type_Dict);
