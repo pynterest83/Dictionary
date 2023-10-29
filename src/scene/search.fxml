@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
    <children>
     <AnchorPane layoutX="47.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
@@ -63,7 +63,6 @@
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="menuBarButton" layoutY="1.0" mnemonicParsing="false" onAction="#MenuBarClick" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.topAnchor="0.0" />
             <AnchorPane fx:id="addNote" layoutX="167.0" layoutY="215.0" onMousePressed="#MouseClick" prefHeight="202.0" prefWidth="498.0" visible="false">
                <children>
                   <TextField fx:id="Syms" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addSyms" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
@@ -83,12 +82,13 @@
                   <Font name="SansSerif Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="SpeakButton" layoutX="104.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickSpeakButton" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: white;" stylesheets="@../style/search.css" styleClass="speak-button" />
+            <Button fx:id="SpeakButton" layoutX="104.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickSpeakButton" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: white;" styleClass="speak-button" stylesheets="@../style/search.css" />
             <Button fx:id="ToolbarMenuButton" layoutX="906.0" layoutY="2.0" mnemonicParsing="false" onAction="#ToolbarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
          </children>
       </AnchorPane>
-      <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" layoutX="1.0" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="950.0" style="-fx-background-color: white;">
+      <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" layoutX="1.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="950.0" style="-fx-background-color: white;">
          <buttons>
+            <Button fx:id="menuBarButton" mnemonicParsing="false" onAction="#MenuBarClick" onMousePressed="#MouseClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" ButtonBar.buttonData="LEFT" />
             <Button fx:id="MinimizeButton" focusTraversable="false" mnemonicParsing="false" onAction="#onMinimizeClick" onMousePressed="#MouseClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
             <Button fx:id="CloseButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" onMousePressed="#MouseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
          </buttons>

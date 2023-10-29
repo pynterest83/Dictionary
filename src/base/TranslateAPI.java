@@ -14,7 +14,6 @@ import java.util.Objects;
 public class TranslateAPI {
     private static final String PATH = "src/resources/Spelling.txt";
     public static LinkedHashMap<String, String> langMap = new LinkedHashMap<>();
-
     public static String googleTranslate(String langFrom, String langTo, String text) throws IOException, URISyntaxException {
         String urlScript = "https://translate.googleapis.com/translate_a/single?client=gtx&"
                 + "sl=" + langFrom
@@ -28,7 +27,6 @@ public class TranslateAPI {
         response.append(in.readLine());
         return response.substring(response.indexOf("\"") + 1,response.indexOf("\"",response.indexOf("\"") + 1));
     }
-
     public static void speakAudio(String text, String languageOutput) throws IOException, URISyntaxException {
         String urlString = "http://translate.google.com/translate_tts?" + "?ie=UTF-8" + //encoding
                 "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) + //query encoded

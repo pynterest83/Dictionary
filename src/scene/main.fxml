@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
       <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="950.0" style="-fx-background-color: white;">
          <buttons>
@@ -16,7 +16,7 @@
             <Button fx:id="CloseButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
          </buttons>
       </ButtonBar>
-      <Pane layoutX="214.0" layoutY="37.0" onMouseClicked="#HideMenuBar" prefHeight="664.0" prefWidth="739.0" />
+      <AnchorPane layoutY="37.0" onMouseClicked="#HideMenuBar" prefHeight="665.0" prefWidth="950.0" />
       <Pane fx:id="menuBar" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E4E5E9;" visible="false">
          <children>
             <Label alignment="CENTER_RIGHT" layoutX="14.0" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="177.0" styleClass="app-label" text="DICTIONARY" textAlignment="CENTER">

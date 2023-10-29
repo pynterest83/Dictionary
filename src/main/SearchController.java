@@ -312,6 +312,10 @@ public class SearchController extends MainController {
     }
     @FXML
     protected void onClickAdd() {
+        searchBar.clear();
+        wordExplain.getEngine().loadContent("");
+        wordSynonyms.getChildren().clear();
+        UsageOverTime.getData().clear();
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -466,7 +470,8 @@ public class SearchController extends MainController {
     }
     @FXML
     private void onClickSpeakButton() throws Exception {
-        TranslateAPI.speakAudio(searched,"English");
+        if (type_Dict.equals("EN_VI")) TranslateAPI.speakAudio(searched,"English");
+        else TranslateAPI.speakAudio(searched,"Vietnamese");
     }
     @FXML
     public void onClickAddLearning() {

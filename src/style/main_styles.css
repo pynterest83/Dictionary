@@ -142,8 +142,11 @@
     -fx-text-fill: black;
 }
 .click-button:hover {
-    -fx-background-color: lightcoral;
+    -fx-background-color: antiquewhite;
     -fx-text-fill: brown;
+}
+.combo-box-popup .cell:selected {
+    -fx-background-color: lightcoral;
 }
 .combo-box-popup .list-view .list-cell:hover {
     -fx-background-color: lightcoral;
