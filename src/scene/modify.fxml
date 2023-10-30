@@ -30,7 +30,7 @@
           </AnchorPane>
       <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="950.0" style="-fx-background-color: transparent;">
          <buttons>
-            <Button fx:id="menuBarButton1" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" ButtonBar.buttonData="LEFT" />
+            <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" ButtonBar.buttonData="LEFT" />
             <Button fx:id="MinimizeButton" focusTraversable="false" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
             <Button fx:id="CloseButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
          </buttons>

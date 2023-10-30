@@ -49,3 +49,20 @@
     -fx-background-size: 30;
     -fx-background-position: center;
 }
+.speak-button:hover {
+    -fx-background-color: lightcoral;
+}
+.favourite {
+    -fx-background-image: url("media/fav.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.not-favourite {
+    -fx-background-image: url("media/not_fav.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}

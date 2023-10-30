@@ -23,14 +23,14 @@
                      </font>
                   </TextField>
                   <ComboBox fx:id="TargetLang" layoutX="69.0" layoutY="297.0" onAction="#SelectTargetLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate To" styleClass="click-button" />
-                  <Button layoutX="298.0" layoutY="274.0" mnemonicParsing="false" onAction="#swap" prefHeight="50.0" prefWidth="50.0" styleClass="swap-button" stylesheets="@../style/ggTranslate.css" />
+                  <Button fx:id="swapButton" layoutX="298.0" layoutY="274.0" mnemonicParsing="false" onAction="#swap" prefHeight="50.0" prefWidth="50.0" styleClass="swap-button" stylesheets="@../style/ggTranslate.css" />
                   <TextArea fx:id="output" editable="false" layoutX="20.0" layoutY="334.0" prefHeight="200.0" prefWidth="568.0" style="-fx-border-color: brown; -fx-background-color: transparent;" styleClass="text-area">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <Button layoutX="540.0" layoutY="215.0" mnemonicParsing="false" onAction="#onClickSpeak1" prefHeight="31.0" prefWidth="40.0" style="-fx-background-color: white;" styleClass="speak-button" stylesheets="@../style/ggTranslate.css" />
-                  <Button layoutX="540.0" layoutY="494.0" mnemonicParsing="false" onAction="#onClickSpeak2" prefHeight="31.0" prefWidth="40.0" style="-fx-background-color: white;" styleClass="speak-button" stylesheets="@../style/ggTranslate.css" />
+                  <Button layoutX="540.0" layoutY="215.0" mnemonicParsing="false" onAction="#onClickSpeak1" prefHeight="31.0" prefWidth="40.0" styleClass="speak-button" stylesheets="@../style/ggTranslate.css" />
+                  <Button layoutX="540.0" layoutY="494.0" mnemonicParsing="false" onAction="#onClickSpeak2" prefHeight="31.0" prefWidth="40.0" styleClass="speak-button" stylesheets="@../style/ggTranslate.css" />
                </children>
             </Pane>
             <Pane layoutX="682.0" layoutY="55.0" prefHeight="583.0" prefWidth="252.0" style="-fx-background-color: white;">

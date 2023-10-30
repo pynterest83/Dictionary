@@ -1,5 +1,7 @@
 package main;
 
+import animatefx.animation.SlideInDown;
+import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideInRight;
 import animatefx.animation.SlideOutRight;
 import base.DictionaryManager;
@@ -51,6 +53,8 @@ public class SearchController extends MainController {
     private Button SpeakButton;
     @FXML
     private Button addLearningButton;
+    @FXML
+    private Button removeLearningButton;
     @FXML
     private Button addSynonymsButton;
     @FXML
@@ -194,6 +198,7 @@ public class SearchController extends MainController {
         wordSynonyms.setSpacing(5);
         SpeakButton.setVisible(false);
         addLearningButton.setVisible(false);
+        removeLearningButton.setVisible(false);
         addNote.setVisible(false);
         addSynonymsButton.setVisible(false);
         en_vi_dict.setVisible(true);
@@ -429,6 +434,9 @@ public class SearchController extends MainController {
         if (wordSynonyms.getChildren().isEmpty()) {
             ArrayList<String> synonyms = DictionaryManager.symDict.get(searched);
             for (String s : synonyms) {
+                SlideInDown slideInDown = new SlideInDown(wordSynonyms);
+                slideInDown.setSpeed(1);
+                slideInDown.play();
                 CreateSearchHyperlink(s);
             }
         }
@@ -463,10 +471,29 @@ public class SearchController extends MainController {
     }
     @FXML
     private void DisplayWordExplain() throws Exception {
-        String explain = DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict);
+        addLearningButton.setVisible(false);
+        removeLearningButton.setVisible(false);
+
+        String explain = "<html><header><h2>"+ searchBar.getText() +"</h2></header>" + DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict).substring(6);
         wordExplain.getEngine().loadContent(explain, "text/html");
+        SlideInLeft slideInLeft = new SlideInLeft(wordExplain);
+        slideInLeft.setSpeed(1);
+        slideInLeft.play();
         SpeakButton.setVisible(true);
-        addLearningButton.setVisible(true);
+
+        boolean isLearning = false;
+        for (int i = 0; i < DictionaryManager.learningDict.size(); i++) {
+            if (DictionaryManager.learningDict.get(i).getWordTarget().equals(searched)) {
+                isLearning = true;
+                break;
+            }
+        }
+        if (isLearning) {
+            addLearningButton.setVisible(true);
+        }
+        else {
+            removeLearningButton.setVisible(true);
+        }
     }
     @FXML
     private void onClickSpeakButton() throws Exception {
@@ -474,11 +501,20 @@ public class SearchController extends MainController {
         else TranslateAPI.speakAudio(searched,"Vietnamese");
     }
     @FXML
-    public void onClickAddLearning() {
-        addNote.setVisible(true);
-        Syms.setVisible(false);
-        Notes.setVisible(true);
-        Notes.requestFocus();
+    public void onClickAddLearning() throws IOException {
+        if (removeLearningButton.isVisible()) {
+            addNote.setVisible(true);
+            Syms.setVisible(false);
+            Notes.setVisible(true);
+            Notes.requestFocus();
+        }
+        else {
+            DictionaryManager.removeLearningWord(searched);
+            RunApplication.Reload("learning.fxml");
+            removeLearningButton.setVisible(true);
+            addLearningButton.setVisible(false);
+        }
+
     }
     @FXML
     public void addDescription(ActionEvent actionEvent) throws IOException {
@@ -490,6 +526,9 @@ public class SearchController extends MainController {
         alert.setContentText("Added to learning list");
         alert.showAndWait();
         addNote.setVisible(false);
+
+        removeLearningButton.setVisible(false);
+        addLearningButton.setVisible(true);
     }
     @FXML
     public void addSyms() throws Exception {

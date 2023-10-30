@@ -1,6 +1,7 @@
 package main;
 
 import base.TranslateAPI;
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,7 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.transform.Rotate;
 import org.controlsfx.control.SearchableComboBox;
+import animatefx.animation.*;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,6 +26,8 @@ public class GGTranslateController extends MainController {
     private static final String PATH = "src/resources/Spelling.txt";
     private String sourceLangCode = "";
     private String targetLangCode = "";
+    @FXML
+    private Button swapButton;
     @FXML
     private ComboBox<String> SourceLang;
     @FXML
@@ -65,6 +70,13 @@ public class GGTranslateController extends MainController {
     }
     @FXML
     public void swap() {
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setAxis(Rotate.Y_AXIS);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setDuration(javafx.util.Duration.millis(500));
+        rotateTransition.setNode(swapButton);
+        rotateTransition.play();
+
         String temp = SourceLang.getValue();
         SourceLang.setValue(TargetLang.getValue());
         TargetLang.setValue(temp);

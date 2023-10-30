@@ -177,3 +177,13 @@
 .back-button:hover {
     -fx-background-color: #CECFD3;
 }
+.add-button {
+    -fx-background-image: url("media/add.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.add-button:hover {
+    -fx-background-color: lightcoral;
+}

@@ -5,10 +5,16 @@
     -fx-background-size: 50;
     -fx-background-position: center;
 }
+.swap-button:hover {
+    -fx-rotate: 360;
+}
 .speak-button {
     -fx-background-image: url("media/voice.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
+}
+.speak-button:hover {
+    -fx-background-color: lightcoral;
 }

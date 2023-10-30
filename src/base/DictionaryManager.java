@@ -287,6 +287,7 @@ public class DictionaryManager extends Dictionary {
         Word tmp = new Word();
         tmp.setWordTarget(word_target);
         int position = Collections.binarySearch(learningDict, tmp);
+        if (position < 0) return;
         learningDict.remove(position);
 
         File outfile = new File(LearningPath);
