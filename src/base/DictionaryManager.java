@@ -1,7 +1,19 @@
 package base;
 
-import java.util.*;
+import org.apache.commons.text.StringEscapeUtils;
+
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DictionaryManager extends Dictionary {
     private static final String E_V_PATH = "src/resources/en-vi.txt";
@@ -18,7 +30,7 @@ public class DictionaryManager extends Dictionary {
             File infile = new File(E_V_PATH);
             FileReader fileReader= new FileReader(infile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line = null;
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] words = line.split("   ");
                 Word newWord = new Word(words[0], words[1]);
@@ -29,7 +41,7 @@ public class DictionaryManager extends Dictionary {
             File infile2 = new File(LearningPath);
             FileReader fileReader2= new FileReader(infile2);
             BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
-            String line2 = null;
+            String line2;
             while ((line2 = bufferedReader2.readLine()) != null) {
                 String[] learning = line2.split("   ");
                 Word newWord = new Word(learning[0], learning[1]);
@@ -40,10 +52,10 @@ public class DictionaryManager extends Dictionary {
             File infile3 = new File(SymPath);
             FileReader fileReader3= new FileReader(infile3);
             BufferedReader bufferedReader3 = new BufferedReader(fileReader3);
-            String line3 = null;
+            String line3;
             while ((line3 = bufferedReader3.readLine()) != null) {
                 String[] words = line3.split(",");
-                ArrayList<String> synonyms = new ArrayList<String>();
+                ArrayList<String> synonyms = new ArrayList<>();
                 for (int i = 1; i < words.length; i++) {
                     synonyms.add(words[i]);
                 }
@@ -82,7 +94,7 @@ public class DictionaryManager extends Dictionary {
     }
 
     public static ArrayList<Word> importFromFile(String path, String dest){
-        ArrayList<Word> repeated = new ArrayList<Word>();
+        ArrayList<Word> repeated = new ArrayList<>();
         try {
             if (dest.equals("EN_VI")) {
                 curDict = EN_VI_Dict;
@@ -124,8 +136,8 @@ public class DictionaryManager extends Dictionary {
             File outfile = new File(PATH);
             FileWriter fileWriter = new FileWriter(outfile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (int i = 0; i < curDict.size(); i++) {
-                bufferedWriter.write(curDict.get(i).getWordTarget() + "   " + curDict.get(i).getWordExplain() + "\n");
+            for (Word word : curDict) {
+                bufferedWriter.write(word.getWordTarget() + "   " + word.getWordExplain() + "\n");
             }
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -147,9 +159,9 @@ public class DictionaryManager extends Dictionary {
         curDict.remove(position);
     }
 
-    public static boolean addWord(String word_target, String word_explain, String path) throws Exception {
+    public static boolean addWord(String word_target, String word_explain, String path) {
         Word newWord = new Word(word_target, word_explain);
-        if (DictionaryManager.dictionaryLookup(word_target, path) != "Word not found.") {
+        if (!Objects.equals(DictionaryManager.dictionaryLookup(word_target, path), "Word not found.")) {
             return false;
         }
         else {
@@ -165,7 +177,7 @@ public class DictionaryManager extends Dictionary {
         return true;
     }
 
-    public static void modifyWord(String word_target, String word_explain, String path) throws Exception {
+    public static void modifyWord(String word_target, String word_explain, String path) {
         if (path.equals("EN_VI")) {
             curDict = EN_VI_Dict;
         }
@@ -180,7 +192,7 @@ public class DictionaryManager extends Dictionary {
         Collections.sort(curDict);
     }
 
-    public static String dictionaryLookup(String search, String path) throws Exception {
+    public static String dictionaryLookup(String search, String path) {
         if (path.equals("EN_VI")) {
             curDict = EN_VI_Dict;
         }
@@ -207,7 +219,7 @@ public class DictionaryManager extends Dictionary {
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(curDict,dummy);
         if (position<0) position = -(position+1);
-        ArrayList<String> suggestions = new ArrayList<String>();
+        ArrayList<String> suggestions = new ArrayList<>();
         while (curDict.get(position).getWordTarget().toLowerCase().indexOf(search.toLowerCase())==0) {
             suggestions.add(curDict.get(position).getWordTarget());
             position++;
@@ -239,7 +251,7 @@ public class DictionaryManager extends Dictionary {
         }
     }
 
-    public static String learningWordLookup(String search) throws Exception {
+    public static String learningWordLookup(String search) {
         Word dummy = new Word();
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(learningDict,dummy);
@@ -254,7 +266,7 @@ public class DictionaryManager extends Dictionary {
         dummy.setWordTarget(search);
         int position = Collections.binarySearch(learningDict,dummy);
         if (position<0) position = -(position+1);
-        ArrayList<String> suggestions = new ArrayList<String>();
+        ArrayList<String> suggestions = new ArrayList<>();
         while (learningDict.get(position).getWordTarget().toLowerCase().indexOf(search.toLowerCase())==0) {
             suggestions.add(learningDict.get(position).getWordTarget());
             position++;
@@ -276,8 +288,8 @@ public class DictionaryManager extends Dictionary {
         File outfile = new File(LearningPath);
         FileWriter fileWriter = new FileWriter(outfile);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        for (int i = 0; i < learningDict.size(); i++) {
-            bufferedWriter.write(learningDict.get(i).getWordTarget() + "   " + learningDict.get(i).getWordExplain() + "\n");
+        for (Word word : learningDict) {
+            bufferedWriter.write(word.getWordTarget() + "   " + word.getWordExplain() + "\n");
         }
         bufferedWriter.flush();
         bufferedWriter.close();
@@ -293,8 +305,8 @@ public class DictionaryManager extends Dictionary {
         File outfile = new File(LearningPath);
         FileWriter fileWriter = new FileWriter(outfile);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        for (int i = 0; i < learningDict.size(); i++) {
-            bufferedWriter.write(learningDict.get(i).getWordTarget() + "   " + learningDict.get(i).getWordExplain() + "\n");
+        for (Word word : learningDict) {
+            bufferedWriter.write(word.getWordTarget() + "   " + word.getWordExplain() + "\n");
         }
         bufferedWriter.flush();
         bufferedWriter.close();
@@ -307,8 +319,8 @@ public class DictionaryManager extends Dictionary {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             symDict.put(word, synonyms);
             bufferedWriter.write(word + ",");
-            for (int i = 0; i < synonyms.size(); i++) {
-                bufferedWriter.write(synonyms.get(i) + ",");
+            for (String synonym : synonyms) {
+                bufferedWriter.write(synonym + ",");
             }
             bufferedWriter.write("\n");
             bufferedWriter.flush();
@@ -353,4 +365,25 @@ public class DictionaryManager extends Dictionary {
         }
         return VI_History;
     }
+    public static String etymologyLookup(String word) throws IOException, URISyntaxException {
+        String urlScript = "https://en.wiktionary.org/w/api.php?action=query&explaintext=&prop=extracts&titles="
+                + URLEncoder.encode(word, StandardCharsets.UTF_8)
+                + "&format=json";
+        HttpURLConnection con = (HttpURLConnection) new URI(urlScript).toURL().openConnection();
+        String response = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
+        if (!response.contains("Etymology")) return "Not available.";
+        response = response.substring(response.indexOf("== English ==") + 13);
+        Matcher match = Pattern.compile("(?<!=)==(?!=)").matcher(response);
+        if (match.find()) {
+            response = response.substring(0, match.start());
+        }
+        StringBuilder etymology = new StringBuilder();
+        int index = response.indexOf("=== Etymology");
+        while (index!=-1) {
+            etymology.append(response.substring(response.indexOf("===",index + 13)+3,response.indexOf("===", response.indexOf("===",index + 13)+3))).append("\n");
+            index = response.indexOf("=== Etymology",index + 13);
+        }
+        return StringEscapeUtils.unescapeJava(etymology.toString());
+    }
+
 }

@@ -36,6 +36,7 @@ import org.controlsfx.control.textfield.TextFields;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -87,6 +88,8 @@ public class SearchController extends MainController {
     private TitledPane DictionaryTool;
     @FXML
     private TitledPane HistoryTool;
+    @FXML
+    private WebView EtymologyPane;
     @FXML
     private Button ToolbarMenuButton;
     @FXML
@@ -172,6 +175,12 @@ public class SearchController extends MainController {
         synonymPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         synonymPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         wordExplain.getChildrenUnmodifiable().addListener((ListChangeListener<Node>) change -> {
+            Set<Node> deadSeaScrolls = wordExplain.lookupAll(".scroll-bar");
+            for (Node scroll : deadSeaScrolls) {
+                scroll.setVisible(false);
+            }
+        });
+        EtymologyPane.getChildrenUnmodifiable().addListener((ListChangeListener<Node>) change -> {
             Set<Node> deadSeaScrolls = wordExplain.lookupAll(".scroll-bar");
             for (Node scroll : deadSeaScrolls) {
                 scroll.setVisible(false);
@@ -365,12 +374,39 @@ public class SearchController extends MainController {
         }
     }
     @FXML
+    protected void LoadEtymology() {
+        ImageView loading = new ImageView(loadImage);
+        loading.setFitWidth(60);
+        loading.setFitHeight(60);
+        loading.setLayoutX(755);
+        loading.setLayoutY(460);
+        AnchorPane parent = (AnchorPane) UsageOverTime.getParent();
+        new Thread(() -> {
+            Platform.runLater(() -> {
+                EtymologyPane.getEngine().loadContent("");
+                parent.getChildren().add(loading);
+            });
+            String response;
+            try {
+                response = DictionaryManager.etymologyLookup(searched);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+            Platform.runLater(() -> {
+                parent.getChildren().remove(loading);
+                EtymologyPane.getEngine().loadContent(response,"text/html");
+            });
+        }).start();
+    }
+    @FXML
     protected void LoadGraph() {
         UsageOverTime.getData().clear();
         ImageView loading = new ImageView(loadImage);
         loading.setFitWidth(60);
         loading.setFitHeight(60);
-        loading.setLayoutX(310);
+        loading.setLayoutX(360);
         loading.setLayoutY(460);
         AnchorPane parent = (AnchorPane) UsageOverTime.getParent();
         new Thread(() -> {
@@ -462,6 +498,7 @@ public class SearchController extends MainController {
             DictionaryManager.addHistory(searched, type_Dict);
             history = DictionaryManager.History.toArray(new String[0]);
             LoadGraph();
+            LoadEtymology();
         }
         else {
             SpeakButton.setVisible(false);
@@ -473,14 +510,12 @@ public class SearchController extends MainController {
     private void DisplayWordExplain() throws Exception {
         addLearningButton.setVisible(false);
         removeLearningButton.setVisible(false);
-
         String explain = "<html><header><h2>"+ searchBar.getText() +"</h2></header>" + DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict).substring(6);
         wordExplain.getEngine().loadContent(explain, "text/html");
         SlideInLeft slideInLeft = new SlideInLeft(wordExplain);
         slideInLeft.setSpeed(1);
         slideInLeft.play();
         SpeakButton.setVisible(true);
-
         boolean isLearning = false;
         for (int i = 0; i < DictionaryManager.learningDict.size(); i++) {
             if (DictionaryManager.learningDict.get(i).getWordTarget().equals(searched)) {

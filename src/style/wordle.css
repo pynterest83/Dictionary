@@ -51,3 +51,7 @@
 .generic-button:hover {
     -fx-background-color: lightblue;
 }
+.normal-text {
+    -fx-font-family: 'Lato', sans-serif;
+    -fx-font-size: 19;
+}

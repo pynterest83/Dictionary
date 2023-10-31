@@ -221,10 +221,28 @@ public class BabblebotController extends MainController {
     private void checksubmission() throws Exception {
         String submit = Answer.getText();
         if (Objects.equals(DictionaryManager.dictionaryLookup(submit, "EN_VI"), "Word not found.")) {
-            new Shake(Submit).play();
+            Submit.setText("NOT FOUND");
+            Submit.getStyleClass().clear();
+            Submit.getStyleClass().add("wrong-answer");
+            Shake wrong = new Shake(Submit);
+            wrong.setOnFinished(e -> {
+                Submit.setText("SUBMIT");
+                Submit.getStyleClass().clear();
+                Submit.getStyleClass().add("keyboard-button");
+            });
+            wrong.play();
         }
         else if (Submissions.getItems().contains(submit)) {
-            new Shake(Submit).play();
+            Submit.setText("ALREADY SUBMITTED");
+            Submit.getStyleClass().clear();
+            Submit.getStyleClass().add("already-answered");
+            Shake wrong = new Shake(Submit);
+            wrong.setOnFinished(e -> {
+                Submit.setText("SUBMIT");
+                Submit.getStyleClass().clear();
+                Submit.getStyleClass().add("keyboard-button");
+            });
+            wrong.play();
         }
         else {
             score++;

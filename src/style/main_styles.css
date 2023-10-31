@@ -1,6 +1,9 @@
 @font-face {
     src: url("fonts/Lato-Bold.ttf");
 }
+@font-face {
+    src: url("fonts/RobotoSlab-Regular.ttf");
+}
 .search-button {
     -fx-background-image: url("media/search.png");
     -fx-background-color:transparent;
@@ -12,7 +15,7 @@
     -fx-background-color: #CECFD3;
 }
 .home-button {
--fx-background-image: url("media/home.png");
+    -fx-background-image: url("media/home.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
@@ -176,14 +179,4 @@
 }
 .back-button:hover {
     -fx-background-color: #CECFD3;
-}
-.add-button {
-    -fx-background-image: url("media/add.png");
-    -fx-background-color:transparent;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 30;
-    -fx-background-position: center;
-}
-.add-button:hover {
-    -fx-background-color: lightcoral;
 }

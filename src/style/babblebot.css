@@ -1,5 +1,6 @@
 .keyboard-button {
     -fx-background-color: transparent;
+    -fx-font-family: 'Lato', sans-serif;
     -fx-border-radius: 4;
     -fx-font-size: 23;
     -fx-border-color: red;
@@ -10,6 +11,7 @@
 }
 .keyboard-clicked {
     -fx-background-color: lightgray;
+    -fx-font-family: 'Lato', sans-serif;
     -fx-alignment: center;
     -fx-font-size: 23;
     -fx-border-radius: 4;
@@ -19,18 +21,18 @@
     -fx-alignment:center;
     -fx-font-size:16;
 }
-.enter-key {
+.shuffle-key {
     -fx-background-color: transparent;
     -fx-border-radius: 4;
     -fx-font-size: 23;
     -fx-border-color: red;
     -fx-alignment: center;
-    -fx-background-image: url("media/enter.png");
+    -fx-background-image: url("media/shuffle.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
 }
-.enter-key: hover {
+.shuffle-key: hover {
     -fx-background-color: lightblue;
 }
 .backspace-button {
@@ -45,4 +47,27 @@
 }
 .backspace-button: hover {
     -fx-background-color: lightblue;
+}
+.already-answered {
+    -fx-background-color: #F08080;
+    -fx-font-family: 'Lato', sans-serif;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 14;
+    -fx-border-color: white;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+}
+.wrong-answer {
+    -fx-background-color: #F08080;
+    -fx-font-family: 'Lato', sans-serif;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 23;
+    -fx-border-color: white;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+}
+.normal-text {
+    -fx-font-family: 'Roboto Slab', serif;
 }

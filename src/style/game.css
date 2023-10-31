@@ -1,0 +1,7 @@
+.game-button {
+    -fx-background-color: transparent;
+}
+.game-button: hover {
+    -fx-border-color: grey;
+    -fx-border-width: 2;
+}
