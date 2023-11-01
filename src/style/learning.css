@@ -1,0 +1,40 @@
+.speak-button {
+    -fx-background-image: url("media/voice.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.speak-button:hover {
+    -fx-background-color: lightcoral;
+}
+.edit-button {
+    -fx-background-image: url("media/edit.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.edit-button:hover {
+    -fx-background-color: lightcoral;
+}
+.remove-button {
+    -fx-background-image: url("media/remove.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.remove-button:hover {
+    -fx-background-color: lightcoral;
+}
+.save-button {
+    -fx-background-image: url("media/save.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.save-button:hover {
+    -fx-background-color: lightcoral;
+}

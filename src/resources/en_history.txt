@@ -1,3 +1,7 @@
+hello
+accost
+approximate
+approach
 search
 creed
 astrology
@@ -26,3 +30,5 @@ library
 screen
 asbestos
 mountain
+heathendom
+do

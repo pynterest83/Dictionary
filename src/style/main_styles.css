@@ -108,8 +108,8 @@
     -fx-vbar-policy: never;
 }
 .text-field {
-    -fx-focus-color: -fx-control-inner-background ;
-    -fx-faint-focus-color: -fx-control-inner-background ;
+    -fx-focus-color: transparent ;
+    -fx-faint-focus-color: transparent ;
 }
 .close-button {
     -fx-background-color: transparent;

@@ -61,6 +61,8 @@ public class SearchController extends MainController {
     @FXML
     private WebView wordExplain;
     @FXML
+    private WebView wordHeader;
+    @FXML
     private VBox wordSynonyms;
     @FXML
     private AnchorPane addNote;
@@ -180,8 +182,14 @@ public class SearchController extends MainController {
                 scroll.setVisible(false);
             }
         });
+        wordHeader.getChildrenUnmodifiable().addListener((ListChangeListener<Node>) change -> {
+            Set<Node> deadSeaScrolls = wordHeader.lookupAll(".scroll-bar");
+            for (Node scroll : deadSeaScrolls) {
+                scroll.setVisible(false);
+            }
+        });
         EtymologyPane.getChildrenUnmodifiable().addListener((ListChangeListener<Node>) change -> {
-            Set<Node> deadSeaScrolls = wordExplain.lookupAll(".scroll-bar");
+            Set<Node> deadSeaScrolls = EtymologyPane.lookupAll(".scroll-bar");
             for (Node scroll : deadSeaScrolls) {
                 scroll.setVisible(false);
             }
@@ -327,6 +335,7 @@ public class SearchController extends MainController {
     @FXML
     protected void onClickAdd() {
         searchBar.clear();
+        wordHeader.getEngine().loadContent("");
         wordExplain.getEngine().loadContent("");
         wordSynonyms.getChildren().clear();
         UsageOverTime.getData().clear();
@@ -339,6 +348,7 @@ public class SearchController extends MainController {
     @FXML
     protected void onClickModify() throws IOException {
         searchBar.clear();
+        wordHeader.getEngine().loadContent("");
         wordExplain.getEngine().loadContent("");
         wordSynonyms.getChildren().clear();
         UsageOverTime.getData().clear();
@@ -503,18 +513,23 @@ public class SearchController extends MainController {
         else {
             SpeakButton.setVisible(false);
             addLearningButton.setVisible(false);
-            wordExplain.getEngine().loadContent("Word not found.", "text/html");
+            wordHeader.getEngine().loadContent("<html><header><h2>Word Not Found !</h2></header></html>", "text/html");
         }
     }
     @FXML
     private void DisplayWordExplain() throws Exception {
         addLearningButton.setVisible(false);
         removeLearningButton.setVisible(false);
-        String explain = "<html><header><h2>"+ searchBar.getText() +"</h2></header>" + DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict).substring(6);
+        String header = "<html><header><h2>"+ searchBar.getText() +"</h2></header></html>";
+        String explain = DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict);
+        wordHeader.getEngine().loadContent(header, "text/html");
         wordExplain.getEngine().loadContent(explain, "text/html");
         SlideInLeft slideInLeft = new SlideInLeft(wordExplain);
+        SlideInLeft slideInLeft1 = new SlideInLeft(wordHeader);
+        slideInLeft1.setSpeed(1);
         slideInLeft.setSpeed(1);
         slideInLeft.play();
+        slideInLeft1.play();
         SpeakButton.setVisible(true);
         boolean isLearning = false;
         for (int i = 0; i < DictionaryManager.learningDict.size(); i++) {
