@@ -11,18 +11,12 @@
     -fx-background-size: 30;
     -fx-background-position: 20;
 }
-.search-button:hover {
-    -fx-background-color: #CECFD3;
-}
 .home-button {
     -fx-background-image: url("media/home.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: 20;
-}
-.home-button:hover {
-    -fx-background-color: #CECFD3;
 }
 .menu-bar-button {
     -fx-background-image: url("media/menu_bar.png");
@@ -41,9 +35,6 @@
     -fx-background-size: 30;
     -fx-background-position: 20;
 }
-.google-translate-button:hover {
-    -fx-background-color: #CECFD3;
-}
 .learning-button {
     -fx-background-image: url("media/learning.png");
     -fx-background-color:transparent;
@@ -51,18 +42,12 @@
     -fx-background-size: 30;
     -fx-background-position: 20;
 }
-.learning-button:hover {
-    -fx-background-color: #CECFD3;
-}
 .games-button {
     -fx-background-image: url("media/games.png");
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: 20;
-}
-.games-button:hover {
-    -fx-background-color: #CECFD3;
 }
 .tab-button {
     -fx-font-family: 'Lato', sans-serif;

@@ -378,34 +378,34 @@
             <Button fx:id="CloseButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
          </buttons>
       </ButtonBar>
-      <Pane fx:id="menuBar" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E4E5E9;" stylesheets="@../style/main_styles.css" visible="false">
+      <Pane fx:id="menuBar" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E1E5E8;" stylesheets="@../style/main_styles.css" visible="false">
          <children>
             <Label alignment="CENTER_RIGHT" layoutX="14.0" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="177.0" styleClass="app-label" text="DICTIONARY" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-            <Button fx:id="HomeButton" layoutX="1.0" layoutY="67.0" mnemonicParsing="false" onAction="#onClickHomeButton" prefHeight="63.0" prefWidth="213.0" styleClass="home-button" text="Home" textAlignment="CENTER">
+            <Button fx:id="HomeButton" layoutX="1.0" layoutY="67.0" mnemonicParsing="false" onAction="#onClickHomeButton" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="home-button" text="Home" textAlignment="CENTER">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="searchButton" layoutX="1.0" layoutY="130.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="63.0" prefWidth="213.0" styleClass="search-button" text="Search">
+            <Button fx:id="searchButton" layoutX="1.0" layoutY="130.0" mnemonicParsing="false" onAction="#onClickSearchButton" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="search-button" text="Search">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="GGTranslateButton" layoutY="193.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" prefHeight="63.0" prefWidth="213.0" styleClass="google-translate-button" text="Google&#10;Translate" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="GGTranslateButton" layoutY="193.0" mnemonicParsing="false" onAction="#onClickGGTranslateButton" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="google-translate-button" text="Google&#10;Translate" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="LearningButton" layoutX="1.0" layoutY="256.0" mnemonicParsing="false" onAction="#onClickLearningButton" prefHeight="63.0" prefWidth="213.0" styleClass="learning-button" text="Learning">
+            <Button fx:id="LearningButton" layoutX="1.0" layoutY="256.0" mnemonicParsing="false" onAction="#onClickLearningButton" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="learning-button" text="Learning">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="GameButton" layoutY="319.0" mnemonicParsing="false" onAction="#onClickGameButton" prefHeight="63.0" prefWidth="213.0" styleClass="games-button" text="Games">
+            <Button fx:id="GameButton" layoutY="319.0" mnemonicParsing="false" onAction="#onClickGameButton" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="games-button" text="Games">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>

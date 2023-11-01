@@ -1,7 +1,32 @@
-.game-button {
+.wordle-image {
+    -fx-font-family: 'Roboto Slab', serif;
+    -fx-font-size: 20;
+    -fx-background-image: url("media/wordle.png");
     -fx-background-color: transparent;
+    -fx-background-size: 300px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+    -fx-border-width: 1;
+    -fx-border-color: lightgrey;
 }
-.game-button: hover {
+.wordle-image: hover {
+    -fx-background-image: url("media/wordleplay.gif");
+    -fx-border-color: grey;
+    -fx-border-width: 2;
+}
+.babble-image {
+    -fx-font-family: 'Roboto Slab', serif;
+    -fx-font-size: 20;
+    -fx-background-image: url("media/babble.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 300px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+    -fx-border-width: 1;
+    -fx-border-color: lightgrey;
+}
+.babble-image: hover {
+    -fx-background-image: url("media/babbleplay.gif");
     -fx-border-color: grey;
     -fx-border-width: 2;
 }

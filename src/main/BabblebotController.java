@@ -10,6 +10,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
@@ -65,21 +66,43 @@ public class BabblebotController extends MainController {
 
     @FXML
     private void initialize() {
+        Submissions.setRotate(180);
+        Submissions.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         PrepareMenu();
         Answer.textProperty().addListener((obs, oldText, newText) -> Submit.setDisable(newText.length() <= 2));
         AnswerList.setCellFactory(e -> new ListCell<>() {
             @Override
             protected void updateItem(String s, boolean empty) {
                 super.updateItem(s, empty);
+                getStyleClass().clear();
                 if (empty) {
                     setText(null);
                     setStyle("-fx-alignment:center; -fx-font-size:16;");
                 } else {
                     setText(s);
                     if (Submissions.getItems().contains(s)) {
-                        setStyle("-fx-alignment:center; -fx-font-size:16; -fx-background-color: #7CFC00");
+                        setStyle("-fx-alignment:center; -fx-font-size:16; -fx-text-fill: #7CFC00");
                     } else {
                         setStyle("-fx-alignment:center; -fx-font-size:16;");
+                    }
+                }
+            }
+        });
+        Submissions.setCellFactory(e -> new ListCell<>() {
+            @Override
+            protected void updateItem(String s, boolean empty) {
+                super.updateItem(s,empty);
+                setRotate(180);
+                setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+                if (empty) {
+                    setText(null);
+                    getStyleClass().clear();
+                    setStyle("-fx-background-color: transparent;");
+                } else {
+                    setText(s);
+                    if (!getStyleClass().contains("list-cell")) {
+                        setStyle(null);
+                        getStyleClass().add("list-cell");
                     }
                 }
             }
@@ -247,7 +270,7 @@ public class BabblebotController extends MainController {
         else {
             score++;
             Score.setText(Integer.toString(score));
-            Submissions.getItems().add(submit);
+            Submissions.getItems().add(0,submit);
         }
     }
     @FXML

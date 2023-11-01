@@ -56,6 +56,18 @@ public class MainController {
         });
     }
     @FXML
+    protected void MenuExited(MouseEvent mouseEvent) {
+        Button source = (Button) mouseEvent.getSource();
+        source.setStyle(null);
+    }
+    @FXML
+    protected void MenuMoved(MouseEvent mouseEvent) {
+        Button source = (Button) mouseEvent.getSource();
+        double position = mouseEvent.getX()/source.getWidth() * 100;
+        source.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 "
+                + Double.toString(position) +"%, #D2C3C6 100%);");
+    }
+    @FXML
     public void onCloseClick() {
         Platform.exit();
     }

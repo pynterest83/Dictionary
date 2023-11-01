@@ -17,9 +17,24 @@
     -fx-border-radius: 4;
     -fx-border-color: red;
 }
+.list-view {
+    -fx-padding: 1px;
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+}
 .list-cell {
-    -fx-alignment:center;
-    -fx-font-size:16;
+    -fx-font-size: 20;
+    -fx-border-color: grey;
+    -fx-background-color: transparent;
+    -fx-font-family: 'Roboto Slab', serif;
+}
+.list-cell: even {
+    -fx-border-width: 0 5 0 0;
+    -fx-alignment: center-right;
+}
+.list-cell: odd {
+    -fx-border-width: 0 0 0 5;
+    -fx-alignment: center-left;
 }
 .shuffle-key {
     -fx-background-color: transparent;
