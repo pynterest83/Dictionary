@@ -37,6 +37,7 @@ public class MainController {
     @FXML
     protected ButtonBar TitleBar;
     protected Boolean inside = false;
+    private static String currentScene = "main.fxml";
     @FXML
     private void initialize() {
         PrepareMenu();
@@ -77,6 +78,7 @@ public class MainController {
     }
     @FXML
     public void onClickHomeButton(ActionEvent actionEvent) throws Exception {
+        currentScene = "main.fxml";
         inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
@@ -85,6 +87,7 @@ public class MainController {
     }
     @FXML
     public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
+        currentScene = "search.fxml";
         inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
@@ -93,6 +96,7 @@ public class MainController {
     }
     @FXML
     protected void onClickGameButton() throws IOException {
+        currentScene = "game.fxml";
         inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
@@ -101,6 +105,7 @@ public class MainController {
     }
     @FXML
     public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
+        currentScene = "ggTranslate.fxml";
         inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
@@ -109,6 +114,7 @@ public class MainController {
     }
     @FXML
     public void onClickLearningButton(ActionEvent actionEvent) throws IOException {
+        currentScene = "learning.fxml";
         inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
@@ -129,6 +135,23 @@ public class MainController {
             });
             inLeft.setSpeed(3);
             inLeft.play();
+            switch (currentScene) {
+                case "main.fxml":
+                    HomeButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
+                    break;
+                case "search.fxml":
+                    searchButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
+                    break;
+                case "game.fxml":
+                    GameButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
+                    break;
+                case "ggTranslate.fxml":
+                    GGTranslateButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
+                    break;
+                case "learning.fxml":
+                    LearningButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
+                    break;
+            }
         }
         else {
             menuBar.setDisable(true);

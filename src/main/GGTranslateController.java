@@ -127,6 +127,7 @@ public class GGTranslateController extends MainController {
                 });
             try {
                 output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, translate));
+                new FadeIn(output).play();
                 Platform.runLater(()-> {
                     parent.getChildren().remove(loading);
                     input.setDisable(false);
@@ -224,6 +225,7 @@ public class GGTranslateController extends MainController {
                         synonymsString.append(s).append("\n");
                     }
                     synonyms.setText(synonymsString.toString());
+                    new FadeIn(synonyms).play();
                 }
             } catch (URISyntaxException | IOException e) {
                 throw new RuntimeException(e);
@@ -281,6 +283,7 @@ public class GGTranslateController extends MainController {
                         antonymsString.append(s).append("\n");
                     }
                     antonyms.setText(antonymsString.toString());
+                    new FadeIn(antonyms).play();
                 }
             } catch (URISyntaxException | IOException e) {
                 throw new RuntimeException(e);

@@ -8,23 +8,24 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GGTranslateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GGTranslateController">
     <children>
           <AnchorPane layoutY="30.4" minHeight="0.0" minWidth="0.0" onMouseClicked="#HideMenuBar" prefHeight="670.0" prefWidth="950.0" AnchorPane.topAnchor="30.0">
               <children>
             <Pane layoutX="51.0" layoutY="55.0" prefHeight="583.0" prefWidth="608.0" style="-fx-background-color: white;">
                <children>
                   <ComboBox fx:id="SourceLang" layoutX="69.0" layoutY="21.0" onAction="#SelectSourceLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate From" styleClass="click-button" />
-                  <TextField fx:id="input" alignment="TOP_LEFT" layoutX="20.0" layoutY="58.0" onAction="#translate" prefHeight="200.0" prefWidth="568.0" style="-fx-border-width: 4; -fx-border-color: transparent transparent transparent darkgray;" styleClass="text-field">
+                  <TextField fx:id="input" alignment="TOP_LEFT" layoutX="20.0" layoutY="58.0" onAction="#translate" prefHeight="200.0" prefWidth="568.0" style="-fx-border-width: 4; -fx-border-color: darkgray transparent darkgray darkgray; -fx-background-color: transparent;" styleClass="text-field">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextField>
                   <ComboBox fx:id="TargetLang" layoutX="69.0" layoutY="297.0" onAction="#SelectTargetLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate To" styleClass="click-button" />
-                  <Button fx:id="swapButton" layoutX="298.0" layoutY="274.0" mnemonicParsing="false" onAction="#swap" prefHeight="50.0" prefWidth="50.0" styleClass="swap-button" stylesheets="@../style/ggTranslate.css" />
-                  <TextArea fx:id="output" editable="false" layoutX="20.0" layoutY="334.0" prefHeight="200.0" prefWidth="568.0" style="-fx-border-color: transparent transparent transparent darkgray; -fx-border-width: 4; -fx-background-color: transparent;" styleClass="text-area">
+                  <Button fx:id="swapButton" layoutX="302.0" layoutY="277.0" mnemonicParsing="false" onAction="#swap" prefHeight="31.0" prefWidth="32.0" styleClass="swap-button" stylesheets="@../style/ggTranslate.css" />
+                  <TextArea fx:id="output" editable="false" layoutX="20.0" layoutY="334.0" prefHeight="200.0" prefWidth="568.0" style="-fx-border-color: darkgray transparent darkgray darkgray; -fx-border-width: 4; -fx-background-color: transparent;" styleClass="text-area">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -36,12 +37,12 @@
             <Pane layoutX="682.0" layoutY="55.0" prefHeight="583.0" prefWidth="252.0" style="-fx-background-color: white;">
                <children>
                   <Button fx:id="symButton" layoutX="49.0" layoutY="21.0" mnemonicParsing="false" onAction="#onClickSynonyms" prefHeight="30.0" prefWidth="71.0" styleClass="click-button" text="Synonyms" />
-                  <TextArea fx:id="synonyms" editable="false" layoutX="17.0" layoutY="58.0" prefHeight="200.0" prefWidth="218.0" scrollLeft="80.0" scrollTop="35.0" style="-fx-background-color: transparent; -fx-border-color: darkgray transparent transparent transparent; -fx-border-width: 4;" styleClass="text-area">
+                  <TextArea fx:id="synonyms" editable="false" layoutX="17.0" layoutY="58.0" prefHeight="200.0" prefWidth="218.0" scrollLeft="80.0" scrollTop="35.0" style="-fx-background-color: transparent; -fx-border-color: darkgray transparent darkgray transparent; -fx-border-width: 4;" styleClass="text-area">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <TextArea fx:id="antonyms" editable="false" layoutX="17.0" layoutY="335.0" prefHeight="200.0" prefWidth="218.0" scrollLeft="80.0" scrollTop="35.0" style="-fx-background-color: transparent; -fx-border-color: darkgray transparent transparent transparent; -fx-border-width: 4;" styleClass="text-area">
+                  <TextArea fx:id="antonyms" editable="false" layoutX="17.0" layoutY="335.0" prefHeight="200.0" prefWidth="218.0" scrollLeft="80.0" scrollTop="35.0" style="-fx-background-color: transparent; -fx-border-color: darkgray transparent darkgray transparent; -fx-border-width: 4;" styleClass="text-area">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -49,6 +50,8 @@
                   <Button fx:id="antButton" layoutX="39.0" layoutY="299.0" mnemonicParsing="false" onAction="#onClickAntonyms" prefHeight="30.0" prefWidth="71.0" styleClass="click-button" text="Antonyms" />
                </children>
             </Pane>
+            <Line endX="10.0" endY="143.0" layoutX="663.0" layoutY="142.0" startX="10.0" startY="-8.0" stroke="#8d7e7e" strokeWidth="3.0" />
+            <Line endX="10.0" endY="210.0" layoutX="661.0" layoutY="204.0" startX="10.0" startY="363.0" stroke="#8d7e7e" strokeWidth="3.0" />
               </children>
           </AnchorPane>
         <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" layoutY="9.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="950.0" style="-fx-background-color: white;">
@@ -86,6 +89,16 @@
                     </font>
                 </Button>
                 <Button fx:id="GameButton" layoutY="319.0" mnemonicParsing="false" onAction="#onClickGameButton" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="games-button" text="Games">
+                    <font>
+                        <Font name="SansSerif Bold" size="18.0" />
+                    </font>
+                </Button>
+                <Button fx:id="SettingButton" layoutY="574.0" mnemonicParsing="false" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="settings-button" text="Settings">
+                    <font>
+                        <Font name="SansSerif Bold" size="18.0" />
+                    </font>
+                </Button>
+                <Button fx:id="HelpButton" layoutX="1.0" layoutY="637.0" mnemonicParsing="false" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="help-button" text="Help">
                     <font>
                         <Font name="SansSerif Bold" size="18.0" />
                     </font>

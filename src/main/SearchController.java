@@ -337,6 +337,7 @@ public class SearchController extends MainController {
         searchBar.clear();
         wordHeader.getEngine().loadContent("");
         wordExplain.getEngine().loadContent("");
+        EtymologyPane.getEngine().loadContent("");
         wordSynonyms.getChildren().clear();
         UsageOverTime.getData().clear();
         menuOpen = false;
@@ -350,6 +351,7 @@ public class SearchController extends MainController {
         searchBar.clear();
         wordHeader.getEngine().loadContent("");
         wordExplain.getEngine().loadContent("");
+        EtymologyPane.getEngine().loadContent("");
         wordSynonyms.getChildren().clear();
         UsageOverTime.getData().clear();
         menuOpen = false;
