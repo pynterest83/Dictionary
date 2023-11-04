@@ -165,3 +165,27 @@
 .back-button:hover {
     -fx-background-color: #CECFD3;
 }
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+/*.html-editor .top-toolbar*/
+/*{*/
+/*    -fx-max-width: 0px;*/
+/*    -fx-min-width: 0px;*/
+/*    -fx-pref-width: 0px;*/
+/*    -fx-max-height: 0px;*/
+/*    -fx-min-height: 0px;*/
+/*    -fx-pref-height: 0px;*/
+/*    -fx-opacity: 0;*/
+/*}*/
+/*.html-editor .bottom-toolbar*/
+/*{*/
+/*    -fx-max-width: 0px;*/
+/*    -fx-min-width: 0px;*/
+/*    -fx-pref-width: 0px;*/
+/*    -fx-max-height: 0px;*/
+/*    -fx-min-height: 0px;*/
+/*    -fx-pref-height: 0px;*/
+/*    -fx-opacity: 0;*/
+/*}*/

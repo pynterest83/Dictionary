@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -36,6 +37,7 @@ public class RunApplication extends Application {
     public void start(Stage stage) throws Exception {
         FXML_scenes.put("main.fxml",FXMLLoader.load(Paths.get("src/scene/main.fxml").toUri().toURL()));
         Scene scene = new Scene(FXML_scenes.get("main.fxml"), 950, 700);
+        stage.getIcons().add(new Image(Paths.get("src/style/media/dictionary.png").toUri().toURL().toString()));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.setScene(scene);
