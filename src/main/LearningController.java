@@ -2,17 +2,18 @@ package main;
 
 import base.DictionaryManager;
 import base.TranslateAPI;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,6 +30,7 @@ public class LearningController extends MainController {
     private Button saveLearningWord;
     private String suggestions[];
     private String currentWord;
+    private Boolean isSaved = true;
     @FXML
     private void initialize() {
         PrepareMenu();
@@ -46,6 +48,12 @@ public class LearningController extends MainController {
                 UserInput();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        });
+        learningExplain.getChildrenUnmodifiable().addListener((ListChangeListener<Node>) change -> {
+            Set<Node> deadSeaScrolls = learningExplain.lookupAll(".scroll-bar");
+            for (Node scroll : deadSeaScrolls) {
+                scroll.setVisible(false);
             }
         });
     }
@@ -70,9 +78,18 @@ public class LearningController extends MainController {
     }
     @FXML
     private void selectSearch() throws Exception {
-        HideMenuBar();
-        DisplayWordExplain(learningList.getSelectionModel().getSelectedItem());
-        currentWord = learningList.getSelectionModel().getSelectedItem();
+        if (isSaved) {
+            HideMenuBar();
+            DisplayWordExplain(learningList.getSelectionModel().getSelectedItem());
+            currentWord = learningList.getSelectionModel().getSelectedItem();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("You have not saved your changes");
+            alert.setContentText("Save your changes before selecting another word");
+            alert.showAndWait();
+        }
     }
     @FXML
     private void onClickSpeakButton() throws Exception {
@@ -81,6 +98,7 @@ public class LearningController extends MainController {
     @FXML
     private void onClickModifyButton() throws Exception {
         editLearningWord.setHtmlText(DictionaryManager.learningWordLookup(currentWord));
+        isSaved = false;
         editLearningWord.setVisible(true);
         editLearningWord.requestFocus();
         saveLearningWord.setVisible(true);
@@ -93,11 +111,21 @@ public class LearningController extends MainController {
         String edited = DictionaryManager.learningWordLookup(currentWord).replace("contenteditable=\"true\"", "contenteditable=\"false\"");
         learningExplain.getEngine().loadContent(edited, "text/html");
         learningList.requestFocus();
+        isSaved = true;
     }
     @FXML
     public void onClickRemoveLearningWord(ActionEvent actionEvent) throws IOException {
-        DictionaryManager.removeLearningWord(currentWord);
-        learningList.getItems().remove(currentWord);
-        learningExplain.getEngine().loadContent("", "text/html");
+        if (isSaved) {
+            DictionaryManager.removeLearningWord(currentWord);
+            learningList.getItems().remove(currentWord);
+            learningExplain.getEngine().loadContent("", "text/html");
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("You have not saved your changes");
+            alert.setContentText("Save your changes before removing this word");
+            alert.showAndWait();
+        }
     }
 }

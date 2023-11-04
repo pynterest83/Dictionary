@@ -514,6 +514,7 @@ public class SearchController extends MainController {
             SpeakButton.setVisible(false);
             addLearningButton.setVisible(false);
             wordHeader.getEngine().loadContent("<html><header><h2>Word Not Found !</h2></header></html>", "text/html");
+            wordExplain.getEngine().loadContent("", "text/html");
         }
     }
     @FXML

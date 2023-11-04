@@ -172,6 +172,11 @@
 .list-view .cell:selected {
     -fx-background-color: lightcoral;
 }
+.list-view .cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent lightgray transparent;
+    -fx-border-width: 0.2;
+}
 .html-editor .top-toolbar
 {
     -fx-max-width: 0px;
