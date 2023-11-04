@@ -56,6 +56,9 @@ public class LearningController extends MainController {
     @FXML
     private void DisplayWordExplain(String word_target) throws Exception {
         String explain = DictionaryManager.learningWordLookup(word_target);
+        if(explain.contains("contenteditable=\"true\"")){
+            explain=explain.replace("contenteditable=\"true\"", "contenteditable=\"false\"");
+        }
         learningExplain.getEngine().loadContent(explain, "text/html");
     }
     @FXML
@@ -79,6 +82,7 @@ public class LearningController extends MainController {
     private void onClickModifyButton() throws Exception {
         editLearningWord.setHtmlText(DictionaryManager.learningWordLookup(currentWord));
         editLearningWord.setVisible(true);
+        editLearningWord.requestFocus();
         saveLearningWord.setVisible(true);
     }
     @FXML
@@ -86,7 +90,9 @@ public class LearningController extends MainController {
         DictionaryManager.modifyLearningWord(currentWord, editLearningWord.getHtmlText());
         editLearningWord.setVisible(false);
         saveLearningWord.setVisible(false);
-        learningExplain.getEngine().loadContent(DictionaryManager.learningWordLookup(currentWord), "text/html");
+        String edited = DictionaryManager.learningWordLookup(currentWord).replace("contenteditable=\"true\"", "contenteditable=\"false\"");
+        learningExplain.getEngine().loadContent(edited, "text/html");
+        learningList.requestFocus();
     }
     @FXML
     public void onClickRemoveLearningWord(ActionEvent actionEvent) throws IOException {

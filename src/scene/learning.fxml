@@ -22,10 +22,10 @@
                </font>
             </TextField>
             <ListView fx:id="learningList" layoutX="20.0" layoutY="148.0" onMouseClicked="#selectSearch" prefHeight="506.0" prefWidth="242.0" />
-            <Pane layoutX="304.0" layoutY="65.0" prefHeight="602.0" prefWidth="586.0" >
+            <Pane layoutX="304.0" layoutY="65.0" prefHeight="602.0" prefWidth="586.0">
                <children>
                   <WebView fx:id="learningExplain" layoutX="13.0" layoutY="56.0" prefHeight="506.0" prefWidth="562.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
-                  <HTMLEditor fx:id="editLearningWord" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="12.0" layoutY="67.0" prefHeight="506.0" prefWidth="562.0" style="-fx-background-color: white;" visible="false" />
+                  <HTMLEditor fx:id="editLearningWord" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="12.0" layoutY="67.0" prefHeight="506.0" prefWidth="562.0" style="-fx-background-color: white; -fx-border-color: lightcoral;" visible="false" />
                   <Button fx:id="saveLearningWord" layoutX="547.0" layoutY="557.0" mnemonicParsing="false" onAction="#saveEdited" prefHeight="31.0" prefWidth="31.0" styleClass="save-button" stylesheets="@../style/learning.css" visible="false" />
                   <Button layoutX="471.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="31.0" prefWidth="31.0" styleClass="speak-button" stylesheets="@../style/learning.css" />
                   <Button layoutX="510.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickModifyButton" prefHeight="31.0" prefWidth="31.0" styleClass="edit-button" stylesheets="@../style/learning.css" />
