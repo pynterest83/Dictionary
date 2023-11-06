@@ -404,14 +404,13 @@ public class SearchController extends MainController {
             String response;
             try {
                 response = DictionaryManager.etymologyLookup(searched);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
+            } catch (IOException | URISyntaxException e) {
+                response = "Not available.";
             }
+            String finalResponse = response;
             Platform.runLater(() -> {
                 parent.getChildren().remove(loading);
-                EtymologyPane.getEngine().loadContent(response,"text/html");
+                EtymologyPane.getEngine().loadContent(finalResponse,"text/html");
             });
         }).start();
     }
@@ -575,7 +574,9 @@ public class SearchController extends MainController {
     @FXML
     public void onClickRecording() throws IOException {
         SpeechRecognizer.start = !SpeechRecognizer.start;
-        SpeechRecognizer.main(null);
+        if (SpeechRecognizer.start) {
+            new Thread(() -> SpeechRecognizer.main(null)).start();
+        }
     }
     @FXML
     public void addDescription(ActionEvent actionEvent) throws IOException {

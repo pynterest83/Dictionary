@@ -200,7 +200,7 @@ public class BabblebotController extends MainController {
                     break;
                 }
             }
-            Answer.setText(Answer.getText().substring(0,Answer.getText().length() -1));
+            Answer.setText(Answer.getText().substring(0,Answer.getText().length() - 1));
         }
     }
     @FXML

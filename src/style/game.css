@@ -19,9 +19,9 @@
     -fx-font-size: 20;
     -fx-background-image: url("media/babble.png");
     -fx-background-color: transparent;
-    -fx-background-size: 300px;
+    -fx-background-size: 250px;
     -fx-background-repeat: no-repeat;
-    -fx-background-position: 50%;
+    -fx-background-position: 50% -9;
     -fx-border-width: 1;
     -fx-border-color: lightgrey;
 }

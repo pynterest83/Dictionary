@@ -14,7 +14,7 @@ module main {
     requires java.logging;
     requires java.desktop;
     opens base to javafx.fxml;
-        exports base;
-        exports main;
-        opens main to javafx.fxml;
+    exports base;
+    exports main;
+    opens main to javafx.fxml;
 }

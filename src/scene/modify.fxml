@@ -67,7 +67,7 @@
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Button>
-             <Button fx:id="SettingButton" layoutY="574.0" mnemonicParsing="false" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="settings-button" text="Settings">
+             <Button fx:id="SettingButton" layoutY="574.0" mnemonicParsing="false" onAction="#onClickSetting" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="settings-button" text="Settings">
                  <font>
                      <Font name="SansSerif Bold" size="18.0" />
                  </font>

@@ -3,11 +3,11 @@ package base;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import main.MainController;
 
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
@@ -19,34 +19,21 @@ public class TranslateAPI {
                 + "sl=" + langFrom
                 + "&tl=" + langTo
                 + "&dt=t&dt=t&q=" + URLEncoder.encode(text,StandardCharsets.UTF_8);
-        URL url = new URI(urlScript).toURL();
         StringBuilder response = new StringBuilder();
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) new URI(urlScript).toURL().openConnection();
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         response.append(in.readLine());
         return response.substring(response.indexOf("\"") + 1,response.indexOf("\"",response.indexOf("\"") + 1));
     }
-    public static void speakAudio(String text, String languageOutput) throws IOException, URISyntaxException {
+    public static void speakAudio(String text, String languageOutput) {
         String urlString = "http://translate.google.com/translate_tts?" + "?ie=UTF-8" + //encoding
                 "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) + //query encoded
                 "&tl=" + TranslateAPI.langMap.get(languageOutput) + //language used
                 "&client=tw-ob";
-        URL url = new URI(urlString).toURL();
-        HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-        urlConn.setRequestMethod("GET");
-        urlConn.setRequestProperty("User-Agent", "Mozilla/5.0");
-        InputStream audioSrc = urlConn.getInputStream();
-        DataInputStream read = new DataInputStream(audioSrc);
-        OutputStream outstream = new FileOutputStream("src/resources/speech.mp3");
-        byte[] buffer = new byte[1024];
-        int len;
-        while ((len = read.read(buffer)) > 0) {
-            outstream.write(buffer, 0, len);
-        }
-        outstream.close();
-        Media voice = new Media(Paths.get("src/resources/speech.mp3").toUri().toString());
+        Media voice = new Media(urlString);
         MediaPlayer mediaPlayer = new MediaPlayer(voice);
+        mediaPlayer.setVolume(MainController.SpeakVolume);
         mediaPlayer.play();
     }
     public static void addDefault() throws IOException {
@@ -65,8 +52,7 @@ public class TranslateAPI {
             word = word.replace(" ", "%20");
         }
         String urlScript = "https://dictionaryapi.com/api/v3/references/thesaurus/json/" + word +"?key=8d9232c5-ec85-49a3-a070-3b63dbc55fc8";
-        URL url = new URI(urlScript).toURL();
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) new URI(urlScript).toURL().openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("accept", "application/json");
         StringBuilder response = new StringBuilder();
@@ -76,7 +62,6 @@ public class TranslateAPI {
             response.append(inputLine);
         }
         in.close();
-
         String data = response.toString();
         if (data.equals("[]")) {
             return null;

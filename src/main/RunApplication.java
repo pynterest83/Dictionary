@@ -72,6 +72,7 @@ public class RunApplication extends Application {
         CompleteSentence.LoadQuestionsAndAnswers();
         Wordle.LoadWordleList();
         TranslateAPI.addDefault();
+        SpeechRecognizer.prepare();
     }
     public static void LoadScenes() throws IOException {
         File dir = new File("src/scene");

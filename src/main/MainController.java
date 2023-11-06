@@ -2,19 +2,28 @@ package main;
 
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideOutLeft;
+import base.CompleteSentence;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.Random;
 
 public class MainController {
+    public static double SpeakVolume = 1.0;
+    @FXML
+    protected AnchorPane Root;
     @FXML
     protected Button menuBarButton;
     @FXML
@@ -29,6 +38,8 @@ public class MainController {
     @FXML
     protected Button LearningButton;
     @FXML
+    protected Button SettingButton;
+    @FXML
     protected Button CloseButton;
     @FXML
     protected Button MinimizeButton;
@@ -41,6 +52,15 @@ public class MainController {
     @FXML
     private void initialize() {
         PrepareMenu();
+        Root.disabledProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (oldValue && !newValue) {
+                try {
+                    StartGame();
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
     @FXML
     protected void PrepareMenu() {
@@ -49,12 +69,8 @@ public class MainController {
                 MenuBarClick();
             }
         });
-        menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-            inside = true;
-        });
-        menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
-            inside = false;
-        });
+        menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> inside = true);
+        menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> inside = false);
     }
     @FXML
     protected void MenuExited(MouseEvent mouseEvent) {
@@ -66,7 +82,7 @@ public class MainController {
         Button source = (Button) mouseEvent.getSource();
         double position = mouseEvent.getX()/source.getWidth() * 100;
         source.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 "
-                + Double.toString(position) +"%, #D2C3C6 100%);");
+                + position +"%, #D2C3C6 100%);");
     }
     @FXML
     public void onCloseClick() {
@@ -77,7 +93,7 @@ public class MainController {
         ((Stage) TitleBar.getScene().getWindow()).setIconified(true);
     }
     @FXML
-    public void onClickHomeButton(ActionEvent actionEvent) throws Exception {
+    public void onClickHomeButton() throws Exception {
         currentScene = "main.fxml";
         inside = false;
         menuOpen = false;
@@ -104,7 +120,7 @@ public class MainController {
         RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
-    public void onClickGGTranslateButton(ActionEvent actionEvent) throws IOException {
+    public void onClickGGTranslateButton() throws IOException {
         currentScene = "ggTranslate.fxml";
         inside = false;
         menuOpen = false;
@@ -113,13 +129,22 @@ public class MainController {
         RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
     }
     @FXML
-    public void onClickLearningButton(ActionEvent actionEvent) throws IOException {
+    public void onClickLearningButton() throws IOException {
         currentScene = "learning.fxml";
         inside = false;
         menuOpen = false;
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"learning.fxml");
+    }
+    @FXML
+    public void onClickSetting() {
+        currentScene = "setting.fxml";
+        inside = false;
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"setting.fxml");
     }
     @FXML
     protected void MenuBarClick() {
@@ -151,6 +176,8 @@ public class MainController {
                 case "learning.fxml":
                     LearningButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
                     break;
+                case "setting.fxml":
+                    SettingButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
             }
         }
         else {
@@ -165,8 +192,76 @@ public class MainController {
     protected void HideMenuBar() {
         if (menuOpen) MenuBarClick();
     }
+    private int CurrentQuestion;
+    private final Random rand = new Random();
     @FXML
-    protected void MouseClick() {
-
+    private RadioButton ChoiceA;
+    @FXML
+    private RadioButton ChoiceB;
+    @FXML
+    private RadioButton ChoiceC;
+    @FXML
+    private RadioButton ChoiceD;
+    @FXML
+    private RadioButton ChoiceE;
+    @FXML
+    private WebView gameScreen;
+    @FXML
+    private Button NextButton;
+    @FXML
+    private Button StartGameButton;
+    @FXML
+    private AnchorPane QuizPane;
+    @FXML
+    private void StartGame() throws MalformedURLException {
+        StartGameButton.setVisible(false);
+        ChoiceA.setVisible(true);
+        ChoiceB.setVisible(true);
+        ChoiceC.setVisible(true);
+        ChoiceD.setVisible(true);
+        ChoiceE.setVisible(true);
+        NextButton.setVisible(true);
+        CurrentQuestion = rand.nextInt(502);
+        String content = "<html>" + CompleteSentence.askQuestion(CurrentQuestion) + "</html>";
+        gameScreen.getEngine().loadContent(content, "text/html");
+    }
+    @FXML
+    private String CheckResult() {
+        if (ChoiceA.isSelected()) return "a";
+        if (ChoiceB.isSelected()) return "b";
+        if (ChoiceC.isSelected()) return "c";
+        if (ChoiceD.isSelected()) return "d";
+        if (ChoiceE.isSelected()) return "e";
+        return "";
+    }
+    @FXML
+    private void ToggleRadioButtons(boolean toggle) {
+        ChoiceA.setDisable(toggle);
+        ChoiceB.setDisable(toggle);
+        ChoiceC.setDisable(toggle);
+        ChoiceD.setDisable(toggle);
+        ChoiceE.setDisable(toggle);
+    }
+    @FXML
+    private void ClearAllRadioButton() {
+        ChoiceA.setSelected(false);
+        ChoiceB.setSelected(false);
+        ChoiceC.setSelected(false);
+        ChoiceD.setSelected(false);
+        ChoiceE.setSelected(false);
+    }
+    @FXML
+    private void onNextButtonClick() {
+        CurrentQuestion = rand.nextInt(501);
+        ToggleRadioButtons(false);
+        ClearAllRadioButton();
+        String content = "<html>" + CompleteSentence.askQuestion(CurrentQuestion) + "</html>";
+        gameScreen.getEngine().loadContent(content,"text/html");
+    }
+    @FXML
+    private void RadioButtonClick() {
+        String content = "<html>" + CompleteSentence.showAnswer(CurrentQuestion,CheckResult()) + "</html>";
+        ToggleRadioButtons(true);
+        gameScreen.getEngine().loadContent(content,"text/html");
     }
 }

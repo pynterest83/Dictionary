@@ -3,27 +3,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GameController">
     <children>
-      <Button fx:id="CompleteSentence" focusTraversable="false" layoutX="24.0" layoutY="60.0" mnemonicParsing="false" onAction="#onClickCompleteSentence" prefHeight="489.0" prefWidth="273.0" stylesheets="@../style/game.css">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="450.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
-      <Button fx:id="Wordle" alignment="BOTTOM_CENTER" focusTraversable="false" layoutX="649.0" layoutY="60.0" mnemonicParsing="false" onAction="#onClickWordle" prefHeight="490.0" prefWidth="274.0" style="-fx-background-color: transparent;" styleClass="wordle-image" stylesheets="@../style/game.css" text="WORDLE">
+      <Button fx:id="Wordle" alignment="BOTTOM_CENTER" focusTraversable="false" layoutX="596.0" layoutY="105.0" mnemonicParsing="false" onAction="#onClickWordle" prefHeight="490.0" prefWidth="274.0" style="-fx-background-color: transparent;" styleClass="wordle-image" stylesheets="@../style/game.css" text="WORDLE" AnchorPane.rightAnchor="80.0">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="Babble" focusTraversable="false" layoutX="338.0" layoutY="60.0" mnemonicParsing="false" onAction="#onClickBabble" prefHeight="490.0" prefWidth="274.0" styleClass="babble-image" stylesheets="@../style/game.css">
+      <Button fx:id="Babble" alignment="BOTTOM_CENTER" focusTraversable="false" layoutX="77.0" layoutY="105.0" mnemonicParsing="false" onAction="#onClickBabble" prefHeight="490.0" prefWidth="274.0" styleClass="babble-image" stylesheets="@../style/game.css" text="BABBLEBOT" textAlignment="CENTER" AnchorPane.leftAnchor="80.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -67,7 +58,7 @@
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="SettingButton" layoutY="574.0" mnemonicParsing="false" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="settings-button" text="Settings">
+            <Button fx:id="SettingButton" layoutY="574.0" mnemonicParsing="false" onAction="#onClickSetting" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="settings-button" text="Settings">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
