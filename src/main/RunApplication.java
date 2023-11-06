@@ -1,9 +1,6 @@
 package main;
 
-import base.CompleteSentence;
-import base.DictionaryManager;
-import base.TranslateAPI;
-import base.Wordle;
+import base.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

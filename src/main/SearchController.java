@@ -5,6 +5,7 @@ import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideInRight;
 import animatefx.animation.SlideOutRight;
 import base.DictionaryManager;
+import base.SpeechRecognizer;
 import base.TranslateAPI;
 import base.Word;
 import javafx.animation.TranslateTransition;
@@ -52,6 +53,8 @@ public class SearchController extends MainController {
     private TextField searchBar;
     @FXML
     private Button SpeakButton;
+    @FXML
+    private Button recordButton;
     @FXML
     private Button addLearningButton;
     @FXML
@@ -568,6 +571,11 @@ public class SearchController extends MainController {
             addLearningButton.setVisible(false);
         }
 
+    }
+    @FXML
+    public void onClickRecording() throws IOException {
+        SpeechRecognizer.start = !SpeechRecognizer.start;
+        SpeechRecognizer.main(null);
     }
     @FXML
     public void addDescription(ActionEvent actionEvent) throws IOException {

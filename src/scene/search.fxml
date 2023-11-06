@@ -51,14 +51,14 @@
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="addNote" layoutX="167.0" layoutY="215.0" onMousePressed="#MouseClick" prefHeight="202.0" prefWidth="498.0" visible="false">
+            <AnchorPane fx:id="addNote" layoutX="167.0" layoutY="215.0" onMousePressed="#MouseClick" prefHeight="202.0" prefWidth="468.0" visible="false">
                <children>
-                  <TextField fx:id="Syms" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addSyms" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
+                  <TextField fx:id="Syms" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addSyms" prefHeight="159.0" prefWidth="431.0" style="-fx-border-color: lightcoral;">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="Notes" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addDescription" prefHeight="159.0" prefWidth="446.0" style="-fx-background-radius: 20;">
+                  <TextField fx:id="Notes" alignment="TOP_LEFT" layoutX="83.0" layoutY="41.0" onAction="#addDescription" prefHeight="159.0" prefWidth="431.0" style="-fx-border-color: lightcoral;">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -96,6 +96,7 @@
                   </Label>
                </children>
             </Pane>
+            <Button fx:id= "recordButton" layoutX="868.0" layoutY="46.0" mnemonicParsing="false" onAction="#onClickRecording" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="mic-button" stylesheets="@../style/search.css" />
          </children>
       </AnchorPane>
       <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" layoutX="1.0" layoutY="3.0" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="950.0" style="-fx-background-color: white;">
