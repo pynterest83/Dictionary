@@ -1,7 +1,10 @@
 package main;
 
+import base.SpeechRecognition;
 import base.TranslateAPI;
+import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,9 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 import org.controlsfx.control.SearchableComboBox;
 import animatefx.animation.*;
 
+import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -45,6 +50,10 @@ public class GGTranslateController extends MainController {
     @FXML
     private Button antButton;
     @FXML
+    private Button recordButton;
+    @FXML
+    private Label ErrorLabel;
+    @FXML
     private Image loadImage = new Image(Paths.get("src/style/media/loading.gif").toUri().toURL().toString());
 
     public GGTranslateController() throws MalformedURLException {
@@ -62,6 +71,7 @@ public class GGTranslateController extends MainController {
     @FXML
     public void SelectSourceLang() {
         sourceLangCode = TranslateAPI.langMap.get(SourceLang.getValue());
+        SpeechRecognition.changeLanguage(sourceLangCode);
     }
     @FXML
     public void SelectTargetLang() {
@@ -93,6 +103,8 @@ public class GGTranslateController extends MainController {
         String tmp = input.getText();
         input.setText(output.getText());
         output.setText(tmp);
+
+        SpeechRecognition.changeLanguage(sourceLangCode);
     }
     @FXML
     public void translate() {
@@ -177,6 +189,50 @@ public class GGTranslateController extends MainController {
             return;
         }
         TranslateAPI.speakAudio(output.getText(),TargetLang.getValue());
+    }
+
+    @FXML
+    public void onClickRecording() {
+        if (!SpeechRecognition.isListening) {
+            new Thread(() -> {
+                Platform.runLater(()-> {
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("micload-button");
+                });
+                SpeechRecognition.streamingMicRecognize();
+                Platform.runLater(()-> {
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("recording-button");
+                });
+                try {
+                    SpeechRecognition.recordIndefinite();
+                } catch (LineUnavailableException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(()-> {
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("mic-button");
+                    if (!SpeechRecognition.alternatives.isEmpty()) {
+                        input.setText(SpeechRecognition.alternatives.get(0));
+                    }
+                    else {
+                        TranslateTransition translateIn = new TranslateTransition(Duration.millis(500),ErrorLabel);
+                        translateIn.setToX(ErrorLabel.getLayoutX() + 2 * ErrorLabel.getWidth() + 80);
+                        PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                        translateIn.setOnFinished(e -> pause.playFromStart());
+                        pause.setOnFinished(e-> {
+                            TranslateTransition translateOut = new TranslateTransition(Duration.millis(500),ErrorLabel);
+                            translateOut.setToX(0);
+                            translateOut.play();
+                        });
+                        translateIn.play();
+                    }
+                });
+            }).start();
+        }
+        else {
+            SpeechRecognition.isListening = false;
+        }
     }
 
     public void onClickSynonyms() {

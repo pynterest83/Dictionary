@@ -507,6 +507,7 @@ public class SearchController extends MainController {
         UsageOverTime.getData().clear();
         wordSynonyms.getChildren().clear();
         addNote.setVisible(false);
+        EtymologyPane.getEngine().loadContent("");
         if (!Objects.equals(DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict), "Word not found.")) {
             searched = searchBar.getText();
             DisplayWordExplain();
@@ -576,34 +577,35 @@ public class SearchController extends MainController {
     }
     @FXML
     public void onClickRecording() {
-        new Thread(() -> {
-            Platform.runLater(()-> {
-                recordButton.getStyleClass().clear();
-                recordButton.getStyleClass().add("micload-button");
-            });
-            SpeechRecognition.streamingMicRecognize();
-            Platform.runLater(()-> {
-                recordButton.getStyleClass().clear();
-                recordButton.getStyleClass().add("recording-button");
-            });
-            try {
-                SpeechRecognition.recordFor(3000);
-            } catch (LineUnavailableException | IOException e) {
-                throw new RuntimeException(e);
-            }
-            Platform.runLater(()-> {
-                recordButton.getStyleClass().clear();
-                recordButton.getStyleClass().add("mic-button");
-                if (!SpeechRecognition.alternatives.isEmpty()) {
-                    searchBar.setText(SpeechRecognition.alternatives.get(0));
-                    try {
-                        enterSearch();
-                    } catch (Exception ignored) {}
+        if (!SpeechRecognition.isListening) {
+            new Thread(() -> {
+                Platform.runLater(()-> {
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("micload-button");
+                });
+                SpeechRecognition.streamingMicRecognize();
+                Platform.runLater(()-> {
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("recording-button");
+                });
+                try {
+                    SpeechRecognition.recordIndefinite();
+                } catch (LineUnavailableException | IOException e) {
+                    throw new RuntimeException(e);
                 }
-                else {
+                Platform.runLater(()-> {
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("mic-button");
+                    if (!SpeechRecognition.alternatives.isEmpty()) {
+                        searchBar.setText(SpeechRecognition.alternatives.get(0));
+                        try {
+                            enterSearch();
+                        } catch (Exception ignored) {}
+                    }
+                    else {
                         TranslateTransition translateIn = new TranslateTransition(Duration.millis(500),ErrorLabel);
                         translateIn.setToX(0);
-                        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                        PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                         translateIn.setOnFinished(e -> pause.playFromStart());
                         pause.setOnFinished(e-> {
                             TranslateTransition translateOut = new TranslateTransition(Duration.millis(500),ErrorLabel);
@@ -611,9 +613,13 @@ public class SearchController extends MainController {
                             translateOut.play();
                         });
                         translateIn.play();
-                }
-            });
-        }).start();
+                    }
+                });
+            }).start();
+        }
+        else {
+            SpeechRecognition.isListening = false;
+        }
     }
     @FXML
     public void addDescription() throws IOException {
@@ -661,11 +667,13 @@ public class SearchController extends MainController {
             type_Dict = "VI_EN";
             en_vi_dict.setVisible(false);
             vi_en_dict.setVisible(true);
+            SpeechRecognition.changeLanguage("vi");
         }
         else {
             type_Dict = "EN_VI";
             en_vi_dict.setVisible(true);
             vi_en_dict.setVisible(false);
+            SpeechRecognition.changeLanguage("en");
         }
         getHistory();
     }

@@ -14,7 +14,7 @@ public class SpeechRecognition {
     public static boolean isListening = false;
     public static ArrayList<String> alternatives = new ArrayList<>();
     static SpeechClient client;
-    static RecognitionConfig recognitionConfig = RecognitionConfig.newBuilder().setEncoding(RecognitionConfig.AudioEncoding.LINEAR16).setLanguageCode("en-US").setSampleRateHertz(16000).build();
+    static RecognitionConfig recognitionConfig = RecognitionConfig.newBuilder().setEncoding(RecognitionConfig.AudioEncoding.LINEAR16).setLanguageCode("en").setSampleRateHertz(16000).build();
     static ClientStream<StreamingRecognizeRequest> clientStream;
     static StreamingRecognitionConfig streamingRecognitionConfig = StreamingRecognitionConfig.newBuilder().setConfig(recognitionConfig).build();
     static StreamingRecognizeRequest request;
@@ -32,27 +32,6 @@ public class SpeechRecognition {
 
     static byte[] data;
 
-    public static void recordFor(int length) throws LineUnavailableException, IOException {
-        TargetDataLine targetDataLine = (TargetDataLine) AudioSystem.getLine(targetInfo);
-        targetDataLine.open(audioFormat);
-        targetDataLine.start();
-        long startTime = System.currentTimeMillis();
-        // Audio Input Stream
-        AudioInputStream audio = new AudioInputStream(targetDataLine);
-        while (true) {
-            long estimatedTime = System.currentTimeMillis() - startTime;
-            byte[] data = new byte[320];
-            audio.read(data);
-            if (estimatedTime > length) {
-                targetDataLine.close();
-                targetDataLine.stop();
-                break;
-            }
-            request = StreamingRecognizeRequest.newBuilder().setAudioContent(ByteString.copyFrom(data)).build();
-            clientStream.send(request);
-        }
-        responseObserver.onComplete();
-    }
     public static void recordIndefinite() throws IOException, LineUnavailableException {
         TargetDataLine targetDataLine = (TargetDataLine) AudioSystem.getLine(targetInfo);
         targetDataLine.open(audioFormat);
@@ -97,5 +76,10 @@ public class SpeechRecognition {
             clientStream = client.streamingRecognizeCallable().splitCall(responseObserver);
             clientStream.send(request);
         } catch (Exception ignored) {}
+    }
+
+    public static void changeLanguage(String language) {
+        recognitionConfig = RecognitionConfig.newBuilder().setEncoding(RecognitionConfig.AudioEncoding.LINEAR16).setLanguageCode(language).setSampleRateHertz(16000).build();
+        streamingRecognitionConfig = StreamingRecognitionConfig.newBuilder().setConfig(recognitionConfig).build();
     }
 }

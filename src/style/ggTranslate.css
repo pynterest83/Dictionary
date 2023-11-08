@@ -18,3 +18,27 @@
 .speak-button:hover {
     -fx-background-color: lightcoral;
 }
+.mic-button {
+    -fx-background-image: url("media/mic.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.mic-button:hover {
+    -fx-background-color: lightcoral;
+}
+.recording-button {
+    -fx-background-image: url("media/recording.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.micload-button {
+    -fx-background-image: url("media/micload.gif");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}

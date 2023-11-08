@@ -214,7 +214,6 @@ public class MainController {
     private AnchorPane QuizPane;
     @FXML
     private void StartGame() throws MalformedURLException {
-        StartGameButton.setVisible(false);
         ChoiceA.setVisible(true);
         ChoiceB.setVisible(true);
         ChoiceC.setVisible(true);

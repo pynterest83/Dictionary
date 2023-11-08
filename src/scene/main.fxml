@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
       <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="950.0" style="-fx-background-color: white;">
          <buttons>
@@ -21,9 +21,9 @@
       </ButtonBar>
       <AnchorPane layoutY="37.0" onMouseClicked="#HideMenuBar" prefHeight="665.0" prefWidth="950.0">
          <children>
-            <AnchorPane fx:id="QuizPane" layoutX="14.0" layoutY="132.0" minHeight="0.0" minWidth="0.0" prefHeight="519.0" prefWidth="694.0" style="-fx-background-color: white;">
+            <AnchorPane fx:id="QuizPane" layoutX="14.0" layoutY="316.0" minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="535.0" style="-fx-background-color: white;">
                <children>
-                  <WebView fx:id="gameScreen" prefHeight="473.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <WebView fx:id="gameScreen" prefHeight="519.0" prefWidth="694.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <RadioButton fx:id="ChoiceA" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#RadioButtonClick" visible="false">
                      <toggleGroup>
                         <ToggleGroup fx:id="QuestionChoices" />
@@ -34,11 +34,6 @@
                   <RadioButton fx:id="ChoiceD" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
                   <RadioButton fx:id="ChoiceE" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
                   <Button fx:id="NextButton" layoutX="428.0" layoutY="291.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" visible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-                  <Button fx:id="StartGameButton" layoutX="284.0" layoutY="224.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="70.0" prefWidth="126.0" text="Start">
-                     <font>
-                        <Font name="Calibri Bold" size="24.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
          </children></AnchorPane>
