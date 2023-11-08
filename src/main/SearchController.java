@@ -5,9 +5,10 @@ import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideInRight;
 import animatefx.animation.SlideOutRight;
 import base.DictionaryManager;
-import base.SpeechRecognizer;
+import base.SpeechRecognition;
 import base.TranslateAPI;
 import base.Word;
+import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
@@ -34,6 +35,7 @@ import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import javax.sound.sampled.LineUnavailableException;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -47,7 +49,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SearchController extends MainController {
-
+    @FXML
+    private AnchorPane Root;
     String[] suggestions;
     @FXML
     private TextField searchBar;
@@ -97,6 +100,8 @@ public class SearchController extends MainController {
     private WebView EtymologyPane;
     @FXML
     private Button ToolbarMenuButton;
+    @FXML
+    private Label ErrorLabel;
     @FXML
     private Image loadImage = new Image(Paths.get("src/style/media/loading.gif").toUri().toURL().toString());
     private String searched = null;
@@ -227,9 +232,7 @@ public class SearchController extends MainController {
             if (newText.length() >= 2) {
                 try {
                     UserInput();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                } catch (Exception ignored) {}
             }
         });
         searchBar.focusedProperty().addListener((ObservableValue <? extends Boolean> observable, Boolean oldValue, Boolean newValue)->{
@@ -318,17 +321,17 @@ public class SearchController extends MainController {
                 repeated = DictionaryManager.importFromFile(f.getAbsolutePath(), "VI_EN");
             }
             if (!repeated.isEmpty()) {
-                for (int i =0; i<repeated.size(); i++) {
+                for (Word word : repeated) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
                     alert1.setTitle("Remove Repeated Words");
-                    alert1.setHeaderText(repeated.get(i).getWordTarget() + " is already in the dictionary.");
-                    alert1.setContentText("Do you want to replace " + repeated.get(i).getWordTarget() +"?");
+                    alert1.setHeaderText(word.getWordTarget() + " is already in the dictionary.");
+                    alert1.setContentText("Do you want to replace " + word.getWordTarget() + "?");
                     Optional<ButtonType> result1 = alert.showAndWait();
 
                     if (result1.get() == ButtonType.OK) {
-                        int position = DictionaryManager.binSearch(repeated.get(i).getWordTarget());
+                        int position = DictionaryManager.binSearch(word.getWordTarget());
                         DictionaryManager.curDict.remove(position);
-                        DictionaryManager.curDict.add(repeated.get(i));
+                        DictionaryManager.curDict.add(word);
                         Collections.sort(DictionaryManager.curDict);
                     }
                 }
@@ -551,7 +554,7 @@ public class SearchController extends MainController {
         }
     }
     @FXML
-    private void onClickSpeakButton() throws Exception {
+    private void onClickSpeakButton() {
         if (type_Dict.equals("EN_VI")) TranslateAPI.speakAudio(searched,"English");
         else TranslateAPI.speakAudio(searched,"Vietnamese");
     }
@@ -572,14 +575,48 @@ public class SearchController extends MainController {
 
     }
     @FXML
-    public void onClickRecording() throws IOException {
-        SpeechRecognizer.start = !SpeechRecognizer.start;
-        if (SpeechRecognizer.start) {
-            new Thread(() -> SpeechRecognizer.main(null)).start();
-        }
+    public void onClickRecording() {
+        new Thread(() -> {
+            Platform.runLater(()-> {
+                recordButton.getStyleClass().clear();
+                recordButton.getStyleClass().add("micload-button");
+            });
+            SpeechRecognition.streamingMicRecognize();
+            Platform.runLater(()-> {
+                recordButton.getStyleClass().clear();
+                recordButton.getStyleClass().add("recording-button");
+            });
+            try {
+                SpeechRecognition.recordFor(3000);
+            } catch (LineUnavailableException | IOException e) {
+                throw new RuntimeException(e);
+            }
+            Platform.runLater(()-> {
+                recordButton.getStyleClass().clear();
+                recordButton.getStyleClass().add("mic-button");
+                if (!SpeechRecognition.alternatives.isEmpty()) {
+                    searchBar.setText(SpeechRecognition.alternatives.get(0));
+                    try {
+                        enterSearch();
+                    } catch (Exception ignored) {}
+                }
+                else {
+                        TranslateTransition translateIn = new TranslateTransition(Duration.millis(500),ErrorLabel);
+                        translateIn.setToX(0);
+                        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                        translateIn.setOnFinished(e -> pause.playFromStart());
+                        pause.setOnFinished(e-> {
+                            TranslateTransition translateOut = new TranslateTransition(Duration.millis(500),ErrorLabel);
+                            translateOut.setByX(-ErrorLabel.getWidth());
+                            translateOut.play();
+                        });
+                        translateIn.play();
+                }
+            });
+        }).start();
     }
     @FXML
-    public void addDescription(ActionEvent actionEvent) throws IOException {
+    public void addDescription() throws IOException {
         DictionaryManager.addLearning(searched, Notes.getText(), type_Dict);
         RunApplication.Reload("learning.fxml");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

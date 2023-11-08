@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.sound.sampled.LineUnavailableException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -53,7 +54,7 @@ public class RunApplication extends Application {
             });
             try {
                 LoadData();
-            } catch (IOException e) {
+            } catch (IOException | LineUnavailableException e) {
                 throw new RuntimeException(e);
             }
             Platform.runLater(() -> {
@@ -67,12 +68,12 @@ public class RunApplication extends Application {
             });
         }).start();
     }
-    public static void LoadData() throws IOException {
+    public static void LoadData() throws IOException, LineUnavailableException {
         DictionaryManager.defaultFile();
         CompleteSentence.LoadQuestionsAndAnswers();
         Wordle.LoadWordleList();
         TranslateAPI.addDefault();
-        SpeechRecognizer.prepare();
+        SpeechRecognition.prepare();
     }
     public static void LoadScenes() throws IOException {
         File dir = new File("src/scene");

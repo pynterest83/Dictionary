@@ -62,6 +62,20 @@
 .mic-button:hover {
     -fx-background-color: lightcoral;
 }
+.recording-button {
+    -fx-background-image: url("media/recording.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.micload-button {
+    -fx-background-image: url("media/micload.gif");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
 .favourite {
     -fx-background-image: url("media/fav.png");
     -fx-background-color:transparent;
@@ -87,5 +101,8 @@
     -fx-background-color: lightcoral;
 }
 .normal-font {
+    -fx-font-family: 'Lato', sans-serif;
+}
+.error-label {
     -fx-font-family: 'Lato', sans-serif;
 }
