@@ -71,7 +71,7 @@
     -fx-background-size: 30;
     -fx-background-position: center;
 }
-.recording-button: hover {
+.recording-button:hover {
     -fx-background-image: url("media/recordingstop.png");
 }
 .micload-button {

@@ -577,6 +577,9 @@ public class SearchController extends MainController {
     }
     @FXML
     public void onClickRecording() {
+        if (type_Dict.equals("EN_VI")) SpeechRecognition.changeLanguage("en");
+        else SpeechRecognition.changeLanguage("vi");
+
         if (!SpeechRecognition.isListening) {
             new Thread(() -> {
                 Platform.runLater(() -> {

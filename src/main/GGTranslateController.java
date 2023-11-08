@@ -67,7 +67,6 @@ public class GGTranslateController extends MainController {
     @FXML
     public void SelectSourceLang() {
         sourceLangCode = TranslateAPI.langMap.get(SourceLang.getValue());
-        SpeechRecognition.changeLanguage(sourceLangCode);
     }
     @FXML
     public void SelectTargetLang() {
@@ -99,8 +98,6 @@ public class GGTranslateController extends MainController {
         String tmp = input.getText();
         input.setText(output.getText());
         output.setText(tmp);
-
-        SpeechRecognition.changeLanguage(sourceLangCode);
     }
     @FXML
     public void translate() {
@@ -189,6 +186,16 @@ public class GGTranslateController extends MainController {
 
     @FXML
     public void onClickRecording() {
+        if (SourceLang.getValue() == null || SourceLang.getValue().equals("Auto Detect")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please select a language");
+            alert.setContentText("Please select a language");
+            alert.showAndWait();
+            return;
+        }
+        SpeechRecognition.changeLanguage(sourceLangCode);
+
         if (!SpeechRecognition.isListening) {
             new Thread(() -> {
                 Platform.runLater(() -> {

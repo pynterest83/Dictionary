@@ -6,3 +6,5 @@ fine
 mark
 student
 understand
+Hello
+goodbye
