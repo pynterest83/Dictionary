@@ -1,5 +1,6 @@
 package main;
 
+import animatefx.animation.FadeIn;
 import base.SpeechRecognition;
 import base.TranslateAPI;
 import javafx.animation.PauseTransition;
@@ -7,17 +8,12 @@ import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import org.controlsfx.control.SearchableComboBox;
-import animatefx.animation.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
@@ -195,34 +191,31 @@ public class GGTranslateController extends MainController {
     public void onClickRecording() {
         if (!SpeechRecognition.isListening) {
             new Thread(() -> {
-                Platform.runLater(()-> {
-                    recordButton.getStyleClass().clear();
-                    recordButton.getStyleClass().add("micload-button");
-                });
-                SpeechRecognition.streamingMicRecognize();
-                Platform.runLater(()-> {
+                Platform.runLater(() -> {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("recording-button");
                 });
                 try {
-                    SpeechRecognition.recordIndefinite();
-                } catch (LineUnavailableException | IOException e) {
-                    throw new RuntimeException(e);
-                }
-                Platform.runLater(()-> {
+                    SpeechRecognition.recordFor(10000);
+                } catch (LineUnavailableException | IOException ignored) {}
+                Platform.runLater(()->{
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("micload-button");
+                });
+                SpeechRecognition.sendRequest();
+                Platform.runLater(() -> {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("mic-button");
                     if (!SpeechRecognition.alternatives.isEmpty()) {
                         input.setText(SpeechRecognition.alternatives.get(0));
-                    }
-                    else {
-                        TranslateTransition translateIn = new TranslateTransition(Duration.millis(500),ErrorLabel);
-                        translateIn.setToX(ErrorLabel.getLayoutX() + 2 * ErrorLabel.getWidth() + 80);
+                    } else {
+                        TranslateTransition translateIn = new TranslateTransition(Duration.millis(500), ErrorLabel);
+                        translateIn.setToX(0);
                         PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                         translateIn.setOnFinished(e -> pause.playFromStart());
-                        pause.setOnFinished(e-> {
-                            TranslateTransition translateOut = new TranslateTransition(Duration.millis(500),ErrorLabel);
-                            translateOut.setToX(0);
+                        pause.setOnFinished(e -> {
+                            TranslateTransition translateOut = new TranslateTransition(Duration.millis(500), ErrorLabel);
+                            translateOut.setByX(-ErrorLabel.getWidth());
                             translateOut.play();
                         });
                         translateIn.play();

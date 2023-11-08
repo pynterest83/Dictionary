@@ -55,6 +55,7 @@
 .mic-button {
     -fx-background-image: url("media/mic.png");
     -fx-background-color:transparent;
+    -fx-background-radius: 50%;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
@@ -65,13 +66,18 @@
 .recording-button {
     -fx-background-image: url("media/recording.png");
     -fx-background-color:transparent;
+    -fx-background-radius: 50%;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
 }
+.recording-button: hover {
+    -fx-background-image: url("media/recordingstop.png");
+}
 .micload-button {
     -fx-background-image: url("media/micload.gif");
     -fx-background-color:transparent;
+    -fx-background-radius: 50%;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;

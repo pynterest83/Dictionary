@@ -2,11 +2,11 @@ package base;
 
 import com.google.api.gax.rpc.ClientStream;
 import com.google.api.gax.rpc.ResponseObserver;
-import com.google.api.gax.rpc.StreamController;
 import com.google.cloud.speech.v1.*;
 import com.google.protobuf.ByteString;
 
 import javax.sound.sampled.*;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,11 +16,12 @@ public class SpeechRecognition {
     static SpeechClient client;
     static RecognitionConfig recognitionConfig = RecognitionConfig.newBuilder().setEncoding(RecognitionConfig.AudioEncoding.LINEAR16).setLanguageCode("en").setSampleRateHertz(16000).build();
     static ClientStream<StreamingRecognizeRequest> clientStream;
-    static StreamingRecognitionConfig streamingRecognitionConfig = StreamingRecognitionConfig.newBuilder().setConfig(recognitionConfig).build();
     static StreamingRecognizeRequest request;
     static ResponseObserver<StreamingRecognizeResponse> responseObserver;
     static AudioFormat audioFormat = new AudioFormat(16000, 16, 1, true, false);
     static DataLine.Info targetInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
+    static TargetDataLine targetDataLine;
+    static ByteArrayOutputStream output;
 
     public static void prepare() throws IOException, LineUnavailableException {
         client = SpeechClient.create();
@@ -28,58 +29,36 @@ public class SpeechRecognition {
             System.out.println("Microphone not supported");
             System.exit(0);
         }
-    }
-
-    static byte[] data;
-
-    public static void recordIndefinite() throws IOException, LineUnavailableException {
-        TargetDataLine targetDataLine = (TargetDataLine) AudioSystem.getLine(targetInfo);
+        targetDataLine = (TargetDataLine) AudioSystem.getLine(targetInfo);
         targetDataLine.open(audioFormat);
+    }
+    public static void recordFor(int length) throws LineUnavailableException, IOException {
+        alternatives.clear();
+        targetDataLine.flush();
         targetDataLine.start();
-        isListening = true;
         long startTime = System.currentTimeMillis();
-        // Audio Input Stream
-        AudioInputStream audio = new AudioInputStream(targetDataLine);
-        while (isListening && System.currentTimeMillis() - startTime <= 10000) {
+        AudioInputStream audioIn = new AudioInputStream(targetDataLine);
+        output = new ByteArrayOutputStream();
+        isListening = true;
+        while (isListening && System.currentTimeMillis() - startTime <= length) {
             byte[] data = new byte[320];
-            audio.read(data);
-            request = StreamingRecognizeRequest.newBuilder().setAudioContent(ByteString.copyFrom(data)).build();
-            clientStream.send(request);
+            int count = audioIn.read(data);
+            output.write(data,0,count);
         }
         targetDataLine.stop();
-        targetDataLine.close();
-        responseObserver.onComplete();
     }
-    public static void streamingMicRecognize() {
-        alternatives.clear();
-        try {
-            request = StreamingRecognizeRequest.newBuilder().setStreamingConfig(streamingRecognitionConfig).build(); // The first request in a streaming call has to be a config
-            responseObserver = new ResponseObserver<>() {
-                final ArrayList<StreamingRecognizeResponse> responses = new ArrayList<>();
-                public void onStart(StreamController controller) {
-                }
-                public void onResponse(StreamingRecognizeResponse response) {
-                    responses.add(response);
-                }
-                public void onComplete() {
-                    for (StreamingRecognizeResponse response : responses) {
-                        StreamingRecognitionResult result = response.getResultsList().get(0);
-                        for (int i = 0; i < result.getAlternativesList().size(); i++) {
-                            SpeechRecognitionAlternative alternative = result.getAlternativesList().get(i);
-                            alternatives.add(alternative.getTranscript());
-                        }
-                    }
-                }
-                public void onError(Throwable t) {
-                }
-            };
-            clientStream = client.streamingRecognizeCallable().splitCall(responseObserver);
-            clientStream.send(request);
-        } catch (Exception ignored) {}
+    public static void sendRequest() {
+        byte[] out = output.toByteArray();
+        RecognitionAudio audio = RecognitionAudio.newBuilder().setContent(ByteString.copyFrom(out)).build();
+        RecognizeResponse response = client.recognize(recognitionConfig,audio);
+        java.util.List<SpeechRecognitionResult> results = response.getResultsList();
+        for (SpeechRecognitionResult result : results) {
+            SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
+            alternatives.add(alternative.getTranscript());
+        }
     }
 
     public static void changeLanguage(String language) {
         recognitionConfig = RecognitionConfig.newBuilder().setEncoding(RecognitionConfig.AudioEncoding.LINEAR16).setLanguageCode(language).setSampleRateHertz(16000).build();
-        streamingRecognitionConfig = StreamingRecognitionConfig.newBuilder().setConfig(recognitionConfig).build();
     }
 }

@@ -353,7 +353,7 @@ public class SearchController extends MainController {
         RunApplication.SwitchScenes(stage,"add.fxml");
     }
     @FXML
-    protected void onClickModify() throws IOException {
+    protected void onClickModify() {
         searchBar.clear();
         wordHeader.getEngine().loadContent("");
         wordExplain.getEngine().loadContent("");
@@ -454,7 +454,7 @@ public class SearchController extends MainController {
         }).start();
     }
     @FXML
-    protected void CreateSearchHyperlink(String word) throws Exception {
+    protected void CreateSearchHyperlink(String word) {
         if (!Objects.equals(DictionaryManager.dictionaryLookup(word, type_Dict), "Word not found.")) {
             Hyperlink wordLink = new Hyperlink(word);
             wordLink.setFont(new Font(16));
@@ -526,7 +526,7 @@ public class SearchController extends MainController {
         }
     }
     @FXML
-    private void DisplayWordExplain() throws Exception {
+    private void DisplayWordExplain() {
         addLearningButton.setVisible(false);
         removeLearningButton.setVisible(false);
         String header = "<html><header><h2>"+ searchBar.getText() +"</h2></header></html>";
@@ -579,36 +579,34 @@ public class SearchController extends MainController {
     public void onClickRecording() {
         if (!SpeechRecognition.isListening) {
             new Thread(() -> {
-                Platform.runLater(()-> {
-                    recordButton.getStyleClass().clear();
-                    recordButton.getStyleClass().add("micload-button");
-                });
-                SpeechRecognition.streamingMicRecognize();
-                Platform.runLater(()-> {
+                Platform.runLater(() -> {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("recording-button");
                 });
                 try {
-                    SpeechRecognition.recordIndefinite();
-                } catch (LineUnavailableException | IOException e) {
-                    throw new RuntimeException(e);
-                }
-                Platform.runLater(()-> {
+                    SpeechRecognition.recordFor(4000);
+                } catch (LineUnavailableException | IOException ignored) {}
+                Platform.runLater(()->{
+                    recordButton.getStyleClass().clear();
+                    recordButton.getStyleClass().add("micload-button");
+                });
+                SpeechRecognition.sendRequest();
+                Platform.runLater(() -> {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("mic-button");
                     if (!SpeechRecognition.alternatives.isEmpty()) {
                         searchBar.setText(SpeechRecognition.alternatives.get(0));
                         try {
                             enterSearch();
-                        } catch (Exception ignored) {}
-                    }
-                    else {
-                        TranslateTransition translateIn = new TranslateTransition(Duration.millis(500),ErrorLabel);
+                        } catch (Exception ignored) {
+                        }
+                    } else {
+                        TranslateTransition translateIn = new TranslateTransition(Duration.millis(500), ErrorLabel);
                         translateIn.setToX(0);
                         PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                         translateIn.setOnFinished(e -> pause.playFromStart());
-                        pause.setOnFinished(e-> {
-                            TranslateTransition translateOut = new TranslateTransition(Duration.millis(500),ErrorLabel);
+                        pause.setOnFinished(e -> {
+                            TranslateTransition translateOut = new TranslateTransition(Duration.millis(500), ErrorLabel);
                             translateOut.setByX(-ErrorLabel.getWidth());
                             translateOut.play();
                         });
