@@ -67,6 +67,11 @@
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Button>
+             <Button fx:id="ImageTranslateButton" layoutY="382.0" mnemonicParsing="false" onAction="#onClickImageTranslateButton" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="image-translate-button" text="Image&#10;Translate" textAlignment="CENTER" wrapText="true">
+                 <font>
+                     <Font name="SansSerif Bold" size="18.0" />
+                 </font>
+             </Button>
              <Button fx:id="SettingButton" layoutY="574.0" mnemonicParsing="false" onAction="#onClickSetting" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="settings-button" text="Settings">
                  <font>
                      <Font name="SansSerif Bold" size="18.0" />

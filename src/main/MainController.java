@@ -38,6 +38,8 @@ public class MainController {
     @FXML
     protected Button LearningButton;
     @FXML
+    protected Button ImageTranslateButton;
+    @FXML
     protected Button SettingButton;
     @FXML
     protected Button CloseButton;
@@ -136,6 +138,15 @@ public class MainController {
         menuBar.setVisible(false);
         Stage stage = (Stage) menuBar.getScene().getWindow();
         RunApplication.SwitchScenes(stage,"learning.fxml");
+    }
+    @FXML
+    public void onClickImageTranslateButton() throws IOException {
+        currentScene = "imageTranslate.fxml";
+        inside = false;
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"imageTranslate.fxml");
     }
     @FXML
     public void onClickSetting() {

@@ -49,6 +49,13 @@
     -fx-background-size: 30;
     -fx-background-position: 20;
 }
+.image-translate-button {
+    -fx-background-image: url("media/image_translate.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: 20;
+}
 .settings-button {
     -fx-background-image: url("media/settings.png");
     -fx-background-color:transparent;
