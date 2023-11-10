@@ -1,6 +1,7 @@
 package main;
 
 import base.ImageTranslate;
+import base.TranslateAPI;
 import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.BoundingPoly;
 import com.google.cloud.vision.v1.Vertex;
@@ -11,16 +12,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class ImageTranslateController extends MainController {
     private static String imagePath;
     private static String outputImagePath;
-    private static ArrayList<Polygon> polygons;
+    private static ArrayList<Text> texts;
     private static double scale;
     @FXML
     private ImageView input;
@@ -43,7 +46,7 @@ public class ImageTranslateController extends MainController {
 
     @FXML
     public void translateImage() {
-        polygons = new ArrayList<>();
+        texts = new ArrayList<>();
 
         new Thread(() -> {
             try {
@@ -52,17 +55,20 @@ public class ImageTranslateController extends MainController {
                 throw new RuntimeException(e);
             }
             for (String word : ImageTranslate.textAnnotations.keySet()) {
-                System.out.println(word);
+                //if (word.length() > 10) continue;
                 BoundingPoly value = ImageTranslate.textAnnotations.get(word);
-                Polygon p = new Polygon();
-                p.setStyle("-fx-fill: transparent; -fx-stroke: red; -fx-stroke-width: 2;");
-                for (Vertex vertex : value.getVerticesList()) {
-                    p.getPoints().addAll(vertex.getX() / scale, vertex.getY() / scale);
-                }
-                polygons.add(p);
+                Text text = new Text(word);
+                text.setLayoutX(value.getVertices(3).getX() / scale);
+                text.setLayoutY(value.getVertices(3).getY() / scale);
+                double width = value.getVertices(1).getX() / scale - value.getVertices(0).getX() / scale;
+                double fontSize = text.getFont().getSize();
+                double curWidth = text.getLayoutBounds().getWidth();
+                text.setFont(javafx.scene.text.Font.font(fontSize * width / curWidth));
+
+                texts.add(text);
             }
             Platform.runLater(() -> {
-                outputPane.getChildren().addAll(polygons);
+                outputPane.getChildren().addAll(texts);
                 output.setImage(new javafx.scene.image.Image(outputImagePath));
             });
         }).start();

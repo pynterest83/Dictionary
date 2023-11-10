@@ -19,8 +19,10 @@ public class ImageTranslate {
 
         Image img = Image.newBuilder().setContent(imgBytes).build();
         Feature feat = Feature.newBuilder().setType(Feature.Type.TEXT_DETECTION).build();
+        ImageContext imageContext = ImageContext.newBuilder().addLanguageHints("en").build();
+        ImageContext imageContext2 = ImageContext.newBuilder().addLanguageHints("vi").build();
         AnnotateImageRequest request =
-                AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+                AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).setImageContext(imageContext).setImageContext(imageContext2).build();
         requests.add(request);
 
         // Initialize client that will be used to send requests. This client only needs to be created
