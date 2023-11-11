@@ -8,17 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ImageTranslateController">
+<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ImageTranslateController">
     <children>
       <Pane layoutX="94.0" layoutY="100.0" onMouseClicked="#inputImage" prefHeight="573.0" prefWidth="374.0" style="-fx-border-style: dashed;">
          <children>
             <ImageView fx:id="input" fitHeight="573.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane fx:id="outputPane" layoutX="550.0" layoutY="100.0" prefHeight="573.0" prefWidth="374.0" style="-fx-border-style: dashed;">
-         <children>
-            <ImageView fx:id="output" fitHeight="573.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true" />
-         </children></Pane>
+      <Pane fx:id="outputPane" layoutX="550.0" layoutY="100.0" prefHeight="573.0" prefWidth="374.0" style="-fx-border-style: dashed;" />
       <Button layoutX="475.0" layoutY="338.0" mnemonicParsing="false" onAction="#translateImage" text="Translate" />
         <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="950.0" style="-fx-background-color: white;">
             <buttons>

@@ -3,15 +3,19 @@ package base;
 
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
+import org.apache.commons.collections4.map.LinkedMap;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ImageTranslate {
-
-    public static HashMap<String, BoundingPoly> textAnnotations;
+    private static ImageAnnotatorClient client;
+    public static void prepare() throws IOException {
+        client = ImageAnnotatorClient.create();
+    }
+    public static LinkedMap<String, BoundingPoly> textAnnotations = new LinkedMap<>();
     public static void detectText(String filePath) throws IOException {
         List<AnnotateImageRequest> requests = new ArrayList<>();
 
@@ -24,24 +28,16 @@ public class ImageTranslate {
         AnnotateImageRequest request =
                 AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).setImageContext(imageContext).setImageContext(imageContext2).build();
         requests.add(request);
-
-        // Initialize client that will be used to send requests. This client only needs to be created
-        // once, and can be reused for multiple requests. After completing all of your requests, call
-        // the "close" method on the client to safely clean up any remaining background resources.
-        try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
-            BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
-            List<AnnotateImageResponse> responses = response.getResponsesList();
-
-            for (AnnotateImageResponse res : responses) {
-                if (res.hasError()) {
-                    System.out.format("Error: %s%n", res.getError().getMessage());
-                    return;
-                }
-                textAnnotations = new HashMap<>();
-                // For full list of available annotations, see http://g.co/cloud/vision/docs
-                for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
-                    textAnnotations.put(annotation.getDescription(), annotation.getBoundingPoly());
-                }
+        BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
+        List<AnnotateImageResponse> responses = response.getResponsesList();
+        for (AnnotateImageResponse res : responses) {
+            if (res.hasError()) {
+                System.out.format("Error: %s%n", res.getError().getMessage());
+                return;
+            }
+            textAnnotations.clear();
+            for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
+                textAnnotations.put(annotation.getDescription(), annotation.getBoundingPoly());
             }
         }
     }

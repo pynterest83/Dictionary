@@ -27,6 +27,7 @@ import static java.util.Map.entry;
 
 public class WordleController extends MainController {
     static int CurrentAttempt;
+    static boolean endGame;
     static int CurrentLetter;
     private static String lastKey;
     private static String lastCharacter = "";
@@ -138,6 +139,7 @@ public class WordleController extends MainController {
     }
     @FXML
     protected void Start() {
+        endGame = false;
         CurrentAttempt = 0;
         CurrentLetter = 0;
         VirtualKeyboard.setVisible(true);
@@ -158,10 +160,18 @@ public class WordleController extends MainController {
     }
     @FXML
     protected void onPress(KeyEvent event) {
+        if (endGame) return;
+        if (!event.getCode().isLetterKey()
+                && !Objects.equals(event.getCode().toString(), "BACK_SPACE")
+                && !Objects.equals(event.getCode().toString(), "ENTER")) {
+            lastKey = "INVALID";
+            return;
+        }
         lastKey = event.getCode().toString();
     }
     @FXML
     protected void onRelease() {
+        if (endGame) return;
         HBox CurrentHbox = (HBox) WordlePane.getChildren().get(CurrentAttempt);
         if (CurrentLetter == 4) {
             lastCharacter = ((TextField) CurrentHbox.getChildren().get(CurrentLetter)).getText();
@@ -186,9 +196,10 @@ public class WordleController extends MainController {
     }
     @FXML
     protected void onType() {
+        if (endGame) return;
+        if (Objects.equals(lastKey, "INVALID")) return;
         HBox CurrentHbox = (HBox) WordlePane.getChildren().get(CurrentAttempt);
         TextField CurrentField = (TextField) CurrentHbox.getChildren().get(CurrentLetter);
-        if (Objects.equals(lastKey, "SPACE")) return;
         if (Objects.equals(lastKey, "BACK_SPACE")) {
             if (CurrentLetter>0) {
                 if (CurrentLetter == 4 && !Objects.equals(lastCharacter, "")) {
@@ -323,16 +334,11 @@ public class WordleController extends MainController {
     }
     @FXML
     protected void EndGame(boolean win) {
+        endGame = true;
         if (win) {
             Win = true;
-            for (int i = CurrentAttempt +1; i<6; i++) {
-                HBox hbox = (HBox) WordlePane.getChildren().get(i);
-                for (int j = 0;j < 5;j++) {
-                    TextField text = (TextField) hbox.getChildren().get(j);
-                    text.setEditable(false);
-                }
-            }
         }
+        ReplayButton.requestFocus();
         PauseTransition replayHalt = new PauseTransition(Duration.seconds(2.5));
         replayHalt.setOnFinished(e -> {
             VirtualKeyboard.setVisible(false);

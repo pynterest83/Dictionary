@@ -231,7 +231,7 @@ public class MainController {
         ChoiceD.setVisible(true);
         ChoiceE.setVisible(true);
         NextButton.setVisible(true);
-        CurrentQuestion = rand.nextInt(502);
+        CurrentQuestion = rand.nextInt(500);
         String content = "<html>" + CompleteSentence.askQuestion(CurrentQuestion) + "</html>";
         gameScreen.getEngine().loadContent(content, "text/html");
     }

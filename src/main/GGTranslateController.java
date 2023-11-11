@@ -34,7 +34,7 @@ public class GGTranslateController extends MainController {
     @FXML
     private ComboBox<String> TargetLang;
     @FXML
-    private TextField input;
+    private TextArea input;
     @FXML
     private TextArea output;
     @FXML

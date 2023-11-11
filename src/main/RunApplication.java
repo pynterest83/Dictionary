@@ -75,6 +75,7 @@ public class RunApplication extends Application {
         TranslateAPI.addDefault();
         try {
             SpeechRecognition.prepare();
+            ImageTranslate.prepare();
         } catch(Exception ignored) {}
     }
     public static void LoadScenes() throws IOException {

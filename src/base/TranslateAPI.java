@@ -4,14 +4,19 @@ package base;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.MainController;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Objects;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
 
 public class TranslateAPI {
+    private static final Pattern pattern = Pattern.compile("(?<=((?<!\\[)\\[\\\"))(.*?)(?=\\\",\\\")");
     private static final String PATH = "src/resources/Spelling.txt";
     public static LinkedHashMap<String, String> langMap = new LinkedHashMap<>();
     public static String googleTranslate(String langFrom, String langTo, String text) throws IOException, URISyntaxException {
@@ -19,12 +24,14 @@ public class TranslateAPI {
                 + "sl=" + langFrom
                 + "&tl=" + langTo
                 + "&dt=t&dt=t&q=" + URLEncoder.encode(text,StandardCharsets.UTF_8);
-        StringBuilder response = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) new URI(urlScript).toURL().openConnection();
-        con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        response.append(in.readLine());
-        return response.substring(response.indexOf("\"") + 1,response.indexOf("\"",response.indexOf("\"") + 1));
+        String response = IOUtils.toString(con.getInputStream(), StandardCharsets.UTF_8);
+        if (!response.contains("\\n")) return response.substring(response.indexOf("\"")+1,response.indexOf("\",\""));
+        StringBuilder translated = new StringBuilder();
+        translated.append(response, response.indexOf("\"")+1, response.indexOf("\"",response.indexOf("\"")+1));
+        String[] match = pattern.matcher(response).results().map(MatchResult::group).toArray(String[]::new);
+        for (String s:match) translated.append(s);
+        return StringEscapeUtils.unescapeJava(translated.toString());
     }
     public static void speakAudio(String text, String languageOutput) {
         String urlString = "http://translate.google.com/translate_tts?" + "?ie=UTF-8" + //encoding
