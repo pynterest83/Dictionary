@@ -1,11 +1,1 @@
-hello
-say
-saying
-testing
-fine
-mark
-student
-understand
-Hello
-goodbye
-find
+how

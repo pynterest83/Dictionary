@@ -218,3 +218,45 @@
     -fx-pref-height: 0px;
     -fx-opacity: 0;
 }
+.radio-button:selected .radio .dot {
+    -fx-background-color: #dd4141;
+    -fx-background-insets: 0;
+}
+.radio-button .radio {
+    -fx-background-color: #e6e6e6;
+    -fx-background-radius: 50;
+    -fx-background-insets: 0;
+}
+.default-avatar {
+    -fx-background-image: url("media/user.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25;
+    -fx-background-position: center;
+}
+.man-avatar {
+    -fx-background-image: url("media/man.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25;
+    -fx-background-position: center;
+}
+.woman-avatar {
+    -fx-background-image: url("media/woman.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25;
+    -fx-background-position: center;
+}
+.login-button {
+    -fx-background-color: #dd4141;
+}
+.cancel-button {
+    -fx-background-color: grey;
+}
+.cancel-button:hover {
+    -fx-background-color: #CECFD3;
+}
+.login-button:hover {
+    -fx-background-color: crimson;
+}

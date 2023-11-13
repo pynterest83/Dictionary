@@ -57,6 +57,7 @@ public class GGTranslateController extends MainController {
 
     @FXML
     private void initialize() {
+        loadOtherScences();
         PrepareMenu();
         for (HashMap.Entry<String, String> entry : TranslateAPI.langMap.entrySet()) {
             SourceLang.getItems().add(entry.getKey());

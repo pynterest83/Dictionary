@@ -14,6 +14,7 @@ public class GameController extends MainController {
     private Button Babble;
     @FXML
     private void initialize() {
+        loadOtherScences();
         PrepareMenu();
     }
     @FXML

@@ -66,6 +66,7 @@ public class BabblebotController extends MainController {
 
     @FXML
     private void initialize() {
+        loadOtherScences();
         Submissions.setRotate(180);
         Submissions.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         PrepareMenu();

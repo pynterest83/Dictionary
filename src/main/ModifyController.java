@@ -28,6 +28,7 @@ public class ModifyController extends MainController {
     private String type_Dict = "EN_VI";
     @FXML
     private void initialize() {
+        loadOtherScences();
         en_vi_dict.setVisible(true);
         vi_en_dict.setVisible(false);
         PrepareMenu();

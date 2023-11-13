@@ -3,13 +3,13 @@ package main;
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideOutLeft;
 import base.CompleteSentence;
+import base.Dictionary;
+import base.DictionaryManager;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -48,7 +48,15 @@ public class MainController {
     @FXML
     protected Button HomeButton;
     @FXML
-    protected ButtonBar TitleBar;
+    protected Pane TitleBar;
+    @FXML
+    protected AnchorPane login;
+    @FXML
+    protected TextField user_name;
+    @FXML
+    protected Label Name;
+    @FXML
+    protected Button Avatar;
     protected Boolean inside = false;
     private static String currentScene = "main.fxml";
     @FXML
@@ -57,6 +65,7 @@ public class MainController {
         Root.disabledProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (oldValue && !newValue) {
                 try {
+                    first_login();
                     StartGame();
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
@@ -273,5 +282,84 @@ public class MainController {
         String content = "<html>" + CompleteSentence.showAnswer(CurrentQuestion,CheckResult()) + "</html>";
         ToggleRadioButtons(true);
         gameScreen.getEngine().loadContent(content,"text/html");
+    }
+
+    @FXML
+    protected void first_login() {
+        if (Dictionary.user.username == null) {
+            login.setVisible(true);
+            menuBarButton.setVisible(false);
+        }
+        else {
+            Name.setText(Dictionary.user.username);
+            Name.setVisible(true);
+            if (Dictionary.user.gender == 0) {
+                Avatar.getStyleClass().clear();
+                Avatar.getStyleClass().add("woman-avatar");
+            }
+            else {
+                Avatar.getStyleClass().clear();
+                Avatar.getStyleClass().add("man-avatar");
+            }
+            Avatar.setVisible(true);
+        }
+    }
+
+    @FXML
+    private RadioButton Female;
+    @FXML
+    private RadioButton Male;
+    public void login(MouseEvent mouseEvent) throws IOException {
+        login.setVisible(false);
+        if (user_name.getText().equals("")) {
+            Alert a = new Alert(Alert.AlertType.WARNING, "Username is required");
+            a.showAndWait();
+        }
+        if (!Female.isSelected() && !Male.isSelected()) {
+            Alert a = new Alert(Alert.AlertType.WARNING, "Gender is required");
+            a.showAndWait();
+        }
+        if (Female.isSelected()) {
+            Dictionary.user.gender = 0;
+            Avatar.getStyleClass().clear();
+            Avatar.getStyleClass().add("woman-avatar");
+        }
+        if (Male.isSelected()) {
+            Dictionary.user.gender = 1;
+            Avatar.getStyleClass().clear();
+            Avatar.getStyleClass().add("man-avatar");
+        }
+        Dictionary.user.username = user_name.getText();
+        Dictionary.user.streak = 0;
+
+        Name.setText(Dictionary.user.username);
+        Name.setVisible(true);
+        Avatar.setVisible(true);
+
+        menuBarButton.setVisible(true);
+        RunApplication.LoadScenes();
+        DictionaryManager.updateUser();
+    }
+
+    protected void loadOtherScences() {
+        if (Dictionary.user.username != null) Name.setText(Dictionary.user.username);
+
+        if (Dictionary.user.gender == 0) {
+            Avatar.getStyleClass().clear();
+            Avatar.getStyleClass().add("woman-avatar");
+        }
+        else if (Dictionary.user.gender == 1) {
+            Avatar.getStyleClass().clear();
+            Avatar.getStyleClass().add("man-avatar");
+        }
+        Avatar.setVisible(true);
+        Name.setVisible(true);
+    }
+
+    public void cancle_login(MouseEvent mouseEvent) {
+        login.setVisible(false);
+        Avatar.setVisible(true);
+        Name.setVisible(true);
+        menuBarButton.setVisible(true);
     }
 }

@@ -33,6 +33,7 @@ public class LearningController extends MainController {
     private Boolean isSaved = true;
     @FXML
     private void initialize() {
+        loadOtherScences();
         PrepareMenu();
         for (int i = 0; i < DictionaryManager.learningDict.size(); i++) {
             learningList.getItems().add(DictionaryManager.learningDict.get(i).getWordTarget());

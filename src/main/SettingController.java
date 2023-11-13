@@ -8,13 +8,14 @@ import javafx.scene.layout.Pane;
 
 public class SettingController extends MainController {
     @FXML
-    private ButtonBar TitleBar;
+    private Pane TitleBar;
     @FXML
     private Pane menuBar;
     @FXML
     private Slider SpeakVolumeSlider;
     @FXML
     private void initialize() {
+        loadOtherScences();
         PrepareMenu();
         SpeakVolumeSlider.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             try {

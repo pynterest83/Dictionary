@@ -22,6 +22,7 @@ public class DictionaryManager extends Dictionary {
     private static final String SymPath = "src/resources/Thesaurus.txt";
     private static final String EN_HisPath = "src/resources/en_history.txt";
     private static final String VI_HisPath = "src/resources/vi_history.txt";
+    private static final String UserPath = "src/resources/UserDB.txt";
     private static String PATH = null;
     private static String HisPath = null;
 
@@ -386,4 +387,37 @@ public class DictionaryManager extends Dictionary {
         return StringEscapeUtils.unescapeJava(etymology.toString());
     }
 
+    public static void loadUser() {
+        try {
+            File infile = new File(UserPath);
+            FileReader fileReader= new FileReader(infile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            ArrayList<String> data = new ArrayList<>();
+            while ((line = bufferedReader.readLine()) != null) {
+                data.add(line);
+            }
+            if (data.isEmpty()) return;
+
+            user = new User(data.get(0), Integer.parseInt(data.get(1)), Integer.parseInt(data.get(2)));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateUser() {
+        try {
+            File outfile = new File(UserPath);
+            FileWriter fileWriter = new FileWriter(outfile);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(user.username + "\n");
+            bufferedWriter.write(user.gender + "\n");
+            bufferedWriter.write(user.streak + "\n");
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

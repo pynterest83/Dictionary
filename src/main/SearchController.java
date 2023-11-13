@@ -114,6 +114,7 @@ public class SearchController extends MainController {
 
     @FXML
     private void initialize() {
+        loadOtherScences();
         FileTool.expandedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 TranslateTransition moveFirst = new TranslateTransition(Duration.seconds(0.38),DictionaryTool);

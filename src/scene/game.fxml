@@ -19,13 +19,18 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <ButtonBar fx:id="TitleBar" buttonMinWidth="26.0" buttonOrder="L_E+U+FBXI_YNOCAH_R" layoutX="-1.0" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="37.0" prefWidth="950.0" style="-fx-background-color: transparent;">
-         <buttons>
-            <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" ButtonBar.buttonData="LEFT" />
-            <Button fx:id="MinimizeButton" focusTraversable="false" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
-            <Button fx:id="CloseButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
-         </buttons>
-      </ButtonBar>
+       <Pane fx:id="TitleBar" layoutX="-3.0" layoutY="7.0" prefHeight="37.0" prefWidth="957.0">
+          <children>
+             <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
+             <Label fx:id="Name" alignment="CENTER" layoutX="753.0" layoutY="5.0" minWidth="15.0" prefHeight="37.0" text="User" visible="false">
+                <font>
+                   <Font size="15.0" />
+                </font></Label>
+             <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="867.0" layoutY="7.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
+             <Button fx:id="CloseButton" focusTraversable="false" layoutX="912.0" layoutY="7.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
+             <Button fx:id="Avatar" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: black;" styleClass="default-avatar" visible="false" />
+          </children>
+       </Pane>
       <Pane fx:id="menuBar" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E1E5E8;" visible="false">
          <children>
             <Label alignment="CENTER_RIGHT" layoutX="14.0" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="177.0" styleClass="app-label" text="DICTIONARY" textAlignment="CENTER">

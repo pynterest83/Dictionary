@@ -85,6 +85,7 @@ public class WordleController extends MainController {
     );
     @FXML
     protected void initialize() {
+        loadOtherScences();
         HBox node = (HBox) VirtualKeyboard.getChildren().get(0);
         PrepareMenu();
         InitializeHBoxes();

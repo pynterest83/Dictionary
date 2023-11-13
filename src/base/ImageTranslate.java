@@ -3,6 +3,7 @@ package base;
 
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
+import javafx.util.Pair;
 import org.apache.commons.collections4.map.LinkedMap;
 
 import java.io.FileInputStream;
@@ -15,7 +16,7 @@ public class ImageTranslate {
     public static void prepare() throws IOException {
         client = ImageAnnotatorClient.create();
     }
-    public static LinkedMap<String, BoundingPoly> textAnnotations = new LinkedMap<>();
+    public static List<Pair<String, BoundingPoly>> textAnnotations = new ArrayList<>();
     public static void detectText(String filePath) throws IOException {
         List<AnnotateImageRequest> requests = new ArrayList<>();
 
@@ -37,7 +38,7 @@ public class ImageTranslate {
             }
             textAnnotations.clear();
             for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
-                textAnnotations.put(annotation.getDescription(), annotation.getBoundingPoly());
+                textAnnotations.add(new Pair<>(annotation.getDescription(), annotation.getBoundingPoly()));
             }
         }
     }

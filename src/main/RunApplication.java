@@ -70,6 +70,7 @@ public class RunApplication extends Application {
     }
     public static void LoadData() throws IOException, LineUnavailableException {
         DictionaryManager.defaultFile();
+        DictionaryManager.loadUser();
         CompleteSentence.LoadQuestionsAndAnswers();
         Wordle.LoadWordleList();
         TranslateAPI.addDefault();

@@ -17,4 +17,6 @@ public class Dictionary {
     public static LinkedHashSet<String> VI_History = new LinkedHashSet<String>();
 
     public static LinkedHashSet<String> History = new LinkedHashSet<String>();
+
+    public static User user = new User();
 }
