@@ -3,10 +3,13 @@ package main;
 import base.ImageTranslate;
 import base.TranslateAPI;
 import com.google.cloud.vision.v1.BoundingPoly;
+import com.sun.javafx.tk.FontLoader;
+import com.sun.javafx.tk.Toolkit;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -179,7 +182,8 @@ public class ImageTranslateController extends MainController {
                 t.setMaxWidth(width);
                 t.setMaxHeight(height);
                 t.setWrapText(true);
-                t.setTextOverrun(OverrunStyle.CLIP);
+                t.setAlignment(Pos.TOP_LEFT);
+                //t.setTextOverrun(OverrunStyle.CLIP);
                 try {
                     t.setFont(Font.loadFont(Paths.get("src/style/fonts/OpenSans-Medium.ttf").toUri().toURL().toString()
                             ,Math.round(sqrt((width*height)/translated.length()/1.2))));
@@ -188,7 +192,16 @@ public class ImageTranslateController extends MainController {
             }
             Platform.runLater(() -> {
                 for (Label t : SourceText) {
+                    t.setVisible(false);
+                    FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
+                    double charWidth = fontLoader.getCharWidth(t.getText().charAt(0), t.getFont());
+                    double textWidth = charWidth * t.getText().length();
+                    if (textWidth > t.getMaxWidth()) {
+                        t.setMinHeight(t.getMinHeight() + 15);
+                        t.setMaxHeight(t.getMaxHeight() + 15);
+                    }
                     imagePane.getChildren().add(t);
+                    t.setVisible(true);
                 }
             });
         }).start();

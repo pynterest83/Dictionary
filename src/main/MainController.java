@@ -302,6 +302,7 @@ public class MainController {
                 Avatar.getStyleClass().add("man-avatar");
             }
             Avatar.setVisible(true);
+            QuizPane.setVisible(true);
         }
     }
 
@@ -337,6 +338,7 @@ public class MainController {
         Avatar.setVisible(true);
 
         menuBarButton.setVisible(true);
+        QuizPane.setVisible(true);
         RunApplication.LoadScenes();
         DictionaryManager.updateUser();
     }
@@ -361,5 +363,6 @@ public class MainController {
         Avatar.setVisible(true);
         Name.setVisible(true);
         menuBarButton.setVisible(true);
+        QuizPane.setVisible(true);
     }
 }
