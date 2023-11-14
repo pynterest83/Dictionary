@@ -3,42 +3,35 @@ package main;
 import base.ImageTranslate;
 import base.TranslateAPI;
 import com.google.cloud.vision.v1.BoundingPoly;
-import com.sun.javafx.tk.FontLoader;
-import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Objects;
+
+import static java.lang.Math.sqrt;
 
 public class ImageTranslateController extends MainController {
     private static String imagePath;
-    private static String outputImagePath;
+    private static String translatePath;
     private static double scale;
     @FXML
-    private static ArrayList<Text> SourceText;
-    private static ArrayList<Text> TranslatedText;
+    private static ArrayList<Label> SourceText = new ArrayList<>();
     @FXML
-    private ImageView input;
+    private ImageView image;
     @FXML
-    private ImageView output;
-    @FXML
-    private Pane inputPane;
-    @FXML
-    private Pane outputPane;
-
+    private Pane imagePane;
     @FXML
     private void initialize() {
         loadOtherScences();
@@ -51,46 +44,60 @@ public class ImageTranslateController extends MainController {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
         File f = fileChooser.showOpenDialog(null);
-        input.setImage(new javafx.scene.image.Image(f.toURI().toString()));
-        outputImagePath = f.toURI().toString();
+        image.setImage(new javafx.scene.image.Image(f.toURI().toString()));
+        if (f.getAbsolutePath().equals(imagePath)) return;
+        for (Label t : SourceText) {
+            imagePane.getChildren().remove(t);
+        }
+        SourceText.clear();
         imagePath = f.getAbsolutePath();
-        scale = input.getImage().getWidth() / input.getFitWidth();
+        double scaleX = image.getImage().getWidth() / image.getFitWidth();
+        double scaleY = image.getImage().getHeight() / image.getFitHeight();
+        scale = Math.max(scaleX, scaleY);
     }
-
+    @FXML
+    private void showTranslation() {
+        for (Label t : SourceText) {
+            t.setVisible(!t.isVisible());
+        }
+    }
     @FXML
     public void translateImage() {
-        SourceText = new ArrayList<>();
-
+        if (Objects.equals(translatePath, imagePath)) return;
+        translatePath = imagePath;
         new Thread(() -> {
             try {
                 ImageTranslate.detectText(imagePath);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            ImageTranslate.textAnnotations.sort((o1, o2) -> {
-                if (o1.getKey().length() > o2.getKey().length()) return -1;
-                if (o1.getKey().length() < o2.getKey().length()) return 1;
-                return 0;
-            });
-            ImageTranslate.textAnnotations.remove(0);
-
             for (Pair<String, BoundingPoly> wordImg : ImageTranslate.textAnnotations) {
                 String word = wordImg.getKey();
                 BoundingPoly value = wordImg.getValue();
-                Text t = new Text(word);
-                t.setLayoutX(value.getVertices(3).getX() / scale);
-                t.setLayoutY(value.getVertices(3).getY() / scale);
-                double width = value.getVertices(1).getX() / scale - value.getVertices(0).getX() / scale;
-                double fontSize = t.getFont().getSize();
-                double curWidth = t.getLayoutBounds().getWidth();
-                t.setFont(Font.font(fontSize * width / curWidth));
-                t.setFocusTraversable(true);
-
+                String translated = null;
+                try {
+                    translated = TranslateAPI.googleTranslate("auto","vi",word);
+                } catch (IOException | URISyntaxException ignored) {}
+                Label t = new Label(translated);
+                t.setStyle("-fx-background-color: white; -fx-border-width: 0.5; -fx-border-color: red;");
+                t.setLayoutX(value.getVertices(0).getX() / scale);
+                t.setLayoutY(value.getVertices(0).getY() / scale);
+                double width = (value.getVertices(1).getX() - value.getVertices(0).getX()) / scale;
+                double height = (value.getVertices(3).getY() - value.getVertices(0).getY()) / scale;
+                t.setMinWidth(width);
+                t.setMinHeight(height);
+                t.setMaxWidth(width);
+                t.setMaxHeight(height);
+                t.setWrapText(true);
+                try {
+                    t.setFont(Font.loadFont(Paths.get("src/style/fonts/OpenSans-Medium.ttf").toUri().toURL().toString()
+                            ,Math.round(sqrt((width*height)/translated.length()/1.2))));
+                } catch (MalformedURLException ignored) {}
                 SourceText.add(t);
             }
             Platform.runLater(() -> {
-                for (Text t : SourceText) {
-                    inputPane.getChildren().add(t);
+                for (Label t : SourceText) {
+                    imagePane.getChildren().add(t);
                 }
             });
         }).start();

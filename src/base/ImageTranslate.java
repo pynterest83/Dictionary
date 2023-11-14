@@ -2,9 +2,9 @@ package base;
 
 
 import com.google.cloud.vision.v1.*;
+import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
 import javafx.util.Pair;
-import org.apache.commons.collections4.map.LinkedMap;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,15 +19,11 @@ public class ImageTranslate {
     public static List<Pair<String, BoundingPoly>> textAnnotations = new ArrayList<>();
     public static void detectText(String filePath) throws IOException {
         List<AnnotateImageRequest> requests = new ArrayList<>();
-
         ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
-
         Image img = Image.newBuilder().setContent(imgBytes).build();
-        Feature feat = Feature.newBuilder().setType(Feature.Type.TEXT_DETECTION).build();
-        ImageContext imageContext = ImageContext.newBuilder().addLanguageHints("en").build();
-        ImageContext imageContext2 = ImageContext.newBuilder().addLanguageHints("vi").build();
+        Feature feat = Feature.newBuilder().setType(Feature.Type.DOCUMENT_TEXT_DETECTION).build();
         AnnotateImageRequest request =
-                AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).setImageContext(imageContext).setImageContext(imageContext2).build();
+                AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
         requests.add(request);
         BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
         List<AnnotateImageResponse> responses = response.getResponsesList();
@@ -37,8 +33,21 @@ public class ImageTranslate {
                 return;
             }
             textAnnotations.clear();
-            for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
-                textAnnotations.add(new Pair<>(annotation.getDescription(), annotation.getBoundingPoly()));
+            TextAnnotation annotation = res.getFullTextAnnotation();
+            for (Page page : annotation.getPagesList()) {
+                for (Block block : page.getBlocksList()) {
+                    for (Paragraph para : block.getParagraphsList()) {
+                        String paraText = "";
+                        for (Word word : para.getWordsList()) {
+                            StringBuilder wordText = new StringBuilder();
+                            for (Symbol symbol : word.getSymbolsList()) {
+                                wordText.append(symbol.getText());
+                            }
+                            paraText = String.format("%s %s", paraText, wordText);
+                        }
+                        textAnnotations.add(new Pair<>(paraText,para.getBoundingBox()));
+                    }
+                }
             }
         }
     }

@@ -2,23 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ImageTranslateController">
+<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ImageTranslateController">
     <children>
-      <Pane fx:id="inputPane" layoutX="94.0" layoutY="100.0" prefHeight="573.0" prefWidth="374.0" style="-fx-border-style: dashed;">
+      <Pane fx:id="imagePane" layoutX="38.0" layoutY="103.0" prefHeight="574.0" prefWidth="874.0" style="-fx-border-style: dashed;">
          <children>
-            <ImageView fx:id="input" fitHeight="573.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="573.0" fitWidth="874.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane fx:id="outputPane" layoutX="550.0" layoutY="100.0" prefHeight="573.0" prefWidth="374.0" style="-fx-border-style: dashed;">
-         <children>
-            <ImageView fx:id="output" fitHeight="573.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true" />
-         </children></Pane>
-      <Button layoutX="475.0" layoutY="338.0" mnemonicParsing="false" onAction="#translateImage" text="Translate" />
+      <Button layoutX="444.0" layoutY="66.0" mnemonicParsing="false" onAction="#translateImage" text="Translate" />
         <Pane fx:id="TitleBar" layoutX="-3.0" layoutY="7.0" prefHeight="37.0" prefWidth="957.0">
             <children>
                 <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
@@ -81,5 +78,6 @@
             </children>
         </Pane>
       <Button layoutX="262.0" layoutY="66.0" mnemonicParsing="false" onAction="#inputImage" text="Add" />
+      <ToggleButton layoutX="780.0" layoutY="66.0" mnemonicParsing="false" onAction="#showTranslation" text="Show/hide translation" />
     </children>
 </AnchorPane>

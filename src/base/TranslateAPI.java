@@ -26,11 +26,10 @@ public class TranslateAPI {
                 + "&dt=t&dt=t&q=" + URLEncoder.encode(text,StandardCharsets.UTF_8);
         HttpURLConnection con = (HttpURLConnection) new URI(urlScript).toURL().openConnection();
         String response = IOUtils.toString(con.getInputStream(), StandardCharsets.UTF_8);
-        if (!response.contains("\\n")) return response.substring(response.indexOf("\"")+1,response.indexOf("\",\""));
         StringBuilder translated = new StringBuilder();
         translated.append(response, response.indexOf("\"")+1, response.indexOf("\"",response.indexOf("\"")+1));
         String[] match = pattern.matcher(response).results().map(MatchResult::group).toArray(String[]::new);
-        for (String s:match) translated.append(s);
+        for (String s:match) translated.append(s).append("\n");
         return StringEscapeUtils.unescapeJava(translated.toString());
     }
     public static void speakAudio(String text, String languageOutput) {

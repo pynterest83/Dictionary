@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SpeechRecognition {
-    public static boolean isListening = false;
+    public static volatile boolean isListening = false;
     public static ArrayList<String> alternatives = new ArrayList<>();
     static SpeechClient client;
     static RecognitionConfig recognitionConfig = RecognitionConfig.newBuilder().setEncoding(RecognitionConfig.AudioEncoding.LINEAR16).setLanguageCode("en").setSampleRateHertz(16000).build();
