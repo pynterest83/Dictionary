@@ -5,27 +5,34 @@ import base.TranslateAPI;
 import com.google.cloud.vision.v1.BoundingPoly;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
+import org.apache.commons.validator.routines.UrlValidator;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static java.lang.Math.sqrt;
 
 public class ImageTranslateController extends MainController {
-    private static String imagePath;
-    private static String translatePath;
     private static double scale;
+    private static byte[] imageBytes;
     @FXML
     private static ArrayList<Label> SourceText = new ArrayList<>();
     @FXML
@@ -33,27 +40,96 @@ public class ImageTranslateController extends MainController {
     @FXML
     private Pane imagePane;
     @FXML
+    private TitledPane AddImage;
+    private static boolean translated = false;
+    @FXML
     private void initialize() {
         loadOtherScences();
         PrepareMenu();
+        imagePane.setOnDragOver(event -> {
+            if (event.getDragboard().hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            event.consume();
+        });
+        AddImage.focusedProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (oldValue && !newValue) AddImage.setExpanded(false);
+        }));
     }
     @FXML
-    public void inputImage() {
+    public void inputImage() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.bmp"));
         File f = fileChooser.showOpenDialog(null);
-        image.setImage(new javafx.scene.image.Image(f.toURI().toString()));
-        if (f.getAbsolutePath().equals(imagePath)) return;
-        for (Label t : SourceText) {
-            imagePane.getChildren().remove(t);
+        if (f != null) {
+            image.setImage(new javafx.scene.image.Image(f.toURI().toString()));
+            imageBytes = Files.readAllBytes(Path.of(f.toURI()));
+            translated = false;
+            for (Label t : SourceText) {
+                imagePane.getChildren().remove(t);
+            }
+            SourceText.clear();
+            double scaleX = image.getImage().getWidth() / image.getFitWidth();
+            double scaleY = image.getImage().getHeight() / image.getFitHeight();
+            scale = Math.max(scaleX, scaleY);
         }
-        SourceText.clear();
-        imagePath = f.getAbsolutePath();
-        double scaleX = image.getImage().getWidth() / image.getFitWidth();
-        double scaleY = image.getImage().getHeight() / image.getFitHeight();
-        scale = Math.max(scaleX, scaleY);
+    }
+    @FXML
+    private void inputImageLink() throws IOException, URISyntaxException {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setHeaderText("Enter link to image:");
+        dialog.showAndWait();
+        String path = dialog.getEditor().getText();
+        UrlValidator validator = new UrlValidator();
+        if (validator.isValid(path)) {
+            image.setImage(new javafx.scene.image.Image(path));
+            if (!image.getImage().isError()) {
+                imageBytes = ((HttpURLConnection) new URI(path).toURL().openConnection()).getInputStream().readAllBytes();
+                translated = false;
+                for (Label t : SourceText) {
+                    imagePane.getChildren().remove(t);
+                }
+                SourceText.clear();
+                double scaleX = image.getImage().getWidth() / image.getFitWidth();
+                double scaleY = image.getImage().getHeight() / image.getFitHeight();
+                scale = Math.max(scaleX, scaleY);
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"The file is either unsupported or corrupted.");
+                alert.setHeaderText("Unable to open.");
+                alert.showAndWait();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Please enter a valid URL.");
+            alert.setHeaderText("Invalid URL.");
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    private void DragDroppedImage(DragEvent event) throws IOException {
+        Dragboard dragboard = event.getDragboard();
+        if (!dragboard.hasFiles()) return;
+        File file = dragboard.getFiles().get(0);
+        image.setImage(new Image(file.toURI().toString()));
+        imageBytes = Files.readAllBytes(Path.of(file.toURI()));
+        if (image.getImage().isError()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid image.");
+            alert.setHeaderText("Please choose a valid image file.");
+            alert.showAndWait();
+        }
+        else {
+            translated = false;
+            for (Label t : SourceText) {
+                imagePane.getChildren().remove(t);
+            }
+            SourceText.clear();
+            double scaleX = image.getImage().getWidth() / image.getFitWidth();
+            double scaleY = image.getImage().getHeight() / image.getFitHeight();
+            scale = Math.max(scaleX, scaleY);
+        }
     }
     @FXML
     private void showTranslation() {
@@ -63,14 +139,14 @@ public class ImageTranslateController extends MainController {
     }
     @FXML
     public void translateImage() {
-        if (Objects.equals(translatePath, imagePath)) return;
-        translatePath = imagePath;
+        if (translated) return;
         new Thread(() -> {
             try {
-                ImageTranslate.detectText(imagePath);
+                ImageTranslate.detectText(imageBytes);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            translated = true;
             for (Pair<String, BoundingPoly> wordImg : ImageTranslate.textAnnotations) {
                 String word = wordImg.getKey();
                 BoundingPoly value = wordImg.getValue();
@@ -89,6 +165,7 @@ public class ImageTranslateController extends MainController {
                 t.setMaxWidth(width);
                 t.setMaxHeight(height);
                 t.setWrapText(true);
+                t.setTextOverrun(OverrunStyle.CLIP);
                 try {
                     t.setFont(Font.loadFont(Paths.get("src/style/fonts/OpenSans-Medium.ttf").toUri().toURL().toString()
                             ,Math.round(sqrt((width*height)/translated.length()/1.2))));

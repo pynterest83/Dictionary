@@ -1,12 +1,11 @@
 package base;
 
 
-import com.google.cloud.vision.v1.*;
 import com.google.cloud.vision.v1.Word;
+import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
 import javafx.util.Pair;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +16,9 @@ public class ImageTranslate {
         client = ImageAnnotatorClient.create();
     }
     public static List<Pair<String, BoundingPoly>> textAnnotations = new ArrayList<>();
-    public static void detectText(String filePath) throws IOException {
+    public static void detectText(byte[] image) throws IOException {
         List<AnnotateImageRequest> requests = new ArrayList<>();
-        ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
+        ByteString imgBytes = ByteString.copyFrom(image);
         Image img = Image.newBuilder().setContent(imgBytes).build();
         Feature feat = Feature.newBuilder().setType(Feature.Type.DOCUMENT_TEXT_DETECTION).build();
         AnnotateImageRequest request =
