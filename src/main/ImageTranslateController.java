@@ -3,6 +3,8 @@ package main;
 import base.ImageTranslate;
 import base.TranslateAPI;
 import com.google.cloud.vision.v1.BoundingPoly;
+import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,6 +16,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import org.apache.commons.validator.routines.UrlValidator;
 
@@ -41,6 +44,8 @@ public class ImageTranslateController extends MainController {
     private Pane imagePane;
     @FXML
     private TitledPane AddImage;
+    @FXML
+    private Label ErrorLabel;
     private static boolean translated = false;
     @FXML
     private void initialize() {
@@ -53,7 +58,11 @@ public class ImageTranslateController extends MainController {
             event.consume();
         });
         AddImage.focusedProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (oldValue && !newValue) AddImage.setExpanded(false);
+            if (oldValue && !newValue) {
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                pause.setOnFinished(e->AddImage.setExpanded(false));
+                pause.playFromStart();
+            }
         }));
     }
     @FXML
@@ -97,7 +106,7 @@ public class ImageTranslateController extends MainController {
                 scale = Math.max(scaleX, scaleY);
             }
             else {
-                Alert alert = new Alert(Alert.AlertType.ERROR,"The file is either unsupported or corrupted.");
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Something when wrong. Please check your internet connection and check if the file type is supported.");
                 alert.setHeaderText("Unable to open.");
                 alert.showAndWait();
             }
@@ -138,13 +147,18 @@ public class ImageTranslateController extends MainController {
         }
     }
     @FXML
-    public void translateImage() {
+    public void translateImage() throws URISyntaxException {
         if (translated) return;
         new Thread(() -> {
+            boolean connected = true;
             try {
                 ImageTranslate.detectText(imageBytes);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
+                connected = false;
+            }
+            if (!connected) {
+                Error();
+                return;
             }
             translated = true;
             for (Pair<String, BoundingPoly> wordImg : ImageTranslate.textAnnotations) {
@@ -178,5 +192,18 @@ public class ImageTranslateController extends MainController {
                 }
             });
         }).start();
+    }
+    @FXML
+    private void Error() {
+        TranslateTransition translateIn = new TranslateTransition(Duration.millis(500), ErrorLabel);
+        translateIn.setToX(0);
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        translateIn.setOnFinished(e -> pause.playFromStart());
+        pause.setOnFinished(e -> {
+            TranslateTransition translateOut = new TranslateTransition(Duration.millis(500), ErrorLabel);
+            translateOut.setByX(-ErrorLabel.getWidth());
+            translateOut.play();
+        });
+        translateIn.play();
     }
 }

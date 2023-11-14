@@ -82,6 +82,14 @@
     -fx-background-size: 30;
     -fx-background-position: center;
 }
+.mic-unavailable {
+    -fx-background-image: url("media/recordingdisabled.png");
+        -fx-background-color:transparent;
+        -fx-background-radius: 50%;
+        -fx-background-repeat: no-repeat;
+        -fx-background-size: 30;
+        -fx-background-position: center;
+}
 .favourite {
     -fx-background-image: url("media/fav.png");
     -fx-background-color:transparent;

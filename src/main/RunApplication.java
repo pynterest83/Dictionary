@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class RunApplication extends Application {
+    public static boolean micAvailable = true;
     static HashMap <String,Parent> FXML_scenes = new HashMap<>();
     public static void main(String[] args) throws Exception {
         launch(args);

@@ -129,7 +129,7 @@ public class GGTranslateController extends MainController {
             loading.setLayoutY(334);
             Platform.runLater(()-> {
                 parent.getChildren().add(loading);
-                //input.setDisable(true);
+                input.setDisable(true);
                 });
             try {
                 output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, translate));
@@ -196,7 +196,6 @@ public class GGTranslateController extends MainController {
             return;
         }
         SpeechRecognition.changeLanguage(sourceLangCode);
-
         if (!SpeechRecognition.isListening) {
             new Thread(() -> {
                 Platform.runLater(() -> {
@@ -210,7 +209,9 @@ public class GGTranslateController extends MainController {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("micload-button");
                 });
-                SpeechRecognition.sendRequest();
+                try {
+                    SpeechRecognition.sendRequest();
+                } catch(Exception ignored){}
                 Platform.runLater(() -> {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("mic-button");

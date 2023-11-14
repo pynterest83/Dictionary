@@ -249,6 +249,11 @@ public class SearchController extends MainController {
         ToolPane.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
             insideToolbar = false;
         });
+        if (!RunApplication.micAvailable) {
+            recordButton.getStyleClass().clear();
+            recordButton.getStyleClass().add("mic-unavailable");
+            recordButton.setDisable(true);
+        }
     }
     @FXML
     protected void MouseClick() {
@@ -594,7 +599,9 @@ public class SearchController extends MainController {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("micload-button");
                 });
-                SpeechRecognition.sendRequest();
+                try {
+                    SpeechRecognition.sendRequest();
+                } catch(Exception ignored) {}
                 Platform.runLater(() -> {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("mic-button");
@@ -602,8 +609,7 @@ public class SearchController extends MainController {
                         searchBar.setText(SpeechRecognition.alternatives.get(0));
                         try {
                             enterSearch();
-                        } catch (Exception ignored) {
-                        }
+                        } catch (Exception ignored) {}
                     } else {
                         TranslateTransition translateIn = new TranslateTransition(Duration.millis(500), ErrorLabel);
                         translateIn.setToX(0);

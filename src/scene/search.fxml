@@ -14,20 +14,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
+<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
    <children>
     <AnchorPane layoutX="47.0" layoutY="32.0" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
             <Line endX="100.0" endY="17.600006103515625" layoutX="-17.0" layoutY="366.0" startX="661.0" startY="17.600006103515625" stroke="#655151" strokeWidth="3.0" />
             <Line endX="100.0" layoutX="566.0" layoutY="115.0" startX="100.0" startY="249.60000610351562" stroke="#615959" strokeWidth="3.0" />
             <Line endX="100.0" layoutX="566.0" layoutY="410.0" startX="100.0" startY="226.5999755859375" stroke="#6f6262" strokeWidth="3.0" />
-            <TextField fx:id="searchBar" focusTraversable="false" layoutX="77.0" layoutY="20.0" onAction="#enterSearch" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="826.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-width: 2; -fx-border-color: transparent transparent darkgray transparent; -fx-font-size: 20;">
+            <TextField fx:id="searchBar" focusTraversable="false" layoutX="77.0" layoutY="14.0" onAction="#enterSearch" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="826.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-width: 2; -fx-border-color: transparent transparent darkgray transparent; -fx-font-size: 20;">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </TextField>
-            <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="30.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
-             <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="30.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
+            <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="25.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
+             <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="25.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
             <Pane layoutX="77.0" layoutY="130.0" onMousePressed="#MouseClick" prefHeight="229.0" prefWidth="575.0" style="-fx-border-color: transparent transparent transparent darkgray; -fx-border-width: 5;">
                <children>
                   <WebView fx:id="wordHeader" layoutX="14.0" prefHeight="49.0" prefWidth="564.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
@@ -95,7 +95,7 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="recordButton" layoutX="868.0" layoutY="46.0" mnemonicParsing="false" onAction="#onClickRecording" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="mic-button" stylesheets="@../style/search.css" />
+            <Button fx:id="recordButton" layoutX="869.0" layoutY="39.0" mnemonicParsing="false" onAction="#onClickRecording" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="mic-button" stylesheets="@../style/search.css" />
             <Label fx:id="ErrorLabel" layoutY="34.0" style="-fx-background-color: #E4E5E9; -fx-border-color: grey; -fx-text-fill: black; -fx-border-width: 0 0 5 0;" styleClass="error-label" stylesheets="@../style/search.css" text="Transcription not available" translateX="-290.0">
                <font>
                   <Font name="System Bold" size="23.0" />
@@ -103,15 +103,15 @@
             </Label>
          </children>
       </AnchorPane>
-      <Pane fx:id="TitleBar" layoutX="-3.0" layoutY="7.0" prefHeight="37.0" prefWidth="957.0">
+      <Pane fx:id="TitleBar" layoutX="-3.0" layoutY="7.0" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
+            <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
             <Label fx:id="Name" alignment="CENTER" layoutX="753.0" layoutY="5.0" minWidth="15.0" prefHeight="37.0" text="User" visible="false">
                <font>
                   <Font size="15.0" />
                </font></Label>
-            <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="867.0" layoutY="7.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
-            <Button fx:id="CloseButton" focusTraversable="false" layoutX="912.0" layoutY="7.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
+            <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="860.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
+            <Button fx:id="CloseButton" focusTraversable="false" layoutX="905.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
             <Button fx:id="Avatar" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: black;" styleClass="default-avatar" visible="false" />
          </children>
       </Pane>

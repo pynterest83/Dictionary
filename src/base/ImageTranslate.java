@@ -7,6 +7,8 @@ import com.google.protobuf.ByteString;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,8 @@ public class ImageTranslate {
         client = ImageAnnotatorClient.create();
     }
     public static List<Pair<String, BoundingPoly>> textAnnotations = new ArrayList<>();
-    public static void detectText(byte[] image) throws IOException {
+    public static void detectText(byte[] image) throws IOException, URISyntaxException {
+        new URI("https://speech.googleapis.com/").toURL().openConnection().connect();
         List<AnnotateImageRequest> requests = new ArrayList<>();
         ByteString imgBytes = ByteString.copyFrom(image);
         Image img = Image.newBuilder().setContent(imgBytes).build();

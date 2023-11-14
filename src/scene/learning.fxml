@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LearningController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LearningController">
     <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="950.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -36,15 +35,15 @@
             <Line endX="5.0" endY="444.0" layoutX="283.0" layoutY="200.0" startX="5.0" startY="-125.0" stroke="#8d7f7f" strokeWidth="3.0" />
          </children>
       </AnchorPane>
-       <Pane fx:id="TitleBar" layoutX="-3.0" layoutY="7.0" prefHeight="37.0" prefWidth="957.0">
+       <Pane fx:id="TitleBar" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
-             <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
+             <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
              <Label fx:id="Name" alignment="CENTER" layoutX="753.0" layoutY="5.0" minWidth="15.0" prefHeight="37.0" text="User" visible="false">
                 <font>
                    <Font size="15.0" />
                 </font></Label>
-             <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="867.0" layoutY="7.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
-             <Button fx:id="CloseButton" focusTraversable="false" layoutX="912.0" layoutY="7.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
+             <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="860.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
+             <Button fx:id="CloseButton" focusTraversable="false" layoutX="905.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
              <Button fx:id="Avatar" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: black;" styleClass="default-avatar" visible="false" />
           </children>
        </Pane>
