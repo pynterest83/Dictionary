@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
@@ -28,21 +30,85 @@
       </Pane>
       <AnchorPane layoutY="52.0" onMouseClicked="#HideMenuBar" prefHeight="650.0" prefWidth="950.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
          <children>
-            <AnchorPane fx:id="QuizPane" layoutX="14.0" layoutY="162.0" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="535.0" style="-fx-background-color: white;" visible="false">
+            <AnchorPane fx:id="WOD_Pane" layoutX="194.0" layoutY="14.0" prefHeight="148.0" prefWidth="731.0" visible="false">
                <children>
-                  <WebView fx:id="gameScreen" prefHeight="519.0" prefWidth="694.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <RadioButton fx:id="ChoiceA" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#RadioButtonClick" visible="false">
+                  <Label fx:id="Word" layoutX="15.0" layoutY="50.0" prefHeight="47.0" prefWidth="226.0">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="14.0" text="WORD OF THE DAY" textFill="#bc3232">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Definition" layoutX="259.0" layoutY="1.0" prefHeight="158.0" prefWidth="361.0">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font></Label>
+                  <Label fx:id="Date" alignment="CENTER" layoutX="620.0" layoutY="6.0" prefHeight="37.0" prefWidth="105.0" style="-fx-background-color: lightcoral;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="211.0" layoutY="59.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="30.0" prefWidth="30.0" styleClass="speak-button" />
+                  <Label fx:id="Pronunciation" layoutX="14.0" layoutY="93.0" prefHeight="21.0" prefWidth="114.0" textFill="#c95555" />
+                  <Label fx:id="WordType" layoutX="128.0" layoutY="93.0" prefHeight="21.0" prefWidth="114.0" textFill="#c95555" />
+                  <Hyperlink layoutX="14.0" layoutY="134.0" onAction="#open_link1" text="Explore more" textFill="#bf4040" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="QuizPane" layoutX="205.0" layoutY="417.0" minHeight="0.0" minWidth="0.0" prefHeight="237.0" prefWidth="731.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <WebView fx:id="gameScreen" layoutY="-2.0" prefHeight="288.0" prefWidth="639.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0" />
+                  <RadioButton fx:id="ChoiceA" layoutX="14.0" layoutY="58.0" mnemonicParsing="false" onAction="#RadioButtonClick" visible="false">
                      <toggleGroup>
                         <ToggleGroup fx:id="QuestionChoices" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="ChoiceB" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" onAction="#RadioButtonClick" prefHeight="18.0" prefWidth="0.0" toggleGroup="$QuestionChoices" visible="false" />
-                  <RadioButton fx:id="ChoiceC" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
-                  <RadioButton fx:id="ChoiceD" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
-                  <RadioButton fx:id="ChoiceE" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
-                  <Button fx:id="NextButton" layoutX="428.0" layoutY="291.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" visible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <RadioButton fx:id="ChoiceB" layoutX="14.0" layoutY="88.0" mnemonicParsing="false" onAction="#RadioButtonClick" prefHeight="18.0" prefWidth="0.0" toggleGroup="$QuestionChoices" visible="false" />
+                  <RadioButton fx:id="ChoiceC" layoutX="14.0" layoutY="118.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
+                  <RadioButton fx:id="ChoiceD" layoutX="14.0" layoutY="148.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
+                  <RadioButton fx:id="ChoiceE" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onAction="#RadioButtonClick" toggleGroup="$QuestionChoices" visible="false" />
+                  <Button fx:id="NextButton" layoutX="687.0" layoutY="173.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="27.0" prefWidth="30.0" styleClass="next-button" visible="false" AnchorPane.bottomAnchor="37.0" AnchorPane.rightAnchor="14.0" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="News_Pane" layoutX="14.0" layoutY="204.0" prefHeight="187.0" prefWidth="731.0" visible="false">
+               <children>
+                  <ImageView fx:id="news_image" fitHeight="117.0" fitWidth="146.0" layoutX="14.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="Title" alignment="TOP_LEFT" layoutX="170.0" prefHeight="63.0" prefWidth="553.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Description" alignment="TOP_LEFT" layoutX="170.0" layoutY="63.0" prefHeight="47.0" prefWidth="553.0" textFill="#e14141">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                  <Label fx:id="Content" alignment="TOP_LEFT" layoutX="170.0" layoutY="111.0" prefHeight="79.0" prefWidth="553.0" textFill="#8d8484" />
+                  <Button layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onAction="#onClickNextNews" prefHeight="25.0" prefWidth="30.0" styleClass="next-button" />
+                  <Hyperlink layoutX="94.0" layoutY="162.0" onAction="#open_link" text="Read more" textFill="#c65050" />
+                  <Label layoutX="65.0" layoutY="7.0" text="NEWS" textFill="#bc3232">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ImageView fx:id="IMG1" fitHeight="181.0" fitWidth="171.0" layoutX="13.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../style/media/word.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="IMG2" disable="true" fitHeight="194.0" fitWidth="187.0" layoutX="745.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../style/media/news_paper.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="IMG3" fitHeight="172.0" fitWidth="171.0" layoutX="23.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../style/media/quiz.jpg" />
+               </image>
+            </ImageView>
             <AnchorPane fx:id="login" layoutX="73.0" layoutY="126.0" prefHeight="414.0" prefWidth="807.0" visible="false">
                <children>
                   <ImageView fitHeight="405.0" fitWidth="457.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
@@ -89,6 +155,13 @@
                   </Pane>
                </children>
             </AnchorPane>
+            <Label fx:id="quiz" layoutX="73.0" layoutY="446.0" text="DAILY QUIZ" textFill="#bc3232" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Line fx:id="line1" endX="686.0" layoutX="194.0" layoutY="188.0" startX="-108.0" stroke="#cd5b5b" strokeLineCap="ROUND" strokeWidth="4.0" visible="false" />
+            <Line fx:id="line2" endX="686.0" layoutX="194.0" layoutY="397.0" startX="-108.0" stroke="#cd5b5b" strokeLineCap="ROUND" strokeWidth="4.0" visible="false" />
          </children></AnchorPane>
       <Pane fx:id="menuBar" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E1E5E8;" visible="false">
          <children>

@@ -379,7 +379,7 @@
                </font></Label>
             <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="860.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
             <Button fx:id="CloseButton" focusTraversable="false" layoutX="905.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" stylesheets="@../style/main_styles.css" />
-            <Button fx:id="Avatar" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: black;" styleClass="default-avatar" visible="false" />
+            <Button fx:id="Avatar" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: black;" styleClass="default-avatar" stylesheets="@../style/main_styles.css" visible="false" />
          </children>
       </Pane>
       <Pane fx:id="menuBar" prefHeight="700.0" prefWidth="214.0" style="-fx-background-color: #E1E5E8;" stylesheets="@../style/main_styles.css" visible="false">

@@ -183,6 +183,20 @@
     -fx-background-size: 30;
     -fx-background-position: center;
 }
+.next-button {
+    -fx-background-image: url("media/next.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20;
+    -fx-background-position: center;
+    -fx-border-color: red;
+    -fx-border-width: 0.5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.next-button:hover {
+    -fx-background-color: lightcoral;
+}
 .back-button:hover {
     -fx-background-color: #CECFD3;
 }
@@ -259,4 +273,14 @@
 }
 .login-button:hover {
     -fx-background-color: crimson;
+}
+.speak-button {
+    -fx-background-image: url("media/voice.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+}
+.speak-button:hover {
+    -fx-background-color: lightcoral;
 }

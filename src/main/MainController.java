@@ -2,25 +2,41 @@ package main;
 
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideOutLeft;
-import base.CompleteSentence;
-import base.Dictionary;
-import base.DictionaryManager;
+import base.*;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import org.controlsfx.control.HyperlinkLabel;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Random;
+import java.util.Timer;
 
 public class MainController {
+    private int curNews = 0;
     public static double SpeakVolume = 1.0;
     @FXML
     protected AnchorPane Root;
@@ -57,10 +73,33 @@ public class MainController {
     protected Label Name;
     @FXML
     protected Button Avatar;
+    @FXML
+    private AnchorPane News_Pane;
+    @FXML
+    private AnchorPane WOD_Pane;
+    @FXML
+    private ImageView IMG1;
+    @FXML
+    private ImageView IMG2;
+    @FXML
+    private Label quiz;
+    @FXML
+    private ImageView IMG3;
     protected Boolean inside = false;
     private static String currentScene = "main.fxml";
+
     @FXML
     private void initialize() {
+        try {
+            News_WOD.getNews();
+            News_WOD.getWordOfTheDay();
+            News_WOD.getDefinition();
+        }
+        catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         PrepareMenu();
         Root.disabledProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (oldValue && !newValue) {
@@ -229,8 +268,6 @@ public class MainController {
     @FXML
     private Button NextButton;
     @FXML
-    private Button StartGameButton;
-    @FXML
     private AnchorPane QuizPane;
     @FXML
     private void StartGame() throws MalformedURLException {
@@ -302,7 +339,7 @@ public class MainController {
                 Avatar.getStyleClass().add("man-avatar");
             }
             Avatar.setVisible(true);
-            QuizPane.setVisible(true);
+            viewAll();
         }
     }
 
@@ -338,7 +375,7 @@ public class MainController {
         Avatar.setVisible(true);
 
         menuBarButton.setVisible(true);
-        QuizPane.setVisible(true);
+        viewAll();
         RunApplication.LoadScenes();
         DictionaryManager.updateUser();
     }
@@ -363,6 +400,117 @@ public class MainController {
         Avatar.setVisible(true);
         Name.setVisible(true);
         menuBarButton.setVisible(true);
+        viewAll();
+    }
+
+    @FXML
+    private ImageView news_image;
+    @FXML
+    private Label Title;
+    @FXML
+    private Label Description;
+    @FXML
+    private Label Content;
+    @FXML
+    private void setUpNews() {
+        news_image.setImage(new Image(News_WOD.articles.get(curNews).getUrlToImage()));
+        Rectangle clip = new Rectangle();
+        clip.setWidth(400.0f);
+        clip.setHeight(400.0f);
+        clip.setArcHeight(20);
+        clip.setArcWidth(20);
+        clip.setStroke(Color.BLACK);
+        news_image.setClip(clip);
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        WritableImage image = news_image.snapshot(parameters, null);
+        news_image.setClip(null);
+        news_image.setEffect(new DropShadow(10, Color.RED));
+        news_image.setImage(image);
+
+        Title.setText(News_WOD.articles.get(curNews).getTitle());
+        Title.setWrapText(true);
+        Description.setText(News_WOD.articles.get(curNews).getDescription());
+        Description.setWrapText(true);
+        String content = News_WOD.articles.get(curNews).getContent();
+        int idx = content.indexOf("[");
+        if (idx != -1) content = content.substring(0,idx);
+        Content.setText(content);
+        Content.setWrapText(true);
+    }
+
+    @FXML
+    private void onClickNextNews() {
+        curNews++;
+        if (curNews == News_WOD.articles.size()) curNews = 0;
+        setUpNews();
+    }
+
+    @FXML
+    private Line line1;
+    @FXML
+    private Line line2;
+    @FXML
+    private void viewAll() {
         QuizPane.setVisible(true);
+        News_Pane.setVisible(true);
+        WOD_Pane.setVisible(true);
+        IMG1.setVisible(true);
+        IMG2.setVisible(true);
+        IMG3.setVisible(true);
+        quiz.setVisible(true);
+        line1.setVisible(true);
+        line2.setVisible(true);
+        setUpNews();
+        setUpWOD();
+    }
+
+    @FXML
+    private void open_link() {
+        try {
+            Desktop.getDesktop().browse(URI.create(News_WOD.articles.get(curNews).getUrl()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private Label Word;
+    @FXML
+    private Label Date;
+    @FXML
+    private Label Definition;
+    @FXML
+    private Label Pronunciation;
+    @FXML
+    private Label WordType;
+    @FXML
+    private void setUpWOD() {
+        Word.setText(News_WOD.wordOfTheDayArticles.get(0).getTitle());
+        Word.setWrapText(true);
+        Date.setText(News_WOD.todayDate);
+        Date.setWrapText(true);
+        String description = News_WOD.wordOfTheDayArticles.get(0).getDescription();
+        String pronunciation = description.substring(description.indexOf("\\"), description.lastIndexOf("\\") + 1);
+        Pronunciation.setText(pronunciation);
+        Pronunciation.setWrapText(true);
+        String wordType = description.substring(description.lastIndexOf("\\") + 5, description.indexOf("\n", description.lastIndexOf("\\")));
+        WordType.setText(wordType);
+        WordType.setWrapText(true);
+        Definition.setText(News_WOD.definition);
+        Definition.setWrapText(true);
+    }
+    @FXML
+    private void open_link1() {
+        try {
+            Desktop.getDesktop().browse(URI.create(News_WOD.wordOfTheDayArticles.get(0).getUrl()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void onClickSpeakButton() {
+        TranslateAPI.speakAudio(News_WOD.wordOfTheDayArticles.get(0).getTitle(),"English");
     }
 }

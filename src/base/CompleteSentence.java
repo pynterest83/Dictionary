@@ -50,21 +50,21 @@ public class CompleteSentence {
     public static String askQuestion(int position) {
         return "<p>"
                 + completeSentences.get(position).question
-                + "</p><p style=\"position:fixed;top:42px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[0]
-                + "</p><p style=\"position:fixed;top:97px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[1]
-                + "</p><p style=\"position:fixed;top:151px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[2]
-                + "</p><p style=\"position:fixed;top:205px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[3]
-                + "</p><p style=\"position:fixed;top:259px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[4]+"</p>";
+                + "</p><p style=\"position:fixed;top:25px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[0]
+                + "</p><p style=\"position:fixed;top:55px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[1]
+                + "</p><p style=\"position:fixed;top:85px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[2]
+                + "</p><p style=\"position:fixed;top:115px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[3]
+                + "</p><p style=\"position:fixed;top:145px\";><br>&emsp;&emsp;" + completeSentences.get(position).choices[4]+"</p>";
     }
     public static String getQuestionOnly(int position) {
         return completeSentences.get(position).question;
     }
     public static String showAnswer(int position,String answer) {
         if (Objects.equals(answer, completeSentences.get(position).answer.substring(0, 1))) {
-            return askQuestion(position) + "<p style=\"color:MediumSeaGreen;position:fixed;top:310px;\"><br>"
+            return askQuestion(position) + "<p style=\"color:MediumSeaGreen;position:fixed;top:170px;\"><br>"
                     + completeSentences.get(position).answer + "</p>";
         }
-        else return askQuestion(position) + "<p style=\"color:Crimson;position:fixed;top:310px;\"><br>"
+        else return askQuestion(position) + "<p style=\"color:Crimson;position:fixed;top:170px;\"><br>"
                 + completeSentences.get(position).answer + "</p>";
     }
 }

@@ -9,3 +9,6 @@ hello
 ok
 OK
 adequate
+curtsy
+bend
+aberrancy
