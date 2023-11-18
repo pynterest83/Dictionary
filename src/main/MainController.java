@@ -64,6 +64,8 @@ public class MainController {
     @FXML
     protected Button HomeButton;
     @FXML
+    protected Button HelpButton;
+    @FXML
     protected Pane TitleBar;
     @FXML
     protected AnchorPane login;
@@ -206,6 +208,15 @@ public class MainController {
         RunApplication.SwitchScenes(stage,"setting.fxml");
     }
     @FXML
+    public void onClickHelp() {
+        currentScene = "help.fxml";
+        inside = false;
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"help.fxml");
+    }
+    @FXML
     protected void MenuBarClick() {
         inside = false;
         menuOpen = !menuOpen;
@@ -237,6 +248,8 @@ public class MainController {
                     break;
                 case "setting.fxml":
                     SettingButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
+                case "help.fxml":
+                    HelpButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
             }
         }
         else {

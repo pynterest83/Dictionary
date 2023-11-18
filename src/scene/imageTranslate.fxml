@@ -81,7 +81,7 @@
                         <Font name="SansSerif Bold" size="18.0" />
                     </font>
                 </Button>
-                <Button fx:id="HelpButton" layoutX="1.0" layoutY="637.0" mnemonicParsing="false" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="help-button" text="Help">
+                <Button fx:id="HelpButton" layoutX="1.0" layoutY="637.0" mnemonicParsing="false" onAction="#onClickHelp" onMouseExited="#MenuExited" onMouseMoved="#MenuMoved" prefHeight="63.0" prefWidth="213.0" styleClass="help-button" text="Help">
                     <font>
                         <Font name="SansSerif Bold" size="18.0" />
                     </font>

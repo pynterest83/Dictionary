@@ -23,8 +23,8 @@ public class News_WOD {
     static NewsAPIClient client = NewsAPI.newClientBuilder().setApiKey("7760cd05eb014505b291331d1498d6d1").build();
     public static String definition = "";
     public static String todayDate = DateUtils.formatDate(new Date(), "yyyy-MM-dd");
-    public static String yesterdayDate = DateUtils.formatDate(new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000), "yyyy-MM-dd");
-    static Map<String,String> wordOfTheDayParams = EverythingParams.newBuilder().setPageSize(1).setLanguage("en").setSearchQuery("english").setFrom(yesterdayDate).setDomains("merriam-webster.com").build();
+    public static String twoDaysAgo = DateUtils.formatDate(new Date(System.currentTimeMillis() - 2 * 24 * 60 * 60 * 1000), "yyyy-MM-dd");
+    static Map<String,String> wordOfTheDayParams = EverythingParams.newBuilder().setPageSize(1).setLanguage("en").setSearchQuery("english").setFrom(twoDaysAgo).setDomains("merriam-webster.com").build();
     static Map<String, String> everythingParams = EverythingParams.newBuilder().setPageSize(100).setLanguage("en").setSearchQuery("english").build();
     public static List<Article> articles = new ArrayList<>();
     public static List<Article> wordOfTheDayArticles = new ArrayList<>();
