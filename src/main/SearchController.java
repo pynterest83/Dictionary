@@ -537,6 +537,9 @@ public class SearchController extends MainController {
         removeLearningButton.setVisible(false);
         String header = "<html><header><h2>"+ searchBar.getText() +"</h2></header></html>";
         String explain = DictionaryManager.dictionaryLookup(searchBar.getText(), type_Dict);
+        if(explain.contains("contenteditable=\"true\"")){
+            explain=explain.replace("contenteditable=\"true\"", "contenteditable=\"false\"");
+        }
         wordHeader.getEngine().loadContent(header, "text/html");
         wordExplain.getEngine().loadContent(explain, "text/html");
         SlideInLeft slideInLeft = new SlideInLeft(wordExplain);
