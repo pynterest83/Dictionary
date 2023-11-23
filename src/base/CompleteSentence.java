@@ -27,8 +27,7 @@ public class CompleteSentence {
                     completeSentences.add(new CompleteSentence(question,choices,answer));
                     choices.clear();
                 }
-                int finalCount = count;
-                int beginIndex = String.valueOf(finalCount / 6 + 1).length() + 2;
+                int beginIndex = String.valueOf(count / 6 + 1).length() + 2;
                 question = line.substring(beginIndex);
                 answer = bufferAnswer.readLine().substring(beginIndex);
             }

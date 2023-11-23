@@ -86,3 +86,15 @@
 .normal-text {
     -fx-font-family: 'Roboto Slab', serif;
 }
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.speech-bubble {
+    -fx-font-family: 'Roboto Slab', serif;
+    -fx-font-size: 25;
+    -fx-background-image: url("media/ChatBubble.png");
+    -fx-text-fill: white;
+    -fx-background-size: 178;
+    -fx-background-repeat: no-repeat;
+    -fx-padding: 5 0 15 0;
+}

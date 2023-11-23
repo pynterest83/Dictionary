@@ -8,12 +8,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Objects;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class DictionaryManager extends Dictionary {
     private static final String E_V_PATH = "src/resources/en-vi.txt";
@@ -28,6 +28,11 @@ public class DictionaryManager extends Dictionary {
 
     public static void defaultFile() {
         try {
+            int lineCount;
+            try (Stream<String> stream = Files.lines(Path.of(E_V_PATH), StandardCharsets.UTF_8)) {
+                lineCount = (int) stream.count();
+            }
+            EN_VI_Dict = new ArrayList<Word>(lineCount);
             File infile = new File(E_V_PATH);
             FileReader fileReader= new FileReader(infile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -38,7 +43,6 @@ public class DictionaryManager extends Dictionary {
                 EN_VI_Dict.add(newWord);
             }
             Collections.sort(EN_VI_Dict);
-
             File infile2 = new File(LearningPath);
             FileReader fileReader2= new FileReader(infile2);
             BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
@@ -50,6 +54,10 @@ public class DictionaryManager extends Dictionary {
             }
             Collections.sort(learningDict);
 
+            try (Stream<String> stream = Files.lines(Path.of(SymPath), StandardCharsets.UTF_8)) {
+                lineCount = (int) stream.count();
+            }
+            symDict = new LinkedHashMap<>(lineCount);
             File infile3 = new File(SymPath);
             FileReader fileReader3= new FileReader(infile3);
             BufferedReader bufferedReader3 = new BufferedReader(fileReader3);
@@ -79,6 +87,10 @@ public class DictionaryManager extends Dictionary {
                 VI_History.add(line5);
             }
 
+            try (Stream<String> stream = Files.lines(Path.of(V_E_PATH), StandardCharsets.UTF_8)) {
+                lineCount = (int) stream.count();
+            }
+            VI_EN_Dict = new ArrayList<Word>(lineCount);
             File infile6 = new File(V_E_PATH);
             FileReader fileReader6= new FileReader(infile6);
             BufferedReader bufferedReader6 = new BufferedReader(fileReader6);

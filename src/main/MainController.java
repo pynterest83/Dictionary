@@ -8,10 +8,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,18 +22,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import org.controlsfx.control.HyperlinkLabel;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Random;
-import java.util.Timer;
 
 public class MainController {
     private int curNews = 0;
@@ -97,10 +93,8 @@ public class MainController {
             News_WOD.getWordOfTheDay();
             News_WOD.getDefinition();
         }
-        catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+        catch (Exception e) {
+            System.out.println("No internet connection.");
         }
         PrepareMenu();
         Root.disabledProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
@@ -408,7 +402,7 @@ public class MainController {
         Name.setVisible(true);
     }
 
-    public void cancle_login(MouseEvent mouseEvent) {
+    public void cancel_login(MouseEvent mouseEvent) {
         login.setVisible(false);
         Avatar.setVisible(true);
         Name.setVisible(true);

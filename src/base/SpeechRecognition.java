@@ -52,7 +52,7 @@ public class SpeechRecognition {
         java.util.List<SpeechRecognitionResult> results = response.getResultsList();
         for (SpeechRecognitionResult result : results) {
             SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
-            alternatives.add(alternative.getTranscript());
+            alternatives.add(alternative.getTranscript().toLowerCase());
         }
     }
 

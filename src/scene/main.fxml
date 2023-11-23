@@ -146,7 +146,7 @@
                               <Font size="19.0" />
                            </font>
                         </RadioButton>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="298.0" onMouseClicked="#cancle_login" prefHeight="37.0" prefWidth="275.0" styleClass="cancel-button" text="Cancel" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="298.0" onMouseClicked="#cancel_login" prefHeight="37.0" prefWidth="275.0" styleClass="cancel-button" text="Cancel" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="19.0" />
                            </font>

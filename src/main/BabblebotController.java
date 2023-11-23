@@ -1,23 +1,25 @@
 package main;
 
 import animatefx.animation.Shake;
+import animatefx.animation.ZoomInUp;
 import base.DictionaryManager;
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
+import base.Sounds;
+import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -43,8 +45,6 @@ public class BabblebotController extends MainController {
     @FXML
     private Button Submit;
     @FXML
-    private ListView<String> Submissions;
-    @FXML
     private TextField Answer;
     @FXML
     private Button StartButton;
@@ -58,17 +58,33 @@ public class BabblebotController extends MainController {
     private ListView<String> AnswerList;
     @FXML
     private Text PrepareStart;
+    @FXML
+    private Pane SubmitPane1;
+    @FXML
+    private Pane SubmitPane2;
+    @FXML
+    private MediaView Bot1Speak;
+    @FXML
+    private MediaView Bot2Speak;
     private int availableWord;
     private String[] contains;
     String[] current;
     ArrayList<String> answerList = new ArrayList<>();
+    ArrayList<String> submission = new ArrayList<>(20);
+    private final MediaPlayer[] babblebot = {
+            new MediaPlayer(new Media(Paths.get("src/style/media/babblebot1.mp4").toUri().toString())),
+            new MediaPlayer(new Media(Paths.get("src/style/media/babblebot2.mp4").toUri().toString()))
+    };
+    private final MediaPlayer[] babblebot_speak = {
+            new MediaPlayer(new Media(Paths.get("src/style/media/babblebot1s.mp4").toUri().toString())),
+            new MediaPlayer(new Media(Paths.get("src/style/media/babblebot2s.mp4").toUri().toString()))
+    };
     private int score;
-
+    static boolean side;
+    static ArrayList<ArrayList<Node>> toRemove = new ArrayList<>(List.of(new ArrayList<Node>(),new ArrayList<Node>()));
     @FXML
     private void initialize() {
         loadOtherScences();
-        Submissions.setRotate(180);
-        Submissions.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         PrepareMenu();
         Answer.textProperty().addListener((obs, oldText, newText) -> Submit.setDisable(newText.length() <= 2));
         AnswerList.setCellFactory(e -> new ListCell<>() {
@@ -81,7 +97,7 @@ public class BabblebotController extends MainController {
                     setStyle("-fx-alignment:center; -fx-font-size:16;");
                 } else {
                     setText(s);
-                    if (Submissions.getItems().contains(s)) {
+                    if (submission.contains(s)) {
                         setStyle("-fx-alignment:center; -fx-font-size:16; -fx-text-fill: #7CFC00");
                     } else {
                         setStyle("-fx-alignment:center; -fx-font-size:16;");
@@ -89,24 +105,13 @@ public class BabblebotController extends MainController {
                 }
             }
         });
-        Submissions.setCellFactory(e -> new ListCell<>() {
-            @Override
-            protected void updateItem(String s, boolean empty) {
-                super.updateItem(s,empty);
-                setRotate(180);
-                setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-                if (empty) {
-                    setText(null);
-                    getStyleClass().clear();
-                    setStyle("-fx-background-color: transparent;");
-                } else {
-                    setText(s);
-                    if (!getStyleClass().contains("list-cell")) {
-                        setStyle(null);
-                        getStyleClass().add("list-cell");
-                    }
-                }
-            }
+        babblebot[0].setOnEndOfMedia(() -> {
+            babblebot[0].seek(javafx.util.Duration.ZERO);
+            babblebot[0].play();
+        });
+        babblebot[1].setOnEndOfMedia(() -> {
+            babblebot[1].seek(javafx.util.Duration.ZERO);
+            babblebot[1].play();
         });
     }
     @FXML
@@ -114,8 +119,11 @@ public class BabblebotController extends MainController {
         ObjectProperty<Duration> timeLeft = new SimpleObjectProperty<>(Duration.ofSeconds((long) (1.4*availableWord)));
         Time.textProperty().bind(Bindings.createStringBinding(() ->
                 String.format("%02d:%02d", timeLeft.get().toMinutesPart(), timeLeft.get().toSecondsPart()), timeLeft));
-        Timeline countdown = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1),(ActionEvent e) ->
-                timeLeft.setValue(timeLeft.get().minus(1, ChronoUnit.SECONDS))));
+        Timeline countdown = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1),(ActionEvent e) -> {
+            Duration time = timeLeft.get();
+            if (time.getSeconds() == 11) Sounds.countdownsound.play();
+            timeLeft.setValue(time.minus(1, ChronoUnit.SECONDS));
+    }));
         countdown.setCycleCount((int)timeLeft.get().getSeconds());
         countdown.setOnFinished(e -> endGame());
         countdown.play();
@@ -139,7 +147,8 @@ public class BabblebotController extends MainController {
     }
     @FXML
     private void start() throws IOException {
-        Submissions.getItems().clear();
+        side = false;
+        submission.clear();
         AnswerList.getItems().clear();
         Answer.setText("");
         reset(false);
@@ -147,6 +156,17 @@ public class BabblebotController extends MainController {
         Score.setText(Integer.toString(score));
         Submit.setDisable(true);
         startCountdown();
+        SetUpAnimation();
+    }
+    private void SetUpAnimation() {
+        Bot1Speak.setMediaPlayer(babblebot[0]);
+        Bot2Speak.setMediaPlayer(babblebot[1]);
+        Bot1Speak.getMediaPlayer().play();
+        Bot2Speak.getMediaPlayer().play();
+        toRemove.get(0).clear();
+        toRemove.get(1).clear();
+        SubmitPane1.getChildren().clear();
+        SubmitPane2.getChildren().clear();
     }
     private void reset(boolean shuffle) {
         if (shuffle) {
@@ -242,7 +262,7 @@ public class BabblebotController extends MainController {
         countdown.play();
     }
     @FXML
-    private void checksubmission() throws Exception {
+    private void checksubmission() {
         String submit = Answer.getText();
         if (Objects.equals(DictionaryManager.dictionaryLookup(submit, "EN_VI"), "Word not found.")) {
             Submit.setText("NOT FOUND");
@@ -255,8 +275,9 @@ public class BabblebotController extends MainController {
                 Submit.getStyleClass().add("keyboard-button");
             });
             wrong.play();
+            Sounds.wrongsound.play();
         }
-        else if (Submissions.getItems().contains(submit)) {
+        else if (submission.contains(submit)) {
             Submit.setText("ALREADY SUBMITTED");
             Submit.getStyleClass().clear();
             Submit.getStyleClass().add("already-answered");
@@ -267,11 +288,49 @@ public class BabblebotController extends MainController {
                 Submit.getStyleClass().add("keyboard-button");
             });
             wrong.play();
+            Sounds.wrongsound.play();
         }
         else {
             score++;
-            Score.setText(Integer.toString(score));
-            Submissions.getItems().add(0,submit);
+            submission.add(submit);
+            int index = side ? 0 : 1;
+            Pane SubmitPane = side ? SubmitPane1 : SubmitPane2;
+            MediaView BotSpeak = side ? Bot1Speak : Bot2Speak;
+            ArrayList<Node> removeList = toRemove.get(index);
+            Label label = setLabel(submit);
+            SubmitPane.getChildren().add(label);
+            ParallelTransition transitions = new ParallelTransition();
+            for (Node node: SubmitPane.getChildren()) {
+                if (node.getTranslateY() - 60 < 0) {
+                    removeList.add(node);
+                }
+                else {
+                    TranslateTransition transition = new TranslateTransition(javafx.util.Duration.seconds(0.5));
+                    transition.setNode(node);
+                    transition.setOnFinished(e -> node.setOpacity(node.getTranslateY() / 165));
+                    transition.setToY(node.getTranslateY() - 60);
+                    transitions.getChildren().add(transition);
+                }
+            }
+            SubmitPane.getChildren().removeAll(toRemove.get(index));
+            toRemove.get(index).clear();
+            ZoomInUp inUp = new ZoomInUp(label);
+            inUp.setSpeed(2);
+            inUp.setOnFinished(e -> {
+                label.setLayoutY(0);
+                label.setTranslateY(165);
+            });
+            transitions.playFromStart();
+            Platform.runLater(inUp::play);
+            BotSpeak.setMediaPlayer(babblebot_speak[index]);
+            BotSpeak.getMediaPlayer().setOnEndOfMedia(()->{
+                BotSpeak.getMediaPlayer().stop();
+                BotSpeak.setMediaPlayer(babblebot[index]);
+                BotSpeak.getMediaPlayer().play();
+            });
+            BotSpeak.getMediaPlayer().play();
+            Sounds.correctsound.get(new Random().nextInt(2)).play();
+            side = !side;
         }
     }
     @FXML
@@ -294,7 +353,7 @@ public class BabblebotController extends MainController {
         pause.playFromStart();
     }
 
-    boolean nextPermutation(String[] p) throws Exception {
+    boolean nextPermutation(String[] p) {
         for (int a = p.length - 2; a >= 0; a--)
             if (p[a].compareTo(p[a + 1]) < 0)
                 for (int b = p.length - 1;; b--)
@@ -362,5 +421,15 @@ public class BabblebotController extends MainController {
                 }
             }
         }
+    }
+    private Label setLabel(String submit) {
+        Label label = new Label(submit);
+        label.setTranslateY(80);
+        label.getStyleClass().add("speech-bubble");
+        label.setMinWidth(178);
+        label.setMinHeight(55);
+        label.setLayoutY(165);
+        label.setAlignment(Pos.CENTER);
+        return label;
     }
 }

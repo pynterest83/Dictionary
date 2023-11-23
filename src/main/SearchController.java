@@ -117,9 +117,9 @@ public class SearchController extends MainController {
         loadOtherScences();
         FileTool.expandedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                TranslateTransition moveFirst = new TranslateTransition(Duration.seconds(0.38),DictionaryTool);
+                TranslateTransition moveFirst = new TranslateTransition(Duration.seconds(0.38), DictionaryTool);
                 moveFirst.setToY(0);
-                TranslateTransition moveSecond = new TranslateTransition(Duration.seconds(0.38),HistoryTool);
+                TranslateTransition moveSecond = new TranslateTransition(Duration.seconds(0.38), HistoryTool);
                 if (DictionaryTool.isExpanded()) {
                     moveSecond.setToY(0);
                 }

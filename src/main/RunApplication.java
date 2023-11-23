@@ -74,6 +74,7 @@ public class RunApplication extends Application {
         DictionaryManager.loadUser();
         CompleteSentence.LoadQuestionsAndAnswers();
         Wordle.LoadWordleList();
+        Sounds.LoadSounds();
         TranslateAPI.addDefault();
         try {
             SpeechRecognition.prepare();
