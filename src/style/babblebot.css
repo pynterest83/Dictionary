@@ -1,21 +1,24 @@
 .keyboard-button {
-    -fx-background-color: transparent;
+    -fx-background-color: lightcoral;
     -fx-font-family: 'Lato', sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
     -fx-border-radius: 4;
     -fx-font-size: 23;
-    -fx-border-color: red;
     -fx-alignment: center;
 }
-.keyboard-button: hover {
-    -fx-background-color: lightblue;
+.keyboard-button:hover {
+    -fx-opacity: 0.7;
 }
 .keyboard-clicked {
-    -fx-background-color: lightgray;
+    -fx-background-color: lightcoral;
     -fx-font-family: 'Lato', sans-serif;
-    -fx-alignment: center;
-    -fx-font-size: 23;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
     -fx-border-radius: 4;
-    -fx-border-color: red;
+    -fx-font-size: 23;
+    -fx-alignment: center;
+    -fx-opacity: 0.5;
 }
 .list-view {
     -fx-padding: 1px;
@@ -28,40 +31,36 @@
     -fx-background-color: transparent;
     -fx-font-family: 'Roboto Slab', serif;
 }
-.list-cell: even {
+.list-cell:even {
     -fx-border-width: 0 5 0 0;
     -fx-alignment: center-right;
 }
-.list-cell: odd {
+.list-cell:odd {
     -fx-border-width: 0 0 0 5;
     -fx-alignment: center-left;
 }
 .shuffle-key {
-    -fx-background-color: transparent;
-    -fx-border-radius: 4;
+    -fx-background-color: darkgrey;
     -fx-font-size: 23;
-    -fx-border-color: red;
     -fx-alignment: center;
     -fx-background-image: url("media/shuffle.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
 }
-.shuffle-key: hover {
-    -fx-background-color: lightblue;
+.shuffle-key:hover {
+    -fx-opacity: 0.7;
 }
 .backspace-button {
     -fx-background-image: url("media/backspace.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
-    -fx-background-color: transparent;
-    -fx-border-radius: 4;
-    -fx-border-color: red;
+    -fx-background-color: darkgrey;
     -fx-alignment: center;
 }
-.backspace-button: hover {
-    -fx-background-color: lightblue;
+.backspace-button:hover {
+    -fx-opacity: 0.7;
 }
 .already-answered {
     -fx-background-color: #F08080;
@@ -97,4 +96,12 @@
     -fx-background-size: 178;
     -fx-background-repeat: no-repeat;
     -fx-padding: 5 0 15 0;
+}
+.answer-box {
+    -fx-text-fill: lightcoral;
+    -fx-background-color: white;
+    -fx-border-color: lightcoral;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-border-width: 5;
 }

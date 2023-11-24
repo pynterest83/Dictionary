@@ -269,10 +269,10 @@
     -fx-background-color: grey;
 }
 .cancel-button:hover {
-    -fx-background-color: #CECFD3;
+    -fx-opacity: 0.5;
 }
 .login-button:hover {
-    -fx-background-color: crimson;
+    -fx-opacity: 0.5;
 }
 .speak-button {
     -fx-background-image: url("media/voice.png");

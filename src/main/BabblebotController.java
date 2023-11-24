@@ -233,6 +233,8 @@ public class BabblebotController extends MainController {
         reset(false);
     }
     @FXML
+    private Pane InstructionPane;
+    @FXML
     private void onClickStart() throws IOException {
         ChooseSet();
         new Thread(() -> {
@@ -242,7 +244,7 @@ public class BabblebotController extends MainController {
                 throw new RuntimeException(e);
             }
         }).start();
-        StartButton.setVisible(false);
+        InstructionPane.setVisible(false);
         ResultPane.setVisible(false);
         PrepareStart.setVisible(true);
         ObjectProperty<Duration> timeLeft = new SimpleObjectProperty<>(Duration.ofSeconds(3));

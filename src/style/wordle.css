@@ -1,57 +1,76 @@
 .keyboard-button {
-    -fx-background-color: transparent;
-    -fx-border-radius: 4;
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
     -fx-font-size: 21;
-    -fx-border-color: red;
     -fx-alignment: center;
 }
 .keyboard-button:hover {
-    -fx-background-color: lightblue;
+    -fx-opacity: 0.7;
 }
 .backspace-button {
     -fx-background-image: url("media/backspace.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30;
     -fx-background-position: center;
-    -fx-background-color: transparent;
-    -fx-border-radius: 4;
-    -fx-border-color: red;
+    -fx-background-color: darkgrey;
     -fx-alignment: center;
 }
 .backspace-button:hover {
-    -fx-background-color: lightblue;
+    -fx-opacity: 0.7;
+}
+.enter-button {
+    -fx-background-image: url("media/enter.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30;
+    -fx-background-position: center;
+    -fx-background-color: darkgrey;
+    -fx-alignment: center;
+}
+.enter-button:hover {
+    -fx-opacity: 0.7;
 }
 .wrong-letter {
-    -fx-background-color: DarkGrey;
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.5;
     -fx-border-radius: 4;
     -fx-font-size: 21;
-    -fx-border-color: red;
+    -fx-border-color: lightcoral;
     -fx-alignment: center;
 }
 .wrong-position {
-    -fx-background-color: Orange;
-    -fx-border-radius: 4;
+    -fx-background-color: darkorange;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
     -fx-font-size: 21;
-    -fx-border-color: red;
     -fx-alignment: center;
 }
 .correct-letter {
-    -fx-background-color: Green;
-    -fx-border-radius: 4;
+    -fx-background-color: indigo;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
     -fx-font-size: 21;
-    -fx-border-color: red;
     -fx-alignment: center;
 }
 .generic-button {
-    -fx-background-color: transparent;
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-    -fx-border-color: blue;
 }
 .generic-button:hover {
-    -fx-background-color: lightblue;
+    -fx-background-color: white;
+    -fx-text-fill: lightcoral;
+    -fx-border-color: lightcoral;
 }
 .normal-text {
     -fx-font-family: 'Lato', sans-serif;
     -fx-font-size: 19;
+}
+.guess-character {
+    -fx-background-color: antiquewhite;
+    -fx-text-fill: crimson;
+    -fx-display-caret: false;
 }

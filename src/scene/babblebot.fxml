@@ -4,11 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -24,9 +27,9 @@
                      </font>
                   </Text>
                   <ListView fx:id="AnswerList" focusTraversable="false" prefHeight="454.0" prefWidth="264.0" stylesheets="@../style/babblebot.css" />
-                  <Button mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: blue;" styleClass="generic-button" text="Replay">
+                  <Button mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" styleClass="generic-button" stylesheets="@../style/wordle.css" text="REPLAY" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font name="Segoe UI Semibold" size="22.0" />
+                        <Font name="System Bold" size="22.0" />
                      </font>
                   </Button>
                </children>
@@ -57,7 +60,7 @@
             </Text>
             <Pane fx:id="SubmitPane1" layoutX="225.0" layoutY="48.0" prefHeight="218.0" prefWidth="178.0" />
             <Pane fx:id="SubmitPane2" layoutX="547.0" layoutY="51.0" prefHeight="218.0" prefWidth="178.0" />
-            <Pane layoutX="192.0" layoutY="269.0" prefHeight="391.0" prefWidth="566.0" style="-fx-background-color: white;">
+            <Pane layoutX="192.0" layoutY="269.0" prefHeight="391.0" prefWidth="566.0" style="-fx-background-color: transparent;">
                <children>
                   <Button fx:id="Submit" layoutX="199.0" layoutY="328.0" mnemonicParsing="false" onAction="#onSubmission" prefHeight="49.0" prefWidth="168.0" styleClass="keyboard-button" text="SUBMIT" textAlignment="JUSTIFY">
                      <font>
@@ -98,7 +101,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <TextField fx:id="Answer" alignment="CENTER" editable="false" layoutX="183.0" layoutY="179.0" prefHeight="63.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: blue;">
+                  <TextField fx:id="Answer" alignment="CENTER" editable="false" layoutX="183.0" layoutY="179.0" prefHeight="63.0" prefWidth="200.0" styleClass="answer-box">
                      <font>
                         <Font name="SansSerif Bold" size="28.0" />
                      </font>
@@ -119,16 +122,36 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Button fx:id="StartButton" layoutX="404.0" layoutY="318.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: blue;" styleClass="generic-button" text="Start">
+      <Text fx:id="PrepareStart" fill="LIGHTCORAL" layoutX="459.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" visible="false">
          <font>
-            <Font name="Segoe UI Semibold" size="22.0" />
-         </font>
-      </Button>
-      <Text fx:id="PrepareStart" layoutX="459.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" visible="false">
-         <font>
-            <Font name="Cambria" size="55.0" />
+            <Font name="System Bold" size="55.0" />
          </font>
       </Text>
+      <Pane fx:id="InstructionPane" layoutX="78.0" layoutY="116.0" prefHeight="498.0" prefWidth="794.0">
+         <children>
+            <ImageView fitHeight="274.0" fitWidth="350.0" layoutX="6.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../style/media/instruction.jpg" />
+               </image>
+            </ImageView>
+            <Label alignment="TOP_LEFT" layoutX="482.0" layoutY="55.0" prefHeight="37.0" prefWidth="189.0" text="HOW TO PLAY" textFill="#d74949" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="372.0" layoutY="93.0" prefHeight="252.0" prefWidth="408.0" text="YOU ARE GIVEN 6 CHARACTERS, TRY TO CREATE WORDS FROM THESE CHARACTERS AS MANY AS POSSIBLE." textAlignment="CENTER" textFill="#d36d6d" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Line endX="13.9000244140625" endY="248.0" layoutX="341.0" layoutY="92.0" startX="13.9000244140625" startY="6.0" stroke="LIGHTCORAL" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
+            <Button fx:id="StartButton" layoutX="327.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="92.0" prefWidth="141.0" styleClass="generic-button" stylesheets="@../style/wordle.css" text="START" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
       <Pane fx:id="TitleBar" layoutX="-4.0" prefHeight="37.0" prefWidth="957.0" style="-fx-background-color: white;">
          <children>
             <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />

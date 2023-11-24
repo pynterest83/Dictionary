@@ -110,10 +110,12 @@ public class WordleController extends MainController {
         }
     }
     @FXML
+    private Pane InstructionPane;
+    @FXML
     protected void onClickStart() {
         WordlePane.setVisible(true);
         VirtualKeyboard.setVisible(true);
-        StartButton.setVisible(false);
+        InstructionPane.setVisible(false);
         Start();
     }
     @FXML
@@ -276,14 +278,14 @@ public class WordleController extends MainController {
         String[] styles = new String[5];
         if (Objects.equals(answer, guess)) {
             for (int i = 0; i < 5; i++) {
-                styles[i] = "-fx-background-color: Green";
+                styles[i] = "-fx-background-color: Indigo; -fx-text-fill: White";
             }
             EndGame(true);
             return styles;
         }
         for (int i = 0; i < 5; i++) {
             if (guess.charAt(i) == answer.charAt(i)) {
-                styles[i] = "-fx-background-color: Green";
+                styles[i] = "-fx-background-color: Indigo; -fx-text-fill: White";
                 setKeyboardColor(guess.charAt(i),"correct-letter");
                 answer = answer.substring(0, i) + "#" + answer.substring(i + 1);
                 guess = guess.substring(0,i) + "@" + guess.substring(i+1);
@@ -294,7 +296,7 @@ public class WordleController extends MainController {
             boolean check = false;
             for (int j = 0; j < 5; j++) {
                 if (guess.charAt(i) == answer.charAt(j)) {
-                    styles[i] = "-fx-background-color: Orange";
+                    styles[i] = "-fx-background-color: Orange; -fx-text-fill: White";
                     setKeyboardColor(guess.charAt(i),"wrong-position");
                     answer = answer.substring(0, j) + "#" + answer.substring(j + 1);
                     guess = guess.substring(0,i) + "@" + guess.substring(i+1);
@@ -303,7 +305,7 @@ public class WordleController extends MainController {
                 }
             }
             if (!check) {
-                styles[i] = "-fx-background-color: DarkGrey";
+                styles[i] = "-fx-background-color: AntiqueWhite; -fx-text-fill: White";
                 setKeyboardColor(guess.charAt(i),"wrong-letter");
             }
         }

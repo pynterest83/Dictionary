@@ -29,6 +29,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.nio.file.Paths;
 import java.util.Random;
 
 public class MainController {
@@ -107,6 +108,8 @@ public class MainController {
                 }
             }
         });
+        String path = Paths.get("src/style/webviews.css").toUri().toString();
+        gameScreen.getEngine().setUserStyleSheetLocation(path);
     }
     @FXML
     protected void PrepareMenu() {
