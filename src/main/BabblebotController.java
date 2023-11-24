@@ -71,11 +71,13 @@ public class BabblebotController extends MainController {
     String[] current;
     ArrayList<String> answerList = new ArrayList<>();
     ArrayList<String> submission = new ArrayList<>(20);
-    private final MediaPlayer[] babblebot = {
+    @FXML
+    private static final MediaPlayer[] babblebot = {
             new MediaPlayer(new Media(Paths.get("src/style/media/babblebot1.mp4").toUri().toString())),
             new MediaPlayer(new Media(Paths.get("src/style/media/babblebot2.mp4").toUri().toString()))
     };
-    private final MediaPlayer[] babblebot_speak = {
+    @FXML
+    private static final MediaPlayer[] babblebot_speak = {
             new MediaPlayer(new Media(Paths.get("src/style/media/babblebot1s.mp4").toUri().toString())),
             new MediaPlayer(new Media(Paths.get("src/style/media/babblebot2s.mp4").toUri().toString()))
     };
@@ -292,6 +294,7 @@ public class BabblebotController extends MainController {
         }
         else {
             score++;
+            Score.setText(Integer.toString(score));
             submission.add(submit);
             int index = side ? 0 : 1;
             Pane SubmitPane = side ? SubmitPane1 : SubmitPane2;

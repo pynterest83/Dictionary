@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.SearchableComboBox?>
 
-<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ImageTranslateController">
+<AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ImageTranslateController">
     <children>
       <Pane fx:id="imagePane" layoutX="38.0" layoutY="103.0" onDragDropped="#DragDroppedImage" prefHeight="574.0" prefWidth="874.0" style="-fx-border-style: dashed;">
          <children>
             <ImageView fx:id="image" fitHeight="573.0" fitWidth="874.0" layoutY="1.0" onMousePressed="#MouseClick" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Button layoutX="443.0" layoutY="70.0" mnemonicParsing="false" onAction="#translateImage" text="Translate" />
+      <Button layoutX="443.0" layoutY="70.0" mnemonicParsing="false" onAction="#translateImage" styleClass="click-button" text="Translate" />
         <Pane fx:id="TitleBar" layoutX="-3.0" layoutY="7.0" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
@@ -95,7 +95,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <SearchableComboBox fx:id="TranslateLanguage" layoutX="403.0" layoutY="38.0" onAction="#ChooseLanguage" prefHeight="26.0" prefWidth="144.0" promptText="Choose language..." />
+      <SearchableComboBox fx:id="TranslateLanguage" layoutX="403.0" layoutY="38.0" onAction="#ChooseLanguage" prefHeight="26.0" prefWidth="144.0" promptText="Choose language..." styleClass="click-button" />
       <Label fx:id="ClipboardLabel" layoutY="642.0" style="-fx-background-color: #E4E5E9; -fx-border-color: grey; -fx-text-fill: black; -fx-border-width: 0 0 5 0;" styleClass="error-label" stylesheets="@../style/search.css" text="Copied to clipboard" translateX="-202.0">
          <font>
             <Font name="System Bold" size="23.0" />

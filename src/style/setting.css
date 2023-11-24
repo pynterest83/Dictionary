@@ -1,8 +1,8 @@
 .slider .track {
-    -fx-background-color: #3264FE;
-    -fx-border-color: #3264FE;
+    -fx-background-color: lightcoral;
+    -fx-border-color: lightcoral;
     -fx-border-radius: 3;
 }
 .slider .thumb {
-    -fx-background-color: #3264FE;
+    -fx-background-color: lightcoral;
 }

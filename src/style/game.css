@@ -9,7 +9,7 @@
     -fx-border-width: 1;
     -fx-border-color: lightgrey;
 }
-.wordle-image: hover {
+.wordle-image:hover {
     -fx-background-image: url("media/wordleplay.gif");
     -fx-border-color: grey;
     -fx-border-width: 2;
@@ -25,7 +25,7 @@
     -fx-border-width: 1;
     -fx-border-color: lightgrey;
 }
-.babble-image: hover {
+.babble-image:hover {
     -fx-background-image: url("media/babbleplay.gif");
     -fx-border-color: grey;
     -fx-border-width: 2;
