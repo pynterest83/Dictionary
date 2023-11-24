@@ -254,6 +254,10 @@ public class SearchController extends MainController {
             recordButton.getStyleClass().add("mic-unavailable");
             recordButton.setDisable(true);
         }
+        String path = Paths.get("src/style/webviews.css").toUri().toString();
+        EtymologyPane.getEngine().setUserStyleSheetLocation(path);
+        wordExplain.getEngine().setUserStyleSheetLocation(path);
+        wordHeader.getEngine().setUserStyleSheetLocation(path);
     }
     @FXML
     protected void MouseClick() {
@@ -588,7 +592,6 @@ public class SearchController extends MainController {
     public void onClickRecording() {
         if (type_Dict.equals("EN_VI")) SpeechRecognition.changeLanguage("en");
         else SpeechRecognition.changeLanguage("vi");
-
         if (!SpeechRecognition.isListening) {
             new Thread(() -> {
                 Platform.runLater(() -> {
@@ -601,6 +604,7 @@ public class SearchController extends MainController {
                 Platform.runLater(()->{
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("micload-button");
+                    recordButton.setDisable(true);
                 });
                 try {
                     SpeechRecognition.sendRequest();
@@ -608,6 +612,7 @@ public class SearchController extends MainController {
                 Platform.runLater(() -> {
                     recordButton.getStyleClass().clear();
                     recordButton.getStyleClass().add("mic-button");
+                    recordButton.setDisable(false);
                     if (!SpeechRecognition.alternatives.isEmpty()) {
                         searchBar.setText(SpeechRecognition.alternatives.get(0));
                         try {

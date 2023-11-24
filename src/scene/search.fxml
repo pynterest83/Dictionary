@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane fx:id="Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SearchController">
@@ -21,23 +22,23 @@
             <Line endX="100.0" endY="17.600006103515625" layoutX="-17.0" layoutY="366.0" startX="661.0" startY="17.600006103515625" stroke="#655151" strokeWidth="3.0" />
             <Line endX="100.0" layoutX="566.0" layoutY="115.0" startX="100.0" startY="249.60000610351562" stroke="#615959" strokeWidth="3.0" />
             <Line endX="100.0" layoutX="566.0" layoutY="410.0" startX="100.0" startY="226.5999755859375" stroke="#6f6262" strokeWidth="3.0" />
-            <TextField fx:id="searchBar" focusTraversable="false" layoutX="77.0" layoutY="14.0" onAction="#enterSearch" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="826.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-width: 2; -fx-border-color: transparent transparent darkgray transparent; -fx-font-size: 20;">
+            <TextField fx:id="searchBar" focusTraversable="false" layoutX="77.0" layoutY="14.0" onAction="#enterSearch" onMousePressed="#MouseClick" prefHeight="63.0" prefWidth="837.0" promptText="Enter search..." style="-fx-background-color: transparent; -fx-border-width: 2; -fx-border-color: transparent transparent darkgray transparent; -fx-font-size: 20;" styleClass="search-bar" stylesheets="@../style/search.css">
                <font>
-                  <Font name="SansSerif Bold" size="14.0" />
+                  <Font name="SansSerif Bold" size="22.0" />
                </font>
             </TextField>
             <Button fx:id="en_vi_dict" layoutX="37.0" layoutY="25.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="en-vi-button" />
              <Button fx:id="vi_en_dict" layoutX="37.0" layoutY="25.0" mnemonicParsing="false" onAction="#changeDict" onMousePressed="#MouseClick" prefHeight="41.0" prefWidth="40.0" styleClass="vi-en-button" />
-            <Pane layoutX="77.0" layoutY="130.0" onMousePressed="#MouseClick" prefHeight="229.0" prefWidth="575.0" style="-fx-border-color: transparent transparent transparent darkgray; -fx-border-width: 5;">
+            <Pane layoutX="77.0" layoutY="97.0" onMousePressed="#MouseClick" prefHeight="263.0" prefWidth="575.0" style="-fx-border-color: transparent transparent transparent darkgray; -fx-border-width: 5;">
                <children>
                   <WebView fx:id="wordHeader" layoutX="14.0" prefHeight="49.0" prefWidth="564.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
-                  <WebView fx:id="wordExplain" layoutX="14.0" layoutY="43.0" onMousePressed="#MouseClick" prefHeight="186.0" prefWidth="564.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
+                  <WebView fx:id="wordExplain" layoutX="14.0" layoutY="43.0" onMousePressed="#MouseClick" prefHeight="219.0" prefWidth="564.0" stylesheets="@../style/main_styles.css" />
                   <Button fx:id="SpeakButton" layoutX="541.0" layoutY="11.0" mnemonicParsing="false" onAction="#onClickSpeakButton" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="speak-button" stylesheets="@../style/search.css" />
                   <Button fx:id="addLearningButton" layoutX="496.0" layoutY="11.0" mnemonicParsing="false" onAction="#onClickAddLearning" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="favourite" stylesheets="@../style/search.css" />
                   <Button fx:id="removeLearningButton" layoutX="496.0" layoutY="11.0" mnemonicParsing="false" onAction="#onClickAddLearning" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="not-favourite" stylesheets="@../style/search.css" />
                </children>
             </Pane>
-            <LineChart fx:id="UsageOverTime" layoutX="48.0" layoutY="395.0" legendVisible="false" onMousePressed="#MouseClick" prefHeight="263.0" prefWidth="575.0" style="-fx-background-color: white;">
+            <LineChart fx:id="UsageOverTime" layoutX="57.0" layoutY="385.0" legendVisible="false" onMousePressed="#MouseClick" prefHeight="263.0" prefWidth="575.0" style="-fx-background-color: white;">
               <xAxis>
                 <NumberAxis fx:id="YearAxis" autoRanging="false" label="Year" lowerBound="1800.0" onMousePressed="#MouseClick" side="BOTTOM" upperBound="2022.0" />
               </xAxis>
@@ -69,11 +70,11 @@
                   <Font name="SansSerif Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="ToolbarMenuButton" layoutX="903.0" layoutY="14.0" mnemonicParsing="false" onAction="#ToolbarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" />
+            <Button fx:id="ToolbarMenuButton" layoutX="915.0" layoutY="-6.0" mnemonicParsing="false" onAction="#ToolbarClick" prefHeight="40.0" prefWidth="40.0" styleClass="menu-bar-button" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Pane layoutX="681.0" layoutY="380.0" onMousePressed="#MouseClick" prefHeight="257.0" prefWidth="254.0" style="-fx-background-color: white; -fx-border-width: 5; -fx-border-color: darkgray transparent transparent transparent;">
                <children>
                   <WebView fx:id="EtymologyPane" layoutY="38.0" prefHeight="219.0" prefWidth="254.0" />
-                  <Label layoutX="14.0" layoutY="14.0" text="Etymology">
+                  <Label layoutX="14.0" layoutY="11.0" text="Etymology">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -95,12 +96,17 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="recordButton" layoutX="869.0" layoutY="39.0" mnemonicParsing="false" onAction="#onClickRecording" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="mic-button" stylesheets="@../style/search.css" />
+            <Button fx:id="recordButton" layoutX="876.0" layoutY="40.0" mnemonicParsing="false" onAction="#onClickRecording" onMousePressed="#MouseClick" prefHeight="30.0" prefWidth="33.0" styleClass="mic-button" stylesheets="@../style/search.css" />
             <Label fx:id="ErrorLabel" layoutY="34.0" style="-fx-background-color: #E4E5E9; -fx-border-color: grey; -fx-text-fill: black; -fx-border-width: 0 0 5 0;" styleClass="error-label" stylesheets="@../style/search.css" text="Transcription not available" translateX="-290.0">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>
             </Label>
+            <Text layoutX="295.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usage over time">
+               <font>
+                  <Font name="SansSerif Bold" size="19.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Pane fx:id="TitleBar" layoutX="-3.0" layoutY="7.0" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

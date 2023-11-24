@@ -12,6 +12,7 @@ import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,6 +58,7 @@ public class LearningController extends MainController {
                 scroll.setVisible(false);
             }
         });
+        learningExplain.getEngine().setUserStyleSheetLocation(Paths.get("src/style/webviews.css").toUri().toString());
     }
     @FXML
     private void UserInput() throws Exception {

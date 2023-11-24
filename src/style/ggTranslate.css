@@ -48,3 +48,7 @@
     -fx-background-size: 30;
     -fx-background-position: center;
 }
+.text-area {
+    -fx-font-family: 'Kumbh Sans', sans-serif;
+    -fx-font-size: 20;
+}

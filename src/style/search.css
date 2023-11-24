@@ -120,3 +120,7 @@
 .error-label {
     -fx-font-family: 'Lato', sans-serif;
 }
+.search-bar {
+    -fx-font-family: 'Kumbh Sans', sans-serif;
+    -fx-font-size: 24;
+}

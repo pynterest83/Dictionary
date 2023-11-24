@@ -1,0 +1,6 @@
+@font-face {
+    src: url("fonts/KumbhSans-Regular.ttf");
+}
+html {
+    font-family: 'Kumbh Sans', sans-serif;
+}

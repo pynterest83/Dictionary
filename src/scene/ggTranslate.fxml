@@ -15,7 +15,7 @@
               <children>
             <Pane layoutX="51.0" layoutY="55.0" prefHeight="583.0" prefWidth="608.0" style="-fx-background-color: white;">
                <children>
-                  <TextArea fx:id="input" layoutX="20.0" layoutY="58.0" prefHeight="200.0" prefWidth="568.0" style="-fx-border-width: 4; -fx-border-color: darkgray; -fx-background-color: transparent;">
+                  <TextArea fx:id="input" layoutX="20.0" layoutY="58.0" prefHeight="200.0" prefWidth="568.0" style="-fx-border-width: 4; -fx-border-color: darkgray; -fx-background-color: transparent;" styleClass="text-area">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -23,7 +23,7 @@
                   <ComboBox fx:id="SourceLang" layoutX="69.0" layoutY="21.0" onAction="#SelectSourceLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate From" styleClass="click-button" />
                   <ComboBox fx:id="TargetLang" layoutX="69.0" layoutY="297.0" onAction="#SelectTargetLang" prefHeight="30.0" prefWidth="150.0" promptText="Translate To" styleClass="click-button" />
                   <Button fx:id="swapButton" layoutX="302.0" layoutY="277.0" mnemonicParsing="false" onAction="#swap" prefHeight="31.0" prefWidth="32.0" styleClass="swap-button" stylesheets="@../style/ggTranslate.css" />
-                  <TextArea fx:id="output" editable="false" layoutX="20.0" layoutY="334.0" prefHeight="200.0" prefWidth="568.0" style="-fx-border-color: darkgray transparent darkgray darkgray; -fx-border-width: 4; -fx-background-color: transparent;" styleClass="text-area">
+                  <TextArea fx:id="output" editable="false" layoutX="20.0" layoutY="334.0" prefHeight="200.0" prefWidth="568.0" style="-fx-border-color: darkgray darkgray darkgray darkgray; -fx-border-width: 4; -fx-background-color: transparent;" styleClass="text-area">
                      <font>
                         <Font size="20.0" />
                      </font>
