@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/wordle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.WordleController">
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/wordle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.WordleController">
    <children>
     <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="527.0" prefWidth="895.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
@@ -394,6 +394,7 @@
                   </HBox>
                </children>
             </VBox>
+            <Button mnemonicParsing="false" onAction="#onClickBack" prefHeight="35.0" prefWidth="35.0" styleClass="back-button" stylesheets="@../style/main_styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <Pane fx:id="TitleBar" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

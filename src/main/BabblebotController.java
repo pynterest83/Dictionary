@@ -22,6 +22,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -115,6 +116,14 @@ public class BabblebotController extends MainController {
             babblebot[1].seek(javafx.util.Duration.ZERO);
             babblebot[1].play();
         });
+    }
+    @FXML
+    private void onClickBack() {
+        inside = false;
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
     private void startCountdown() {

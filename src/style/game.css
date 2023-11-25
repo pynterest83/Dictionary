@@ -9,11 +9,6 @@
     -fx-border-width: 1;
     -fx-border-color: lightgrey;
 }
-.wordle-image:hover {
-    -fx-background-image: url("media/wordleplay.gif");
-    -fx-border-color: grey;
-    -fx-border-width: 2;
-}
 .babble-image {
     -fx-font-family: 'Roboto Slab', serif;
     -fx-font-size: 20;
@@ -22,11 +17,6 @@
     -fx-background-size: 250px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 50% -9;
-    -fx-border-width: 1;
-    -fx-border-color: lightgrey;
-}
-.babble-image:hover {
-    -fx-background-image: url("media/babbleplay.gif");
-    -fx-border-color: grey;
     -fx-border-width: 2;
+    -fx-border-color: lightgrey;
 }

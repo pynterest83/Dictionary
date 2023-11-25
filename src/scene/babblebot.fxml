@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.BabblebotController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.BabblebotController">
    <children>
-      <AnchorPane fx:id="ResultPane" layoutY="30.0" prefHeight="675.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/babblebot.css" visible="false">
+      <AnchorPane fx:id="ResultPane" layoutY="37.0" prefHeight="675.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/babblebot.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
          <children>
             <VBox alignment="CENTER" layoutX="343.0" layoutY="14.0" prefHeight="646.0" prefWidth="264.0" spacing="30.0">
                <children>
@@ -34,6 +34,7 @@
                   </Button>
                </children>
             </VBox>
+            <Button mnemonicParsing="false" onAction="#onClickBack" prefHeight="35.0" prefWidth="35.0" styleClass="back-button" stylesheets="@../style/main_styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="GamePane" layoutY="30.0" prefHeight="668.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/babblebot.css" visible="false">
@@ -152,15 +153,15 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="TitleBar" layoutX="-4.0" prefHeight="37.0" prefWidth="957.0" style="-fx-background-color: white;">
+      <Pane fx:id="TitleBar" layoutX="-4.0" prefHeight="37.0" prefWidth="957.0" style="-fx-background-color: white;" AnchorPane.topAnchor="0.0">
          <children>
             <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
             <Label fx:id="Name" alignment="CENTER" layoutX="753.0" layoutY="5.0" minWidth="15.0" prefHeight="37.0" text="User" visible="false">
                <font>
                   <Font size="15.0" />
                </font></Label>
-            <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="867.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
-            <Button fx:id="CloseButton" focusTraversable="false" layoutX="912.0" layoutY="-1.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
+            <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="858.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
+            <Button fx:id="CloseButton" focusTraversable="false" layoutX="913.0" layoutY="-1.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
             <Button fx:id="Avatar" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: black;" styleClass="default-avatar" visible="false" />
          </children>
       </Pane>

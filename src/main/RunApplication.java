@@ -26,6 +26,7 @@ public class RunApplication extends Application {
         launch(args);
     }
     public static void SwitchScenes(Stage stage,String sceneName) {
+        MainController.currentScene = sceneName;
         stage.getScene().setRoot(FXML_scenes.get(sceneName));
         stage.show();
     }

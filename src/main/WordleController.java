@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -196,6 +197,14 @@ public class WordleController extends MainController {
     @FXML
     protected void MouseClick() {
         if (!inside) HideMenuBar();
+    }
+    @FXML
+    private void onClickBack() {
+        inside = false;
+        menuOpen = false;
+        menuBar.setVisible(false);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        RunApplication.SwitchScenes(stage,"game.fxml");
     }
     @FXML
     protected void onType() {
