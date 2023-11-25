@@ -4,10 +4,7 @@ import animatefx.animation.SlideInDown;
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideInRight;
 import animatefx.animation.SlideOutRight;
-import base.DictionaryManager;
-import base.SpeechRecognition;
-import base.TranslateAPI;
-import base.Word;
+import base.*;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -243,12 +240,8 @@ public class SearchController extends MainController {
                 searchBar.setText("");
             }
         });
-        ToolPane.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-            insideToolbar = true;
-        });
-        ToolPane.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
-            insideToolbar = false;
-        });
+        ToolPane.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> insideToolbar = true);
+        ToolPane.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> insideToolbar = false);
         if (!RunApplication.micAvailable) {
             recordButton.getStyleClass().clear();
             recordButton.getStyleClass().add("mic-unavailable");
@@ -416,7 +409,7 @@ public class SearchController extends MainController {
             });
             String response;
             try {
-                response = DictionaryManager.etymologyLookup(searched);
+                response = Etymology.etymologyLookup(searched, Objects.equals(type_Dict, "EN_VI") ? "English" : "Vietnamese");
             } catch (IOException | URISyntaxException e) {
                 response = "Not available.";
             }
@@ -441,7 +434,7 @@ public class SearchController extends MainController {
             Platform.runLater(() -> parent.getChildren().add(loading));
             XYChart.Series<Integer,Double> data = new XYChart.Series<>();
             String requestString = searched.replace(' ','+');
-            double[] wordData = TranslateAPI.graphData(requestString);
+            double[] wordData = UsageGraph.graphData(requestString);
             if (type_Dict.equals("VI_EN") || wordData == null || wordData.length == 0) {
                 success = false;
             }
@@ -485,7 +478,7 @@ public class SearchController extends MainController {
         }
     }
     @FXML
-    protected void LoadSynonym() throws Exception {
+    protected void LoadSynonym() {
         HideMenuBar();
         addSynonymsButton.setVisible(true);
         if (DictionaryManager.symDict.get(searched) == null) {
@@ -511,7 +504,7 @@ public class SearchController extends MainController {
         new Thread(() -> history = DictionaryManager.getHistory(type_Dict).toArray(new String[0])).start();
     }
     @FXML
-    protected void enterSearch() throws Exception {
+    protected void enterSearch() {
         HideMenuBar();
         if (graphFailed.isVisible()) graphFailed.setVisible(false);
         UsageOverTime.getData().clear();
@@ -652,7 +645,7 @@ public class SearchController extends MainController {
         addLearningButton.setVisible(true);
     }
     @FXML
-    public void addSyms() throws Exception {
+    public void addSyms() {
         String[] sym = Syms.getText().split(",");
         ArrayList<String> synonyms = new ArrayList<>(Arrays.asList(sym));
         if (DictionaryManager.symDict.get(searched) != null) {

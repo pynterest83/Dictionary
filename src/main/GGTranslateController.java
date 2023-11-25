@@ -2,6 +2,7 @@ package main;
 
 import animatefx.animation.FadeIn;
 import base.SpeechRecognition;
+import base.Thesaurus;
 import base.TranslateAPI;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
@@ -145,7 +146,7 @@ public class GGTranslateController extends MainController {
         }).start();
     }
 
-    public void onClickSpeak1() throws IOException, URISyntaxException {
+    public void onClickSpeak1() {
         if (SourceLang.getValue() == null || SourceLang.getValue().equals("Auto Detect")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -165,7 +166,7 @@ public class GGTranslateController extends MainController {
         TranslateAPI.speakAudio(input.getText(),SourceLang.getValue());
     }
 
-    public void onClickSpeak2() throws IOException, URISyntaxException {
+    public void onClickSpeak2() {
         if (TargetLang.getValue() == null || TargetLang.getValue().equals("Auto Detect")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -273,7 +274,7 @@ public class GGTranslateController extends MainController {
                 symButton.setDisable(true);
             });
             try {
-                String[] synonymsList = TranslateAPI.theSaurus(word, "syn");
+                String[] synonymsList = Thesaurus.theSaurus(word, "syn");
                 if (synonymsList == null) {
                     synonyms.setText("No synonyms found");
                 }
@@ -331,7 +332,7 @@ public class GGTranslateController extends MainController {
                 antButton.setDisable(true);
             });
             try {
-                String[] antonymsList = TranslateAPI.theSaurus(word, "ant");
+                String[] antonymsList = Thesaurus.theSaurus(word, "ant");
                 if (antonymsList == null) {
                     antonyms.setText("No antonyms found");
                 }

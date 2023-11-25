@@ -5,7 +5,6 @@ import animatefx.animation.ZoomInUp;
 import base.DictionaryManager;
 import base.Sounds;
 import javafx.animation.*;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -84,7 +83,7 @@ public class BabblebotController extends MainController {
     };
     private int score;
     static boolean side;
-    static ArrayList<ArrayList<Node>> toRemove = new ArrayList<>(List.of(new ArrayList<Node>(),new ArrayList<Node>()));
+    static ArrayList<ArrayList<Node>> toRemove = new ArrayList<>(List.of(new ArrayList<>(), new ArrayList<>()));
     @FXML
     private void initialize() {
         loadOtherScences();
@@ -236,7 +235,7 @@ public class BabblebotController extends MainController {
         }
     }
     @FXML
-    private void onSubmission() throws Exception {
+    private void onSubmission() {
         checksubmission();
         Answer.setText("");
         reset(false);
@@ -304,6 +303,7 @@ public class BabblebotController extends MainController {
             Sounds.wrongsound.play();
         }
         else {
+            Sounds.correctsound.get(new Random().nextInt(2)).play();
             score++;
             Score.setText(Integer.toString(score));
             submission.add(submit);
@@ -335,7 +335,7 @@ public class BabblebotController extends MainController {
                 label.setTranslateY(165);
             });
             transitions.playFromStart();
-            Platform.runLater(inUp::play);
+            inUp.play();
             BotSpeak.setMediaPlayer(babblebot_speak[index]);
             BotSpeak.getMediaPlayer().setOnEndOfMedia(()->{
                 BotSpeak.getMediaPlayer().stop();
@@ -343,7 +343,6 @@ public class BabblebotController extends MainController {
                 BotSpeak.getMediaPlayer().play();
             });
             BotSpeak.getMediaPlayer().play();
-            Sounds.correctsound.get(new Random().nextInt(2)).play();
             side = !side;
         }
     }
@@ -417,7 +416,7 @@ public class BabblebotController extends MainController {
         for (int i = 0;i < indices.length; i++) result[i] = input[indices[i]];
         return result;
     }
-    void createAnswerList(String[] input) throws Exception {
+    void createAnswerList(String[] input) {
         availableWord = 0;
         answerList.clear();
         Arrays.sort(input);

@@ -1,18 +1,10 @@
 package base;
 
-import org.apache.commons.text.StringEscapeUtils;
-
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class DictionaryManager extends Dictionary {
@@ -377,26 +369,6 @@ public class DictionaryManager extends Dictionary {
             return EN_History;
         }
         return VI_History;
-    }
-    public static String etymologyLookup(String word) throws IOException, URISyntaxException {
-        String urlScript = "https://en.wiktionary.org/w/api.php?action=query&explaintext=&prop=extracts&titles="
-                + URLEncoder.encode(word, StandardCharsets.UTF_8)
-                + "&format=json";
-        HttpURLConnection con = (HttpURLConnection) new URI(urlScript).toURL().openConnection();
-        String response = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
-        if (!response.contains("Etymology")) return "Not available.";
-        response = response.substring(response.indexOf("== English ==") + 13);
-        Matcher match = Pattern.compile("(?<!=)==(?!=)").matcher(response);
-        if (match.find()) {
-            response = response.substring(0, match.start());
-        }
-        StringBuilder etymology = new StringBuilder();
-        int index = response.indexOf("=== Etymology");
-        while (index!=-1) {
-            etymology.append(response.substring(response.indexOf("===",index + 13)+3,response.indexOf("===", response.indexOf("===",index + 13)+3))).append("\n");
-            index = response.indexOf("=== Etymology",index + 13);
-        }
-        return StringEscapeUtils.unescapeJava(etymology.toString());
     }
 
     public static void loadUser() {
