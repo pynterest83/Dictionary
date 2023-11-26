@@ -2,23 +2,26 @@ package main;
 
 import base.DictionaryManager;
 import base.TranslateAPI;
+import controls.GeneralControls;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LearningController extends MainController {
+public class LearningController extends GeneralControls {
     @FXML
     private ListView<String> learningList;
     @FXML
@@ -29,7 +32,7 @@ public class LearningController extends MainController {
     private HTMLEditor editLearningWord;
     @FXML
     private Button saveLearningWord;
-    private String suggestions[];
+    private String[] suggestions;
     private String currentWord;
     private Boolean isSaved = true;
     @FXML
@@ -58,14 +61,13 @@ public class LearningController extends MainController {
                 scroll.setVisible(false);
             }
         });
-        learningExplain.getEngine().setUserStyleSheetLocation(Paths.get("src/style/webviews.css").toUri().toString());
     }
     @FXML
-    private void UserInput() throws Exception {
+    private void UserInput() {
         suggestions = DictionaryManager.learningWordSearcher(searchLearningWord.getText());
     }
     @FXML
-    private void DisplayWordExplain(String word_target) throws Exception {
+    private void DisplayWordExplain(String word_target) {
         String explain = DictionaryManager.learningWordLookup(word_target);
         if(explain.contains("contenteditable=\"true\"")){
             explain=explain.replace("contenteditable=\"true\"", "contenteditable=\"false\"");
@@ -73,14 +75,14 @@ public class LearningController extends MainController {
         learningExplain.getEngine().loadContent(explain, "text/html");
     }
     @FXML
-    private void enterSearch() throws Exception {
+    private void enterSearch() {
         HideMenuBar();
         DisplayWordExplain(searchLearningWord.getText());
         currentWord = searchLearningWord.getText();
         searchLearningWord.clear();
     }
     @FXML
-    private void selectSearch() throws Exception {
+    private void selectSearch() {
         if (isSaved) {
             HideMenuBar();
             DisplayWordExplain(learningList.getSelectionModel().getSelectedItem());
@@ -95,11 +97,11 @@ public class LearningController extends MainController {
         }
     }
     @FXML
-    private void onClickSpeakButton() throws Exception {
+    private void onClickSpeakButton() {
         TranslateAPI.speakAudio(currentWord,"English");
     }
     @FXML
-    private void onClickModifyButton() throws Exception {
+    private void onClickModifyButton() {
         editLearningWord.setHtmlText(DictionaryManager.learningWordLookup(currentWord));
         isSaved = false;
         editLearningWord.setVisible(true);

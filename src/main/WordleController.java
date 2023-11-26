@@ -3,6 +3,7 @@ package main;
 import animatefx.animation.Pulse;
 import base.DictionaryManager;
 import base.Wordle;
+import controls.GeneralControls;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
@@ -26,7 +27,7 @@ import java.util.Objects;
 
 import static java.util.Map.entry;
 
-public class WordleController extends MainController {
+public class WordleController extends GeneralControls {
     static int CurrentAttempt;
     static boolean endGame;
     static int CurrentLetter;

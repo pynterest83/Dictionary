@@ -1,6 +1,7 @@
 package main;
 
 import base.DictionaryManager;
+import controls.GeneralControls;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AddController extends MainController {
+public class AddController extends GeneralControls {
     @FXML
     private TextField addText;
     @FXML

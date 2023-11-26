@@ -1,77 +1,27 @@
 package main;
 
-import animatefx.animation.SlideInLeft;
-import animatefx.animation.SlideOutLeft;
-import base.*;
-import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import base.Dictionary;
+import base.DictionaryManager;
+import base.News_WOD;
+import controls.*;
 import javafx.fxml.FXML;
-import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.*;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.nio.file.Paths;
-import java.util.Random;
 
-public class MainController {
-    private int curNews = 0;
+public class MainController extends GeneralControls implements CompleteSentenceControls, NewsControls {
     public static double SpeakVolume = 1.0;
     @FXML
-    protected AnchorPane Root;
-    @FXML
-    protected Button menuBarButton;
-    @FXML
-    protected Pane menuBar;
-    protected boolean menuOpen = false;
-    @FXML
-    protected Button searchButton;
-    @FXML
-    protected Button GameButton;
-    @FXML
-    protected Button GGTranslateButton;
-    @FXML
-    protected Button LearningButton;
-    @FXML
-    protected Button ImageTranslateButton;
-    @FXML
-    protected Button SettingButton;
-    @FXML
-    protected Button CloseButton;
-    @FXML
-    protected Button MinimizeButton;
-    @FXML
-    protected Button HomeButton;
-    @FXML
-    protected Button HelpButton;
-    @FXML
-    protected Pane TitleBar;
-    @FXML
     protected AnchorPane login;
-    @FXML
-    protected TextField user_name;
-    @FXML
-    protected Label Name;
-    @FXML
-    protected Button Avatar;
     @FXML
     private AnchorPane News_Pane;
     @FXML
@@ -84,9 +34,48 @@ public class MainController {
     private Label quiz;
     @FXML
     private ImageView IMG3;
-    protected Boolean inside = false;
-    public static String currentScene = "main.fxml";
-
+    @FXML
+    RadioButton ChoiceA;
+    @FXML
+    RadioButton ChoiceB;
+    @FXML
+    RadioButton ChoiceC;
+    @FXML
+    RadioButton ChoiceD;
+    @FXML
+    RadioButton ChoiceE;
+    @FXML
+    WebView gameScreen;
+    @FXML
+    Button NextButton;
+    @FXML
+    AnchorPane QuizPane;
+    @FXML
+    private RadioButton Female;
+    @FXML
+    private RadioButton Male;
+    @FXML
+    private ImageView news_image;
+    @FXML
+    private Label Title;
+    @FXML
+    private Label Description;
+    @FXML
+    private Label Content;
+    @FXML
+    private Line line1;
+    @FXML
+    private Line line2;
+    @FXML
+    private Label Word;
+    @FXML
+    private Label Date;
+    @FXML
+    private Label Definition;
+    @FXML
+    private Label Pronunciation;
+    @FXML
+    private Label WordType;
     @FXML
     private void initialize() {
         try {
@@ -98,238 +87,33 @@ public class MainController {
             System.out.println("No internet connection.");
         }
         PrepareMenu();
-        Root.disabledProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+        root.disabledProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue && !newValue) {
-                try {
                     first_login();
                     StartGame();
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
             }
         });
         String path = Paths.get("src/style/webviews.css").toUri().toString();
         gameScreen.getEngine().setUserStyleSheetLocation(path);
+        completeSentences = new CompleteSentences(ChoiceA,ChoiceB,ChoiceC,ChoiceD,ChoiceE,gameScreen,NextButton,QuizPane);
+        newsControls = new News(news_image,Title,Description,Content,line1,line2,Word,Date,Definition,Pronunciation,WordType);
     }
     @FXML
-    protected void PrepareMenu() {
-        HomeButton.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)-> {
-            if (oldValue && !newValue && menuOpen && !inside) {
-                MenuBarClick();
-            }
-        });
-        menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> inside = true);
-        menuBar.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> inside = false);
+    private void viewAll() {
+        QuizPane.setVisible(true);
+        News_Pane.setVisible(true);
+        WOD_Pane.setVisible(true);
+        IMG1.setVisible(true);
+        IMG2.setVisible(true);
+        IMG3.setVisible(true);
+        quiz.setVisible(true);
+        line1.setVisible(true);
+        line2.setVisible(true);
+        setUpNews();
+        setUpWOD();
     }
     @FXML
-    protected void MenuExited(MouseEvent mouseEvent) {
-        Button source = (Button) mouseEvent.getSource();
-        source.setStyle(null);
-    }
-    @FXML
-    protected void MenuMoved(MouseEvent mouseEvent) {
-        Button source = (Button) mouseEvent.getSource();
-        double position = mouseEvent.getX()/source.getWidth() * 100;
-        source.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 "
-                + position +"%, #D2C3C6 100%);");
-    }
-    @FXML
-    public void onCloseClick() {
-        Platform.exit();
-    }
-    @FXML
-    public void onMinimizeClick() {
-        ((Stage) TitleBar.getScene().getWindow()).setIconified(true);
-    }
-    @FXML
-    public void onClickHomeButton() throws Exception {
-        currentScene = "main.fxml";
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"main.fxml");
-    }
-    @FXML
-    public void onClickSearchButton(ActionEvent actionEvent) throws Exception {
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"search.fxml");
-    }
-    @FXML
-    protected void onClickGameButton() throws IOException {
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"game.fxml");
-    }
-    @FXML
-    public void onClickGGTranslateButton() throws IOException {
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"ggTranslate.fxml");
-    }
-    @FXML
-    public void onClickLearningButton() throws IOException {
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"learning.fxml");
-    }
-    @FXML
-    public void onClickImageTranslateButton() throws IOException {
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"imageTranslate.fxml");
-    }
-    @FXML
-    public void onClickSetting() {
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"setting.fxml");
-    }
-    @FXML
-    public void onClickHelp() {
-        inside = false;
-        menuOpen = false;
-        menuBar.setVisible(false);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        RunApplication.SwitchScenes(stage,"help.fxml");
-    }
-    @FXML
-    protected void MenuBarClick() {
-        inside = false;
-        menuOpen = !menuOpen;
-        if (menuOpen) {
-            menuBar.setVisible(true);
-            menuBar.setDisable(true);
-            SlideInLeft inLeft = new SlideInLeft(menuBar);
-            inLeft.setOnFinished(e -> {
-                menuBar.setDisable(false);
-                HomeButton.requestFocus();
-            });
-            inLeft.setSpeed(3);
-            inLeft.play();
-            switch (currentScene) {
-                case "main.fxml":
-                    HomeButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
-                    break;
-                case "search.fxml":
-                    searchButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
-                    break;
-                case "game.fxml":
-                    GameButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
-                    break;
-                case "ggTranslate.fxml":
-                    GGTranslateButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
-                    break;
-                case "learning.fxml":
-                    LearningButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
-                    break;
-                case "setting.fxml":
-                    SettingButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
-                case "help.fxml":
-                    HelpButton.setStyle("-fx-background-color: linear-gradient(to right, #D2C3C6 0%, #E7E7E9 100%);");
-            }
-        }
-        else {
-            menuBar.setDisable(true);
-            SlideOutLeft outLeft= new SlideOutLeft(menuBar);
-            outLeft.setOnFinished(e -> menuBar.setVisible(menuOpen));
-            outLeft.setSpeed(3);
-            outLeft.play();
-        }
-    }
-    @FXML
-    protected void HideMenuBar() {
-        if (menuOpen) MenuBarClick();
-    }
-    private int CurrentQuestion;
-    private final Random rand = new Random();
-    @FXML
-    private RadioButton ChoiceA;
-    @FXML
-    private RadioButton ChoiceB;
-    @FXML
-    private RadioButton ChoiceC;
-    @FXML
-    private RadioButton ChoiceD;
-    @FXML
-    private RadioButton ChoiceE;
-    @FXML
-    private WebView gameScreen;
-    @FXML
-    private Button NextButton;
-    @FXML
-    private AnchorPane QuizPane;
-    @FXML
-    private void StartGame() throws MalformedURLException {
-        ChoiceA.setVisible(true);
-        ChoiceB.setVisible(true);
-        ChoiceC.setVisible(true);
-        ChoiceD.setVisible(true);
-        ChoiceE.setVisible(true);
-        NextButton.setVisible(true);
-        CurrentQuestion = rand.nextInt(500);
-        String content = "<html>" + CompleteSentence.askQuestion(CurrentQuestion) + "</html>";
-        gameScreen.getEngine().loadContent(content, "text/html");
-    }
-    @FXML
-    private String CheckResult() {
-        if (ChoiceA.isSelected()) return "a";
-        if (ChoiceB.isSelected()) return "b";
-        if (ChoiceC.isSelected()) return "c";
-        if (ChoiceD.isSelected()) return "d";
-        if (ChoiceE.isSelected()) return "e";
-        return "";
-    }
-    @FXML
-    private void ToggleRadioButtons(boolean toggle) {
-        ChoiceA.setDisable(toggle);
-        ChoiceB.setDisable(toggle);
-        ChoiceC.setDisable(toggle);
-        ChoiceD.setDisable(toggle);
-        ChoiceE.setDisable(toggle);
-    }
-    @FXML
-    private void ClearAllRadioButton() {
-        ChoiceA.setSelected(false);
-        ChoiceB.setSelected(false);
-        ChoiceC.setSelected(false);
-        ChoiceD.setSelected(false);
-        ChoiceE.setSelected(false);
-    }
-    @FXML
-    private void onNextButtonClick() {
-        CurrentQuestion = rand.nextInt(501);
-        ToggleRadioButtons(false);
-        ClearAllRadioButton();
-        String content = "<html>" + CompleteSentence.askQuestion(CurrentQuestion) + "</html>";
-        gameScreen.getEngine().loadContent(content,"text/html");
-    }
-    @FXML
-    private void RadioButtonClick() {
-        String content = "<html>" + CompleteSentence.showAnswer(CurrentQuestion,CheckResult()) + "</html>";
-        ToggleRadioButtons(true);
-        gameScreen.getEngine().loadContent(content,"text/html");
-    }
-
-    @FXML
-    protected Button Streak;
-    @FXML
-    protected Label streakInfo;
-    @FXML
-    protected void first_login() {
+    private void first_login() {
         if (Dictionary.user.username == null) {
             login.setVisible(true);
             menuBarButton.setVisible(false);
@@ -371,14 +155,10 @@ public class MainController {
             viewAll();
         }
     }
-
     @FXML
-    private RadioButton Female;
-    @FXML
-    private RadioButton Male;
-    public void login(MouseEvent mouseEvent) throws IOException {
+    private void login(MouseEvent mouseEvent) throws IOException {
         login.setVisible(false);
-        if (user_name.getText().equals("")) {
+        if (user_name.getText().isEmpty()) {
             Alert a = new Alert(Alert.AlertType.WARNING, "Username is required");
             a.showAndWait();
         }
@@ -410,29 +190,8 @@ public class MainController {
         RunApplication.LoadScenes();
         DictionaryManager.updateUser();
     }
-
-    protected void loadOtherScences() {
-        if (Dictionary.user.username != null) Name.setText(Dictionary.user.username);
-
-        if (Dictionary.user.gender == 0) {
-            Avatar.getStyleClass().clear();
-            Avatar.getStyleClass().add("woman-avatar");
-        }
-        else if (Dictionary.user.gender == 1) {
-            Avatar.getStyleClass().clear();
-            Avatar.getStyleClass().add("man-avatar");
-        }
-        if (Dictionary.user.streakOn) {
-            Streak.getStyleClass().clear();
-            Streak.getStyleClass().add("on-streak");
-            streakInfo.setText("You are on a streak!");
-        }
-        Avatar.setVisible(true);
-        Name.setVisible(true);
-        Streak.setVisible(true);
-    }
-
-    public void cancel_login(MouseEvent mouseEvent) {
+    @FXML
+    private void cancel_login(MouseEvent mouseEvent) {
         login.setVisible(false);
         Avatar.setVisible(true);
         Name.setVisible(true);
@@ -440,122 +199,54 @@ public class MainController {
         menuBarButton.setVisible(true);
         viewAll();
     }
-
-    @FXML
-    private ImageView news_image;
-    @FXML
-    private Label Title;
-    @FXML
-    private Label Description;
-    @FXML
-    private Label Content;
-    @FXML
-    private void setUpNews() {
-        news_image.setImage(new Image(News_WOD.articles.get(curNews).getUrlToImage()));
-        Rectangle clip = new Rectangle();
-        clip.setWidth(400.0f);
-        clip.setHeight(400.0f);
-        clip.setArcHeight(20);
-        clip.setArcWidth(20);
-        clip.setStroke(Color.BLACK);
-        news_image.setClip(clip);
-        SnapshotParameters parameters = new SnapshotParameters();
-        parameters.setFill(Color.TRANSPARENT);
-        WritableImage image = news_image.snapshot(parameters, null);
-        news_image.setClip(null);
-        news_image.setEffect(new DropShadow(10, Color.RED));
-        news_image.setImage(image);
-
-        Title.setText(News_WOD.articles.get(curNews).getTitle());
-        Title.setWrapText(true);
-        Description.setText(News_WOD.articles.get(curNews).getDescription());
-        Description.setWrapText(true);
-        String content = News_WOD.articles.get(curNews).getContent();
-        int idx = content.indexOf("[");
-        if (idx != -1) content = content.substring(0,idx);
-        Content.setText(content);
-        Content.setWrapText(true);
+    CompleteSentences completeSentences;
+    @Override
+    public void StartGame() {
+        completeSentences.StartGame();
     }
-
-    @FXML
-    private void onClickNextNews() {
-        curNews++;
-        if (curNews == News_WOD.articles.size()) curNews = 0;
-        setUpNews();
+    @Override
+    public String CheckResult() {
+        return completeSentences.CheckResult();
     }
-
-    @FXML
-    private Line line1;
-    @FXML
-    private Line line2;
-    @FXML
-    private void viewAll() {
-        QuizPane.setVisible(true);
-        News_Pane.setVisible(true);
-        WOD_Pane.setVisible(true);
-        IMG1.setVisible(true);
-        IMG2.setVisible(true);
-        IMG3.setVisible(true);
-        quiz.setVisible(true);
-        line1.setVisible(true);
-        line2.setVisible(true);
-        setUpNews();
-        setUpWOD();
+    @Override
+    public void ToggleRadioButtons(boolean toggle) {
+        completeSentences.ToggleRadioButtons(toggle);
     }
-
-    @FXML
-    private void open_link() {
-        try {
-            Desktop.getDesktop().browse(URI.create(News_WOD.articles.get(curNews).getUrl()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public void ClearAllRadioButton() {
+        completeSentences.ClearAllRadioButton();
     }
-
-    @FXML
-    private Label Word;
-    @FXML
-    private Label Date;
-    @FXML
-    private Label Definition;
-    @FXML
-    private Label Pronunciation;
-    @FXML
-    private Label WordType;
-    @FXML
-    private void setUpWOD() {
-        Word.setText(News_WOD.wordOfTheDayArticles.get(0).getTitle());
-        Word.setWrapText(true);
-        Date.setText(News_WOD.todayDate);
-        Date.setWrapText(true);
-        String description = News_WOD.wordOfTheDayArticles.get(0).getDescription();
-        String pronunciation = description.substring(description.indexOf("\\"), description.lastIndexOf("\\") + 1);
-        Pronunciation.setText(pronunciation);
-        Pronunciation.setWrapText(true);
-        String wordType = description.substring(description.lastIndexOf("\\") + 5, description.indexOf("\n", description.lastIndexOf("\\")));
-        WordType.setText(wordType);
-        WordType.setWrapText(true);
-        Definition.setText(News_WOD.definition);
-        Definition.setWrapText(true);
+    @Override
+    public void onNextButtonClick() {
+        completeSentences.onNextButtonClick();
     }
-    @FXML
-    private void open_link1() {
-        try {
-            Desktop.getDesktop().browse(URI.create(News_WOD.wordOfTheDayArticles.get(0).getUrl()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public void RadioButtonClick() {
+        completeSentences.RadioButtonClick();
     }
-
-    @FXML
-    private void onClickSpeakButton() {
-        TranslateAPI.speakAudio(News_WOD.wordOfTheDayArticles.get(0).getTitle(),"English");
+    NewsControls newsControls;
+    @Override
+    public void setUpNews() {
+        newsControls.setUpNews();
     }
-
-    public void showStreak(ActionEvent actionEvent) {
-        if (streakInfo.isVisible()) streakInfo.setVisible(false);
-        else if (!streakInfo.isVisible()) {
-            streakInfo.setVisible(true);
-        }
+    @Override
+    public void onClickNextNews() {
+        newsControls.onClickNextNews();
+    }
+    @Override
+    public void open_link() {
+        newsControls.open_link();
+    }
+    @Override
+    public void setUpWOD() {
+        newsControls.setUpWOD();
+    }
+    @Override
+    public void open_link1() {
+        newsControls.open_link1();
+    }
+    @Override
+    public void onClickSpeakButton() {
+        newsControls.onClickSpeakButton();
     }
 }

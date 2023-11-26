@@ -1,5 +1,6 @@
 package main;
 
+import controls.GeneralControls;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -9,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.nio.file.Paths;
 
-public class GameController extends MainController {
+public class GameController extends GeneralControls {
     @FXML
     private Button Wordle;
     @FXML

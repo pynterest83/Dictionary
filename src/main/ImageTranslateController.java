@@ -4,12 +4,13 @@ import base.ImageTranslate;
 import base.TranslateAPI;
 import com.google.cloud.vision.v1.BoundingPoly;
 import com.sun.javafx.tk.FontLoader;
+import com.sun.javafx.tk.FontMetrics;
 import com.sun.javafx.tk.Toolkit;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -35,8 +36,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-
-import static java.lang.Math.sqrt;
 
 public class ImageTranslateController extends MainController {
     private static double scale;
@@ -194,6 +193,7 @@ public class ImageTranslateController extends MainController {
             for (Pair<String, BoundingPoly> wordImg : ImageTranslate.textAnnotations) {
                 String word = wordImg.getKey();
                 BoundingPoly value = wordImg.getValue();
+                Double average = ImageTranslate.symbolSize.get(wordImg);
                 String translation = null;
                 try {
                     translation = TranslateAPI.googleTranslate("auto",TranslateAPI.langMap.get(TranslateLanguage.getValue()),word);
@@ -203,22 +203,23 @@ public class ImageTranslateController extends MainController {
                 }
                 Label t = new Label(translation);
                 t.setOnMousePressed(event -> ((Node)event.getSource()).toFront());
-                t.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                            if(mouseEvent.getClickCount() == 2){
-                                ClipboardContent content = new ClipboardContent();
-                                content.putString(((Label)mouseEvent.getSource()).getText());
-                                Clipboard.getSystemClipboard().setContent(content);
-                                NotifyClipboard();
-                            }
+                t.setOnMouseClicked(mouseEvent -> {
+                    if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                        if(mouseEvent.getClickCount() == 2) {
+                            ClipboardContent content = new ClipboardContent();
+                            content.putString(((Label)mouseEvent.getSource()).getText());
+                            Clipboard.getSystemClipboard().setContent(content);
+                            NotifyClipboard();
                         }
                     }
                 });
                 t.setStyle("-fx-background-color: white; -fx-border-width: 0.5; -fx-border-color: red;");
+                Tooltip tooltip = new Tooltip(translation);
+                tooltip.setWrapText(true);
+                t.setTooltip(tooltip);
                 t = SetSize(t,value);
-                t.setFont(new Font(FontSize(translation,t.getMaxWidth(),t.getMaxHeight())));
+                double fontSize = average/scale;
+                t.setFont(new Font(fontSize - (fontSize/8.5)*(fontSize/8.5)/4));
                 SourceText.add(t);
             }
             Platform.runLater(() -> {
@@ -235,6 +236,8 @@ public class ImageTranslateController extends MainController {
                         t.setMinHeight(t.getMinHeight() + 15);
                         t.setMaxHeight(t.getMaxHeight() + 15);
                     }
+                    FontMetrics metrics = Toolkit.getToolkit().getFontLoader().getFontMetrics(t.getFont());
+                    t.setPadding(new Insets(-metrics.getDescent(), 0, 0, 0));
                     StopLoading();
                 }
             });
@@ -273,30 +276,19 @@ public class ImageTranslateController extends MainController {
         loading.setFitWidth(60);
         loading.setLayoutX(445);
         loading.setLayoutY(55);
-        Root.getChildren().add(loading);
-        Root.setDisable(true);
+        root.getChildren().add(loading);
+        root.setDisable(true);
     }
     @FXML
     private void StopLoading() {
-        Root.getChildren().remove(loading);
-        Root.setDisable(false);
-    }
-    private double FontSize(String translation,double width, double height) {
-        double fontScale = 1;
-        if (Objects.equals(TranslateLanguage.getValue(), "Chinese") || Objects.equals(TranslateLanguage.getValue(), "Japanese") || Objects.equals(TranslateLanguage.getValue(), "Korean")) {
-            fontScale = 1.7;
-        }
-        return Math.round(sqrt((width*height)/translation.length()/fontScale));
+        root.getChildren().remove(loading);
+        root.setDisable(false);
     }
     private Label SetSize(Label t,BoundingPoly value) {
-        int offset = 0;
-        if (Objects.equals(TranslateLanguage.getValue(), "Chinese") || Objects.equals(TranslateLanguage.getValue(), "Japanese") || Objects.equals(TranslateLanguage.getValue(), "Korean")) {
-            offset = 7;
-        }
         t.setLayoutX(value.getVertices(0).getX() / scale);
-        t.setLayoutY(value.getVertices(0).getY() / scale - offset);
+        t.setLayoutY(value.getVertices(0).getY() / scale);
         double width = (value.getVertices(1).getX() - value.getVertices(0).getX()) / scale;
-        double height = (value.getVertices(3).getY() - value.getVertices(0).getY()) / scale + offset;
+        double height = (value.getVertices(3).getY() - value.getVertices(0).getY()) / scale;
         t.setMinWidth(width);
         t.setMinHeight(height);
         t.setMaxWidth(width);
@@ -309,6 +301,7 @@ public class ImageTranslateController extends MainController {
     private void ResetTranslation() {
         translated = false;
         for (Label t : SourceText) {
+            Tooltip.uninstall(t,t.getTooltip());
             imagePane.getChildren().remove(t);
         }
         SourceText.clear();

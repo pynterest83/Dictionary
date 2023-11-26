@@ -1,12 +1,12 @@
 package main;
 
+import controls.GeneralControls;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 
-public class SettingController extends MainController {
+public class SettingController extends GeneralControls {
     @FXML
     private Pane TitleBar;
     @FXML

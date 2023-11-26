@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.AddController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.AddController">
     <children>
-          <AnchorPane focusTraversable="true" layoutX="-2.0" layoutY="30.4" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="669.0" prefWidth="950.0" AnchorPane.topAnchor="30.4">
+          <AnchorPane focusTraversable="true" layoutY="37.0" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="669.0" prefWidth="950.0" AnchorPane.topAnchor="30.4">
               <children>
                   <TextField fx:id="addText" layoutX="97.0" layoutY="14.0" onAction="#onEnterAdd" prefHeight="40.0" prefWidth="837.0" style="-fx-background-color: transparent; -fx-border-width: 2; -fx-border-color: transparent transparent darkgray transparent;">
                     <font>
@@ -23,15 +23,15 @@
             <Button layoutY="17.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="34.0" prefWidth="33.0" styleClass="back-button" />
               </children>
           </AnchorPane>
-        <Pane fx:id="TitleBar" layoutX="-5.0" layoutY="-5.0" prefHeight="37.0" prefWidth="957.0">
+        <Pane fx:id="TitleBar" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
+                <Button fx:id="menuBarButton" cancelButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#MenuBarClick" prefHeight="31.0" prefWidth="45.0" styleClass="menu-bar-button" stylesheets="@../style/main_styles.css" />
                 <Label fx:id="Name" alignment="CENTER" layoutX="753.0" layoutY="5.0" minWidth="15.0" prefHeight="37.0" text="User" visible="false">
                     <font>
                         <Font size="15.0" />
                     </font></Label>
-                <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="867.0" layoutY="7.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
-                <Button fx:id="CloseButton" focusTraversable="false" layoutX="912.0" layoutY="7.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
+                <Button fx:id="MinimizeButton" focusTraversable="false" layoutX="860.0" mnemonicParsing="false" onAction="#onMinimizeClick" prefHeight="30.4" prefWidth="45.0" styleClass="minimize-button" stylesheets="@../style/main_styles.css" />
+                <Button fx:id="CloseButton" focusTraversable="false" layoutX="905.0" minWidth="25.0" mnemonicParsing="false" onAction="#onCloseClick" prefHeight="31.0" prefWidth="45.0" styleClass="close-button" />
                 <Button fx:id="Avatar" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: black;" styleClass="default-avatar" visible="false" />
                 <Button fx:id="Streak" layoutX="668.0" layoutY="8.0" mnemonicParsing="false" onAction="#showStreak" prefHeight="31.0" prefWidth="34.0" styleClass="off-streak" visible="false" />
                 <Label fx:id="streakInfo" layoutX="677.0" layoutY="40.0" prefHeight="37.0" prefWidth="171.0" text="You are not on a streak!" textFill="LIGHTCORAL" visible="false">

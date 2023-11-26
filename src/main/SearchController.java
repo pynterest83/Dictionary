@@ -5,6 +5,7 @@ import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideInRight;
 import animatefx.animation.SlideOutRight;
 import base.*;
+import controls.GeneralControls;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -45,9 +46,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SearchController extends MainController {
+public class SearchController extends GeneralControls {
     @FXML
-    private AnchorPane Root;
+    private AnchorPane root;
     String[] suggestions;
     @FXML
     private TextField searchBar;
@@ -247,10 +248,6 @@ public class SearchController extends MainController {
             recordButton.getStyleClass().add("mic-unavailable");
             recordButton.setDisable(true);
         }
-        String path = Paths.get("src/style/webviews.css").toUri().toString();
-        EtymologyPane.getEngine().setUserStyleSheetLocation(path);
-        wordExplain.getEngine().setUserStyleSheetLocation(path);
-        wordHeader.getEngine().setUserStyleSheetLocation(path);
     }
     @FXML
     protected void MouseClick() {

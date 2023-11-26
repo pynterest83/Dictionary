@@ -1,11 +1,12 @@
 package main;
 
+import controls.GeneralControls;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.TitledPane;
 import javafx.util.Duration;
 
-public class HelpController extends MainController {
+public class HelpController extends GeneralControls {
     @FXML
     private TitledPane Q1;
     @FXML
@@ -20,22 +21,20 @@ public class HelpController extends MainController {
     private void initialize() {
         loadOtherScences();
         Q1.expandedProperty().addListener((observable, oldValue, newValue) -> {
+            TranslateTransition tt = new TranslateTransition(Duration.millis(380), Q1);
             if (newValue) {
-                TranslateTransition tt = new TranslateTransition(Duration.millis(380), Q1);
                 if (Q2.isExpanded()) tt.setToY(-Q1.getHeight() + 5);
                 else tt.setToY(-Q1.getHeight() + 40);
-                tt.play();
             }
             else {
-                TranslateTransition tt = new TranslateTransition(Duration.millis(380), Q1);
                 if (Q2.isExpanded()) tt.setToY(-40);
                 else tt.setToY(0);
-                tt.play();
             }
+            tt.play();
         });
         Q2.expandedProperty().addListener((observable, oldValue, newValue) -> {
+            TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q2);
             if (newValue) {
-                TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q2);
                 tt1.setToY(-Q2.getHeight() + 40);
                 TranslateTransition tt2 = new TranslateTransition(Duration.millis(380), Q1);
                 if (!Q1.isExpanded()) tt2.setToY(-35);
@@ -44,7 +43,6 @@ public class HelpController extends MainController {
                 tt2.play();
             }
             else {
-                TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q2);
                 tt1.setToY(0);
                 TranslateTransition tt2 = new TranslateTransition(Duration.millis(380), Q1);
                 if (!Q1.isExpanded()) tt2.setToY(0);
@@ -54,8 +52,8 @@ public class HelpController extends MainController {
             }
         });
         Q3.expandedProperty().addListener((observable, oldValue, newValue) -> {
+            TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q4);
             if (newValue) {
-                TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q4);
                 tt1.setToY(Q3.getHeight() - 40);
                 TranslateTransition tt2 = new TranslateTransition(Duration.millis(380), Q5);
                 if (Q4.isExpanded()) tt2.setToY(Q3.getHeight() - 40 + Q4.getHeight() - 45);
@@ -64,7 +62,6 @@ public class HelpController extends MainController {
                 tt2.play();
             }
             else {
-                TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q4);
                 tt1.setToY(0);
                 TranslateTransition tt2 = new TranslateTransition(Duration.millis(380), Q5);
                 if (Q4.isExpanded()) tt2.setToY(Q4.getHeight() - 45);
@@ -74,8 +71,8 @@ public class HelpController extends MainController {
             }
         });
         Q4.expandedProperty().addListener((observable, oldValue, newValue) -> {
+            TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q5);
             if (newValue) {
-                TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q5);
                 tt1.setToY(Q4.getHeight() - 40 + Q3.getHeight() - 45);
                 TranslateTransition tt2 = new TranslateTransition(Duration.millis(380), Q5);
                 tt2.setToY(Q4.getHeight() - 45);
@@ -83,7 +80,6 @@ public class HelpController extends MainController {
                 else tt2.play();
             }
             else {
-                TranslateTransition tt1 = new TranslateTransition(Duration.millis(380), Q5);
                 tt1.setToY(Q4.getHeight() - 40);
                 if (Q3.isExpanded()) tt1.play();
                 TranslateTransition tt2 = new TranslateTransition(Duration.millis(380), Q5);

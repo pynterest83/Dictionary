@@ -34,7 +34,7 @@ public class TranslateAPI {
         StringBuilder translated = new StringBuilder();
         translated.append(response, response.indexOf("\"")+1, response.indexOf("\"",response.indexOf("\"")+1));
         String[] match = pattern.matcher(response).results().map(MatchResult::group).toArray(String[]::new);
-        for (String s:match) translated.append(s).append("\n");
+        for (String s:match) translated.append(s);
         return StringEscapeUtils.unescapeJava(translated.toString());
     }
     public static void speakAudio(String text, String languageOutput) {

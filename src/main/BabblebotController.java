@@ -4,6 +4,7 @@ import animatefx.animation.Shake;
 import animatefx.animation.ZoomInUp;
 import base.DictionaryManager;
 import base.Sounds;
+import controls.GeneralControls;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -35,7 +36,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class BabblebotController extends MainController {
+public class BabblebotController extends GeneralControls {
     @FXML
     private Text Score;
     @FXML
@@ -304,8 +305,7 @@ public class BabblebotController extends MainController {
         }
         else {
             Sounds.correctsound.get(new Random().nextInt(2)).play();
-            score++;
-            Score.setText(Integer.toString(score));
+            Score.setText(Integer.toString(++score));
             submission.add(submit);
             int index = side ? 0 : 1;
             Pane SubmitPane = side ? SubmitPane1 : SubmitPane2;

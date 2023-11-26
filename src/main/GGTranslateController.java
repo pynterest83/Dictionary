@@ -4,6 +4,7 @@ import animatefx.animation.FadeIn;
 import base.SpeechRecognition;
 import base.Thesaurus;
 import base.TranslateAPI;
+import controls.GeneralControls;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -24,7 +25,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class GGTranslateController extends MainController {
+public class GGTranslateController extends GeneralControls {
     private static final String PATH = "src/resources/Spelling.txt";
     private String sourceLangCode = "";
     private String targetLangCode = "";

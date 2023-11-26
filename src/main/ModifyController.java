@@ -1,6 +1,7 @@
 package main;
 
 import base.DictionaryManager;
+import controls.GeneralControls;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ModifyController extends MainController {
+public class ModifyController extends GeneralControls {
     @FXML
     private TextField modifyText;
     @FXML

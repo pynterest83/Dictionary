@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GameController">
+<AnchorPane fx:id="root" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GameController">
     <children>
       <Button fx:id="Wordle" alignment="BOTTOM_CENTER" focusTraversable="false" layoutX="676.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClickWordle" prefHeight="490.0" prefWidth="260.0" style="-fx-background-color: transparent;" styleClass="wordle-image" stylesheets="@../style/game.css" text="WORDLE" AnchorPane.rightAnchor="14.0">
          <font>
