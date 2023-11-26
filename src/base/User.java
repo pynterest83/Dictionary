@@ -1,18 +1,22 @@
 package base;
 
+import java.util.Date;
+
 public class User {
     public String username;
     public int gender;
-    public int streak;
-
+    public String streak;
+    public boolean streakOn;
     public User() {
         username = null;
         gender = -1;
-        streak = 0;
+        streak = null;
+        streakOn = false;
     }
-    public User(String name, int gend, int str) {
+    public User(String name, int gend, String Date, boolean StreakOn) {
         username = name;
         gender = gend;
-        streak = str;
+        streak = Date;
+        streakOn = StreakOn;
     }
 }

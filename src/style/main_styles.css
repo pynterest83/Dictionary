@@ -284,3 +284,17 @@
 .speak-button:hover {
     -fx-background-color: lightcoral;
 }
+.off-streak {
+    -fx-background-image: url("media/off-streak.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25;
+    -fx-background-position: center;
+}
+.on-streak {
+    -fx-background-image: url("media/on-streak.png");
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25;
+    -fx-background-position: center;
+}

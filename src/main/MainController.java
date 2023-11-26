@@ -325,6 +325,10 @@ public class MainController {
     }
 
     @FXML
+    protected Button Streak;
+    @FXML
+    protected Label streakInfo;
+    @FXML
     protected void first_login() {
         if (Dictionary.user.username == null) {
             login.setVisible(true);
@@ -342,6 +346,28 @@ public class MainController {
                 Avatar.getStyleClass().add("man-avatar");
             }
             Avatar.setVisible(true);
+            if (Dictionary.user.streakOn) {
+                // get date from streak
+                int year = Integer.parseInt(Dictionary.user.streak.substring(0,4));
+                int month = Integer.parseInt(Dictionary.user.streak.substring(5,7));
+                int day = Integer.parseInt(Dictionary.user.streak.substring(8,10));
+                // get current date from date object
+                java.time.LocalDate currentDate = java.time.LocalDate.now();
+                int currentYear = currentDate.getYear();
+                int currentMonth = currentDate.getMonthValue();
+                int currentDay = currentDate.getDayOfMonth();
+                // check if user is on a streak
+                if (year == currentYear && month == currentMonth && (day == currentDay || day == currentDay - 1)) {
+                    Streak.getStyleClass().clear();
+                    Streak.getStyleClass().add("on-streak");
+                    streakInfo.setText("You are on a streak!");
+                }
+                else {
+                    Dictionary.user.streakOn = false;
+                    streakInfo.setText("You are not on a streak!");
+                }
+            }
+            Streak.setVisible(true);
             viewAll();
         }
     }
@@ -371,11 +397,13 @@ public class MainController {
             Avatar.getStyleClass().add("man-avatar");
         }
         Dictionary.user.username = user_name.getText();
-        Dictionary.user.streak = 0;
+        Dictionary.user.streak = java.time.LocalDate.now().toString();
+        Dictionary.user.streakOn = true;
 
         Name.setText(Dictionary.user.username);
         Name.setVisible(true);
         Avatar.setVisible(true);
+        Streak.setVisible(true);
 
         menuBarButton.setVisible(true);
         viewAll();
@@ -394,14 +422,21 @@ public class MainController {
             Avatar.getStyleClass().clear();
             Avatar.getStyleClass().add("man-avatar");
         }
+        if (Dictionary.user.streakOn) {
+            Streak.getStyleClass().clear();
+            Streak.getStyleClass().add("on-streak");
+            streakInfo.setText("You are on a streak!");
+        }
         Avatar.setVisible(true);
         Name.setVisible(true);
+        Streak.setVisible(true);
     }
 
     public void cancel_login(MouseEvent mouseEvent) {
         login.setVisible(false);
         Avatar.setVisible(true);
         Name.setVisible(true);
+        Streak.setVisible(true);
         menuBarButton.setVisible(true);
         viewAll();
     }
@@ -515,5 +550,12 @@ public class MainController {
     @FXML
     private void onClickSpeakButton() {
         TranslateAPI.speakAudio(News_WOD.wordOfTheDayArticles.get(0).getTitle(),"English");
+    }
+
+    public void showStreak(ActionEvent actionEvent) {
+        if (streakInfo.isVisible()) streakInfo.setVisible(false);
+        else if (!streakInfo.isVisible()) {
+            streakInfo.setVisible(true);
+        }
     }
 }

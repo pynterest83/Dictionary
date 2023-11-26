@@ -383,7 +383,7 @@ public class DictionaryManager extends Dictionary {
             }
             if (data.isEmpty()) return;
 
-            user = new User(data.get(0), Integer.parseInt(data.get(1)), Integer.parseInt(data.get(2)));
+            user = new User(data.get(0), Integer.parseInt(data.get(1)), data.get(2), Boolean.parseBoolean(data.get(3)));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -398,6 +398,7 @@ public class DictionaryManager extends Dictionary {
             bufferedWriter.write(user.username + "\n");
             bufferedWriter.write(user.gender + "\n");
             bufferedWriter.write(user.streak + "\n");
+            bufferedWriter.write(user.streakOn + "\n");
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (Exception e) {
