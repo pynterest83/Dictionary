@@ -17,25 +17,74 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
-import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TranslateAPI {
-    private static final Pattern pattern = Pattern.compile("(?<=((?<!\\[)\\[\\\"))(.*?)(?=\\\",\\\")");
+    private static final Pattern specialCharacters = Pattern.compile("[\\<\\(\\[\\{\\\\^\\-\\=\\$\\!\\|\\]\\}\\)\\?\\*\\+\\.\\>]");
+    private static final String generalPattern = "(?<=((?<!\\[)\\[\"))(.*?)(?=\",\"";
     private static final String PATH = "src/resources/Spelling.txt";
     public static LinkedHashMap<String, String> langMap = new LinkedHashMap<>();
-    public static String googleTranslate(String langFrom, String langTo, String text) throws IOException, URISyntaxException {
+    public static String googleTranslate(String langFrom, String langTo, String text, boolean isParagraph) throws IOException, URISyntaxException {
+        text = text.trim();
+        if (isParagraph) text = text.replace("\n","");
         String urlScript = "https://translate.googleapis.com/translate_a/single?client=gtx&"
                 + "sl=" + langFrom
                 + "&tl=" + langTo
                 + "&dt=t&dt=t&q=" + URLEncoder.encode(text,StandardCharsets.UTF_8);
         HttpURLConnection con = (HttpURLConnection) new URI(urlScript).toURL().openConnection();
         String response = IOUtils.toString(con.getInputStream(), StandardCharsets.UTF_8);
+        response = StringEscapeUtils.unescapeJava(response);
+        return (isParagraph ? paragraphParser(text, response) : nonParagraphParser(text, response));
+    }
+    private static String nonParagraphParser(String text, String response) {
+        response = response.replace("\n","\\n");
         StringBuilder translated = new StringBuilder();
-        translated.append(response, response.indexOf("\"")+1, response.indexOf("\"",response.indexOf("\"")+1));
-        String[] match = pattern.matcher(response).results().map(MatchResult::group).toArray(String[]::new);
-        for (String s:match) translated.append(s);
-        return StringEscapeUtils.unescapeJava(translated.toString());
+        String[] lines =  text.split("\n");
+        int begin = response.indexOf("\"") + 1;
+        int end = response.indexOf("\",\"" + lines[0].split("\\.|\\?|!;")[0]);
+        try {
+            translated.append(response, begin, end);
+            response = response.substring(end + 1);
+        } catch(Exception e) {
+            return "";
+        }
+        for (String line:lines) {
+            String[] sentences = line.split("\\.|\\?|!;");
+            for (int i = 0; i < sentences.length; i++) {
+                sentences[i] = escapeAll(sentences[i].trim());
+                Pattern pattern = Pattern.compile(generalPattern + sentences[i] + ")");
+                Matcher match = pattern.matcher(response);
+                match.find();
+                try {
+                    translated.append(match.group());
+                    response = response.substring(match.end()+1);
+                } catch(Exception ignored) {}
+            }
+        }
+        return StringEscapeUtils.unescapeJava(translated.toString()).replace("\",\"","");
+    }
+    private static String paragraphParser(String text, String response) {
+        StringBuilder translated = new StringBuilder();
+        String[] lines = text.split("\\.|\\?|!;");
+        int begin = response.indexOf("\"") + 1;
+        int end = response.indexOf("\",\"" + lines[0]);
+        try {
+            translated.append(response, begin, end);
+        } catch(Exception e) {
+            return "";
+        }
+        for (int i = 1; i < lines.length; i++) {
+            lines[i] = escapeAll(lines[i].trim());
+            Pattern pattern = Pattern.compile(generalPattern + lines[i] + ")");
+            Matcher match = pattern.matcher(response);
+            match.find();
+            try {
+                translated.append(match.group());
+                response = response.substring(match.end()+1);
+            } catch(Exception ignored) {}
+        }
+        return StringEscapeUtils.unescapeJava(translated.toString()).replace("\",\"","");
     }
     public static void speakAudio(String text, String languageOutput) {
         String urlString = "http://translate.google.com/translate_tts?" + "?ie=UTF-8" + //encoding
@@ -57,5 +106,9 @@ public class TranslateAPI {
             langMap.put(lang[0], lang[1]);
         }
         fileReader.close();
+    }
+    private static String escapeAll(String input) {
+        Matcher matcher = specialCharacters.matcher(input);
+        return matcher.replaceAll("\\\\$0");
     }
 }

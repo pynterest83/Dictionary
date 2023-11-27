@@ -3,7 +3,6 @@ package main;
 import base.ImageTranslate;
 import base.TranslateAPI;
 import com.google.cloud.vision.v1.BoundingPoly;
-import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.FontMetrics;
 import com.sun.javafx.tk.Toolkit;
 import javafx.animation.PauseTransition;
@@ -182,8 +181,10 @@ public class ImageTranslateController extends MainController {
                 connected = false;
             }
             if (!connected) {
-                StopLoading();
-                Error();
+                Platform.runLater(() -> {
+                    StopLoading();
+                    Error();
+                });
                 return;
             }
             ShowTranslateButton.setVisible(true);
@@ -196,7 +197,7 @@ public class ImageTranslateController extends MainController {
                 Double average = ImageTranslate.symbolSize.get(wordImg);
                 String translation = null;
                 try {
-                    translation = TranslateAPI.googleTranslate("auto",TranslateAPI.langMap.get(TranslateLanguage.getValue()),word);
+                    translation = TranslateAPI.googleTranslate("auto",TranslateAPI.langMap.get(TranslateLanguage.getValue()),word,true);
                 } catch (IOException | URISyntaxException ignored) {}
                 if (translation == null) {
                     continue;
@@ -213,6 +214,13 @@ public class ImageTranslateController extends MainController {
                         }
                     }
                 });
+                t.setOnScroll(event -> {
+                    double deltaY = event.getDeltaY();
+                    Label label = (Label)event.getSource();
+                    if (deltaY < 0) label.setFont(new Font(label.getFont().getSize()-1));
+                    else label.setFont(new Font(label.getFont().getSize()+1));
+                    event.consume();
+                });
                 t.setStyle("-fx-background-color: white; -fx-border-width: 0.5; -fx-border-color: red;");
                 Tooltip tooltip = new Tooltip(translation);
                 tooltip.setWrapText(true);
@@ -225,17 +233,6 @@ public class ImageTranslateController extends MainController {
             Platform.runLater(() -> {
                 for (Label t : SourceText) {
                     imagePane.getChildren().add(t);
-                    FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
-                    double charWidth = fontLoader.getCharWidth(t.getText().charAt(0), t.getFont());
-                    double textWidth = charWidth * t.getText().length();
-                    if (textWidth > t.getMaxWidth()) {
-                        t.setMinWidth(t.getMinWidth() + 15);
-                        t.setMaxWidth(t.getMaxWidth() + 15);
-                    }
-                    else {
-                        t.setMinHeight(t.getMinHeight() + 15);
-                        t.setMaxHeight(t.getMaxHeight() + 15);
-                    }
                     FontMetrics metrics = Toolkit.getToolkit().getFontLoader().getFontMetrics(t.getFont());
                     t.setPadding(new Insets(-metrics.getDescent(), 0, 0, 0));
                     StopLoading();

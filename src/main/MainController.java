@@ -83,9 +83,7 @@ public class MainController extends GeneralControls implements CompleteSentenceC
             News_WOD.getWordOfTheDay();
             News_WOD.getDefinition();
         }
-        catch (Exception e) {
-            System.out.println("No internet connection.");
-        }
+        catch (Exception ignored) {}
         PrepareMenu();
         root.disabledProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue && !newValue) {

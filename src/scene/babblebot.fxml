@@ -37,7 +37,7 @@
             <Button mnemonicParsing="false" onAction="#onClickBack" prefHeight="35.0" prefWidth="35.0" styleClass="back-button" stylesheets="@../style/main_styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="GamePane" layoutY="30.0" prefHeight="668.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/babblebot.css">
+      <AnchorPane fx:id="GamePane" layoutY="30.0" prefHeight="668.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/babblebot.css" visible="false">
          <children>
             <Text layoutX="208.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="normal-text" text="Score:">
                <font>
@@ -128,7 +128,7 @@
             <Font name="System Bold" size="55.0" />
          </font>
       </Text>
-      <Pane fx:id="InstructionPane" layoutX="78.0" layoutY="116.0" prefHeight="498.0" prefWidth="794.0" visible="false">
+      <Pane fx:id="InstructionPane" layoutX="78.0" layoutY="116.0" prefHeight="498.0" prefWidth="794.0">
          <children>
             <ImageView fitHeight="274.0" fitWidth="350.0" layoutX="6.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
                <image>

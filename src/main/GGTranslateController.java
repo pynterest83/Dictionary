@@ -134,15 +134,17 @@ public class GGTranslateController extends GeneralControls {
                 input.setDisable(true);
                 });
             try {
-                output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, translate));
+                output.setText(TranslateAPI.googleTranslate(sourceLangCode, targetLangCode, translate, false));
                 new FadeIn(output).play();
                 Platform.runLater(()-> {
                     parent.getChildren().remove(loading);
                     input.setDisable(false);
                 });
             } catch (IOException | URISyntaxException e) {
-                parent.getChildren().remove(loading);
-                input.setDisable(false);
+                Platform.runLater(() -> {
+                    parent.getChildren().remove(loading);
+                    input.setDisable(false);
+                });
             }
         }).start();
     }

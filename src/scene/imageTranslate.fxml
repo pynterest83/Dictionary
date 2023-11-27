@@ -95,7 +95,7 @@
                 </Button>
             </children>
         </Pane>
-      <ToggleButton fx:id="ShowTranslateButton" layoutX="780.0" layoutY="70.0" mnemonicParsing="false" onAction="#showTranslation" text="Show/hide translation" />
+      <ToggleButton fx:id="ShowTranslateButton" layoutX="780.0" layoutY="70.0" mnemonicParsing="false" onAction="#showTranslation" text="Show/hide translation" visible="false" />
       <Label fx:id="ErrorLabel" layoutY="61.0" style="-fx-background-color: #E4E5E9; -fx-border-color: grey; -fx-text-fill: black; -fx-border-width: 0 0 5 0;" styleClass="error-label" stylesheets="@../style/search.css" text="Something went wrong. Please try again later." translateX="-470.0">
          <font>
             <Font name="System Bold" size="23.0" />
