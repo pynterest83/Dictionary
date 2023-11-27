@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LearningController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/main_styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LearningController">
     <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="950.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,12 +22,12 @@
                   <Font name="SansSerif Bold" size="19.0" />
                </font>
             </TextField>
-            <ListView fx:id="learningList" layoutX="20.0" layoutY="148.0" onMouseClicked="#selectSearch" prefHeight="506.0" prefWidth="242.0" />
-            <Pane layoutX="304.0" layoutY="65.0" prefHeight="602.0" prefWidth="586.0">
+            <ListView fx:id="learningList" layoutX="20.0" layoutY="148.0" onMouseClicked="#selectSearch" prefHeight="354.0" prefWidth="242.0" />
+            <Pane layoutX="304.0" layoutY="65.0" prefHeight="572.0" prefWidth="586.0">
                <children>
-                  <WebView fx:id="learningExplain" layoutX="13.0" layoutY="56.0" prefHeight="506.0" prefWidth="562.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
-                  <HTMLEditor fx:id="editLearningWord" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="12.0" layoutY="67.0" prefHeight="506.0" prefWidth="562.0" style="-fx-background-color: white; -fx-border-color: lightcoral;" visible="false" />
-                  <Button fx:id="saveLearningWord" layoutX="547.0" layoutY="557.0" mnemonicParsing="false" onAction="#saveEdited" prefHeight="31.0" prefWidth="31.0" styleClass="save-button" stylesheets="@../style/learning.css" visible="false" />
+                  <WebView fx:id="learningExplain" layoutX="13.0" layoutY="56.0" prefHeight="518.0" prefWidth="562.0" style="-fx-blend-mode: DARKEN;" stylesheets="@../style/main_styles.css" />
+                  <HTMLEditor fx:id="editLearningWord" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="12.0" layoutY="55.0" prefHeight="518.0" prefWidth="562.0" style="-fx-background-color: white; -fx-border-color: lightcoral;" visible="false" />
+                  <Button fx:id="saveLearningWord" layoutX="544.0" layoutY="530.0" mnemonicParsing="false" onAction="#saveEdited" prefHeight="31.0" prefWidth="31.0" styleClass="save-button" stylesheets="@../style/learning.css" visible="false" />
                   <Button layoutX="471.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickSpeakButton" prefHeight="31.0" prefWidth="31.0" styleClass="speak-button" stylesheets="@../style/learning.css" />
                   <Button layoutX="510.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickModifyButton" prefHeight="31.0" prefWidth="31.0" styleClass="edit-button" stylesheets="@../style/learning.css" />
                   <Button layoutX="541.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickRemoveLearningWord" prefHeight="31.0" prefWidth="31.0" styleClass="remove-button" stylesheets="@../style/learning.css" />
@@ -33,6 +35,11 @@
             </Pane>
             <Line endX="138.0" layoutX="124.0" layoutY="120.0" startX="-102.0" stroke="#8d7f7f" strokeWidth="3.0" />
             <Line endX="5.0" endY="444.0" layoutX="283.0" layoutY="200.0" startX="5.0" startY="-125.0" stroke="#8d7f7f" strokeWidth="3.0" />
+            <ImageView fitHeight="187.0" fitWidth="187.0" layoutX="21.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../style/media/learning.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
        <Pane fx:id="TitleBar" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

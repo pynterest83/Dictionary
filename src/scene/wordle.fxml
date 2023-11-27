@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/wordle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.WordleController">
+<AnchorPane fx:id="root" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#MouseClick" prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: white;" stylesheets="@../style/wordle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.WordleController">
    <children>
     <AnchorPane layoutY="32.0" minHeight="0.0" minWidth="0.0" onMousePressed="#MouseClick" prefHeight="527.0" prefWidth="895.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.4">
          <children>
@@ -395,6 +395,36 @@
                </children>
             </VBox>
             <Button mnemonicParsing="false" onAction="#onClickBack" prefHeight="35.0" prefWidth="35.0" styleClass="back-button" stylesheets="@../style/main_styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label alignment="CENTER" layoutX="381.0" layoutY="26.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightcoral;" text="W" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="412.0" layoutY="26.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: indigo;" text="O" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="443.0" layoutY="26.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: darkorange;" text="R" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="474.0" layoutY="26.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: indigo;" text="D" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="505.0" layoutY="26.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightcoral;" text="L" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="536.0" layoutY="26.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: darkorange;" text="E" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Pane fx:id="TitleBar" prefHeight="37.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

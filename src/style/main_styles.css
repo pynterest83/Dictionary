@@ -302,7 +302,7 @@
     -fx-background-color: #E4E5E9;
     -fx-text-fill: black;
 }
-.toggle-button: selected {
+.toggle-button:selected {
     -fx-background-color: lightgrey;
     -fx-border-color: grey;
     -fx-border-width: 1;

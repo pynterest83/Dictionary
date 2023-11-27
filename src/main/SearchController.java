@@ -248,6 +248,10 @@ public class SearchController extends GeneralControls {
             recordButton.getStyleClass().add("mic-unavailable");
             recordButton.setDisable(true);
         }
+        String path = Paths.get("src/style/webviews.css").toUri().toString();
+        wordHeader.getEngine().setUserStyleSheetLocation(path);
+        wordExplain.getEngine().setUserStyleSheetLocation(path);
+        EtymologyPane.getEngine().setUserStyleSheetLocation(path);
     }
     @FXML
     protected void MouseClick() {

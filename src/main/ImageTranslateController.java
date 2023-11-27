@@ -5,6 +5,7 @@ import base.TranslateAPI;
 import com.google.cloud.vision.v1.BoundingPoly;
 import com.sun.javafx.tk.FontMetrics;
 import com.sun.javafx.tk.Toolkit;
+import controls.GeneralControls;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class ImageTranslateController extends MainController {
+public class ImageTranslateController extends GeneralControls {
     private static double scale;
     private static byte[] imageBytes;
     @FXML
