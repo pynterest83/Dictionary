@@ -15,12 +15,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 import javax.sound.sampled.LineUnavailableException;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Objects;
@@ -101,6 +105,14 @@ public class GGTranslateController extends GeneralControls {
         String tmp = input.getText();
         input.setText(output.getText());
         output.setText(tmp);
+    }
+    @FXML
+    private void translateDocs() throws IOException {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open text file");
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = chooser.showOpenDialog(null);
+        input.setText(new String(Files.readAllBytes(Path.of(file.toURI()))));
     }
     @FXML
     public void translate() {
