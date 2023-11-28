@@ -107,8 +107,14 @@ public class MainController extends GeneralControls implements CompleteSentenceC
         quiz.setVisible(true);
         line1.setVisible(true);
         line2.setVisible(true);
-        setUpNews();
-        setUpWOD();
+        try {
+            setUpNews();
+            setUpWOD();
+        } catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"News and word of the day section may not work as expected.");
+            alert.setHeaderText("Something went wrong.");
+            alert.showAndWait();
+        }
     }
     @FXML
     private void first_login() {
