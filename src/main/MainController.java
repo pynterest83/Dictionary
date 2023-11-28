@@ -85,16 +85,12 @@ public class MainController extends GeneralControls implements CompleteSentenceC
         }
         catch (Exception ignored) {}
         PrepareMenu();
-        root.disabledProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue && !newValue) {
-                    first_login();
-                    StartGame();
-            }
-        });
         String path = Paths.get("src/style/webviews.css").toUri().toString();
         gameScreen.getEngine().setUserStyleSheetLocation(path);
         completeSentences = new CompleteSentences(ChoiceA,ChoiceB,ChoiceC,ChoiceD,ChoiceE,gameScreen,NextButton,QuizPane);
         newsControls = new News(news_image,Title,Description,Content,line1,line2,Word,Date,Definition,Pronunciation,WordType);
+        first_login();
+        StartGame();
     }
     @FXML
     private void viewAll() {

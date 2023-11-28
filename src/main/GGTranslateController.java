@@ -112,7 +112,7 @@ public class GGTranslateController extends GeneralControls {
         chooser.setTitle("Open text file");
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         File file = chooser.showOpenDialog(null);
-        input.setText(new String(Files.readAllBytes(Path.of(file.toURI()))));
+        input.setText(Files.readString(Path.of(file.toURI())));
     }
     @FXML
     public void translate() {

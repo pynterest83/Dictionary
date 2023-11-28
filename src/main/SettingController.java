@@ -67,7 +67,7 @@ public class SettingController extends GeneralControls {
 
         setUp();
         loadOtherScences();
-        RunApplication.LoadScenes();
+        RunApplication.ReloadAll();
         DictionaryManager.updateUser();
     }
 

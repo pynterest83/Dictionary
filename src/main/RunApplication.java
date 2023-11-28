@@ -33,12 +33,17 @@ public class RunApplication extends Application {
     public static void Reload(String sceneName) throws IOException {
         FXML_scenes.replace(sceneName, FXMLLoader.load(Paths.get("src/scene/"+sceneName).toUri().toURL()));
     }
+    public static void ReloadAll() throws IOException {
+        for (String scene : FXML_scenes.keySet()) {
+            Reload(scene);
+        }
+    }
     @Override
     public void start(Stage stage) throws Exception {
-        FXML_scenes.put("main.fxml",FXMLLoader.load(Paths.get("src/scene/main.fxml").toUri().toURL()));
-        Scene scene = new Scene(FXML_scenes.get("main.fxml"), 950, 700);
+        Scene scene = new Scene(new AnchorPane(),950, 700);
         stage.getIcons().add(new Image(Paths.get("src/style/media/dictionary.png").toUri().toURL().toString()));
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Dictionary");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
@@ -51,7 +56,6 @@ public class RunApplication extends Application {
         LoadScenes();
         new Thread(() -> {
             Platform.runLater(() -> {
-                root.setDisable(true);
                 root.getChildren().add(loading);
             });
             try {
@@ -65,8 +69,8 @@ public class RunApplication extends Application {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                root.setDisable(false);
                 root.getChildren().remove(loading);
+                SwitchScenes(stage,"main.fxml");
             });
         }).start();
     }
@@ -85,9 +89,7 @@ public class RunApplication extends Application {
     public static void LoadScenes() throws IOException {
         File dir = new File("src/scene");
         for (File file : Objects.requireNonNull(dir.listFiles())) {
-            if (!file.getName().equals("main.fxml")) {
                 FXML_scenes.put(file.getName(), FXMLLoader.load(Paths.get("src/scene/" + file.getName()).toUri().toURL()));
-            }
         }
     }
 }

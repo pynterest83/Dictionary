@@ -32,6 +32,7 @@ public class CompleteSentences implements CompleteSentenceControls {
     }
 
     public void StartGame() {
+        if (CompleteSentence.completeSentences.isEmpty()) return;
         ChoiceA.setVisible(true);
         ChoiceB.setVisible(true);
         ChoiceC.setVisible(true);
