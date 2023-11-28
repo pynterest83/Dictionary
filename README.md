@@ -3,7 +3,7 @@
 #### Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
-3. [Setup and guide](#setup and guide)
+3. [Setup and guide](#setupandguide)
 
 # Introduction <a name = "introduction"></a>
 
@@ -30,7 +30,7 @@
   <img src="https://i.imgur.com/hxQwDwq.png">
 </p>
 
-# Setup and guide <a name = "setup and guide"></a>
+# Setup and guide <a name = "setupandguide"></a>
 * Install Java 11 or higher
 * Clone the repository
 * Open the project in IntelliJ IDEA
